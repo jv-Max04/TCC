@@ -1,0 +1,13 @@
+{
+  "aquecimento_s": 600,
+  "queimadores": 4,
+  "valores_pos_aquecimento": [
+    8.725079510208566,
+    8.657445845833031,
+    8.658113481249329
+  ],
+  "media": 8.680212945763643,
+  "baseline_sessoes_limpas": 8.6941,
+  "sd_sessoes_limpas": 0.0119,
+  "remediacao_q0": 8.8197
+}

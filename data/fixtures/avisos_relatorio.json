@@ -1,0 +1,14 @@
+{
+  "dv18": {
+    "consequencia": "O SERRF desta ferramenta usa a floresta que conta como a do `tools.R` e chega perto do original: sob a mesma régua remove de 91% a 159% do erro sistemático que o do R remove, e a concordância número a número passa em 3 dos 4 modos. Comparação com resultado obtido no SERRF do R não vai bater no dígito — nem o próprio R repete o seu número, porque não fixa a semente.",
+    "procedencia": "O porte é fiel nos onze passos, verificado na U12 da Fase 3. O que diferia era a FLORESTA: com a do `scikit-learn`, padrão até 21/10/2026, o nosso removia de 15% a 29% do que o do R remove, e o RSD residual mediano ficava 1,71 a 4,17 vezes o do original (DV18, DV28). Com a floresta que conta como o `ranger`, padrão desde então, a régua fora da amostra dá de 90,7% a 159,2%, medida antes de uma correção posterior do SERRF e não remedida; com ela, o `[CA-3.1]` passa em 3 dos 4 modos."
+  },
+  "dv22": {
+    "consequencia": "Os limiares de diagnóstico foram calibrados também sobre matrizes sintéticas, e 6 de 20 propriedades delas divergem das reais além da tolerância declarada. Dado atípico merece conferência manual do diagnóstico.",
+    "procedencia": "Perfil completo em DV22, com o desvio por propriedade e por modo e a direção de cada um. Duas correções estruturais levaram o vão de 13 para 6 propriedades, e o erro INVERTEU de direção no processo."
+  },
+  "m8": {
+    "consequencia": "A recomendação automática de corretor, pela estabilidade dos QCs, não acerta mais que uma regra fixa entre modos cromatográficos — escolher sempre o SERRF acerta 75,0% contra 67,5% dela, sem diferença significativa — e nos arquivos reais as duas escolhem o mesmo: use como ponto de partida e confira o corretor no seu modo, não como veredito.",
+    "procedencia": "Leave-one-mode-out sobre 40 matrizes sintéticas com 7 QCs, rotuladas com a floresta do SERRF que conta como a do R: a política aprendida dá 67,5% contra 75,0% de uma política constante, com p = 0,5078 sobre 9 discordantes, empatando 2 dobras e perdendo 2; deixando uma matriz de fora, 55,0% contra 75,0%, p = 0,0078. Nos quatro arquivos reais ela e a constante escolhem SERRF e acertam 3 de 4. O modelo da floresta anterior dava 70,0% contra 55,0%, e o de oito QCs, 50,0% contra 60,0%."
+  }
+}

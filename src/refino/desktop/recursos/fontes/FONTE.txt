@@ -1,0 +1,5 @@
+IBM Plex
+https://github.com/IBM/plex
+Commit: 48e8676114c04f29033b4b53da4ec579f8846297
+SIL Open Font License 1.1; original unmodified font files.
+Used by the supplied Lovable reference (src/styles.css).

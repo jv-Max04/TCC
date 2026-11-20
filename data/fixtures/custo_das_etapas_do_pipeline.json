@@ -1,0 +1,493 @@
+{
+ "natureza": "Custo de cada etapa FORA do corretor SERRF, por modo. Cobre tres lacunas: um modo so, proxy sobre matriz crua, e pipeline medido com os padroes que SALTAM filtros.",
+ "data": "2026-09-02",
+ "commit": "9e23a531a5ce68c9f9f7479c559ae6333d9f33ce",
+ "caminho_medido_sha256": {
+  "src/refino/io/readers.py": "2f970acf39a8d8c8c72e97f73e8ef2986f7701543835be37005790bfdad0e979",
+  "src/refino/io/writers.py": "d5b13c4349b789abd807ccad4e47d5596a7b66649878de08256f3bf59fcde0d7",
+  "src/refino/preprocessing/pipeline.py": "57ed94ee2fab2b248c321dd5383f9b5e54e7991ab7a97803d9759a3ea641ba14",
+  "src/refino/metrics/report.py": "7f9d60945142f530501f2ad7ed0a4e625a9c54efca74e60fc352f16fddc42f41",
+  "src/refino/metrics/structure.py": "a831ae0906579231d137366d45a136956d70b56a519a00b769a8f48577479d26",
+  "src/refino/statistics/plsda.py": "40528edbb5eb2e62c9bf4f8ced569670e5a0ea627cc5781baa19fb325a1fdd93",
+  "src/refino/diagnosis/profile.py": "88a65fd01b1f84b5aa7029cdae4e084022d38894be28a49c64d968cf655e5962",
+  "src/refino/correction/loess.py": "5a23174d08a4bfb6146d6de1d4c07b3c090bfe7c2b85804ba32da301a77003c0"
+ },
+ "maquina": {
+  "plataforma": "Windows-11-10.0.26200-SP0",
+  "processador": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+  "nucleos_logicos": 12,
+  "load_per_core": "INDISPONIVEL - `os.getloadavg` e POSIX e nao existe no Windows"
+ },
+ "versoes": {
+  "python": "3.12.14",
+  "numpy": "2.5.1",
+  "sklearn": "1.9.0"
+ },
+ "desfechos_pre_registrados": [
+  {
+   "id": "a",
+   "criterio": "alguma etapa FORA dos corretores passa de 10 s em algum modo",
+   "leitura": "ela e visivel para quem espera na tela e merece etapa propria no progresso; hoje so `correcao` tem nome nas quatro rotas longas"
+  },
+  {
+   "id": "b",
+   "criterio": "a escrita do artefato passa de 5% do custo de uma exportacao com `method=none`",
+   "leitura": "o download \u00abrapido\u00bb nao e rapido, e o 202-e-consulta da rota de exportacao justifica-se por mais do que o corretor"
+  },
+  {
+   "id": "c",
+   "criterio": "o pico de memoria de algum modo passa de 2 GB",
+   "leitura": "ha risco real no laptop do laboratorio, e isso vira item com numero em vez de suposicao"
+  },
+  {
+   "id": "d",
+   "criterio": "o pipeline com as seis etapas EXERCITADAS custa mais de 10x o pipeline com os padroes",
+   "leitura": "os 0,1 s medidos antes cobrem o caminho que SALTA filtros, e nao o caminho que corre; o numero antigo precisa da populacao ao lado"
+  }
+ ],
+ "escopo_negativo": [
+  "o SERRF: tem arnes proprio (scripts/mede_passos_do_serrf.py) e os numeros do mesmo dia e commit sao citados em vez de remedidos.",
+  "as rotas da API: scripts/mede_latencia_das_rotas.py.",
+  "o R e o enriquecimento: dependem de conteiner.",
+  "REPETICAO: cada etapa corre UMA vez por modo. Sao quatro populacoes, nao quatro repeticoes - nada aqui separa efeito de variacao entre execucoes."
+ ],
+ "leitura_da_memoria": "`incremento_do_pico_mb` e quanto a etapa empurrou o pico do PROCESSO para cima. Zero significa \u00abcoube no que ja estava alocado\u00bb, e NAO \u00abnao usa memoria\u00bb.",
+ "execucoes": [
+  {
+   "modo": "neg_hilic",
+   "n_features": 2039,
+   "n_amostras": 68,
+   "par_de_grupos": [
+    "ATLL",
+    "NoHTLV"
+   ],
+   "pico_do_processo_ao_fim_mb": 174.6,
+   "working_set_ao_fim_mb": 165.8,
+   "etapas": [
+    {
+     "etapa": "1_ingestao_e_validacao",
+     "parede_s": 0.053,
+     "working_set_mb": 162.1,
+     "incremento_do_pico_mb": 15.8
+    },
+    {
+     "etapa": "2_diagnostico",
+     "parede_s": 0.1519,
+     "working_set_mb": 165.2,
+     "incremento_do_pico_mb": 5.5
+    },
+    {
+     "etapa": "3_corretor_none",
+     "parede_s": 0.0005,
+     "working_set_mb": 166.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "4_corretor_loess",
+     "parede_s": 12.4236,
+     "working_set_mb": 167.4,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "5_pipeline_spec_padrao",
+     "parede_s": 0.0202,
+     "working_set_mb": 168.5,
+     "incremento_do_pico_mb": 0.7
+    },
+    {
+     "etapa": "6_pipeline_seis_etapas",
+     "parede_s": 0.0504,
+     "working_set_mb": 167.5,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "7_qc_rsd_plain",
+     "parede_s": 0.024,
+     "working_set_mb": 167.5,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "8_qc_rsd_outlier_removed",
+     "parede_s": 0.0464,
+     "working_set_mb": 167.5,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "9_pca",
+     "parede_s": 0.0115,
+     "working_set_mb": 167.5,
+     "incremento_do_pico_mb": 1.4
+    },
+    {
+     "etapa": "10_structural_metrics",
+     "parede_s": 0.0177,
+     "working_set_mb": 167.5,
+     "incremento_do_pico_mb": 1.1
+    },
+    {
+     "etapa": "11_plsda_200_permutacoes",
+     "parede_s": 0.8085,
+     "working_set_mb": 167.9,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "12_univariate_test",
+     "parede_s": 0.0051,
+     "working_set_mb": 168.2,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "13_benjamini_hochberg",
+     "parede_s": 0.0002,
+     "working_set_mb": 168.2,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "14_build_quality_report",
+     "parede_s": 0.0412,
+     "working_set_mb": 168.2,
+     "incremento_do_pico_mb": 0.7
+    },
+    {
+     "etapa": "15_write_toserrf",
+     "parede_s": 0.0761,
+     "working_set_mb": 168.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "16_write_metaboanalyst",
+     "parede_s": 0.0865,
+     "working_set_mb": 165.8,
+     "incremento_do_pico_mb": 0.0
+    }
+   ]
+  },
+  {
+   "modo": "neg_c18",
+   "n_features": 2184,
+   "n_amostras": 68,
+   "par_de_grupos": [
+    "ATLL",
+    "NoHTLV"
+   ],
+   "pico_do_processo_ao_fim_mb": 176.4,
+   "working_set_ao_fim_mb": 169.6,
+   "etapas": [
+    {
+     "etapa": "1_ingestao_e_validacao",
+     "parede_s": 0.0593,
+     "working_set_mb": 166.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "2_diagnostico",
+     "parede_s": 0.1603,
+     "working_set_mb": 167.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "3_corretor_none",
+     "parede_s": 0.0005,
+     "working_set_mb": 168.1,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "4_corretor_loess",
+     "parede_s": 13.1238,
+     "working_set_mb": 169.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "5_pipeline_spec_padrao",
+     "parede_s": 0.0204,
+     "working_set_mb": 170.4,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "6_pipeline_seis_etapas",
+     "parede_s": 0.0675,
+     "working_set_mb": 170.9,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "7_qc_rsd_plain",
+     "parede_s": 0.0255,
+     "working_set_mb": 167.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "8_qc_rsd_outlier_removed",
+     "parede_s": 0.0493,
+     "working_set_mb": 167.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "9_pca",
+     "parede_s": 0.0098,
+     "working_set_mb": 167.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "10_structural_metrics",
+     "parede_s": 0.0197,
+     "working_set_mb": 167.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "11_plsda_200_permutacoes",
+     "parede_s": 0.8362,
+     "working_set_mb": 170.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "12_univariate_test",
+     "parede_s": 0.0052,
+     "working_set_mb": 169.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "13_benjamini_hochberg",
+     "parede_s": 0.0002,
+     "working_set_mb": 169.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "14_build_quality_report",
+     "parede_s": 0.0445,
+     "working_set_mb": 169.6,
+     "incremento_do_pico_mb": 1.8
+    },
+    {
+     "etapa": "15_write_toserrf",
+     "parede_s": 0.0978,
+     "working_set_mb": 169.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "16_write_metaboanalyst",
+     "parede_s": 0.1076,
+     "working_set_mb": 169.6,
+     "incremento_do_pico_mb": 0.0
+    }
+   ]
+  },
+  {
+   "modo": "pos_c18",
+   "n_features": 2572,
+   "n_amostras": 68,
+   "par_de_grupos": [
+    "ATLL",
+    "NoHTLV"
+   ],
+   "pico_do_processo_ao_fim_mb": 180.8,
+   "working_set_ao_fim_mb": 172.3,
+   "etapas": [
+    {
+     "etapa": "1_ingestao_e_validacao",
+     "parede_s": 0.069,
+     "working_set_mb": 168.8,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "2_diagnostico",
+     "parede_s": 0.1833,
+     "working_set_mb": 169.3,
+     "incremento_do_pico_mb": 0.7
+    },
+    {
+     "etapa": "3_corretor_none",
+     "parede_s": 0.0006,
+     "working_set_mb": 170.8,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "4_corretor_loess",
+     "parede_s": 15.8837,
+     "working_set_mb": 172.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "5_pipeline_spec_padrao",
+     "parede_s": 0.0237,
+     "working_set_mb": 174.0,
+     "incremento_do_pico_mb": 0.8
+    },
+    {
+     "etapa": "6_pipeline_seis_etapas",
+     "parede_s": 0.0824,
+     "working_set_mb": 173.7,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "7_qc_rsd_plain",
+     "parede_s": 0.0299,
+     "working_set_mb": 172.7,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "8_qc_rsd_outlier_removed",
+     "parede_s": 0.0579,
+     "working_set_mb": 172.7,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "9_pca",
+     "parede_s": 0.0113,
+     "working_set_mb": 172.7,
+     "incremento_do_pico_mb": 1.5
+    },
+    {
+     "etapa": "10_structural_metrics",
+     "parede_s": 0.0201,
+     "working_set_mb": 172.7,
+     "incremento_do_pico_mb": 1.3
+    },
+    {
+     "etapa": "11_plsda_200_permutacoes",
+     "parede_s": 0.8926,
+     "working_set_mb": 174.9,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "12_univariate_test",
+     "parede_s": 0.0061,
+     "working_set_mb": 172.2,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "13_benjamini_hochberg",
+     "parede_s": 0.0002,
+     "working_set_mb": 172.2,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "14_build_quality_report",
+     "parede_s": 0.0497,
+     "working_set_mb": 172.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "15_write_toserrf",
+     "parede_s": 0.1203,
+     "working_set_mb": 172.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "16_write_metaboanalyst",
+     "parede_s": 0.1325,
+     "working_set_mb": 172.3,
+     "incremento_do_pico_mb": 0.0
+    }
+   ]
+  },
+  {
+   "modo": "pos_hilic",
+   "n_features": 6035,
+   "n_amostras": 68,
+   "par_de_grupos": [
+    "ATLL",
+    "NoHTLV"
+   ],
+   "pico_do_processo_ao_fim_mb": 215.3,
+   "working_set_ao_fim_mb": 192.5,
+   "etapas": [
+    {
+     "etapa": "1_ingestao_e_validacao",
+     "parede_s": 0.1643,
+     "working_set_mb": 182.8,
+     "incremento_do_pico_mb": 22.5
+    },
+    {
+     "etapa": "2_diagnostico",
+     "parede_s": 0.3798,
+     "working_set_mb": 187.3,
+     "incremento_do_pico_mb": 2.6
+    },
+    {
+     "etapa": "3_corretor_none",
+     "parede_s": 0.0012,
+     "working_set_mb": 190.6,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "4_corretor_loess",
+     "parede_s": 35.4749,
+     "working_set_mb": 195.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "5_pipeline_spec_padrao",
+     "parede_s": 0.056,
+     "working_set_mb": 198.1,
+     "incremento_do_pico_mb": 1.5
+    },
+    {
+     "etapa": "6_pipeline_seis_etapas",
+     "parede_s": 0.1464,
+     "working_set_mb": 195.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "7_qc_rsd_plain",
+     "parede_s": 0.0689,
+     "working_set_mb": 195.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "8_qc_rsd_outlier_removed",
+     "parede_s": 0.1339,
+     "working_set_mb": 195.0,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "9_pca",
+     "parede_s": 0.02,
+     "working_set_mb": 195.0,
+     "incremento_do_pico_mb": 3.4
+    },
+    {
+     "etapa": "10_structural_metrics",
+     "parede_s": 0.0313,
+     "working_set_mb": 195.0,
+     "incremento_do_pico_mb": 3.1
+    },
+    {
+     "etapa": "11_plsda_200_permutacoes",
+     "parede_s": 2.2181,
+     "working_set_mb": 195.3,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "12_univariate_test",
+     "parede_s": 0.0136,
+     "working_set_mb": 196.5,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "13_benjamini_hochberg",
+     "parede_s": 0.0004,
+     "working_set_mb": 196.5,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "14_build_quality_report",
+     "parede_s": 0.1007,
+     "working_set_mb": 196.5,
+     "incremento_do_pico_mb": 1.5
+    },
+    {
+     "etapa": "15_write_toserrf",
+     "parede_s": 0.2546,
+     "working_set_mb": 196.5,
+     "incremento_do_pico_mb": 0.0
+    },
+    {
+     "etapa": "16_write_metaboanalyst",
+     "parede_s": 0.4525,
+     "working_set_mb": 192.5,
+     "incremento_do_pico_mb": 0.0
+    }
+   ]
+  }
+ ]
+}

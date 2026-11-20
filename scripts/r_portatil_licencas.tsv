@@ -1,0 +1,113 @@
+pacote	versao	licenca	arquivo_de_licenca
+base	4.4.3	Part of R 4.4.3	-
+Biobase	2.66.0	Artistic-2.0	-
+BiocGenerics	0.52.0	Artistic-2.0	-
+BiocParallel	1.40.0	GPL-2 | GPL-3	-
+bit	4.6.0	GPL-2 | GPL-3	-
+bit64	4.6.0-1	GPL-2 | GPL-3	-
+bitops	1.0-9	GPL (>= 2)	-
+blob	1.2.4	MIT + file LICENSE	LICENSE
+cachem	1.1.0	MIT + file LICENSE	LICENSE
+Cairo	1.6-2	GPL-2 | GPL-3	-
+caret	7.0-1	GPL (>= 2)	-
+caTools	1.18.3	GPL-3	-
+class	7.3-23	GPL-2 | GPL-3	-
+cli	3.6.5	MIT + file LICENSE	LICENSE
+codetools	0.2-20	GPL	-
+compiler	4.4.3	Part of R 4.4.3	-
+cowplot	1.1.3	GPL-2	-
+crmn	0.0.21	GPL (>= 3)	-
+data.table	1.17.4	MPL-2.0 | file LICENSE	LICENSE
+datasets	4.4.3	Part of R 4.4.3	-
+DBI	1.2.3	LGPL (>= 2.1)	-
+digest	0.6.37	GPL (>= 2)	-
+dplyr	1.1.4	MIT + file LICENSE	LICENSE
+edgeR	4.4.2	GPL (>=2)	-
+farver	2.1.2	MIT + file LICENSE	LICENSE
+fastmap	1.2.0	MIT + file LICENSE	LICENSE
+fastmatch	1.1-6	GPL-2	-
+fgsea	1.32.4	MIT + file LICENCE	LICENCE
+foreach	1.5.2	Apache License (== 2.0)	-
+future	1.49.0	LGPL (>= 2.1)	-
+future.apply	1.11.3	GPL (>= 2)	-
+generics	0.1.4	MIT + file LICENSE	LICENSE
+ggplot2	3.5.2	MIT + file LICENSE	LICENSE
+glasso	1.11	GPL-2	-
+globals	0.18.0	LGPL (>= 2.1)	-
+glue	1.8.0	MIT + file LICENSE	LICENSE
+gower	1.0.2	GPL-3	-
+gplots	3.2.0	GPL-2	-
+graphics	4.4.3	Part of R 4.4.3	-
+grDevices	4.4.3	Part of R 4.4.3	-
+grid	4.4.3	Part of R 4.4.3	-
+gtable	0.3.6	MIT + file LICENSE	LICENSE
+gtools	3.9.5	GPL-2	-
+hardhat	1.4.1	MIT + file LICENSE	LICENSE
+htmltools	0.5.8.1	GPL (>= 2)	-
+htmlwidgets	1.6.4	MIT + file LICENSE	LICENSE
+httr	1.4.7	MIT + file LICENSE	LICENSE
+igraph	2.1.4	GPL (>= 2)	-
+impute	1.80.0	GPL-2	-
+ipred	0.9-15	GPL (>= 2)	COPYRIGHTS
+iterators	1.0.14	Apache License (== 2.0)	-
+jsonlite	2.0.0	MIT + file LICENSE	LICENSE
+KernSmooth	2.23-26	Unlimited	-
+lattice	0.22-6	GPL (>= 2)	-
+lava	1.8.1	GPL-3	-
+lazyeval	0.2.2	GPL-3	-
+lifecycle	1.0.4	MIT + file LICENSE	LICENSE
+limma	3.62.2	GPL (>=2)	-
+listenv	0.9.1	LGPL (>= 2.1)	-
+locfit	1.5-9.12	GPL (>= 2)	-
+lubridate	1.9.4	GPL (>= 2)	-
+magrittr	2.0.3	MIT + file LICENSE	LICENSE
+MASS	7.3-64	GPL-2 | GPL-3	-
+Matrix	1.7-2	GPL (>= 2) | file LICENCE	LICENCE
+memoise	2.0.1	MIT + file LICENSE	LICENSE
+MetaboAnalystR	4.3.0	MIT + file LICENSE	LICENSE
+methods	4.4.3	Part of R 4.4.3	-
+ModelMetrics	1.2.2.2	GPL (>= 2)	-
+multtest	2.62.0	LGPL	-
+nlme	3.1-167	GPL (>= 2)	-
+nnet	7.3-20	GPL-2 | GPL-3	-
+parallel	4.4.3	Part of R 4.4.3	-
+parallelly	1.44.0	LGPL (>= 2.1)	-
+pcaMethods	1.98.0	GPL (>= 3)	-
+pillar	1.10.2	MIT + file LICENSE	LICENSE
+pkgconfig	2.0.3	MIT + file LICENSE	LICENSE
+plotly	4.10.4	MIT + file LICENSE	LICENSE
+plyr	1.8.9	MIT + file LICENSE	LICENSE
+pROC	1.18.5	GPL (>= 3)	-
+prodlim	2025.04.28	GPL (>= 2)	-
+purrr	1.0.4	MIT + file LICENSE	LICENSE
+qs2	0.1.5	GPL-3	-
+R6	2.6.1	MIT + file LICENSE	LICENSE
+RColorBrewer	1.1-3	Apache License 2.0	COPYING
+Rcpp	1.0.14	GPL (>= 2)	-
+RcppParallel	5.1.10	GPL (>= 3)	-
+recipes	1.3.1	MIT + file LICENSE	LICENSE
+reshape2	1.4.4	MIT + file LICENSE	LICENSE
+rlang	1.1.6	MIT + file LICENSE	LICENSE
+rpart	4.1.24	GPL-2 | GPL-3	-
+RSQLite	2.4.0	LGPL (>= 2.1)	-
+scales	1.4.0	MIT + file LICENSE	LICENSE
+scrime	1.3.5	GPL-2	-
+siggenes	1.80.0	LGPL (>= 2)	-
+splines	4.4.3	Part of R 4.4.3	-
+statmod	1.5.0	GPL-2 | GPL-3	-
+stats	4.4.3	Part of R 4.4.3	-
+stats4	4.4.3	Part of R 4.4.3	-
+stringfish	0.16.0	GPL-3	-
+stringi	1.8.7	file LICENSE	LICENSE
+stringr	1.5.1	MIT + file LICENSE	LICENSE
+survival	3.8-3	LGPL (>= 2)	COPYRIGHTS
+tibble	3.2.1	MIT + file LICENSE	LICENSE
+tidyr	1.3.1	MIT + file LICENSE	LICENSE
+tidyselect	1.2.1	MIT + file LICENSE	LICENSE
+timechange	0.3.0	GPL (>= 3)	-
+timeDate	4041.110	GPL (>= 2)	-
+tools	4.4.3	Part of R 4.4.3	-
+utils	4.4.3	Part of R 4.4.3	-
+vctrs	0.6.5	MIT + file LICENSE	LICENSE
+viridisLite	0.4.2	MIT + file LICENSE	LICENSE
+withr	3.0.2	MIT + file LICENSE	LICENSE

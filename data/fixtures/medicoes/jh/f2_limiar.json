@@ -1,0 +1,137 @@
+{
+ "id": "jh-f2",
+ "commit": "05a8f78d8d21e813156816fa9e5d0f1e8bc32c22",
+ "src_sem_modificacao_local": true,
+ "data": "2026-11-04T09:46:33-03:00",
+ "ambiente": {
+  "python": "3.12.14",
+  "plataforma": "Windows-11-10.0.26300-SP0"
+ },
+ "vetores": "docs\\medicoes-jh\\resultados\\f2_vetores",
+ "tau_200": 0.16792059565615636,
+ "tau_200_arredondado": 0.168,
+ "limiar_do_produto": 0.167,
+ "sigmas": {
+  "pos_hilic": {
+   "A": "serrf",
+   "B": "none",
+   "margem_da_populacao": 0.3083893023247656,
+   "media_de_D": 0.29365420523119334,
+   "sigma": 0.08396029782807818
+  },
+  "pos_c18": {
+   "A": "serrf",
+   "B": "none",
+   "margem_da_populacao": 0.6788083415312409,
+   "media_de_D": 0.6731381458677013,
+   "sigma": 0.04982381354906961
+  },
+  "neg_hilic": {
+   "A": "loess",
+   "B": "serrf",
+   "margem_da_populacao": 0.038198397104323,
+   "media_de_D": 0.03971128169544086,
+   "sigma": 0.047714371800922604
+  },
+  "neg_c18": {
+   "A": "serrf",
+   "B": "none",
+   "margem_da_populacao": 0.025641352935507362,
+   "media_de_D": 0.020235097033900758,
+   "sigma": 0.045230764230714204
+  }
+ },
+ "por_modo": {
+  "pos_hilic": {
+   "n_features_da_amostra": 200,
+   "amostra": {
+    "none": 1.5219026273103593,
+    "loess": 1.5495513363243933,
+    "serrf": 1.0968776820196342
+   },
+   "populacao": {
+    "none": 1.4381285246297832,
+    "loess": 1.4761456501911272,
+    "serrf": 1.0991594948647891
+   },
+   "vencedor_da_populacao": "serrf",
+   "margem_da_populacao": 0.3083893023247656,
+   "palpite": "serrf",
+   "margem": 0.38748618214944874,
+   "empate_com_o_limiar_do_produto": false,
+   "empate_com_tau_remedido": false,
+   "concorda_com_a_populacao": true
+  },
+  "pos_c18": {
+   "n_features_da_amostra": 200,
+   "amostra": {
+    "none": 0.23955386917414212,
+    "loess": 0.3130982153191113,
+    "serrf": 0.14899741512832282
+   },
+   "populacao": {
+    "none": 0.24145546654934025,
+    "loess": 0.32396453891862986,
+    "serrf": 0.1438255103790518
+   },
+   "vencedor_da_populacao": "serrf",
+   "margem_da_populacao": 0.6788083415312409,
+   "palpite": "serrf",
+   "margem": 0.6077719802576997,
+   "empate_com_o_limiar_do_produto": false,
+   "empate_com_tau_remedido": false,
+   "concorda_com_a_populacao": true
+  },
+  "neg_hilic": {
+   "n_features_da_amostra": 200,
+   "amostra": {
+    "none": 0.730311345969235,
+    "loess": 0.6260356413754755,
+    "serrf": 0.6717054176496977
+   },
+   "populacao": {
+    "none": 0.6717843460787416,
+    "loess": 0.5919177765553022,
+    "serrf": 0.6145280868372696
+   },
+   "vencedor_da_populacao": "loess",
+   "margem_da_populacao": 0.038198397104323,
+   "palpite": "loess",
+   "margem": 0.07295076071688221,
+   "empate_com_o_limiar_do_produto": true,
+   "empate_com_tau_remedido": true,
+   "concorda_com_a_populacao": true
+  },
+  "neg_c18": {
+   "n_features_da_amostra": 200,
+   "amostra": {
+    "none": 0.13988385225513186,
+    "loess": 0.16451113535487222,
+    "serrf": 0.13758355957896357
+   },
+   "populacao": {
+    "none": 0.15503551210769762,
+    "loess": 0.19321145555933117,
+    "serrf": 0.15115957606815245
+   },
+   "vencedor_da_populacao": "serrf",
+   "margem_da_populacao": 0.025641352935507362,
+   "palpite": "serrf",
+   "margem": 0.016719240897733037,
+   "empate_com_o_limiar_do_produto": true,
+   "empate_com_tau_remedido": true,
+   "concorda_com_a_populacao": true
+  }
+ },
+ "ancora": {
+  "o_que_confere": "tau com --publicados; com --vetores, o Palpite medido igual, bit a bit, à mediana do vetor remedido nas 200 da semente 42",
+  "segundos_do_palpite_por_modo": {
+   "pos_hilic": 62.2,
+   "pos_c18": 54.1,
+   "neg_hilic": 53.7,
+   "neg_c18": 53.9
+  },
+  "ok": true,
+  "falhas": []
+ }
+}

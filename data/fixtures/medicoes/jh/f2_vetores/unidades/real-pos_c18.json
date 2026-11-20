@@ -1,0 +1,17 @@
+{
+ "grupo": "real",
+ "modo": "pos_c18",
+ "n_features": 2572,
+ "n_qcs": 7,
+ "indefinidos": {
+  "none": 60,
+  "loess": 92,
+  "serrf": 60
+ },
+ "vetores": "real-pos_c18.npz",
+ "ok": true,
+ "segundos": 2130.1,
+ "unidade": "real-pos_c18",
+ "n_jobs_por_unidade": 3,
+ "pid": 14900
+}

@@ -1,0 +1,350 @@
+{
+ "natureza": "Onde vai o tempo DENTRO do SERRF. Envoltorios sobre o caminho REAL, no espaco de nomes de `refino.correction.serrf`, com `n_jobs=1` porque o patch e de processo.",
+ "data": "2026-10-24",
+ "commit": "f3cca15951425b6f2d2926628a07ee6ae3751115",
+ "caminho_medido_sha256": {
+  "src/refino/correction/serrf.py": "f09dd43ca6101be54a92fb196a9aebeace24e9091f62f36d126094a2d14ff729",
+  "src/refino/correction/_serrf_steps.py": "49e5be9a7d73d39425ba28bd5d0fe6429a1c3e7476ff80cba45404048c415b81",
+  "src/refino/correction/_forest_speedup.py": "1c73cee9e65bd68834753b77ddf4bc89dac8eff7e9921a90ce4dcf8994a5b706",
+  "src/refino/correction/base.py": "680e10dc217fcb8bf19c97f885146c4b11a1a7a07bae2c91a65ea37529e8222d",
+  "src/refino/correction/_floresta_ranger.py": "275210557ba13602900c21c7210dda0494074e928c7dfed1e8b93e46cb211b0a"
+ },
+ "maquina": {
+  "plataforma": "Windows-11-10.0.26200-SP0",
+  "processador": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+  "nucleos_logicos": 12,
+  "load_per_core": "INDISPONIVEL - `os.getloadavg` e POSIX e nao existe no Windows"
+ },
+ "versoes": {
+  "python": "3.12.14",
+  "numpy": "2.5.1",
+  "sklearn": "1.9.0",
+  "joblib": "1.5.3"
+ },
+ "desfechos_pre_registrados": [
+  {
+   "id": "a",
+   "criterio": "a floresta (passo 4, `_predict`) e mais de 80% da parede total",
+   "leitura": "a decomposicao CONFIRMA o que ja se sabia; a otimizacao so vive na floresta, e o numero serve para fechar a pergunta em vez de a abrir"
+  },
+  {
+   "id": "b",
+   "criterio": "algum passo FORA da floresta passa de 10% da parede total",
+   "leitura": "ha candidato de otimizacao que ninguem tinha nomeado; e o desfecho que justifica o custo desta medicao"
+  },
+  {
+   "id": "c",
+   "criterio": "a soma dos passos instrumentados fica abaixo de 70% da parede total",
+   "leitura": "o custo NAO esta nos passos: esta na indexacao, nas copias e no despacho em volta deles, e o alvo de qualquer otimizacao nao e passo nenhum"
+  }
+ ],
+ "ancora": {
+  "bit_identidade": "OK",
+  "chamadas_por_envoltorio": {
+   "1_substituicao": 1,
+   "2_correlacoes": 1,
+   "3_selecao_de_preditores": 20,
+   "4_escalonamento": 40,
+   "4_preditores_usaveis": 20,
+   "4_floresta": 20,
+   "5_normaliza_qc": 20,
+   "6_normaliza_amostras": 20,
+   "7_reescala_por_mediana": 40,
+   "8_substitui_nao_finitos": 20,
+   "9_mascara_de_outlier": 20,
+   "9_reparo_subtrativo": 20,
+   "10_reparo_da_linha": 1,
+   "11_restauracao": 1
+  }
+ },
+ "escopo_negativo": [
+  "n_jobs=-1, que e o regime das chamadas reais: o patch e de processo e nao alcanca os workers do loky (AR45). A composicao POR FEATURE transfere; a fatia dos passos seriais no pai - 1, 2, 10 e 11 - CRESCE sob paralelismo, e a projecao vai derivada.",
+  "memoria: nenhum byte medido.",
+  "o R: este arnes nao fala com o r_service.",
+  "hoist_correlations=False: mede-se o caminho de producao, que ica."
+ ],
+ "seriais_no_pai": [
+  "10_reparo_da_linha",
+  "11_restauracao",
+  "1_substituicao",
+  "2_correlacoes"
+ ],
+ "execucoes": [
+  {
+   "modo": "neg_hilic",
+   "n_features": 2039,
+   "n_amostras": 68,
+   "n_jobs": 1,
+   "semente": 42,
+   "parede_total_s": 340.34,
+   "cpu_total_s": 339.797,
+   "soma_dos_passos_s": 339.987,
+   "nao_atribuido_s": 0.354,
+   "passos": {
+    "10_reparo_da_linha": {
+     "parede_s": 0.07,
+     "chamadas": 1
+    },
+    "11_restauracao": {
+     "parede_s": 0.0007,
+     "chamadas": 1
+    },
+    "1_substituicao": {
+     "parede_s": 0.042,
+     "chamadas": 1
+    },
+    "2_correlacoes": {
+     "parede_s": 0.1011,
+     "chamadas": 1
+    },
+    "3_selecao_de_preditores": {
+     "parede_s": 2.44,
+     "chamadas": 2039
+    },
+    "4_escalonamento": {
+     "parede_s": 0.2247,
+     "chamadas": 4078
+    },
+    "4_floresta": {
+     "parede_s": 336.8109,
+     "chamadas": 2039
+    },
+    "4_preditores_usaveis": {
+     "parede_s": 0.013,
+     "chamadas": 2039
+    },
+    "5_normaliza_qc": {
+     "parede_s": 0.0317,
+     "chamadas": 2039
+    },
+    "6_normaliza_amostras": {
+     "parede_s": 0.0605,
+     "chamadas": 2039
+    },
+    "7_reescala_por_mediana": {
+     "parede_s": 0.0881,
+     "chamadas": 4078
+    },
+    "8_substitui_nao_finitos": {
+     "parede_s": 0.0072,
+     "chamadas": 2039
+    },
+    "9_mascara_de_outlier": {
+     "parede_s": 0.0438,
+     "chamadas": 2039
+    },
+    "9_reparo_subtrativo": {
+     "parede_s": 0.0531,
+     "chamadas": 2039
+    }
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "n_features": 2184,
+   "n_amostras": 68,
+   "n_jobs": 1,
+   "semente": 42,
+   "parede_total_s": 364.169,
+   "cpu_total_s": 363.625,
+   "soma_dos_passos_s": 363.789,
+   "nao_atribuido_s": 0.379,
+   "passos": {
+    "10_reparo_da_linha": {
+     "parede_s": 0.077,
+     "chamadas": 1
+    },
+    "11_restauracao": {
+     "parede_s": 0.0006,
+     "chamadas": 1
+    },
+    "1_substituicao": {
+     "parede_s": 0.0276,
+     "chamadas": 1
+    },
+    "2_correlacoes": {
+     "parede_s": 0.1089,
+     "chamadas": 1
+    },
+    "3_selecao_de_preditores": {
+     "parede_s": 2.7156,
+     "chamadas": 2184
+    },
+    "4_escalonamento": {
+     "parede_s": 0.2401,
+     "chamadas": 4368
+    },
+    "4_floresta": {
+     "parede_s": 360.3017,
+     "chamadas": 2184
+    },
+    "4_preditores_usaveis": {
+     "parede_s": 0.0138,
+     "chamadas": 2184
+    },
+    "5_normaliza_qc": {
+     "parede_s": 0.034,
+     "chamadas": 2184
+    },
+    "6_normaliza_amostras": {
+     "parede_s": 0.0647,
+     "chamadas": 2184
+    },
+    "7_reescala_por_mediana": {
+     "parede_s": 0.0947,
+     "chamadas": 4368
+    },
+    "8_substitui_nao_finitos": {
+     "parede_s": 0.0076,
+     "chamadas": 2184
+    },
+    "9_mascara_de_outlier": {
+     "parede_s": 0.0469,
+     "chamadas": 2184
+    },
+    "9_reparo_subtrativo": {
+     "parede_s": 0.0562,
+     "chamadas": 2184
+    }
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "n_features": 2572,
+   "n_amostras": 68,
+   "n_jobs": 1,
+   "semente": 42,
+   "parede_total_s": 429.406,
+   "cpu_total_s": 429.047,
+   "soma_dos_passos_s": 428.958,
+   "nao_atribuido_s": 0.448,
+   "passos": {
+    "10_reparo_da_linha": {
+     "parede_s": 0.0918,
+     "chamadas": 1
+    },
+    "11_restauracao": {
+     "parede_s": 0.0007,
+     "chamadas": 1
+    },
+    "1_substituicao": {
+     "parede_s": 0.016,
+     "chamadas": 1
+    },
+    "2_correlacoes": {
+     "parede_s": 0.136,
+     "chamadas": 1
+    },
+    "3_selecao_de_preditores": {
+     "parede_s": 4.3445,
+     "chamadas": 2572
+    },
+    "4_escalonamento": {
+     "parede_s": 0.285,
+     "chamadas": 5144
+    },
+    "4_floresta": {
+     "parede_s": 423.71,
+     "chamadas": 2572
+    },
+    "4_preditores_usaveis": {
+     "parede_s": 0.0163,
+     "chamadas": 2572
+    },
+    "5_normaliza_qc": {
+     "parede_s": 0.0399,
+     "chamadas": 2572
+    },
+    "6_normaliza_amostras": {
+     "parede_s": 0.076,
+     "chamadas": 2572
+    },
+    "7_reescala_por_mediana": {
+     "parede_s": 0.1113,
+     "chamadas": 5144
+    },
+    "8_substitui_nao_finitos": {
+     "parede_s": 0.0091,
+     "chamadas": 2572
+    },
+    "9_mascara_de_outlier": {
+     "parede_s": 0.0553,
+     "chamadas": 2572
+    },
+    "9_reparo_subtrativo": {
+     "parede_s": 0.066,
+     "chamadas": 2572
+    }
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "n_features": 6035,
+   "n_amostras": 68,
+   "n_jobs": 1,
+   "semente": 42,
+   "parede_total_s": 1015.613,
+   "cpu_total_s": 1014.0,
+   "soma_dos_passos_s": 1014.531,
+   "nao_atribuido_s": 1.082,
+   "passos": {
+    "10_reparo_da_linha": {
+     "parede_s": 0.2107,
+     "chamadas": 1
+    },
+    "11_restauracao": {
+     "parede_s": 0.0018,
+     "chamadas": 1
+    },
+    "1_substituicao": {
+     "parede_s": 0.0874,
+     "chamadas": 1
+    },
+    "2_correlacoes": {
+     "parede_s": 0.4592,
+     "chamadas": 1
+    },
+    "3_selecao_de_preditores": {
+     "parede_s": 16.0231,
+     "chamadas": 6035
+    },
+    "4_escalonamento": {
+     "parede_s": 0.6801,
+     "chamadas": 12070
+    },
+    "4_floresta": {
+     "parede_s": 996.1775,
+     "chamadas": 6035
+    },
+    "4_preditores_usaveis": {
+     "parede_s": 0.0388,
+     "chamadas": 6035
+    },
+    "5_normaliza_qc": {
+     "parede_s": 0.0947,
+     "chamadas": 6035
+    },
+    "6_normaliza_amostras": {
+     "parede_s": 0.1847,
+     "chamadas": 6035
+    },
+    "7_reescala_por_mediana": {
+     "parede_s": 0.2603,
+     "chamadas": 12070
+    },
+    "8_substitui_nao_finitos": {
+     "parede_s": 0.0218,
+     "chamadas": 6035
+    },
+    "9_mascara_de_outlier": {
+     "parede_s": 0.1339,
+     "chamadas": 6035
+    },
+    "9_reparo_subtrativo": {
+     "parede_s": 0.1574,
+     "chamadas": 6035
+    }
+   }
+  }
+ ]
+}

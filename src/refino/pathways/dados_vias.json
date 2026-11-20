@@ -1,0 +1,38 @@
+{
+  "versao": 1,
+  "origem": "https://www.metaboanalyst.ca/resources/libs/",
+  "medido_em": "2026-10-01",
+  "nota": "As bibliotecas que o MetaboAnalystR le no modo local. O servidor as troca sem versao; os sha256 sao os do download de 01/10/2026. Na pasta do laboratorio so passam copias com estes hashes; na release publica o download grava o hash que vier e marca 'nao validada' quando ele difere.",
+  "bibliotecas": [
+    {
+      "arquivo": "compound_db.qs",
+      "caminho_remoto": "compound_db.qs",
+      "tamanho": 1287503,
+      "sha256": "6e77d8c468f2b591b11f4ff1d1888fe155853feb02acfbd4070f82376146c965"
+    },
+    {
+      "arquivo": "syn_nms.qs",
+      "caminho_remoto": "syn_nms.qs",
+      "tamanho": 4339555,
+      "sha256": "d560098276339f9c52e534bfa9679cf3c39a4a4908b576dd522ad3a337aff1f8"
+    },
+    {
+      "arquivo": "master_compound_db.qs",
+      "caminho_remoto": "master_compound_db.qs",
+      "tamanho": 12507744,
+      "sha256": "9359d0833639ebb181f08ed04da6bfb6d408b172ff43bf831cf557eb4400640d"
+    },
+    {
+      "arquivo": "msets_smpdb_pathway.qs",
+      "caminho_remoto": "msets/smpdb_pathway.qs",
+      "tamanho": 13938,
+      "sha256": "682a0476f498de699c6d8e19df7dc5c5b0154ffd6a48d82330aba7d790145f45"
+    },
+    {
+      "arquivo": "smpdb_hsa.qs",
+      "caminho_remoto": "smpdb/hsa.qs",
+      "tamanho": 102715,
+      "sha256": "747084539664b25a9c5c462c4e4d0cb80bb17c6b942ce65eb41ad2d3eae05638"
+    }
+  ]
+}

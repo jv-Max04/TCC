@@ -1,0 +1,17 @@
+{
+ "grupo": "real",
+ "modo": "neg_hilic",
+ "n_features": 2039,
+ "n_qcs": 7,
+ "indefinidos": {
+  "none": 212,
+  "loess": 418,
+  "serrf": 212
+ },
+ "vetores": "real-neg_hilic.npz",
+ "ok": true,
+ "segundos": 1803.0,
+ "unidade": "real-neg_hilic",
+ "n_jobs_por_unidade": 3,
+ "pid": 11844
+}

@@ -1,0 +1,28 @@
+{
+  "pid": 4133212,
+  "abertura": {
+    "nucleos_nominais": 12,
+    "load_1min": 2.7,
+    "mhz_medio": 4145.6,
+    "governador": "powersave",
+    "boot_id": "40025d06-dff4-4b54-be65-730e736f901f",
+    "ligada_s": 86748.1,
+    "modelo_da_maquina": "AMD Ryzen 5 7600, 6 núcleos físicos / 12 lógicos (nominal de fábrica: 5171,85 MHz máx, NUNCA observado)"
+  },
+  "fechamento": {
+    "nucleos_nominais": 12,
+    "load_1min": 17.32,
+    "mhz_medio": 3957.2,
+    "governador": "powersave",
+    "boot_id": "40025d06-dff4-4b54-be65-730e736f901f",
+    "ligada_s": 87137.4,
+    "modelo_da_maquina": "AMD Ryzen 5 7600, 6 núcleos físicos / 12 lógicos (nominal de fábrica: 5171,85 MHz máx, NUNCA observado)"
+  },
+  "regime": "carga recente conhecida",
+  "valores": [
+    8.94847133131912,
+    8.89236775861112,
+    9.193078081805451
+  ],
+  "nota": "Medido minutos depois de `make check` completo (7,5 min de suite). NAO e ponto ambiente e NAO entra no estimador: a condicao de carga recente e conhecida e declarada, como os pontos injetados. Fica no registro porque nada se descarta (AR99), e porque foi ele que exercitou a banda em producao."
+}

@@ -1,0 +1,219 @@
+{
+  "commit": "35b4029000db6cfb7c7e2d224506b45f1300e816",
+  "formula": "media + 3 * desvio (INALTERADA)",
+  "n": 20,
+  "media": 10.037503591246503,
+  "desvio": 0.9195779580590107,
+  "minimo": 8.817242349027765,
+  "maximo": 11.438214767916987,
+  "teto_novo": 12.796237465423536,
+  "teto_d222": 8.56,
+  "media_d222": 8.497,
+  "desvio_d222": 0.021,
+  "ponto_ar98": 8.521,
+  "ponto_que_reprovou": 8.732,
+  "load_min": 9.37,
+  "load_max": 21.24,
+  "pontos": [
+    {
+      "mili_por_celula": 8.82021564715261,
+      "parede_s": 127.01110531899758,
+      "executor_s": 127.01107983999827,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 9.37,
+      "load_final": 13.61,
+      "queimadores": 0
+    },
+    {
+      "mili_por_celula": 9.352674300555718,
+      "parede_s": 134.6785099280023,
+      "executor_s": 134.67846012300288,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 13.61,
+      "load_final": 15.78,
+      "queimadores": 1
+    },
+    {
+      "mili_por_celula": 10.00406878638892,
+      "parede_s": 144.05859052400046,
+      "executor_s": 144.05854050999915,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 15.78,
+      "load_final": 17.01,
+      "queimadores": 2
+    },
+    {
+      "mili_por_celula": 10.529335653402793,
+      "parede_s": 151.62243340900022,
+      "executor_s": 151.62239244100056,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 17.01,
+      "load_final": 17.7,
+      "queimadores": 3
+    },
+    {
+      "mili_por_celula": 11.431888709444642,
+      "parede_s": 164.61919741600286,
+      "executor_s": 164.61914946499746,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 17.7,
+      "load_final": 21.24,
+      "queimadores": 4
+    },
+    {
+      "mili_por_celula": 8.822229770625098,
+      "parede_s": 127.04010869700141,
+      "executor_s": 127.04008021299524,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 21.24,
+      "load_final": 16.49,
+      "queimadores": 0
+    },
+    {
+      "mili_por_celula": 9.394510606735924,
+      "parede_s": 135.28095273699728,
+      "executor_s": 135.28090960499685,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 16.49,
+      "load_final": 16.7,
+      "queimadores": 1
+    },
+    {
+      "mili_por_celula": 9.941930521597188,
+      "parede_s": 143.16379951099952,
+      "executor_s": 143.1637490150024,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 16.7,
+      "load_final": 17.72,
+      "queimadores": 2
+    },
+    {
+      "mili_por_celula": 10.597104675555581,
+      "parede_s": 152.59830732800037,
+      "executor_s": 152.59824087299785,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 17.72,
+      "load_final": 18.08,
+      "queimadores": 3
+    },
+    {
+      "mili_por_celula": 11.438214767916987,
+      "parede_s": 164.71029265800462,
+      "executor_s": 164.7102463600022,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 18.08,
+      "load_final": 20.66,
+      "queimadores": 4
+    },
+    {
+      "mili_por_celula": 8.817242349027765,
+      "parede_s": 126.96828982599982,
+      "executor_s": 126.96826631099975,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 20.66,
+      "load_final": 16.53,
+      "queimadores": 0
+    },
+    {
+      "mili_por_celula": 9.409034241319508,
+      "parede_s": 135.4900930750009,
+      "executor_s": 135.49003196800186,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 16.53,
+      "load_final": 16.35,
+      "queimadores": 1
+    },
+    {
+      "mili_por_celula": 9.9744436106246,
+      "parede_s": 143.63198799299425,
+      "executor_s": 143.6319387399999,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 16.35,
+      "load_final": 17.51,
+      "queimadores": 2
+    },
+    {
+      "mili_por_celula": 10.729212470833367,
+      "parede_s": 154.5006595800005,
+      "executor_s": 154.5006027230047,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 17.51,
+      "load_final": 18.68,
+      "queimadores": 3
+    },
+    {
+      "mili_por_celula": 11.369828168611393,
+      "parede_s": 163.7255256280041,
+      "executor_s": 163.72548041200207,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 18.68,
+      "load_final": 20.53,
+      "queimadores": 4
+    },
+    {
+      "mili_por_celula": 8.818964154861028,
+      "parede_s": 126.9930838299988,
+      "executor_s": 126.99306148799951,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 20.53,
+      "load_final": 16.28,
+      "queimadores": 0
+    },
+    {
+      "mili_por_celula": 9.461437557708146,
+      "parede_s": 136.24470083099732,
+      "executor_s": 136.24465087600402,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 16.28,
+      "load_final": 17.45,
+      "queimadores": 1
+    },
+    {
+      "mili_por_celula": 9.99128621972179,
+      "parede_s": 143.87452156399377,
+      "executor_s": 143.87446554699272,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 17.45,
+      "load_final": 18.06,
+      "queimadores": 2
+    },
+    {
+      "mili_por_celula": 10.587991306250236,
+      "parede_s": 152.4670748100034,
+      "executor_s": 152.46701951499563,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 18.06,
+      "load_final": 19.72,
+      "queimadores": 3
+    },
+    {
+      "mili_por_celula": 11.258458306596772,
+      "parede_s": 162.1217996149935,
+      "executor_s": 162.12174554199737,
+      "celulas": 2880,
+      "nucleos": 12,
+      "load_inicial": 18.62,
+      "load_final": 19.5,
+      "queimadores": 4
+    }
+  ]
+}

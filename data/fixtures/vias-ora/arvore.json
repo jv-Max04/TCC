@@ -1,0 +1,2135 @@
+{
+ "bibliotecas": {
+  "compound_db.qs": "6e77d8c468f2b591b11f4ff1d1888fe155853feb02acfbd4070f82376146c965",
+  "master_compound_db.qs": "9359d0833639ebb181f08ed04da6bfb6d408b172ff43bf831cf557eb4400640d",
+  "msets_smpdb_pathway.qs": "682a0476f498de699c6d8e19df7dc5c5b0154ffd6a48d82330aba7d790145f45",
+  "smpdb_hsa.qs": "747084539664b25a9c5c462c4e4d0cb80bb17c6b942ce65eb41ad2d3eae05638",
+  "syn_nms.qs": "d560098276339f9c52e534bfa9679cf3c39a4a4908b576dd522ad3a337aff1f8"
+ },
+ "entrada_sha256": "1bd6bf12c98d02f07fed0a84eb7b99fbdcb775c27fc5222636745c8d1ed66b82",
+ "lado": "arvore",
+ "mapear": {
+  "fundo": {
+   "casados": 63,
+   "consultados": 63,
+   "mapeamento": [
+    {
+     "casado": "Glycine",
+     "consulta": "Glycine",
+     "hmdb": "HMDB0000123",
+     "kegg": "C00037"
+    },
+    {
+     "casado": "L-Alanine",
+     "consulta": "L-Alanine",
+     "hmdb": "HMDB0000161",
+     "kegg": "C00041"
+    },
+    {
+     "casado": "Citric acid",
+     "consulta": "Citric acid",
+     "hmdb": "HMDB0000094",
+     "kegg": "C00158"
+    },
+    {
+     "casado": "Lactic acid",
+     "consulta": "L-Lactic acid",
+     "hmdb": "HMDB0000190",
+     "kegg": "C00186"
+    },
+    {
+     "casado": "D-Glucose",
+     "consulta": "D-Glucose",
+     "hmdb": "HMDB0000122",
+     "kegg": "C00031"
+    },
+    {
+     "casado": "Pyruvic acid",
+     "consulta": "Pyruvic acid",
+     "hmdb": "HMDB0000243",
+     "kegg": "C00022"
+    },
+    {
+     "casado": "Succinic acid",
+     "consulta": "Succinic acid",
+     "hmdb": "HMDB0000254",
+     "kegg": "C00042"
+    },
+    {
+     "casado": "Fumaric acid",
+     "consulta": "Fumaric acid",
+     "hmdb": "HMDB0000134",
+     "kegg": "C00122"
+    },
+    {
+     "casado": "Malic acid",
+     "consulta": "L-Malic acid",
+     "hmdb": "HMDB0000156",
+     "kegg": "C00149"
+    },
+    {
+     "casado": "Oxoglutaric acid",
+     "consulta": "Oxoglutaric acid",
+     "hmdb": "HMDB0000208",
+     "kegg": "C00026"
+    },
+    {
+     "casado": "Glutamic acid",
+     "consulta": "L-Glutamic acid",
+     "hmdb": "HMDB0000148",
+     "kegg": "C00025"
+    },
+    {
+     "casado": "Glutamine",
+     "consulta": "L-Glutamine",
+     "hmdb": "HMDB0000641",
+     "kegg": "C00064"
+    },
+    {
+     "casado": "L-Aspartic acid",
+     "consulta": "L-Aspartic acid",
+     "hmdb": "HMDB0000191",
+     "kegg": "C00049"
+    },
+    {
+     "casado": "Serine",
+     "consulta": "L-Serine",
+     "hmdb": "HMDB0000187",
+     "kegg": "C00065"
+    },
+    {
+     "casado": "L-Threonine",
+     "consulta": "L-Threonine",
+     "hmdb": "HMDB0000167",
+     "kegg": "C00188"
+    },
+    {
+     "casado": "L-Valine",
+     "consulta": "L-Valine",
+     "hmdb": "HMDB0000883",
+     "kegg": "C00183"
+    },
+    {
+     "casado": "Leucine",
+     "consulta": "L-Leucine",
+     "hmdb": "HMDB0000687",
+     "kegg": "C00123"
+    },
+    {
+     "casado": "Isoleucine",
+     "consulta": "L-Isoleucine",
+     "hmdb": "HMDB0000172",
+     "kegg": "C00407"
+    },
+    {
+     "casado": "Proline",
+     "consulta": "L-Proline",
+     "hmdb": "HMDB0000162",
+     "kegg": "C00148"
+    },
+    {
+     "casado": "Phenylalanine",
+     "consulta": "L-Phenylalanine",
+     "hmdb": "HMDB0000159",
+     "kegg": "C00079"
+    },
+    {
+     "casado": "L-Tyrosine",
+     "consulta": "L-Tyrosine",
+     "hmdb": "HMDB0000158",
+     "kegg": "C00082"
+    },
+    {
+     "casado": "L-Tryptophan",
+     "consulta": "L-Tryptophan",
+     "hmdb": "HMDB0000929",
+     "kegg": "C00078"
+    },
+    {
+     "casado": "Urea",
+     "consulta": "Urea",
+     "hmdb": "HMDB0000294",
+     "kegg": "C00086"
+    },
+    {
+     "casado": "Ornithine",
+     "consulta": "L-Ornithine",
+     "hmdb": "HMDB0000214",
+     "kegg": "C00077"
+    },
+    {
+     "casado": "Citrulline",
+     "consulta": "L-Citrulline",
+     "hmdb": "HMDB0000904",
+     "kegg": "C00327"
+    },
+    {
+     "casado": "L-Arginine",
+     "consulta": "L-Arginine",
+     "hmdb": "HMDB0000517",
+     "kegg": "C00062"
+    },
+    {
+     "casado": "Creatine",
+     "consulta": "Creatine",
+     "hmdb": "HMDB0000064",
+     "kegg": "C00300"
+    },
+    {
+     "casado": "Taurine",
+     "consulta": "Taurine",
+     "hmdb": "HMDB0000251",
+     "kegg": "C00245"
+    },
+    {
+     "casado": "Hypoxanthine",
+     "consulta": "Hypoxanthine",
+     "hmdb": "HMDB0000157",
+     "kegg": "C00262"
+    },
+    {
+     "casado": "Xanthine",
+     "consulta": "Xanthine",
+     "hmdb": "HMDB0000292",
+     "kegg": "C00385"
+    },
+    {
+     "casado": "Uric acid",
+     "consulta": "Uric acid",
+     "hmdb": "HMDB0000289",
+     "kegg": "C00366"
+    },
+    {
+     "casado": "Adenosine",
+     "consulta": "Adenosine",
+     "hmdb": "HMDB0000050",
+     "kegg": "C00212"
+    },
+    {
+     "casado": "Inosine",
+     "consulta": "Inosine",
+     "hmdb": "HMDB0000195",
+     "kegg": "C00294"
+    },
+    {
+     "casado": "Guanosine",
+     "consulta": "Guanosine",
+     "hmdb": "HMDB0000133",
+     "kegg": "C00387"
+    },
+    {
+     "casado": "Uridine",
+     "consulta": "Uridine",
+     "hmdb": "HMDB0000296",
+     "kegg": "C00299"
+    },
+    {
+     "casado": "Cytidine",
+     "consulta": "Cytidine",
+     "hmdb": "HMDB0000089",
+     "kegg": "C00475"
+    },
+    {
+     "casado": "Thymine",
+     "consulta": "Thymine",
+     "hmdb": "HMDB0000262",
+     "kegg": "C00178"
+    },
+    {
+     "casado": "Uracil",
+     "consulta": "Uracil",
+     "hmdb": "HMDB0000300",
+     "kegg": "C00106"
+    },
+    {
+     "casado": "Choline",
+     "consulta": "Choline",
+     "hmdb": "HMDB0000097",
+     "kegg": "C00114"
+    },
+    {
+     "casado": "Betaine",
+     "consulta": "Betaine",
+     "hmdb": "HMDB0000043",
+     "kegg": "C00719"
+    },
+    {
+     "casado": "L-Carnitine",
+     "consulta": "L-Carnitine",
+     "hmdb": "HMDB0000062",
+     "kegg": "C00487"
+    },
+    {
+     "casado": "Glycerol",
+     "consulta": "Glycerol",
+     "hmdb": "HMDB0000131",
+     "kegg": "C00116"
+    },
+    {
+     "casado": "Palmitic acid",
+     "consulta": "Palmitic acid",
+     "hmdb": "HMDB0000220",
+     "kegg": "C00249"
+    },
+    {
+     "casado": "Oleic acid",
+     "consulta": "Oleic acid",
+     "hmdb": "HMDB0000207",
+     "kegg": "C00712"
+    },
+    {
+     "casado": "Stearic acid",
+     "consulta": "Stearic acid",
+     "hmdb": "HMDB0000827",
+     "kegg": "C01530"
+    },
+    {
+     "casado": "Cholesterol",
+     "consulta": "Cholesterol",
+     "hmdb": "HMDB0000067",
+     "kegg": "C00187"
+    },
+    {
+     "casado": "Cortisol",
+     "consulta": "Cortisol",
+     "hmdb": "HMDB0000063",
+     "kegg": "C00735"
+    },
+    {
+     "casado": "Hippuric acid",
+     "consulta": "Hippuric acid",
+     "hmdb": "HMDB0000714",
+     "kegg": "C01586"
+    },
+    {
+     "casado": "Kynurenine",
+     "consulta": "L-Kynurenine",
+     "hmdb": "HMDB0000684",
+     "kegg": "C00328"
+    },
+    {
+     "casado": "Serotonin",
+     "consulta": "Serotonin",
+     "hmdb": "HMDB0000259",
+     "kegg": "C00780"
+    },
+    {
+     "casado": "Dopamine",
+     "consulta": "Dopamine",
+     "hmdb": "HMDB0000073",
+     "kegg": "C03758"
+    },
+    {
+     "casado": "Histamine",
+     "consulta": "Histamine",
+     "hmdb": "HMDB0000870",
+     "kegg": "C00388"
+    },
+    {
+     "casado": "Histidine",
+     "consulta": "L-Histidine",
+     "hmdb": "HMDB0000177",
+     "kegg": "C00135"
+    },
+    {
+     "casado": "Lysine",
+     "consulta": "L-Lysine",
+     "hmdb": "HMDB0000182",
+     "kegg": "C00047"
+    },
+    {
+     "casado": "Methionine",
+     "consulta": "L-Methionine",
+     "hmdb": "HMDB0000696",
+     "kegg": "C00073"
+    },
+    {
+     "casado": "L-Cysteine",
+     "consulta": "L-Cysteine",
+     "hmdb": "HMDB0000574",
+     "kegg": "C00097"
+    },
+    {
+     "casado": "Glutathione",
+     "consulta": "Glutathione",
+     "hmdb": "HMDB0000125",
+     "kegg": "C00051"
+    },
+    {
+     "casado": "Spermidine",
+     "consulta": "Spermidine",
+     "hmdb": "HMDB0001257",
+     "kegg": "C00315"
+    },
+    {
+     "casado": "Putrescine",
+     "consulta": "Putrescine",
+     "hmdb": "HMDB0001414",
+     "kegg": "C00134"
+    },
+    {
+     "casado": "Niacinamide",
+     "consulta": "Niacinamide",
+     "hmdb": "HMDB0001406",
+     "kegg": "C00153"
+    },
+    {
+     "casado": "Pantothenic acid",
+     "consulta": "Pantothenic acid",
+     "hmdb": "HMDB0000210",
+     "kegg": "C00864"
+    },
+    {
+     "casado": "Riboflavin",
+     "consulta": "Riboflavin",
+     "hmdb": "HMDB0000244",
+     "kegg": "C00255"
+    },
+    {
+     "casado": "Ascorbic acid",
+     "consulta": "Ascorbic acid",
+     "hmdb": "HMDB0000044",
+     "kegg": "C00072"
+    }
+   ]
+  },
+  "lista": {
+   "casados": 25,
+   "consultados": 25,
+   "mapeamento": [
+    {
+     "casado": "Glycine",
+     "consulta": "Glycine",
+     "hmdb": "HMDB0000123",
+     "kegg": "C00037"
+    },
+    {
+     "casado": "L-Alanine",
+     "consulta": "L-Alanine",
+     "hmdb": "HMDB0000161",
+     "kegg": "C00041"
+    },
+    {
+     "casado": "Citric acid",
+     "consulta": "Citric acid",
+     "hmdb": "HMDB0000094",
+     "kegg": "C00158"
+    },
+    {
+     "casado": "Lactic acid",
+     "consulta": "L-Lactic acid",
+     "hmdb": "HMDB0000190",
+     "kegg": "C00186"
+    },
+    {
+     "casado": "D-Glucose",
+     "consulta": "D-Glucose",
+     "hmdb": "HMDB0000122",
+     "kegg": "C00031"
+    },
+    {
+     "casado": "Pyruvic acid",
+     "consulta": "Pyruvic acid",
+     "hmdb": "HMDB0000243",
+     "kegg": "C00022"
+    },
+    {
+     "casado": "Succinic acid",
+     "consulta": "Succinic acid",
+     "hmdb": "HMDB0000254",
+     "kegg": "C00042"
+    },
+    {
+     "casado": "Fumaric acid",
+     "consulta": "Fumaric acid",
+     "hmdb": "HMDB0000134",
+     "kegg": "C00122"
+    },
+    {
+     "casado": "Malic acid",
+     "consulta": "L-Malic acid",
+     "hmdb": "HMDB0000156",
+     "kegg": "C00149"
+    },
+    {
+     "casado": "Oxoglutaric acid",
+     "consulta": "Oxoglutaric acid",
+     "hmdb": "HMDB0000208",
+     "kegg": "C00026"
+    },
+    {
+     "casado": "Glutamic acid",
+     "consulta": "L-Glutamic acid",
+     "hmdb": "HMDB0000148",
+     "kegg": "C00025"
+    },
+    {
+     "casado": "Glutamine",
+     "consulta": "L-Glutamine",
+     "hmdb": "HMDB0000641",
+     "kegg": "C00064"
+    },
+    {
+     "casado": "L-Aspartic acid",
+     "consulta": "L-Aspartic acid",
+     "hmdb": "HMDB0000191",
+     "kegg": "C00049"
+    },
+    {
+     "casado": "Serine",
+     "consulta": "L-Serine",
+     "hmdb": "HMDB0000187",
+     "kegg": "C00065"
+    },
+    {
+     "casado": "L-Threonine",
+     "consulta": "L-Threonine",
+     "hmdb": "HMDB0000167",
+     "kegg": "C00188"
+    },
+    {
+     "casado": "L-Valine",
+     "consulta": "L-Valine",
+     "hmdb": "HMDB0000883",
+     "kegg": "C00183"
+    },
+    {
+     "casado": "Leucine",
+     "consulta": "L-Leucine",
+     "hmdb": "HMDB0000687",
+     "kegg": "C00123"
+    },
+    {
+     "casado": "Isoleucine",
+     "consulta": "L-Isoleucine",
+     "hmdb": "HMDB0000172",
+     "kegg": "C00407"
+    },
+    {
+     "casado": "Proline",
+     "consulta": "L-Proline",
+     "hmdb": "HMDB0000162",
+     "kegg": "C00148"
+    },
+    {
+     "casado": "Phenylalanine",
+     "consulta": "L-Phenylalanine",
+     "hmdb": "HMDB0000159",
+     "kegg": "C00079"
+    },
+    {
+     "casado": "L-Tyrosine",
+     "consulta": "L-Tyrosine",
+     "hmdb": "HMDB0000158",
+     "kegg": "C00082"
+    },
+    {
+     "casado": "L-Tryptophan",
+     "consulta": "L-Tryptophan",
+     "hmdb": "HMDB0000929",
+     "kegg": "C00078"
+    },
+    {
+     "casado": "Urea",
+     "consulta": "Urea",
+     "hmdb": "HMDB0000294",
+     "kegg": "C00086"
+    },
+    {
+     "casado": "Ornithine",
+     "consulta": "L-Ornithine",
+     "hmdb": "HMDB0000214",
+     "kegg": "C00077"
+    },
+    {
+     "casado": "Citrulline",
+     "consulta": "L-Citrulline",
+     "hmdb": "HMDB0000904",
+     "kegg": "C00327"
+    }
+   ]
+  }
+ },
+ "ora_com_fundo": {
+  "acao": "ora_local",
+  "biblioteca": "smpdb_pathway",
+  "na_lista": 25,
+  "status": "ok",
+  "universo": {
+   "tamanho": 63,
+   "tipo": "fundo_do_ensaio"
+  },
+  "vias": [
+   {
+    "acertos": 10,
+    "compostos": [
+     "Citric acid",
+     "D-Glucose",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "Lactic acid",
+     "Malic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Succinic acid"
+    ],
+    "esperado": 3.97,
+    "fdr": 0.00251,
+    "holm": 0.00251,
+    "p": 2.56e-05,
+    "total": 10,
+    "via": "Warburg Effect"
+   },
+   {
+    "acertos": 10,
+    "compostos": [
+     "Citrulline",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "L-Alanine",
+     "L-Aspartic acid",
+     "Ornithine",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Urea"
+    ],
+    "esperado": 4.37,
+    "fdr": 0.0102,
+    "holm": 0.0203,
+    "p": 0.000209,
+    "total": 11,
+    "via": "Urea Cycle"
+   },
+   {
+    "acertos": 10,
+    "compostos": [
+     "Citrulline",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glycine",
+     "L-Aspartic acid",
+     "Ornithine",
+     "Oxoglutaric acid",
+     "Proline",
+     "Succinic acid",
+     "Urea"
+    ],
+    "esperado": 4.76,
+    "fdr": 0.0303,
+    "holm": 0.089,
+    "p": 0.000927,
+    "total": 12,
+    "via": "Arginine and Proline Metabolism"
+   },
+   {
+    "acertos": 6,
+    "compostos": [
+     "Glutamic acid",
+     "Isoleucine",
+     "L-Valine",
+     "Leucine",
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 2.38,
+    "fdr": 0.0511,
+    "holm": 0.248,
+    "p": 0.00261,
+    "total": 6,
+    "via": "Valine, Leucine and Isoleucine Degradation"
+   },
+   {
+    "acertos": 6,
+    "compostos": [
+     "Citric acid",
+     "Fumaric acid",
+     "Malic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Succinic acid"
+    ],
+    "esperado": 2.38,
+    "fdr": 0.0511,
+    "holm": 0.248,
+    "p": 0.00261,
+    "total": 6,
+    "via": "Citric Acid Cycle"
+   },
+   {
+    "acertos": 7,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine",
+     "Glycine",
+     "L-Aspartic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Serine"
+    ],
+    "esperado": 3.17,
+    "fdr": 0.0673,
+    "holm": 0.465,
+    "p": 0.005,
+    "total": 8,
+    "via": "Ammonia Recycling"
+   },
+   {
+    "acertos": 8,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine",
+     "Glycine",
+     "L-Alanine",
+     "L-Aspartic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Succinic acid"
+    ],
+    "esperado": 3.97,
+    "fdr": 0.0673,
+    "holm": 0.606,
+    "p": 0.00658,
+    "total": 10,
+    "via": "Glutamate Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Fumaric acid",
+     "Glutamic acid",
+     "L-Tyrosine",
+     "Oxoglutaric acid",
+     "Phenylalanine"
+    ],
+    "esperado": 1.98,
+    "fdr": 0.0673,
+    "holm": 0.688,
+    "p": 0.00756,
+    "total": 5,
+    "via": "Phenylalanine and Tyrosine Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Glutamic acid",
+     "Glycine",
+     "L-Alanine",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.98,
+    "fdr": 0.0673,
+    "holm": 0.688,
+    "p": 0.00756,
+    "total": 5,
+    "via": "Alanine Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "D-Glucose",
+     "Glutamic acid",
+     "L-Alanine",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.98,
+    "fdr": 0.0673,
+    "holm": 0.688,
+    "p": 0.00756,
+    "total": 5,
+    "via": "Glucose-Alanine Cycle"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "D-Glucose",
+     "Lactic acid",
+     "Malic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.98,
+    "fdr": 0.0673,
+    "holm": 0.688,
+    "p": 0.00756,
+    "total": 5,
+    "via": "Gluconeogenesis"
+   },
+   {
+    "acertos": 6,
+    "compostos": [
+     "Citrulline",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "L-Aspartic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 2.78,
+    "fdr": 0.106,
+    "holm": 1,
+    "p": 0.013,
+    "total": 7,
+    "via": "Aspartate Metabolism"
+   },
+   {
+    "acertos": 4,
+    "compostos": [
+     "Glutamic acid",
+     "L-Aspartic acid",
+     "Malic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 1.59,
+    "fdr": 0.149,
+    "holm": 1,
+    "p": 0.0212,
+    "total": 4,
+    "via": "Malate-Aspartate Shuttle"
+   },
+   {
+    "acertos": 4,
+    "compostos": [
+     "Citric acid",
+     "D-Glucose",
+     "Malic acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.59,
+    "fdr": 0.149,
+    "holm": 1,
+    "p": 0.0212,
+    "total": 4,
+    "via": "Transfer of Acetyl Groups into Mitochondria"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "L-Valine",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 1.19,
+    "fdr": 0.355,
+    "holm": 1,
+    "p": 0.0579,
+    "total": 3,
+    "via": "Propanoate Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.19,
+    "fdr": 0.355,
+    "holm": 1,
+    "p": 0.0579,
+    "total": 3,
+    "via": "Amino Sugar Metabolism"
+   },
+   {
+    "acertos": 8,
+    "compostos": [
+     "Glutamic acid",
+     "Glycine",
+     "L-Alanine",
+     "L-Threonine",
+     "Ornithine",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Serine"
+    ],
+    "esperado": 5.16,
+    "fdr": 0.399,
+    "holm": 1,
+    "p": 0.0692,
+    "total": 13,
+    "via": "Glycine and Serine Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Fumaric acid",
+     "Glutamic acid",
+     "L-Aspartic acid",
+     "L-Tyrosine",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 2.78,
+    "fdr": 0.439,
+    "holm": 1,
+    "p": 0.0805,
+    "total": 7,
+    "via": "Tyrosine Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "D-Glucose",
+     "Serine"
+    ],
+    "esperado": 0.794,
+    "fdr": 0.686,
+    "holm": 1,
+    "p": 0.154,
+    "total": 2,
+    "via": "Sphingolipid Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "D-Glucose",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.794,
+    "fdr": 0.686,
+    "holm": 1,
+    "p": 0.154,
+    "total": 2,
+    "via": "Glycolysis"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Fumaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 0.794,
+    "fdr": 0.686,
+    "holm": 1,
+    "p": 0.154,
+    "total": 2,
+    "via": "Mitochondrial Electron Transport Chain"
+   },
+   {
+    "acertos": 4,
+    "compostos": [
+     "Glutamic acid",
+     "L-Alanine",
+     "L-Tryptophan",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 2.38,
+    "fdr": 0.686,
+    "holm": 1,
+    "p": 0.163,
+    "total": 6,
+    "via": "Tryptophan Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.59,
+    "fdr": 0.686,
+    "holm": 1,
+    "p": 0.168,
+    "total": 4,
+    "via": "Cysteine Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Lactic acid",
+     "Malic acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.59,
+    "fdr": 0.686,
+    "holm": 1,
+    "p": 0.168,
+    "total": 4,
+    "via": "Pyruvate Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "Glycine",
+     "L-Alanine"
+    ],
+    "esperado": 1.98,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.306,
+    "total": 5,
+    "via": "Glutathione Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "L-Alanine",
+     "Serine"
+    ],
+    "esperado": 1.19,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.345,
+    "total": 3,
+    "via": "Selenoamino Acid Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Glutamic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 1.19,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.345,
+    "total": 3,
+    "via": "Lysine Degradation"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine"
+    ],
+    "esperado": 1.19,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.345,
+    "total": 3,
+    "via": "Nicotinate and Nicotinamide Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 1.19,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.345,
+    "total": 3,
+    "via": "Phytanic Acid Peroxisomal Oxidation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glycine"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Porphyrin Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Urea"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "D-Arginine and D-Ornithine Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamic acid"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Folate Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Succinic acid"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Ketone Body Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Succinic acid"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Butyrate Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamine"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Phenylacetate Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Lactose Synthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "L-Threonine"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Threonine and 2-Oxobutanoate Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Lactose Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Trehalose Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "L-Tyrosine"
+    ],
+    "esperado": 0.397,
+    "fdr": 0.972,
+    "holm": 1,
+    "p": 0.397,
+    "total": 1,
+    "via": "Thyroid hormone synthesis"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "L-Aspartic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 2.38,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.449,
+    "total": 6,
+    "via": "Beta-Alanine Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glycine",
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 2.38,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.449,
+    "total": 6,
+    "via": "Carnitine Synthesis"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "Glycine",
+     "L-Aspartic acid"
+    ],
+    "esperado": 4.37,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.458,
+    "total": 11,
+    "via": "Purine Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 1.59,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.522,
+    "total": 4,
+    "via": "Oxidation of Branched Chain Fatty Acids"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.794,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.64,
+    "total": 2,
+    "via": "Galactose Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamic acid"
+    ],
+    "esperado": 0.794,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.64,
+    "total": 2,
+    "via": "Arachidonic Acid Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Serine"
+    ],
+    "esperado": 0.794,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.64,
+    "total": 2,
+    "via": "Homocysteine Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Pyruvic acid"
+    ],
+    "esperado": 0.794,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.64,
+    "total": 2,
+    "via": "Pyruvaldehyde Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Serine"
+    ],
+    "esperado": 0.794,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.64,
+    "total": 2,
+    "via": "Phosphatidylethanolamine Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "L-Tyrosine"
+    ],
+    "esperado": 1.19,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.788,
+    "total": 3,
+    "via": "Catecholamine Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamic acid"
+    ],
+    "esperado": 1.19,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.788,
+    "total": 3,
+    "via": "Histidine Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glycine"
+    ],
+    "esperado": 1.59,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.876,
+    "total": 4,
+    "via": "Bile Acid Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Ornithine"
+    ],
+    "esperado": 1.59,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.876,
+    "total": 4,
+    "via": "Spermidine and Spermine Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamine"
+    ],
+    "esperado": 1.98,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.929,
+    "total": 5,
+    "via": "Pyrimidine Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Glycine",
+     "Serine"
+    ],
+    "esperado": 3.57,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.941,
+    "total": 9,
+    "via": "Methionine Metabolism"
+   }
+  ]
+ },
+ "ora_sem_fundo": {
+  "acao": "ora_local",
+  "biblioteca": "smpdb_pathway",
+  "na_lista": 25,
+  "status": "ok",
+  "universo": {
+   "tamanho": 1002,
+   "tipo": "biblioteca"
+  },
+  "vias": [
+   {
+    "acertos": 10,
+    "compostos": [
+     "Citrulline",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "L-Alanine",
+     "L-Aspartic acid",
+     "Ornithine",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Urea"
+    ],
+    "esperado": 0.699,
+    "fdr": 1.22e-08,
+    "holm": 1.22e-08,
+    "p": 1.24e-10,
+    "total": 28,
+    "via": "Urea Cycle"
+   },
+   {
+    "acertos": 10,
+    "compostos": [
+     "Citrulline",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glycine",
+     "L-Aspartic acid",
+     "Ornithine",
+     "Oxoglutaric acid",
+     "Proline",
+     "Succinic acid",
+     "Urea"
+    ],
+    "esperado": 1.3,
+    "fdr": 5.22e-06,
+    "holm": 1.03e-05,
+    "p": 1.07e-07,
+    "total": 52,
+    "via": "Arginine and Proline Metabolism"
+   },
+   {
+    "acertos": 10,
+    "compostos": [
+     "Citric acid",
+     "D-Glucose",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "Lactic acid",
+     "Malic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Succinic acid"
+    ],
+    "esperado": 1.42,
+    "fdr": 8.84e-06,
+    "holm": 2.6e-05,
+    "p": 2.71e-07,
+    "total": 57,
+    "via": "Warburg Effect"
+   },
+   {
+    "acertos": 7,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine",
+     "Glycine",
+     "L-Aspartic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Serine"
+    ],
+    "esperado": 0.773,
+    "fdr": 0.000107,
+    "holm": 0.000414,
+    "p": 4.36e-06,
+    "total": 31,
+    "via": "Ammonia Recycling"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "D-Glucose",
+     "Glutamic acid",
+     "L-Alanine",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.324,
+    "fdr": 0.000141,
+    "holm": 0.000674,
+    "p": 7.17e-06,
+    "total": 13,
+    "via": "Glucose-Alanine Cycle"
+   },
+   {
+    "acertos": 8,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine",
+     "Glycine",
+     "L-Alanine",
+     "L-Aspartic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Succinic acid"
+    ],
+    "esperado": 1.2,
+    "fdr": 0.000146,
+    "holm": 0.000832,
+    "p": 8.95e-06,
+    "total": 48,
+    "via": "Glutamate Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Glutamic acid",
+     "Glycine",
+     "L-Alanine",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.424,
+    "fdr": 0.000451,
+    "holm": 0.00296,
+    "p": 3.22e-05,
+    "total": 17,
+    "via": "Alanine Metabolism"
+   },
+   {
+    "acertos": 8,
+    "compostos": [
+     "Glutamic acid",
+     "Glycine",
+     "L-Alanine",
+     "L-Threonine",
+     "Ornithine",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Serine"
+    ],
+    "esperado": 1.47,
+    "fdr": 0.000541,
+    "holm": 0.00402,
+    "p": 4.42e-05,
+    "total": 59,
+    "via": "Glycine and Serine Metabolism"
+   },
+   {
+    "acertos": 4,
+    "compostos": [
+     "Glutamic acid",
+     "L-Aspartic acid",
+     "Malic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 0.25,
+    "fdr": 0.000626,
+    "holm": 0.00517,
+    "p": 5.75e-05,
+    "total": 10,
+    "via": "Malate-Aspartate Shuttle"
+   },
+   {
+    "acertos": 6,
+    "compostos": [
+     "Citric acid",
+     "Fumaric acid",
+     "Malic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid",
+     "Succinic acid"
+    ],
+    "esperado": 0.798,
+    "fdr": 0.000738,
+    "holm": 0.0067,
+    "p": 7.53e-05,
+    "total": 32,
+    "via": "Citric Acid Cycle"
+   },
+   {
+    "acertos": 6,
+    "compostos": [
+     "Citrulline",
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "L-Aspartic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 0.873,
+    "fdr": 0.00114,
+    "holm": 0.0113,
+    "p": 0.000128,
+    "total": 35,
+    "via": "Aspartate Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Fumaric acid",
+     "Glutamic acid",
+     "L-Tyrosine",
+     "Oxoglutaric acid",
+     "Phenylalanine"
+    ],
+    "esperado": 0.674,
+    "fdr": 0.0029,
+    "holm": 0.0309,
+    "p": 0.000355,
+    "total": 27,
+    "via": "Phenylalanine and Tyrosine Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "D-Glucose",
+     "Lactic acid",
+     "Malic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.823,
+    "fdr": 0.0071,
+    "holm": 0.081,
+    "p": 0.000942,
+    "total": 33,
+    "via": "Gluconeogenesis"
+   },
+   {
+    "acertos": 4,
+    "compostos": [
+     "Citric acid",
+     "D-Glucose",
+     "Malic acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.549,
+    "fdr": 0.0114,
+    "holm": 0.139,
+    "p": 0.00163,
+    "total": 22,
+    "via": "Transfer of Acetyl Groups into Mitochondria"
+   },
+   {
+    "acertos": 6,
+    "compostos": [
+     "Glutamic acid",
+     "Isoleucine",
+     "L-Valine",
+     "Leucine",
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 1.47,
+    "fdr": 0.0155,
+    "holm": 0.2,
+    "p": 0.00238,
+    "total": 59,
+    "via": "Valine, Leucine and Isoleucine Degradation"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "Glycine",
+     "L-Alanine"
+    ],
+    "esperado": 0.499,
+    "fdr": 0.0724,
+    "holm": 0.982,
+    "p": 0.0118,
+    "total": 20,
+    "via": "Glutathione Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glycine",
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 0.549,
+    "fdr": 0.0891,
+    "holm": 1,
+    "p": 0.0155,
+    "total": 22,
+    "via": "Carnitine Synthesis"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "Oxoglutaric acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.649,
+    "fdr": 0.132,
+    "holm": 1,
+    "p": 0.0244,
+    "total": 26,
+    "via": "Cysteine Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Fumaric acid",
+     "Glutamic acid",
+     "L-Aspartic acid",
+     "L-Tyrosine",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 1.75,
+    "fdr": 0.132,
+    "holm": 1,
+    "p": 0.0255,
+    "total": 70,
+    "via": "Tyrosine Metabolism"
+   },
+   {
+    "acertos": 5,
+    "compostos": [
+     "Fumaric acid",
+     "Glutamic acid",
+     "Glutamine",
+     "Glycine",
+     "L-Aspartic acid"
+    ],
+    "esperado": 1.82,
+    "fdr": 0.147,
+    "holm": 1,
+    "p": 0.0301,
+    "total": 73,
+    "via": "Purine Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.823,
+    "fdr": 0.213,
+    "holm": 1,
+    "p": 0.0457,
+    "total": 33,
+    "via": "Amino Sugar Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "L-Aspartic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 0.848,
+    "fdr": 0.22,
+    "holm": 1,
+    "p": 0.0493,
+    "total": 34,
+    "via": "Beta-Alanine Metabolism"
+   },
+   {
+    "acertos": 4,
+    "compostos": [
+     "Glutamic acid",
+     "L-Alanine",
+     "L-Tryptophan",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 1.47,
+    "fdr": 0.231,
+    "holm": 1,
+    "p": 0.0542,
+    "total": 59,
+    "via": "Tryptophan Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Fumaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 0.474,
+    "fdr": 0.322,
+    "holm": 1,
+    "p": 0.0789,
+    "total": 19,
+    "via": "Mitochondrial Electron Transport Chain"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Glutamic acid",
+     "L-Valine",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 1.05,
+    "fdr": 0.325,
+    "holm": 1,
+    "p": 0.0829,
+    "total": 42,
+    "via": "Propanoate Metabolism"
+   },
+   {
+    "acertos": 3,
+    "compostos": [
+     "Lactic acid",
+     "Malic acid",
+     "Pyruvic acid"
+    ],
+    "esperado": 1.17,
+    "fdr": 0.399,
+    "holm": 1,
+    "p": 0.108,
+    "total": 47,
+    "via": "Pyruvate Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "D-Glucose",
+     "Pyruvic acid"
+    ],
+    "esperado": 0.574,
+    "fdr": 0.399,
+    "holm": 1,
+    "p": 0.11,
+    "total": 23,
+    "via": "Glycolysis"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 0.649,
+    "fdr": 0.456,
+    "holm": 1,
+    "p": 0.135,
+    "total": 26,
+    "via": "Oxidation of Branched Chain Fatty Acids"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Oxoglutaric acid",
+     "Succinic acid"
+    ],
+    "esperado": 0.649,
+    "fdr": 0.456,
+    "holm": 1,
+    "p": 0.135,
+    "total": 26,
+    "via": "Phytanic Acid Peroxisomal Oxidation"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "L-Alanine",
+     "Serine"
+    ],
+    "esperado": 0.674,
+    "fdr": 0.469,
+    "holm": 1,
+    "p": 0.144,
+    "total": 27,
+    "via": "Selenoamino Acid Metabolism"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Glutamic acid",
+     "Oxoglutaric acid"
+    ],
+    "esperado": 0.749,
+    "fdr": 0.538,
+    "holm": 1,
+    "p": 0.17,
+    "total": 30,
+    "via": "Lysine Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamine"
+    ],
+    "esperado": 0.225,
+    "fdr": 0.588,
+    "holm": 1,
+    "p": 0.204,
+    "total": 9,
+    "via": "Phenylacetate Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Serine"
+    ],
+    "esperado": 0.225,
+    "fdr": 0.588,
+    "holm": 1,
+    "p": 0.204,
+    "total": 9,
+    "via": "Homocysteine Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.225,
+    "fdr": 0.588,
+    "holm": 1,
+    "p": 0.204,
+    "total": 9,
+    "via": "Lactose Degradation"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Glutamic acid",
+     "Glutamine"
+    ],
+    "esperado": 0.873,
+    "fdr": 0.605,
+    "holm": 1,
+    "p": 0.216,
+    "total": 35,
+    "via": "Nicotinate and Nicotinamide Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Pyruvic acid"
+    ],
+    "esperado": 0.25,
+    "fdr": 0.61,
+    "holm": 1,
+    "p": 0.224,
+    "total": 10,
+    "via": "Pyruvaldehyde Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Urea"
+    ],
+    "esperado": 0.274,
+    "fdr": 0.629,
+    "holm": 1,
+    "p": 0.244,
+    "total": 11,
+    "via": "D-Arginine and D-Ornithine Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.274,
+    "fdr": 0.629,
+    "holm": 1,
+    "p": 0.244,
+    "total": 11,
+    "via": "Trehalose Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Serine"
+    ],
+    "esperado": 0.299,
+    "fdr": 0.643,
+    "holm": 1,
+    "p": 0.263,
+    "total": 12,
+    "via": "Phosphatidylethanolamine Biosynthesis"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "D-Glucose",
+     "Serine"
+    ],
+    "esperado": 0.998,
+    "fdr": 0.643,
+    "holm": 1,
+    "p": 0.263,
+    "total": 40,
+    "via": "Sphingolipid Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Succinic acid"
+    ],
+    "esperado": 0.324,
+    "fdr": 0.643,
+    "holm": 1,
+    "p": 0.281,
+    "total": 13,
+    "via": "Ketone Body Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "L-Tyrosine"
+    ],
+    "esperado": 0.324,
+    "fdr": 0.643,
+    "holm": 1,
+    "p": 0.281,
+    "total": 13,
+    "via": "Thyroid hormone synthesis"
+   },
+   {
+    "acertos": 2,
+    "compostos": [
+     "Glycine",
+     "Serine"
+    ],
+    "esperado": 1.05,
+    "fdr": 0.643,
+    "holm": 1,
+    "p": 0.282,
+    "total": 42,
+    "via": "Methionine Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Ornithine"
+    ],
+    "esperado": 0.449,
+    "fdr": 0.816,
+    "holm": 1,
+    "p": 0.368,
+    "total": 18,
+    "via": "Spermidine and Spermine Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Succinic acid"
+    ],
+    "esperado": 0.474,
+    "fdr": 0.816,
+    "holm": 1,
+    "p": 0.384,
+    "total": 19,
+    "via": "Butyrate Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.474,
+    "fdr": 0.816,
+    "holm": 1,
+    "p": 0.384,
+    "total": 19,
+    "via": "Lactose Synthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "L-Tyrosine"
+    ],
+    "esperado": 0.499,
+    "fdr": 0.816,
+    "holm": 1,
+    "p": 0.4,
+    "total": 20,
+    "via": "Catecholamine Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "L-Threonine"
+    ],
+    "esperado": 0.499,
+    "fdr": 0.816,
+    "holm": 1,
+    "p": 0.4,
+    "total": 20,
+    "via": "Threonine and 2-Oxobutanoate Degradation"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamic acid"
+    ],
+    "esperado": 0.724,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.524,
+    "total": 29,
+    "via": "Folate Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "D-Glucose"
+    ],
+    "esperado": 0.948,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.624,
+    "total": 38,
+    "via": "Galactose Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glycine"
+    ],
+    "esperado": 0.998,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.643,
+    "total": 40,
+    "via": "Porphyrin Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamic acid"
+    ],
+    "esperado": 1.05,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.662,
+    "total": 42,
+    "via": "Histidine Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamine"
+    ],
+    "esperado": 1.42,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.773,
+    "total": 57,
+    "via": "Pyrimidine Metabolism"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glycine"
+    ],
+    "esperado": 1.62,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.817,
+    "total": 65,
+    "via": "Bile Acid Biosynthesis"
+   },
+   {
+    "acertos": 1,
+    "compostos": [
+     "Glutamic acid"
+    ],
+    "esperado": 1.67,
+    "fdr": 1,
+    "holm": 1,
+    "p": 0.827,
+    "total": 67,
+    "via": "Arachidonic Acid Metabolism"
+   }
+  ]
+ },
+ "versao_R": "R version 4.4.3 (2025-02-28 ucrt)",
+ "versao_metaboanalystr": "4.3.0"
+}

@@ -1,0 +1,325 @@
+{
+ "natureza": "Latencia por rota da API. DISPARO e PONTA A PONTA sao quantidades diferentes e vao em campos diferentes: o primeiro e o que o `timeout` por requisicao do cliente guarda, o segundo e o que a pessoa espera.",
+ "data": "2026-09-02",
+ "commit": "9e23a531a5ce68c9f9f7479c559ae6333d9f33ce",
+ "caminho_medido_sha256": {
+  "src/refino/api/rotas.py": "3491c1f3986816d2de9b74975d5ac8a5f900a305d7d24c29e50e668c7862d0a9",
+  "src/refino/api/app.py": "2075588cd950b8b946be20971286511c4e5dda34b53c0cc420723690594b970c",
+  "src/refino/api/progresso.py": "ceb0fe9198aeaab6164ce12f15446f0e58d1156365998cafb8e97c1d0455025b"
+ },
+ "maquina": {
+  "plataforma": "Windows-11-10.0.26200-SP0",
+  "processador": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+  "nucleos_logicos": 12
+ },
+ "repeticoes": 7,
+ "pior_conhecida_d355_s": 0.735,
+ "pior_medida_s": 0.7632,
+ "pior_medida_onde": "pos_hilic POST /matrizes/diagnosticar",
+ "desfechos_pre_registrados": [
+  {
+   "id": "a",
+   "criterio": "o DISPARO de alguma rota passa de 1 s",
+   "leitura": "deixa de parecer instantaneo para quem clica, e a tela precisa de sinal de vida ANTES do 202. O limiar tem origem: o pior caso conhecido e 0,735 s, e 1 s e o degrau logo acima dele"
+  },
+  {
+   "id": "b",
+   "criterio": "a pior requisicao isolada difere dos 0,735 s por mais de 2x",
+   "leitura": "o numero de 0,735 s caducou ou media outro caminho, e a folga de 408x que ele declara para o `timeout=300` precisa de ser reafirmada em vez de citada"
+  },
+  {
+   "id": "c",
+   "criterio": "alguma rota devolve codigo diferente do que `docs/rotas-api.md` declara",
+   "leitura": "e achado de CONTRATO e nao de desempenho, e sai deste arnes para um registro proprio"
+  }
+ ],
+ "escopo_negativo": [
+  "`TestClient` NAO abre porta: fala com a aplicacao em processo, sem pilha de rede. Todo numero aqui e PISO do que um cliente por HTTP mede, nao estimativa dele.",
+  "sem banco: as rotas que exigem Postgres devolvem 503, e o custo de descobrir isso tambem e latencia.",
+  "a grade do multiverso e MINIMA (2 celulas): correr a padrao mediria o [CA-8.5].",
+  "`serrf` fora dos disparos longos: o corretor nao corre antes do 202.",
+  "as repeticoes medem a mesma maquina no mesmo minuto - sem variacao de rede, carga ou disco frio."
+ ],
+ "execucoes": [
+  {
+   "modo": "neg_hilic",
+   "disparos": {
+    "GET /health": {
+     "n": 7,
+     "min_s": 0.0017,
+     "mediana_s": 0.0019,
+     "max_s": 0.0059,
+     "codigo": 200
+    },
+    "POST /matrizes/validar": {
+     "n": 7,
+     "min_s": 0.0642,
+     "mediana_s": 0.0673,
+     "max_s": 0.0914,
+     "codigo": 200
+    },
+    "POST /matrizes/diagnosticar": {
+     "n": 7,
+     "min_s": 0.2586,
+     "mediana_s": 0.2624,
+     "max_s": 0.3095,
+     "codigo": 200
+    },
+    "POST /matrizes/recomendar": {
+     "n": 7,
+     "min_s": 0.2147,
+     "mediana_s": 0.2169,
+     "max_s": 0.2189,
+     "codigo": 200
+    },
+    "POST /matrizes/corrigir (disparo)": {
+     "n": 7,
+     "min_s": 0.0692,
+     "mediana_s": 0.0749,
+     "max_s": 0.1293,
+     "codigo": 202
+    },
+    "POST /matrizes/processar (disparo)": {
+     "n": 7,
+     "min_s": 0.0694,
+     "mediana_s": 0.0729,
+     "max_s": 0.1255,
+     "codigo": 202
+    },
+    "POST /matrizes/exportar (disparo)": {
+     "n": 7,
+     "min_s": 0.0683,
+     "mediana_s": 0.0709,
+     "max_s": 0.1512,
+     "codigo": 202
+    },
+    "POST /execucoes (disparo, sem banco)": {
+     "n": 7,
+     "min_s": 0.2179,
+     "mediana_s": 0.2189,
+     "max_s": 0.221,
+     "codigo": 503
+    },
+    "POST /multiversos (disparo, grade minima)": {
+     "n": 7,
+     "min_s": 0.0904,
+     "mediana_s": 0.1369,
+     "max_s": 0.1393,
+     "codigo": 202
+    },
+    "GET /multiversos/{id}": {
+     "n": 7,
+     "min_s": 0.0018,
+     "mediana_s": 0.0021,
+     "max_s": 0.0524,
+     "codigo": 200
+    },
+    "POST /multiversos/{id}/cancelar (409, ja terminou)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0017,
+     "max_s": 0.002,
+     "codigo": 409
+    },
+    "GET /multiversos/{id}/resultado (409, sem par de grupos)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0018,
+     "max_s": 0.0023,
+     "codigo": 409
+    },
+    "GET /multiversos/historico (sem banco)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0018,
+     "max_s": 0.0019,
+     "codigo": 503
+    },
+    "GET /trabalhos/{id} (desconhecido)": {
+     "n": 7,
+     "min_s": 0.0017,
+     "mediana_s": 0.0019,
+     "max_s": 0.0021,
+     "codigo": 404
+    },
+    "GET /trabalhos/{id}/relatorio (desconhecido)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0018,
+     "max_s": 0.002,
+     "codigo": 404
+    },
+    "POST /trabalhos/{id}/cancelar (desconhecido)": {
+     "n": 7,
+     "min_s": 0.0017,
+     "mediana_s": 0.0017,
+     "max_s": 0.002,
+     "codigo": 404
+    }
+   },
+   "ponta_a_ponta": {
+    "POST /matrizes/corrigir + reclamacao": {
+     "n": 3,
+     "min_s": 0.0711,
+     "mediana_s": 0.0741,
+     "max_s": 0.117,
+     "codigo": 200
+    },
+    "POST /matrizes/processar + reclamacao": {
+     "n": 3,
+     "min_s": 0.0719,
+     "mediana_s": 0.072,
+     "max_s": 0.0724,
+     "codigo": 200
+    },
+    "POST /matrizes/exportar + reclamacao": {
+     "n": 3,
+     "min_s": 0.0716,
+     "mediana_s": 0.0751,
+     "max_s": 0.1177,
+     "codigo": 200
+    }
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "disparos": {
+    "GET /health": {
+     "n": 7,
+     "min_s": 0.0017,
+     "mediana_s": 0.0018,
+     "max_s": 0.0024,
+     "codigo": 200
+    },
+    "POST /matrizes/validar": {
+     "n": 7,
+     "min_s": 0.1827,
+     "mediana_s": 0.1861,
+     "max_s": 0.2616,
+     "codigo": 200
+    },
+    "POST /matrizes/diagnosticar": {
+     "n": 7,
+     "min_s": 0.6969,
+     "mediana_s": 0.7038,
+     "max_s": 0.7632,
+     "codigo": 200
+    },
+    "POST /matrizes/recomendar": {
+     "n": 7,
+     "min_s": 0.568,
+     "mediana_s": 0.5731,
+     "max_s": 0.6345,
+     "codigo": 200
+    },
+    "POST /matrizes/corrigir (disparo)": {
+     "n": 7,
+     "min_s": 0.2001,
+     "mediana_s": 0.268,
+     "max_s": 0.3347,
+     "codigo": 202
+    },
+    "POST /matrizes/processar (disparo)": {
+     "n": 7,
+     "min_s": 0.2014,
+     "mediana_s": 0.2614,
+     "max_s": 0.3137,
+     "codigo": 202
+    },
+    "POST /matrizes/exportar (disparo)": {
+     "n": 7,
+     "min_s": 0.2011,
+     "mediana_s": 0.2074,
+     "max_s": 0.4652,
+     "codigo": 202
+    },
+    "POST /execucoes (disparo, sem banco)": {
+     "n": 7,
+     "min_s": 0.5755,
+     "mediana_s": 0.5795,
+     "max_s": 0.6464,
+     "codigo": 503
+    },
+    "POST /multiversos (disparo, grade minima)": {
+     "n": 7,
+     "min_s": 0.2608,
+     "mediana_s": 0.4137,
+     "max_s": 0.4619,
+     "codigo": 202
+    },
+    "GET /multiversos/{id}": {
+     "n": 7,
+     "min_s": 0.0018,
+     "mediana_s": 0.002,
+     "max_s": 0.0405,
+     "codigo": 200
+    },
+    "POST /multiversos/{id}/cancelar (409, ja terminou)": {
+     "n": 7,
+     "min_s": 0.0017,
+     "mediana_s": 0.0019,
+     "max_s": 0.0027,
+     "codigo": 409
+    },
+    "GET /multiversos/{id}/resultado (409, sem par de grupos)": {
+     "n": 7,
+     "min_s": 0.0017,
+     "mediana_s": 0.0019,
+     "max_s": 0.0022,
+     "codigo": 409
+    },
+    "GET /multiversos/historico (sem banco)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0019,
+     "max_s": 0.0021,
+     "codigo": 503
+    },
+    "GET /trabalhos/{id} (desconhecido)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0017,
+     "max_s": 0.0021,
+     "codigo": 404
+    },
+    "GET /trabalhos/{id}/relatorio (desconhecido)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0017,
+     "max_s": 0.0018,
+     "codigo": 404
+    },
+    "POST /trabalhos/{id}/cancelar (desconhecido)": {
+     "n": 7,
+     "min_s": 0.0016,
+     "mediana_s": 0.0017,
+     "max_s": 0.0019,
+     "codigo": 404
+    }
+   },
+   "ponta_a_ponta": {
+    "POST /matrizes/corrigir + reclamacao": {
+     "n": 3,
+     "min_s": 0.2066,
+     "mediana_s": 0.2097,
+     "max_s": 0.2475,
+     "codigo": 200
+    },
+    "POST /matrizes/processar + reclamacao": {
+     "n": 3,
+     "min_s": 0.2074,
+     "mediana_s": 0.2096,
+     "max_s": 0.2116,
+     "codigo": 200
+    },
+    "POST /matrizes/exportar + reclamacao": {
+     "n": 3,
+     "min_s": 0.2084,
+     "mediana_s": 0.2121,
+     "max_s": 0.2128,
+     "codigo": 200
+    }
+   }
+  }
+ ]
+}

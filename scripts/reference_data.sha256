@@ -1,0 +1,36 @@
+# Manifesto de integridade dos dados de referência.
+# Gerado por scripts/fetch_reference_data.sh --write
+# Caminhos relativos a data/reference/. Não editar à mão.
+0f3cf8ae1b4392e65136d60efd82b8c4e8d515e7a643125c0eb649374d2025f3  input/Sample_List_neg_c18.csv
+d1a6bcd118bc94b0cb6d9d3e43109761c1d2492262632cf2266663a4168d95ee  input/Sample_List_neg_hilic.csv
+1b7862dce8b379e30890890561b1ac4bc0b833134014d94cc67b4c998bd5530d  input/Sample_List_pos_c18.csv
+1d7caa0f46f575d1373169c6f9fa63d42e91c4540918fef9889b2935622509d0  input/Sample_List_pos_hilic.csv
+6275b148dafc3c02360d0cce91898a853b5776f7a356928545d3c9b93e34577c  input/measurements_neg_c18.csv
+5805f01f5201c3ca82e089f8c96d09469ee5233be52b0757da8f5781be8eb19c  input/measurements_neg_hilic.csv
+d50ec62120aaac52d403bfd680798d84aef708fffa4badd70bae70cdc464b025  input/measurements_pos_c18.csv
+3600c7e82d76f7b869738a10b7f038dd52aacb757b8a541d2305d5e083895720  input/measurements_pos_hilic.csv
+b28e3a588ede5f4c638b9db5da3e39e7f1609d8251b30c36ddd567b0782a1b37  output/neg_c18_toserrf - normalization result/Bar Plot and PCA plot.png
+c48fc7be432908909f9a63f50df7febaf13c9c9daab8d7a62bfba30af67f9250  output/neg_c18_toserrf - normalization result/QC - RSD.csv
+4bb2bcbdd02f5e7a39d78c4930e432c02bc4d5615b3b89a592fdd1423e0eb362  output/neg_c18_toserrf - normalization result/normalized datasets/NEG_Lipidomica_comcorreção_SERRF.csv
+0c2092ba134eed3d3fe3b8345cf1e26aef3dbb12fa80589d29faa9748163d7eb  output/neg_c18_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv
+b1f82b4923a8e4f44f18beb729f1bfd6e69e677521dfdefb298c95a02e5270e3  output/neg_c18_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv
+a317e6389c9cced9ef949a0ddcf8284e42f62617dc37dbad9271757b5972f6b2  output/neg_c18_toserrf - normalization result/normalized datasets/normalized by - none.csv
+d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84  output/neg_c18_toserrf.csv
+5819b379fa399bb639941423b4c055fa0c30fa6404d48151f2172ba4287e2992  output/neg_hilic_toserrf - normalization result/Bar Plot and PCA plot.png
+4dcdd6c79b7339826b0c041c6602c16e2a52e603ee97fbb40c196f70c281bfcd  output/neg_hilic_toserrf - normalization result/QC - RSD.csv
+9243ff396006af680914cdc29b6dc12f5aa925a49955ca55a3fd1f54d2ae6630  output/neg_hilic_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv
+e61ee72aa659e31791aa4598ec1460c5b603908c6ba42a619197c08898717af1  output/neg_hilic_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv
+a160e611f7701594d7b414f4517efb23176caec1a08bec71f138de0741588594  output/neg_hilic_toserrf - normalization result/normalized datasets/normalized by - none.csv
+6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168  output/neg_hilic_toserrf.csv
+27c8dab603604d9063996069686ae008b91978c6a243505785b88152dd222fc3  output/pos_c18_toserrf - normalization result/Bar Plot and PCA plot.png
+16bac1a9fc0050977e1926cfa11cb939f2332c46dd66958823a306bac7e7ac0b  output/pos_c18_toserrf - normalization result/QC - RSD.csv
+3ce9305a019a0e6315498ce309dd1df65fd705403b0f41df7218170c77b58eb5  output/pos_c18_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv
+afa32601c00980a693692f0d76f6730ac4f32fc8ad82e38ca562b6346d825353  output/pos_c18_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv
+5dd054980f8e38fef4dfce7b825f6b9bae51c5cfbbbe00825977f57b2e3fde51  output/pos_c18_toserrf - normalization result/normalized datasets/normalized by - none.csv
+e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52  output/pos_c18_toserrf.csv
+f98b15f1c65f67ea1cd6b4ae0b9d9becddbfb92684ba5d87c7a6f0b32232be6f  output/pos_hilic_toserrf - normalization result/Bar Plot and PCA plot.png
+26d5bd099a9dfdc6ea04d41d495a4e43538663fcee65c7118eb82fe377624daf  output/pos_hilic_toserrf - normalization result/QC - RSD.csv
+5afd4e839a620833d784a8b862b6d5ec592a99905c5684e63ed648607c7bee50  output/pos_hilic_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv
+f2ba51113c8cb06256c9c5118d590a7e9e226f54566e5e33ad69aefd03c760e3  output/pos_hilic_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv
+f27745a5f700c8da85d6e064277a115fc1d11d0c671bdaeb43d1d6b253a68ca2  output/pos_hilic_toserrf - normalization result/normalized datasets/normalized by - none.csv
+3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f  output/pos_hilic_toserrf.csv

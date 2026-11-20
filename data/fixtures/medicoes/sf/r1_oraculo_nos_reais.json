@@ -1,0 +1,58 @@
+{
+ "fonte": "a R1 do estado novo",
+ "ancora": {
+  "ok": true,
+  "falhas": [],
+  "nota": "âncoras da SF: a 2 (o none das unidades real-* é o gravado) e a 5b (o construtor refaz a R1 gravada com os vetores atuais)"
+ },
+ "modos": {
+  "pos_hilic": {
+   "modo": "pos_hilic",
+   "scores": {
+    "none": 1.4381285246297832,
+    "loess": 1.4743651134071896,
+    "serrf": 1.1014425246279964
+   },
+   "vencedor": "serrf",
+   "margem": 0.3056773208529423,
+   "abstem": false,
+   "segundos_nao_e_medicao_de_tempo": 14896.3
+  },
+  "pos_c18": {
+   "modo": "pos_c18",
+   "scores": {
+    "none": 0.24145546654934025,
+    "loess": 0.32451004585034604,
+    "serrf": 0.14344418566725106
+   },
+   "vencedor": "serrf",
+   "margem": 0.6832712000571912,
+   "abstem": false,
+   "segundos_nao_e_medicao_de_tempo": 6439.3
+  },
+  "neg_hilic": {
+   "modo": "neg_hilic",
+   "scores": {
+    "none": 0.6717843460787416,
+    "loess": 0.5937575197253574,
+    "serrf": 0.6198227151790393
+   },
+   "vencedor": "loess",
+   "margem": 0.04389872058502665,
+   "abstem": false,
+   "segundos_nao_e_medicao_de_tempo": 4978.1
+  },
+  "neg_c18": {
+   "modo": "neg_c18",
+   "scores": {
+    "none": 0.15503551210769762,
+    "loess": 0.1936616212473396,
+    "serrf": 0.15150903934374585
+   },
+   "vencedor": "serrf",
+   "margem": 0.023275659189884074,
+   "abstem": false,
+   "segundos_nao_e_medicao_de_tempo": 5433.9
+  }
+ }
+}

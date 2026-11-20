@@ -1,0 +1,23 @@
+{
+  "pid": 4107179,
+  "abertura": {
+    "nucleos_nominais": 12,
+    "load_1min": 2.18,
+    "mhz_medio": 4195.7,
+    "governador": "powersave",
+    "modelo_da_maquina": "AMD Ryzen 5 7600, 6 núcleos físicos / 12 lógicos (nominal de fábrica: 5171,85 MHz máx, NUNCA observado)"
+  },
+  "fechamento": {
+    "nucleos_nominais": 12,
+    "load_1min": 17.15,
+    "mhz_medio": 4153.7,
+    "governador": "powersave",
+    "modelo_da_maquina": "AMD Ryzen 5 7600, 6 núcleos físicos / 12 lógicos (nominal de fábrica: 5171,85 MHz máx, NUNCA observado)"
+  },
+  "regime": "ambiente",
+  "valores": [
+    8.679683785764306,
+    8.687369880902528,
+    8.69383404333247
+  ]
+}

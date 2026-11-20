@@ -1,0 +1,723 @@
+<meta charset="utf-8">
+<!--
+  SEM <!doctype html> DE PROPOSITO, pelo mesmo motivo do GUIA, do ENTENDER e do
+  MEDICOES: dois destinos, e um <!doctype> aqui produziria documento aninhado
+  quando o arquivo e publicado como artefato.
+
+  Este documento e sobre O MULTIVERSO. O ENTENDER explica o sistema inteiro e cita
+  o multiverso de passagem; o MEDICOES compara os corretores contra o programa em R.
+  Aqui esta o mecanismo do multiverso e a ficha de custo medida nesta maquina.
+-->
+<title>O multiverso de análises</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap">
+<style>
+:root{
+  --papel:#FAF8F4; --carta:#FFFFFF; --carta2:#F2EFE9;
+  --linha:#E1DDD3;
+  --tinta:#191814; --tinta2:#48453E; --tinta3:#67635B;
+  --tom:#7A2E58; --tom-fraco:#F7ECF2; --tom-linha:#C795AF;
+  --medida:#1B5C48; --medida-fundo:#EAF2ED; --medida-linha:#9BC4B0;
+  --alerta:#8A5310; --alerta-fundo:#FBF1E1; --alerta-linha:#D9AE6B;
+  --grave:#96331F; --grave-fundo:#F9E7E1; --grave-linha:#DBA491;
+  --lateral-fundo:#F4F1EB; --lateral-ativo:#E9E3D8;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}}
+:root[data-theme="dark"]{
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);
+ font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;font-size:16.5px;line-height:1.68;
+ -webkit-font-smoothing:antialiased}
+.folha{max-width:880px;margin:0 auto;padding:0 26px 120px}
+h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;margin:0;text-wrap:balance}
+code{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+ font-size:.88em;background:var(--carta2);padding:1px 5px;border-radius:2px;
+ border:1px solid var(--linha);white-space:nowrap}
+a{color:var(--tom)}
+:focus-visible{outline:2px solid var(--tom);outline-offset:3px}
+.rolo:focus-visible,pre.fluxo:focus-visible{outline-offset:-2px}
+p{margin:0 0 15px}
+img{max-width:100%}
+
+/* ======================= A BARRA LATERAL =======================
+   HERDADO DO `ENTENDER`: esta pagina NAO tem barra lateral, nem script, nem indice.
+   CUIDADO AO REMEDIR — as unicas ocorrencias de `<script`, `class="lateral"`,
+   `class="veu"`, `<nav` e `<footer` neste arquivo sao as DESTE comentario, entao
+   `grep -c` devolve 1 para cada uma e nao 0. A conferencia e `grep -n` e ler a linha
+   que casou: no corpo, a partir de <main>, nao ha nenhuma delas.
+   Ficam mortas aqui: `.abre-lateral`, `.veu`, `.lateral` e as suas filhas, `nav.indice`,
+   `footer`, `ol.passos`, `ul.pontos`, `dl.glos` e `.termo`. Os quatro ultimos porque nao
+   ha `<ol>`, `<dl>` nem `class="termo"` no corpo, e porque o unico `class="pontos"` esta
+   num `<p>` (o que abre com `Medido sobre <b>2.880`) — o seletor e de tipo `ul` e nunca o alcanca. A unica lista do
+   corpo e a `<ul>` sem classe dos «Limites declarados». */
+.abre-lateral{position:fixed;top:14px;left:14px;z-index:40;
+ font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+ background:var(--carta);color:var(--tinta2);border:1px solid var(--linha);
+ padding:9px 14px;border-radius:3px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.09)}
+.abre-lateral:hover{color:var(--tom);border-color:var(--tom-linha)}
+.veu{position:fixed;inset:0;background:rgba(0,0,0,.34);z-index:44;border:0;padding:0;
+ cursor:pointer;display:none}
+.veu[data-aberto="1"]{display:block}
+
+.lateral{position:fixed;top:0;left:0;width:290px;height:100vh;z-index:45;
+ background:var(--lateral-fundo);border-right:1px solid var(--linha);
+ overflow-y:auto;overscroll-behavior:contain;
+ transform:translateX(-100%);transition:transform .18s ease-out;font-size:14px}
+.lateral[data-aberto="1"]{transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.lateral{transition:none}}
+.lateral-int{padding:20px 18px 60px}
+.lateral-titulo{display:block;font-family:"IBM Plex Serif",Georgia,serif;font-size:17px;
+ font-weight:600;color:var(--tinta);text-decoration:none;letter-spacing:-.01em;margin-bottom:3px}
+.lateral-sub{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.15em;
+ text-transform:uppercase;color:var(--tinta3);margin-bottom:16px}
+.lateral-busca{width:100%;font:inherit;font-size:13px;padding:7px 10px;margin-bottom:4px;
+ background:var(--carta);color:var(--tinta);border:1px solid var(--linha);border-radius:3px}
+.lateral-busca::placeholder{color:var(--tinta3)}
+.lateral-conta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--tinta3);
+ min-height:15px;margin-bottom:11px}
+
+.lat-parte{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:20px 0 7px;padding-bottom:5px;
+ border-bottom:1px solid var(--linha)}
+.lat-parte:first-child{margin-top:0}
+.lat-cap{display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--tinta2);
+ padding:5px 8px;margin:0 -8px;border-radius:3px;line-height:1.4}
+.lat-cap:hover{background:var(--lateral-ativo);color:var(--tinta)}
+.lat-cap .num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--tinta3);
+ font-variant-numeric:tabular-nums;flex:0 0 auto}
+.lat-cap[data-atual="1"]{background:var(--lateral-ativo);color:var(--tom);font-weight:600}
+.lat-cap[data-atual="1"] .num{color:var(--tom)}
+.lat-subs{display:none;margin:2px 0 8px 30px;padding-left:11px;border-left:1px solid var(--linha)}
+.lat-subs[data-abre="1"]{display:block}
+.lat-sub{display:block;text-decoration:none;color:var(--tinta3);font-size:13px;
+ padding:3px 6px;margin:0 -6px;border-radius:3px;line-height:1.4}
+.lat-sub:hover{color:var(--tinta);background:var(--lateral-ativo)}
+.lat-sub[data-atual="1"]{color:var(--tom);font-weight:600}
+.lat-vazio{color:var(--tinta3);font-size:13px;padding:10px 0}
+
+@media (min-width:1100px){
+  body{padding-left:290px}
+  .lateral{transform:translateX(0)}
+  .abre-lateral,.veu{display:none}
+}
+
+/* ============================ A CAPA ============================ */
+header.capa{background:var(--carta);border-bottom:1px solid var(--linha)}
+.capa-int{max-width:880px;margin:0 auto;padding:52px 26px 38px}
+.selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--tinta3);display:flex;gap:18px;flex-wrap:wrap}
+.selo b{color:var(--tom);font-weight:600}
+h1{font-size:clamp(32px,5.4vw,50px);font-weight:600;letter-spacing:-.022em;line-height:1.08;margin:16px 0 14px}
+.chamada{font-size:19px;color:var(--tinta2);max-width:62ch;margin:0}
+.capa-nota{margin-top:26px;padding-top:18px;border-top:1px solid var(--linha);
+ font-size:14.5px;color:var(--tinta3);max-width:68ch}
+.capa-nota b{color:var(--tinta2)}
+@media (max-width:1099px){.capa-int{padding-top:74px}}
+
+/* ====================== O INDICE NO FLUXO ====================== */
+nav.indice{background:var(--carta2);border:1px solid var(--linha);margin:36px 0 12px;padding:22px 24px}
+nav.indice h2{font-size:12px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:0 0 15px}
+nav.indice h3{font-size:11px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--tom);margin:20px 0 6px}
+nav.indice h3:first-of-type{margin-top:0}
+nav.indice ol{margin:0;padding:0;list-style:none;
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:0 30px}
+nav.indice li{padding:5px 0;border-bottom:1px solid var(--linha);display:flex;gap:10px}
+nav.indice li b{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);
+ font-variant-numeric:tabular-nums;font-weight:600;flex:0 0 auto;padding-top:2px}
+nav.indice a{text-decoration:none;color:var(--tinta2);font-size:15px}
+nav.indice a:hover{color:var(--tom);text-decoration:underline}
+
+/* ========================== O CAPITULO ========================== */
+.cap{margin-top:74px;scroll-margin-top:16px}
+.cap-cab{border-bottom:2px solid var(--tinta);padding-bottom:14px}
+.cap-num{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+ text-transform:uppercase;color:var(--tom);font-weight:600}
+.cap-cab h2{font-size:clamp(24px,3.6vw,32px);font-weight:600;letter-spacing:-.015em;
+ line-height:1.18;margin:9px 0 0}
+.cap-cab .sub{color:var(--tinta3);font-size:14.5px;margin:9px 0 0;max-width:64ch}
+.cap h3{font-size:20.5px;font-weight:600;margin:40px 0 12px;letter-spacing:-.005em;
+ scroll-margin-top:16px}
+.cap h4{font-size:16.5px;font-weight:600;margin:26px 0 8px;color:var(--tinta)}
+
+/* ========= O CARTAO DE NUMERO: o valor E a populacao ========= */
+.medido{background:var(--medida-fundo);border-left:3px solid var(--medida-linha);
+ padding:13px 18px;margin:20px 0;overflow-x:auto}
+.medido .q{display:block;color:var(--tinta2);font-size:12.5px;letter-spacing:.02em;margin-bottom:6px;
+ font-family:"IBM Plex Mono",monospace}
+.medido .v{display:block;color:var(--medida);font-weight:600;font-size:16px;line-height:1.5;
+ font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.medido .pop{display:block;margin-top:9px;padding-top:8px;border-top:1px solid var(--medida-linha);
+ color:var(--tinta3);font-size:13px;line-height:1.58}
+.medido .pop b{color:var(--tinta2);font-weight:600}
+.medido code{background:transparent;border:none;padding:0;color:inherit}
+
+.cilada{background:var(--alerta-fundo);border:1px solid var(--alerta-linha);padding:16px 20px;margin:24px 0}
+.cilada h4{margin:0 0 9px;color:var(--alerta);font-size:15.5px;font-family:"IBM Plex Sans",sans-serif;
+ font-weight:600;letter-spacing:.005em}
+.cilada h4::before{content:"A cilada \00a0 ";font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+ letter-spacing:.18em;text-transform:uppercase}
+.cilada p{margin:0 0 10px;color:var(--tinta2)}
+.cilada p:last-child{margin-bottom:0}
+.cilada .errado{font-style:italic;color:var(--alerta);font-weight:500}
+
+.cartao{background:var(--carta);border:1px solid var(--linha);padding:18px 22px;margin:24px 0}
+.cartao > :first-child{margin-top:0}
+.cartao > :last-child{margin-bottom:0}
+.cartao h3,.cartao h4{margin:0 0 10px;font-size:17.5px}
+.destaque{background:var(--tom-fraco);border-color:var(--tom-linha)}
+.destaque h3,.destaque h4{color:var(--tom)}
+.perigo{background:var(--grave-fundo);border-color:var(--grave-linha)}
+.perigo h4{color:var(--grave)}
+
+.termo{font-weight:600;color:var(--tom);border-bottom:1px dotted var(--tom-linha)}
+
+.rolo{overflow-x:auto;margin:22px 0;border:1px solid var(--linha);background:var(--carta)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--linha);vertical-align:top}
+th{background:var(--carta2);font-weight:600;font-size:12px;letter-spacing:.06em;
+ text-transform:uppercase;color:var(--tinta2);white-space:nowrap}
+td{color:var(--tinta2)}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;
+ color:var(--tinta)}
+tbody tr:last-child td{border-bottom:none}
+
+ul.pontos{margin:15px 0;padding-left:0;list-style:none}
+ul.pontos li{position:relative;padding-left:21px;margin-bottom:10px;color:var(--tinta2)}
+ul.pontos li::before{content:"";position:absolute;left:2px;top:12px;width:7px;height:1px;
+ background:var(--tom-linha)}
+ol.passos{margin:15px 0;padding-left:0;list-style:none;counter-reset:pp}
+ol.passos li{position:relative;padding-left:35px;margin-bottom:12px;color:var(--tinta2)}
+ol.passos li::before{counter-increment:pp;content:counter(pp);position:absolute;left:0;top:2px;
+ font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);font-weight:600;
+ border:1px solid var(--tom-linha);border-radius:50%;width:22px;height:22px;
+ display:grid;place-items:center;line-height:1}
+
+pre.fluxo{background:var(--carta);border:1px solid var(--linha);padding:20px;margin:24px 0;
+ overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;
+ color:var(--tinta2);white-space:pre}
+pre.fluxo b{color:var(--tom);font-weight:600}
+pre.fluxo i{color:var(--medida);font-style:italic;font-weight:600}
+
+dl.glos{margin:24px 0;display:grid;grid-template-columns:auto 1fr;gap:0}
+dl.glos dt{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:600;color:var(--tom);
+ padding:12px 22px 12px 0;border-top:1px solid var(--linha);white-space:nowrap}
+dl.glos dd{margin:0;padding:12px 0;border-top:1px solid var(--linha);color:var(--tinta2);font-size:15px}
+
+footer{margin-top:88px;padding-top:28px;border-top:2px solid var(--tinta);
+ color:var(--tinta3);font-size:14.5px}
+footer h3{font-size:18px;margin:0 0 12px;color:var(--tinta)}
+footer b{color:var(--tinta2)}
+footer p{margin:0 0 12px}
+footer p.fecho{margin-top:22px;padding-top:16px;border-top:1px solid var(--linha)}
+
+@media (max-width:640px){
+  dl.glos{grid-template-columns:1fr}
+  dl.glos dt{padding:12px 0 2px;border-top:1px solid var(--linha)}
+  dl.glos dd{padding:0 0 12px;border-top:none}
+}
+@media (max-width:560px){
+  /* `nowrap` no <code> estoura a caixa a 380px: o token mais longo em prosa nua mede
+     ~334px contra ~328px de caixa. `pre-wrap` preserva os espacos internos de nomes
+     como `normalized by - none.csv`; `anywhere` autoriza a quebra dentro do
+     identificador. Acima de 560px nada muda. */
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+}
+
+/* IMPRESSAO. Sem este bloco o defeito e incapacitante e silencioso: Chrome e Edge honram
+   `prefers-color-scheme` ao imprimir E desligam fundos por padrao, entao quem le em tema
+   escuro do sistema imprime --tinta #ECEAE3 sobre papel branco — razao de contraste 1,06,
+   uma pagina em branco com texto fantasma. As TRES formas de :root entram na lista para
+   alcancar tambem o escuro por preferencia. */
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --papel:#FFFFFF; --carta:#FFFFFF; --carta2:#F4F2ED;
+    --linha:#CFCAC0;
+    --tinta:#000000; --tinta2:#26241F; --tinta3:#4A4740;
+    --tom:#5E2244; --tom-fraco:#F7ECF2; --tom-linha:#A87A93;
+    --medida:#124434; --medida-fundo:#EDF4F0; --medida-linha:#7FAE99;
+    --alerta:#6B3F0A; --alerta-fundo:#FBF4E8; --alerta-linha:#C69A55;
+    --grave:#7A2716; --grave-fundo:#FAEDE8; --grave-linha:#C99783;
+    --lateral-fundo:#FFFFFF; --lateral-ativo:#FFFFFF;
+  }
+  body{font-size:11pt;padding-left:0}
+  .lateral,.abre-lateral,.veu{display:none}
+  header.capa{border-bottom:1px solid var(--linha)}
+  .folha{max-width:none;padding-bottom:0}
+  /* o conteudo cortado a direita e irrecuperavel no papel: rolagem vira quebra */
+  .rolo,pre.fluxo{overflow-x:visible}
+  pre.fluxo{white-space:pre-wrap;overflow-wrap:anywhere}
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+  .cap{margin-top:34px;break-inside:auto}
+  .cap-cab,.medido,.cilada,.cartao,.rolo,pre.fluxo{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  nav.indice{break-after:page}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body id="topo">
+
+<header class="capa">
+  <div class="capa-int">
+    <div class="selo">
+      <span>refino quimiométrico</span>
+      <span>o multiverso</span>
+      <span><b>o que é, para que serve, e o que custa</b></span>
+    </div>
+    <h1>O multiverso de análises</h1>
+    <p class="chamada">Toda análise de metabolômica exige uma dezena de escolhas, e nenhuma delas
+      é obviamente certa. O multiverso roda <b>todas as combinações</b> e responde a pergunta que
+      escolher uma só não responde: <b>a minha conclusão dependia da escolha?</b></p>
+    <p class="capa-nota">A segunda metade deste documento é a <b>ficha de custo</b>, medida nesta
+      máquina em 31/08/2026: as quatro corridas cronometradas uma a uma, o custo por corretor, e a
+      curva de escalonamento de threads. Antes desta medição existia <b>um</b> número derivado;
+      agora são quatro medidos.</p>
+  </div>
+</header>
+
+<main class="folha">
+
+<div class="cilada">
+  <p><b>Funcionalidade em beta:</b> está implementada e pode ser usada, mas não faz parte da
+    entrega ao laboratório. Na janela, é a aba «Teste de robustez (beta)». O estado beta não
+    altera o mecanismo nem as medições descritas abaixo.</p>
+</div>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c1">
+  <div class="cap-cab"><span class="cap-num">01</span>
+    <h2>O problema: a esteira tem escolhas em cada etapa</h2>
+  </div>
+
+  <p>A tabela que sai do equipamento não vai direto para a estatística. Passa por uma esteira, e
+    <b>cada etapa transforma a tabela inteira</b>. O que o multiverso varre são as escolhas dessas
+    etapas:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>#</th><th>Etapa</th><th>Escolhas na grade</th><th>Quantas</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><b>corrigir o sinal</b> — tirar a deriva do aparelho</td><td><code>none</code> · <code>loess</code> · <code>serrf</code></td><td class="n">3</td></tr>
+      <tr><td>2</td><td>declarar lotes</td><td>1</td><td class="n">1</td></tr>
+      <tr><td>3</td><td><b>filtrar por RSD</b> — descartar o que continua instável nos QC</td><td>sem corte · 20% · 25% · 30%</td><td class="n">4</td></tr>
+      <tr><td>4</td><td>descartar por ausência</td><td>50% · 80%</td><td class="n">2</td></tr>
+      <tr><td>5</td><td><b>imputar</b> — preencher o que sobrou vazio</td><td><code>one_fifth_min</code> · <code>col_min</code> · <code>knn</code> · <code>median</code> · <code>mean</code></td><td class="n">5</td></tr>
+      <tr><td>6</td><td><b>normalizar por amostra</b> — corrigir quantidade total</td><td><code>none</code> · <code>sum</code> · <code>pqn_group</code> · <code>median</code> · <code>quantile</code></td><td class="n">5</td></tr>
+      <tr><td>7</td><td><b>transformar</b> — comprimir a escala</td><td><code>none</code> · <code>log10</code> · <code>sqrt</code> · <code>cbrt</code></td><td class="n">4</td></tr>
+      <tr><td>8</td><td><b>escalonar</b> — pôr as features em escala comparável</td><td><code>none</code> · <code>mean_center</code> · <code>auto</code> · <code>pareto</code></td><td class="n">4</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">tamanho da grade padrão</span>
+    <span class="v">9.600 células = 3 × 1 × 4 × 2 × 5 × 5 × 4 × 4</span>
+    <span class="pop"><b>População:</b> os oito eixos acima. <b>Ninguém decidiu que a grade teria
+      9.600 caminhos</b> — é o produto de oito listas, e muda quando uma lista muda. O total é
+      derivado de <code>GridDefinition().size()</code>, e o número aqui é cópia
+      manual.</span>
+  </div>
+
+  <p><b>Cada uma dessas 9.600 células é uma análise completa e defensável.</b> Cada uma produz uma
+    lista de features diferenciais — e elas não são a mesma lista.</p>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c2">
+  <div class="cap-cab"><span class="cap-num">02</span>
+    <h2>Para que serve: o rótulo de confiança</h2>
+  </div>
+
+  <h3>O que se faz hoje, e o vão que fica</h3>
+
+  <p>O fluxo do laboratório escolhe <b>um</b> caminho. Sobre a escolha entre os dois corretores, a
+    fonte primária é literal:</p>
+
+  <div class="chamada">«geralmente a gente faz quem fica melhor»</div>
+
+  <p>Sem critério registrado. O resultado sai, vira figura, vira artigo — e <b>ninguém sabe se ele
+    dependia daquela escolha</b>. Não é descuido: é o que dá para fazer à mão. Ninguém roda 9.600
+    análises clicando numa plataforma web.</p>
+
+  <h3>O que o multiverso devolve</h3>
+
+  <p>Para <b>cada feature</b>, ele conta em quantas células ela saiu significativa e com que sinal,
+    e emite um veredito:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Veredito</th><th>Critério</th><th>Como se lê</th></tr></thead>
+    <tbody>
+      <tr><td><b><code>robust</code></b></td><td>significativa em <b>≥80%</b> das células <b>e</b> mesmo sinal em <b>≥95%</b></td><td>achado. A escolha não importou</td></tr>
+      <tr><td><b><code>fragile</code></b></td><td>aparece, mas abaixo desses cortes</td><td><b>depende da escolha</b></td></tr>
+      <tr><td><b><code>absent</code></b></td><td>significativa em <b>&lt;5%</b></td><td>não é achado</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cartao destaque">
+    <h4>O ganho concreto, em uma frase</h4>
+    <p><b><code>fragile</code> é uma feature que você não leva para a bancada.</b> Validar um
+      metabólito custa reagente, tempo de equipamento e semanas. Saber <b>antes</b> que ele só
+      existe sob uma combinação de escolhas evita gastar isso.</p>
+    <p>E o inverso vale igual: <code>robust</code> é o que se defende com confiança num
+      artigo, porque a objeção mais comum — <i>«o resultado depende do pré-processamento»</i> — já
+      está respondida com número, e não com opinião.</p>
+  </div>
+
+  <h3>O desfecho medido, e ele é desconfortável</h3>
+
+  <div class="cilada">
+    <p>No recorte que foi <b>efetivamente medido</b> — 96 células, no par ATLL × NoHTLV — <b>o
+      veredito de todas as features é <code>absent</code></b>, e as frações valem zero.</p>
+    <p>Naquele contraste, com aquele corpus, <b>nada sobreviveu</b>. Não porque o instrumento
+      falhou: ele funcionou e respondeu. A resposta foi <i>«não há achado robusto aqui»</i>.</p>
+    <p>Isso é resultado, não fracasso — e é o tipo de coisa que o fluxo atual <b>não</b> teria
+      dito. Ele teria devolvido a lista do caminho escolhido, e alguém teria acreditado nela.</p>
+  </div>
+
+  <div class="medido">
+    <span class="q">a grade COMPLETA correu, e o recorte acima deixou de
+      ser o que existe</span>
+    <span class="v">9.600 células, os <b>três</b> corretores, os <b>quatro</b> modos, os
+      <b>seis</b> pares de grupos</span>
+    <span class="pop"><b>População:</b> 12.144 features avaliadas. O parágrafo acima fica porque
+      estava certo <b>para o recorte dele</b> — e porque ver os dois lado a lado é o que mostra o
+      que a grade completa acrescentou.</span>
+  </div>
+
+  <p><b>O desfecho não se inverteu — ficou mais forte.</b> Em <b>23 das 24 comparações</b> nenhuma
+    feature ultrapassa o limiar em mais de 5% das 9.600 configurações, e a decomposição por eixo dá
+    <b>zero nas 27 opções</b> dos sete eixos (no par ATLL × NoHTLV, nos quatro modos). A objeção <i>«talvez com outra normalização
+    aparecesse algo»</i> deixa de ter onde se apoiar: as outras normalizações correram.</p>
+
+  <p><b>E apareceram dois resíduos, que é o que torna a medição interessante.</b> Um par do
+    <code>neg_hilic</code> chega a <b>4,4%</b> — abaixo do corte de 5% — e um par do
+    <code>neg_c18</code> tem <b>uma</b> feature classificada <code>fragile</code>, significativa em
+    <b>26%</b> das configurações e não significativa em 74%.</p>
+
+  <div class="cartao">
+    <h4>Por que os dois resíduos são ruído, e quem o diz é a ESTRUTURA</h4>
+    <p><b>Nenhum dos dois se repete em nenhum outro modo.</b> Os quatro modos medem o mesmo sangue
+      dos mesmos pacientes por quatro químicas de separação diferentes. Um efeito biológico real
+      apareceria em mais de um; ruído aparece num e some nos outros três — que é exactamente o que
+      estes dois fazem.</p>
+    <p><b>E a feature <code>fragile</code> é o aplicativo a fazer o seu trabalho.</b> Quem rodasse
+      uma configuração só, e calhasse numa das ~2.500 em que ela é significativa (o número supõe as 9.600 células; o 26% é das células em que ela teve q definido, que o arquivo da corrida não grava), a poria na
+      dissertação como achado. O rótulo existe para dizer <i>«isto depende da escolha que você
+      fez»</i> — e é a demonstração mais concreta de para que serve o multiverso.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c3">
+  <div class="cap-cab"><span class="cap-num">03</span>
+    <h2>Como 9.600 caminhos cabem em minutos</h2>
+  </div>
+
+  <p>Correr as células uma a uma pagaria <b>9.600 correções de sinal</b>, e a correção é de longe a
+    etapa cara. Não é o que acontece.</p>
+
+  <p><b>As células formam uma árvore de prefixos.</b> A correção é a primeira decisão e não depende
+    das seguintes, então todas as folhas que escolhem a mesma correção partilham a mesma matriz
+    corrigida:</p>
+
+  <div class="chamada" style="text-align:left"><code>matriz de entrada<br>
+  &nbsp;├── raiz <b>none</b>&nbsp;&nbsp;→ 3.200 folhas (as outras sete decisões)<br>
+  &nbsp;├── raiz <b>loess</b>&nbsp;→ 3.200 folhas<br>
+  &nbsp;└── raiz <b>serrf</b>&nbsp;→ 3.200 folhas</code></div>
+
+  <p><b>O número de correções cai de 9.600 para três.</b> E «três» é propriedade da grade de hoje,
+    não do desenho: sai de multiplicar as três correções pelo único valor do eixo de lotes.</p>
+
+  <p>A árvore não é otimização opcional — um contador conta as chamadas de cada corretor por raiz,
+    e existe no código uma execução ingénua deliberada que serve de oráculo. Um total esconderia
+    uma árvore em que uma raiz foi chamada duas vezes e outra nenhuma.</p>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c4">
+  <div class="cap-cab"><span class="cap-num">04</span>
+    <h2>O custo, medido nesta máquina</h2>
+  </div>
+
+  <p>Até 31/08/2026 o custo da grade era <b>derivado</b>: os componentes tinham sido medidos uma
+    vez sobre o <code>pos_hilic</code>, e os outros três modos obtidos por escala. A grade completa
+    com <code>serrf</code> <b>nunca fora cronometrada</b>. Foi.</p>
+
+  <h3>As quatro corridas</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Modo</th><th>Features</th><th>Parede</th><th>Custo fixo<br>(as 3 correções)</th><th>Marginal<br>por célula</th><th>Fixo / total</th></tr></thead>
+    <tbody>
+      <tr><td><code>neg_hilic</code></td><td class="n">2.039</td><td class="n"><b>12,1 min</b></td><td class="n">7,6 min</td><td class="n">0,0633 s</td><td class="n">62%</td></tr>
+      <tr><td><code>neg_c18</code></td><td class="n">2.184</td><td class="n"><b>12,9 min</b></td><td class="n">7,3 min</td><td class="n">0,0785 s</td><td class="n">56%</td></tr>
+      <tr><td><code>pos_c18</code></td><td class="n">2.572</td><td class="n"><b>15,2 min</b></td><td class="n">9,5 min</td><td class="n">0,0794 s</td><td class="n">62%</td></tr>
+      <tr><td><code>pos_hilic</code></td><td class="n">6.035</td><td class="n"><b>31,7 min</b></td><td class="n">20,2 min</td><td class="n">0,1596 s</td><td class="n">64%</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">a grade padrão completa, cronometrada pela primeira vez</span>
+    <span class="v">12,1 a 31,7 minutos, conforme o modo</span>
+    <span class="pop"><b>População:</b> grade padrão de 4.320 células à data da medição — hoje são 9.600 —, <code>n_jobs=1</code> no
+      executor e no corretor, sobre os quatro arquivos reais do laboratório. Máquina: Windows 11,
+      <b>12 núcleos lógicos</b>. O custo fixo é separado do marginal por observação externa — o
+      <code>progress</code> do executor dispara uma vez por célula, e o intervalo que precede a
+      primeira célula de cada prefixo contém a correção daquele prefixo. <b>Imprecisão conhecida:</b>
+      a raiz do <code>none</code> custa décimos de segundo, cai abaixo do limiar de detecção e é
+      contada como folha; inflaciona o marginal em ~0,0002 s/célula.</span>
+  </div>
+
+  <h3>Dois achados que a medição produziu</h3>
+
+  <div class="cartao destaque">
+    <h4>1. A lei de escala erra 16% para os modos menores</h4>
+    <p>O previsto por escala linear a partir do <code>pos_hilic</code> era 10,4 / 11,1 / 13,1 min
+      para os três modos pequenos. O medido foi 12,1 / 12,9 / 15,2 — <b>+16% nos três, no
+      dígito</b>. No <code>pos_hilic</code> o erro é de 3%, e isso não é virtude: é <b>onde os
+      componentes foram medidos</b>, então ali o modelo é ajuste e não previsão.</p>
+    <p>O que está errado não é o modelo de custo fixo mais marginal — é <b>extrapolar linearmente
+      pelo número de features</b>. Há um termo que não escala com features: a matriz de correlação,
+      a montagem dos preditores, o carregamento. Numa matriz pequena ele pesa proporcionalmente
+      mais.</p>
+  </div>
+
+  <div class="cartao destaque">
+    <h4>2. O número de features não é a única variável</h4>
+    <p>O <code>neg_c18</code> tem <b>mais</b> features que o <code>neg_hilic</code> — 2.184 contra
+      2.039 — e custo fixo <b>menor</b>: 7,3 contra 7,6 min. A ordem inverte.</p>
+    <p>Candidato natural é a fração de zeros, que difere muito entre modos e muda quanto trabalho o
+      SERRF faz por feature. <b>Não foi medido, e não se afirma aqui.</b> Fica como observação com
+      o número ao lado.</p>
+  </div>
+
+  <div class="cilada">
+    <p><span class="errado">"o <code>serrf</code> é 97% do custo, então as folhas não importam"</span>
+      — a primeira metade é verdadeira sobre a <b>correção</b> e falsa sobre a <b>grade</b>. Medido,
+      o custo fixo é <b>56% a 64%</b> do total e as folhas são o resto. O «99,96%» que o código
+      registra compara <b>uma raiz contra UMA folha</b>, não contra as 9.600. É a mesma quantidade
+      lida sobre a população errada.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c5">
+  <div class="cap-cab"><span class="cap-num">05</span>
+    <h2>Threads: a curva desta máquina</h2>
+  </div>
+
+  <p>Há <b>dois</b> níveis de paralelismo, independentes, e <b>os dois são parâmetro hoje</b>.
+    A rota liga o do corretor e deixa o das folhas em <code>1</code>. Sobre a grade de
+    <b>9.600 células</b>, paralelizar só as folhas renderia <b>1,73×</b> e ligar os dois rende
+    <b>4,61×</b> — e é esse o regime da tabela do fim deste capítulo, <b>não o da rota</b>. O regime
+    da rota rende <b>1,57×</b> sobre o sequencial no <code>pos_hilic</code>, e é ele que a
+    estimativa da tela escreve desde 04/09/2026. <b>Nenhuma das três razões é invariante ao tamanho
+    da grade:</b> sobre as 4.320 células que eram a padrão em 31/08/2026 os mesmos cálculos davam
+    <b>1,38×</b>, <b>4,9×</b> e <b>2,10×</b> — que são os números que a tabela do fim deste capítulo
+    ainda carrega, e ali estão declarados «à data». Crescer a grade engorda as folhas, então
+    paralelizá-las passa a render mais e o ganho que vem do custo fixo dilui-se: os dois movem-se
+    em direções opostas, e é por isso que nenhuma destas razões sobrevive a uma mudança de
+    grade.</p>
+
+  <div class="cartao perigo">
+    <h3>A estimativa da tela DIVERGIA do regime da rota, e a diferença era de 2,3× a 2,6×</h3>
+    <p><b>Corrigido em 04/09/2026.</b> Até esse dia <code>estimativa_de_custo</code> dividia a raiz
+    pelo ganho do corretor <b>e</b> as folhas pelo ganho das folhas — o regime dos <b>dois</b>
+    níveis —, e a rota corre com <code>n_jobs=1</code>. A frase na tela dizia <i>«com o paralelismo
+    que a execução usa»</i>, e errava <b>para menos</b>: quem planeasse uma espera de 6 min
+    esperaria 15. Derivado das mesmas constantes:</p>
+    <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+      <thead><tr><th>modo</th><th>sequencial</th><th>o que a tela estimava</th><th>o que ela passou a estimar em 04/09/2026</th><th>razão</th></tr></thead>
+      <tbody>
+        <tr><td><code>neg_hilic</code></td><td>12,1 min</td><td>2,5 min</td><td>5,9 min</td><td>2,38×</td></tr>
+        <tr><td><code>neg_c18</code></td><td>12,9 min</td><td>2,7 min</td><td>7,0 min</td><td>2,58×</td></tr>
+        <tr><td><code>pos_c18</code></td><td>15,2 min</td><td>3,1 min</td><td>7,4 min</td><td>2,39×</td></tr>
+        <tr><td><code>pos_hilic</code></td><td>31,7 min</td><td>6,4 min</td><td>15,1 min</td><td>2,34×</td></tr>
+      </tbody>
+    </table></div>
+
+    <p><b>População:</b> os números derivados vêm das constantes de custo de 31/08/2026 sobre a
+    grade de <b>4.320 células</b>, que era a padrão àquela data — e a coluna «sequencial» é medida,
+    não derivada. <b>Hoje a grade é de 9.600 células</b>, e a mesma fórmula sobre ela dá
+    <b>11,5 · 13,9 · 14,4 · 29,1 min</b> na coluna do regime da rota, que é o que a tela escreve
+    hoje; a divergência corrigida passa a ser de <b>2,9× a 3,2×</b>. Os dois pares estão aqui de
+    propósito: o de cima é o que se mediu e corrigiu, o de baixo é o que o usuário vê.</p>
+
+  <p><b>O programa oferece MAIS opções do que a grade varre, e a diferença é decisão e não
+  esquecimento.</b> A imputação tem nove métodos e a grade varre cinco; a normalização por amostra
+  tem oito e a grade varre cinco; o escalonamento tem seis e a grade varre quatro. O que fica de
+  fora foi excluído por um motivo escrito em <code>multiverse/grid.py</code> — custo medido, colapso
+  derivado, ou mudança da forma da matriz —, e as três normalizações contra referência ficam fora
+  por uma razão diferente: elas dependem de um nome que o usuário escolhe, e não há conjunto a
+  varrer. Todas continuam alcançáveis à mão, pela linha de comando e pelas duas telas.</p>
+    <p><b>A estimativa descreve o regime da rota, e a rota não liga os dois níveis.</b> Ligá-los
+    <b>muda comportamento</b> — o comentário da rota recusa fazê-lo sem medir, e há um precedente medido
+    contra: o corretor paralelo abre <b>14 processos com janela</b> no binário congelado, e ninguém
+    mediu o que o segundo nível faz ali. Ele continua em aberto.</p>
+    <p><b>Os dois pontos cronometrados com tudo ligado — 2,2 min e 6,4 min — continuam medidos e
+    continuam verdadeiros.</b> O que eles não descrevem é o que a ferramenta faz, e é por isso que
+    esta página traz os dois regimes lado a lado em vez de escolher um.</p>
+  </div>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Nível</th><th>O que paraleliza</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td><b>corretor</b></td><td>as features, dentro de uma correção</td><td><b>parâmetro <code>corrector_jobs</code></b> — padrão 1 na biblioteca, <code>-1</code> na rota</td></tr>
+      <tr><td><b>executor</b></td><td>as folhas, entre células</td><td>parâmetro, padrão 1</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Nível do corretor — uma correção SERRF no <code>pos_c18</code></h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Threads</th><th>Tempo</th><th>Ganho</th><th>Eficiência</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="n">491,3 s</td><td class="n">1,00×</td><td class="n">100%</td></tr>
+      <tr><td class="n">2</td><td class="n">272,6 s</td><td class="n">1,80×</td><td class="n">90%</td></tr>
+      <tr><td class="n"><b>4</b></td><td class="n"><b>140,4 s</b></td><td class="n"><b>3,50×</b></td><td class="n"><b>88%</b></td></tr>
+      <tr><td class="n">8</td><td class="n">96,9 s</td><td class="n">5,07×</td><td class="n">63%</td></tr>
+      <tr><td class="n">12</td><td class="n">87,8 s</td><td class="n">5,60×</td><td class="n">47%</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">onde a curva de threads desta máquina dobra</span>
+    <span class="v">em 4 threads — 3,50× de ganho com 88% de eficiência</span>
+    <span class="pop"><b>População:</b> uma correção SERRF completa sobre o <code>pos_c18</code>
+      real — 2.572 features × 68 amostras, um lote, semente 42 —, variando o <code>n_jobs</code> do
+      corretor. Máquina de 12 núcleos lógicos. De 4 para 8 threads paga-se o dobro de núcleos por
+      45% a mais de ganho; de 8 para 12, por 10%. O <code>RandomForest</code> só liberta o GIL em
+      parte, e é isso que a queda de eficiência mede.</span>
+  </div>
+
+  <h3>Nível das folhas — grade sem <code>serrf</code> no <code>pos_hilic</code></h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Threads</th><th>Tempo</th><th>Ganho</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td class="n">500,3 s</td><td class="n">1,00×</td></tr>
+      <tr><td class="n">4</td><td class="n">165,6 s</td><td class="n">3,02×</td></tr>
+      <tr><td class="n">12</td><td class="n">123,5 s</td><td class="n">4,05×</td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="pontos">Medido sobre <b>2.880 células — dois terços da grade de 4.320 que era a padrão
+    à data</b>, com a grade reduzida a <code>none</code> e <code>loess</code> de propósito: com
+    <code>serrf</code> na grade o custo da raiz é tão grande que o efeito das folhas desapareceria
+    no ruído, e o experimento não teria poder para responder o que se pergunta. A mesma redução
+    sobre a grade de hoje seriam <b>6.400 células</b>.</p>
+
+  <h3>O que isso valeria na grade completa</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Configuração</th><th><code>pos_hilic</code>, 4.320 células à data</th><th>Ganho</th></tr></thead>
+    <tbody>
+      <tr><td><b>hoje</b> — tudo em 1 thread</td><td class="n"><b>31,7 min</b></td><td class="n">—</td></tr>
+      <tr><td>só as folhas em paralelo (12t)</td><td class="n">23,0 min</td><td class="n">1,38×</td></tr>
+      <tr><td><b>folhas e corretor em paralelo (12t)</b></td><td class="n"><b>6,4 min</b></td><td class="n"><b>4,9×</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cartao destaque">
+    <h4>Meia hora vira seis minutos e meio — e isto foi cronometrado</h4>
+    <p><b>A previsão de 6,4 min foi escrita antes de medir, e o relógio deu 6,4 min.</b> As duas
+      últimas linhas da tabela nasceram como projeção — composição do custo fixo e do marginal
+      medidos com os ganhos de threads medidos — e foram <b>confirmadas por execução</b> no mesmo
+      dia:</p>
+    <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+      <thead><tr><th>Modo</th><th>Sequencial</th><th>Paralelo, medido</th><th>Ganho</th></tr></thead>
+      <tbody>
+        <tr><td><code>neg_hilic</code></td><td class="n">12,1 min</td><td class="n"><b>2,2 min</b></td><td class="n">5,43×</td></tr>
+        <tr><td><code>pos_hilic</code></td><td class="n">31,7 min</td><td class="n"><b>6,4 min</b></td><td class="n">4,96×</td></tr>
+      </tbody>
+    </table></div>
+    <p><b>Os dois extremos bastam para a faixa</b>, e medi-los custou menos que medir os quatro.</p>
+  </div>
+
+  <div class="cartao destaque">
+    <h4>E o paralelismo foi LIGADO — a rota já corre assim</h4>
+    <p>Este documento dizia, quando foi escrito, que o que separava a projeção da realidade era
+      <code>executor.py:154</code>, que forçava <code>SerrfCorrector(n_jobs=1)</code>. <b>Deixou de
+      separar no mesmo dia.</b> O valor virou parâmetro, e <code>POST /multiversos</code> tem
+      <code>corrector_jobs=-1</code> por omissão — <b>mas a capacidade do processo baixa-o</b>: se
+      <code>regime_do_processo()</code> devolver série, a rota põe os dois eixos em <code>1</code>.
+      No clone corre em paralelo; <b>no executável congelado em que a rede do <code>loky</code>
+      caiu, corre em série</b>, e é essa guarda que impede os catorze processos com janela de
+      AR192.</p>
+    <p><b>Os dois padrões divergem de propósito:</b> a biblioteca continua em <code>1</code>, porque
+      o chamador que não pensa no assunto é a suíte de teste — grades pequenas, onde criar processos
+      custa mais que o trabalho. A rota serve quem está à espera na tela, e é outro caso.</p>
+    <p><b>A condição para ligar:</b> paralelismo tem de ser escolha de tempo e não de resultado. Dois
+      testes o afirmam — um compara as matrizes corrigidas com 1 e com 2 threads e exige que sejam
+      <b>bit-idênticas</b>; o outro verifica que o valor <b>chega</b> ao corretor, sem o que o
+      primeiro passaria com o parâmetro descartado.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c6">
+  <div class="cap-cab"><span class="cap-num">06</span>
+    <h2>Ficha técnica</h2>
+  </div>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>máquina</td><td>Windows 11, <b>12 núcleos lógicos</b></td></tr>
+      <tr><td>data</td><td>31 de agosto de 2026</td></tr>
+      <tr><td>grade</td><td>padrão <b>à data da medição — 4.320 células</b>, oito eixos. <b>Hoje são 9.600</b>, e nenhum tempo desta página foi remedido sobre a grade nova</td></tr>
+      <tr><td>execuções cronometradas</td><td><b>6</b> grades completas — <b>4</b> sequenciais e <b>2</b> em paralelo — + <b>5</b> pontos de threads do corretor + <b>3</b> das folhas</td></tr>
+      <tr><td>tempo total de medição</td><td>~1 h 52 — 1 h 12 nas quatro grades sequenciais, 18 min na curva do corretor, 13 min na das folhas, 9 min nas duas grades em paralelo</td></tr>
+      <tr><td>semente</td><td>42, em toda parte</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Limites declarados</h3>
+
+  <ul>
+    <li><b>Uma execução por ponto.</b> Não há repetição, então não há faixa de variação medida. O
+      que sustenta a leitura dos ±16% é a consistência entre três modos, não a estabilidade de cada
+      corrida.</li>
+    <li><b>A faixa em paralelo tem DOIS modos medidos, não quatro</b> — os extremos. Os dois do
+      meio seguem a curva por composição, não por relógio.</li>
+    <li><b>A raiz do <code>none</code> não é detectada</b> como raiz — custa menos que o limiar de
+      5 s e entra no marginal.</li>
+    <li><b>Nada foi medido com outro corpus.</b> Os quatro modos são os quatro arquivos deste
+      estudo.</li>
+  </ul>
+
+  <h3>Onde os números vivem</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>todas as medições desta página</td><td><code>data/fixtures/custo_do_multiverso.json</code></td></tr>
+      <tr><td>o arnês das grades completas</td><td><code>scripts/mede_custo_do_multiverso.py</code></td></tr>
+      <tr><td>o arnês das curvas de threads</td><td><code>scripts/mede_paralelismo_do_serrf.py</code></td></tr>
+      <tr><td>a comparação dos corretores contra o programa em R</td><td><code>docs/MEDICOES-da-correcao.html</code></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+</body>
+</html>

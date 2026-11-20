@@ -1,0 +1,191 @@
+{
+ "maquina": {
+  "nucleos_logicos": 12,
+  "plataforma": "Windows-11-10.0.26200-SP0",
+  "processador": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD"
+ },
+ "grade": {
+  "celulas": 4320,
+  "eixos": [
+   "corrections",
+   "batch_options",
+   "rsd_cutoffs",
+   "missing_thresholds",
+   "imputations",
+   "sample_norms",
+   "transformations",
+   "scalings"
+  ]
+ },
+ "execucoes": [
+  {
+   "modo": "neg_hilic",
+   "n_features": 2039,
+   "n_amostras": 68,
+   "n_jobs_do_executor": 1,
+   "celulas": 4320,
+   "parede_total_s": 728.1210489999794,
+   "correcoes_por_prefixo": {
+    "('none', 1)": 1,
+    "('serrf', 1)": 1,
+    "('loess', 1)": 1
+   },
+   "custo_fixo_detectado_s": [
+    442.271,
+    12.541
+   ],
+   "soma_do_fixo_s": 454.812,
+   "n_raizes_detectadas": 2,
+   "marginal_medio_por_celula_s": 0.0633,
+   "marginal_total_s": 273.309,
+   "commit": "33ca8305ab9b458cbd613cb3824d9fe1856cb4d0"
+  },
+  {
+   "modo": "neg_c18",
+   "n_features": 2184,
+   "n_amostras": 68,
+   "n_jobs_do_executor": 1,
+   "celulas": 4320,
+   "parede_total_s": 775.5885696999903,
+   "correcoes_por_prefixo": {
+    "('none', 1)": 1,
+    "('serrf', 1)": 1,
+    "('loess', 1)": 1
+   },
+   "custo_fixo_detectado_s": [
+    423.173,
+    13.335
+   ],
+   "soma_do_fixo_s": 436.509,
+   "n_raizes_detectadas": 2,
+   "marginal_medio_por_celula_s": 0.07853,
+   "marginal_total_s": 339.08,
+   "commit": "33ca8305ab9b458cbd613cb3824d9fe1856cb4d0"
+  },
+  {
+   "modo": "pos_c18",
+   "n_features": 2572,
+   "n_amostras": 68,
+   "n_jobs_do_executor": 1,
+   "celulas": 4320,
+   "parede_total_s": 911.4515649999958,
+   "correcoes_por_prefixo": {
+    "('none', 1)": 1,
+    "('serrf', 1)": 1,
+    "('loess', 1)": 1
+   },
+   "custo_fixo_detectado_s": [
+    552.898,
+    15.76
+   ],
+   "soma_do_fixo_s": 568.658,
+   "n_raizes_detectadas": 2,
+   "marginal_medio_por_celula_s": 0.07939,
+   "marginal_total_s": 342.794,
+   "commit": "33ca8305ab9b458cbd613cb3824d9fe1856cb4d0"
+  },
+  {
+   "modo": "pos_hilic",
+   "n_features": 6035,
+   "n_amostras": 68,
+   "n_jobs_do_executor": 1,
+   "celulas": 4320,
+   "parede_total_s": 1900.9958961000084,
+   "correcoes_por_prefixo": {
+    "('none', 1)": 1,
+    "('serrf', 1)": 1,
+    "('loess', 1)": 1
+   },
+   "custo_fixo_detectado_s": [
+    1176.618,
+    35.327
+   ],
+   "soma_do_fixo_s": 1211.946,
+   "n_raizes_detectadas": 2,
+   "marginal_medio_por_celula_s": 0.15958,
+   "marginal_total_s": 689.05,
+   "commit": "158e76f8e9771543cfbd963b781731b5fffb2481"
+  }
+ ],
+ "escalonamento_do_corretor": {
+  "modo": "pos_c18",
+  "o_que": "uma correcao SERRF completa, variando n_jobs do CORRETOR",
+  "pontos": [
+   {
+    "n_jobs": 1,
+    "segundos": 491.33,
+    "ganho_vs_1": 1.0,
+    "eficiencia": 1.0
+   },
+   {
+    "n_jobs": 2,
+    "segundos": 272.62,
+    "ganho_vs_1": 1.802,
+    "eficiencia": 0.901
+   },
+   {
+    "n_jobs": 4,
+    "segundos": 140.4,
+    "ganho_vs_1": 3.5,
+    "eficiencia": 0.875
+   },
+   {
+    "n_jobs": 8,
+    "segundos": 96.93,
+    "ganho_vs_1": 5.069,
+    "eficiencia": 0.634
+   },
+   {
+    "n_jobs": 12,
+    "segundos": 87.75,
+    "ganho_vs_1": 5.599,
+    "eficiencia": 0.467
+   }
+  ]
+ },
+ "escalonamento_das_folhas": {
+  "modo": "pos_hilic",
+  "o_que": "grade none+loess, variando n_jobs do EXECUTOR (alcanca as folhas, nao as raizes)",
+  "pontos": [
+   {
+    "n_jobs": 1,
+    "segundos": 500.27,
+    "celulas": 2880,
+    "ganho_vs_1": 1.0
+   },
+   {
+    "n_jobs": 4,
+    "segundos": 165.62,
+    "celulas": 2880,
+    "ganho_vs_1": 3.021
+   },
+   {
+    "n_jobs": 12,
+    "segundos": 123.55,
+    "celulas": 2880,
+    "ganho_vs_1": 4.049
+   }
+  ]
+ },
+ "grade_em_paralelo": {
+  "o_que": "grade padrao completa com n_jobs=-1 E corrector_jobs=-1, 12 nucleos",
+  "pontos": [
+   {
+    "modo": "neg_hilic",
+    "n_features": 2039,
+    "segundos": 134.12,
+    "sequencial_s": 728.1210489999794,
+    "ganho": 5.43,
+    "celulas": 4320
+   },
+   {
+    "modo": "pos_hilic",
+    "n_features": 6035,
+    "segundos": 383.58,
+    "sequencial_s": 1900.9958961000084,
+    "ganho": 4.96,
+    "celulas": 4320
+   }
+  ]
+ }
+}

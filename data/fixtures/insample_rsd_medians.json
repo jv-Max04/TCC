@@ -1,0 +1,444 @@
+{
+  "provenance": {
+    "python_version": "3.12.13",
+    "numpy_version": "2.5.1",
+    "command": "scripts/gen_insample_medians.py",
+    "generated_at": "2026-07-27T01:13:02+0000",
+    "seed": null,
+    "note": "sd/mean e fivenum sao deterministicos: nenhuma semente e necessaria. Este gerador NAO importa refino, por KTD-7: e a segunda transcricao da formula, e importar apagaria a regressao que o arquivo existe para detectar.",
+    "units": "Toda quantidade tem sufixo de unidade. median_rsd_pct e frac_*_pct estao em pontos percentuais. Os dois limiares estao sobre o RSD como FRACAO (0,25 = 25%), que e a escala em que refino.metrics.rsd devolve.",
+    "near_zero_threshold_rsd_fraction": 1e-06,
+    "gap_probe_threshold_rsd_fraction": 1e-12,
+    "outlier_coef": 1.5,
+    "ddof": 1,
+    "qc_selection_rule": "Colunas com sampleType == 'qc' no {modo}_toserrf.csv, nao casamento de 'QC' no nome da amostra. Nestes quatro arquivos os dois caminhos coincidem, e a coincidencia e observacao sobre eles.",
+    "sources": {
+      "output/neg_c18_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv": "0c2092ba134eed3d3fe3b8345cf1e26aef3dbb12fa80589d29faa9748163d7eb",
+      "output/neg_c18_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv": "b1f82b4923a8e4f44f18beb729f1bfd6e69e677521dfdefb298c95a02e5270e3",
+      "output/neg_c18_toserrf - normalization result/normalized datasets/normalized by - none.csv": "a317e6389c9cced9ef949a0ddcf8284e42f62617dc37dbad9271757b5972f6b2",
+      "output/neg_c18_toserrf.csv": "d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84",
+      "output/neg_hilic_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv": "9243ff396006af680914cdc29b6dc12f5aa925a49955ca55a3fd1f54d2ae6630",
+      "output/neg_hilic_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv": "e61ee72aa659e31791aa4598ec1460c5b603908c6ba42a619197c08898717af1",
+      "output/neg_hilic_toserrf - normalization result/normalized datasets/normalized by - none.csv": "a160e611f7701594d7b414f4517efb23176caec1a08bec71f138de0741588594",
+      "output/neg_hilic_toserrf.csv": "6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168",
+      "output/pos_c18_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv": "3ce9305a019a0e6315498ce309dd1df65fd705403b0f41df7218170c77b58eb5",
+      "output/pos_c18_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv": "afa32601c00980a693692f0d76f6730ac4f32fc8ad82e38ca562b6346d825353",
+      "output/pos_c18_toserrf - normalization result/normalized datasets/normalized by - none.csv": "5dd054980f8e38fef4dfce7b825f6b9bae51c5cfbbbe00825977f57b2e3fde51",
+      "output/pos_c18_toserrf.csv": "e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52",
+      "output/pos_hilic_toserrf - normalization result/normalized datasets/normalized by - SERRF.csv": "5afd4e839a620833d784a8b862b6d5ec592a99905c5684e63ed648607c7bee50",
+      "output/pos_hilic_toserrf - normalization result/normalized datasets/normalized by - batch_loess.csv": "f2ba51113c8cb06256c9c5118d590a7e9e226f54566e5e33ad69aefd03c760e3",
+      "output/pos_hilic_toserrf - normalization result/normalized datasets/normalized by - none.csv": "f27745a5f700c8da85d6e064277a115fc1d11d0c671bdaeb43d1d6b253a68ca2",
+      "output/pos_hilic_toserrf.csv": "3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f"
+    }
+  },
+  "cells": [
+    {
+      "mode": "pos_hilic",
+      "method": "none",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_HILIC_PLASMA_MSe_POS_QC1",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC2",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC3",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC4",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC5",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC6",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC7"
+      ],
+      "plain": {
+        "n_features": 6035,
+        "n_defined": 5933,
+        "n_undefined": 102,
+        "median_rsd_pct": 167.76665100776566,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 6035,
+        "n_defined": 5801,
+        "n_undefined": 234,
+        "median_rsd_pct": 143.81285246297833,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "pos_hilic",
+      "method": "batch_loess",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_HILIC_PLASMA_MSe_POS_QC1",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC2",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC3",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC4",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC5",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC6",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC7"
+      ],
+      "plain": {
+        "n_features": 6035,
+        "n_defined": 5563,
+        "n_undefined": 472,
+        "median_rsd_pct": 113.16399121506657,
+        "n_near_zero": 945,
+        "frac_near_zero_pct": 16.98723710228294,
+        "n_below_gap_probe": 941,
+        "frac_below_gap_probe_pct": 16.91533345317275
+      },
+      "outlier_removed": {
+        "n_features": 6035,
+        "n_defined": 5577,
+        "n_undefined": 458,
+        "median_rsd_pct": 3.81486770361747,
+        "n_near_zero": 2467,
+        "frac_near_zero_pct": 44.23525192755962,
+        "n_below_gap_probe": 2464,
+        "frac_below_gap_probe_pct": 44.18145956607495
+      }
+    },
+    {
+      "mode": "pos_hilic",
+      "method": "SERRF",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_HILIC_PLASMA_MSe_POS_QC1",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC2",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC3",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC4",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC5",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC6",
+        "HTLV_HILIC_PLASMA_MSe_POS_QC7"
+      ],
+      "plain": {
+        "n_features": 6035,
+        "n_defined": 5933,
+        "n_undefined": 102,
+        "median_rsd_pct": 47.65965109099116,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 6035,
+        "n_defined": 5801,
+        "n_undefined": 234,
+        "median_rsd_pct": 40.63210307419693,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "pos_c18",
+      "method": "none",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_C18_PLASMA_MSe_POS_QC1",
+        "HTLV_C18_PLASMA_MSe_POS_QC2",
+        "HTLV_C18_PLASMA_MSe_POS_QC3",
+        "HTLV_C18_PLASMA_MSe_POS_QC4",
+        "HTLV_C18_PLASMA_MSe_POS_QC5",
+        "HTLV_C18_PLASMA_MSe_POS_QC6",
+        "HTLV_C18_PLASMA_MSe_POS_QC7"
+      ],
+      "plain": {
+        "n_features": 2572,
+        "n_defined": 2537,
+        "n_undefined": 35,
+        "median_rsd_pct": 24.691912282501967,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 2572,
+        "n_defined": 2512,
+        "n_undefined": 60,
+        "median_rsd_pct": 24.145546654934023,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "pos_c18",
+      "method": "batch_loess",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_C18_PLASMA_MSe_POS_QC1",
+        "HTLV_C18_PLASMA_MSe_POS_QC2",
+        "HTLV_C18_PLASMA_MSe_POS_QC3",
+        "HTLV_C18_PLASMA_MSe_POS_QC4",
+        "HTLV_C18_PLASMA_MSe_POS_QC5",
+        "HTLV_C18_PLASMA_MSe_POS_QC6",
+        "HTLV_C18_PLASMA_MSe_POS_QC7"
+      ],
+      "plain": {
+        "n_features": 2572,
+        "n_defined": 2485,
+        "n_undefined": 87,
+        "median_rsd_pct": 1.9184053404092614e-13,
+        "n_near_zero": 1461,
+        "frac_near_zero_pct": 58.79275653923541,
+        "n_below_gap_probe": 1461,
+        "frac_below_gap_probe_pct": 58.79275653923541
+      },
+      "outlier_removed": {
+        "n_features": 2572,
+        "n_defined": 2486,
+        "n_undefined": 86,
+        "median_rsd_pct": 8.044254404188485e-14,
+        "n_near_zero": 1601,
+        "frac_near_zero_pct": 64.40064360418343,
+        "n_below_gap_probe": 1601,
+        "frac_below_gap_probe_pct": 64.40064360418343
+      }
+    },
+    {
+      "mode": "pos_c18",
+      "method": "SERRF",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_C18_PLASMA_MSe_POS_QC1",
+        "HTLV_C18_PLASMA_MSe_POS_QC2",
+        "HTLV_C18_PLASMA_MSe_POS_QC3",
+        "HTLV_C18_PLASMA_MSe_POS_QC4",
+        "HTLV_C18_PLASMA_MSe_POS_QC5",
+        "HTLV_C18_PLASMA_MSe_POS_QC6",
+        "HTLV_C18_PLASMA_MSe_POS_QC7"
+      ],
+      "plain": {
+        "n_features": 2572,
+        "n_defined": 2537,
+        "n_undefined": 35,
+        "median_rsd_pct": 8.378949749067155,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 2572,
+        "n_defined": 2512,
+        "n_undefined": 60,
+        "median_rsd_pct": 7.498270694770791,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "neg_hilic",
+      "method": "none",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC1",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC2",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC3",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC4",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC5",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC6",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC7"
+      ],
+      "plain": {
+        "n_features": 2039,
+        "n_defined": 1903,
+        "n_undefined": 136,
+        "median_rsd_pct": 69.4206616544295,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 2039,
+        "n_defined": 1827,
+        "n_undefined": 212,
+        "median_rsd_pct": 67.17843460787417,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "neg_hilic",
+      "method": "batch_loess",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC1",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC2",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC3",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC4",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC5",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC6",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC7"
+      ],
+      "plain": {
+        "n_features": 2039,
+        "n_defined": 1670,
+        "n_undefined": 369,
+        "median_rsd_pct": 30.74057936046354,
+        "n_near_zero": 452,
+        "frac_near_zero_pct": 27.065868263473053,
+        "n_below_gap_probe": 452,
+        "frac_below_gap_probe_pct": 27.065868263473053
+      },
+      "outlier_removed": {
+        "n_features": 2039,
+        "n_defined": 1671,
+        "n_undefined": 368,
+        "median_rsd_pct": 4.670754781737493,
+        "n_near_zero": 640,
+        "frac_near_zero_pct": 38.30041891083184,
+        "n_below_gap_probe": 640,
+        "frac_below_gap_probe_pct": 38.30041891083184
+      }
+    },
+    {
+      "mode": "neg_hilic",
+      "method": "SERRF",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC1",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC2",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC3",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC4",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC5",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC6",
+        "HTLV_HILIC_PLASMA_MSe_NEG_QC7"
+      ],
+      "plain": {
+        "n_features": 2039,
+        "n_defined": 1903,
+        "n_undefined": 136,
+        "median_rsd_pct": 45.802262408623804,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 2039,
+        "n_defined": 1827,
+        "n_undefined": 212,
+        "median_rsd_pct": 21.662499511639453,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "neg_c18",
+      "method": "none",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_C18_PLASMA_MSe_NEG_QC1",
+        "HTLV_C18_PLASMA_MSe_NEG_QC2",
+        "HTLV_C18_PLASMA_MSe_NEG_QC3",
+        "HTLV_C18_PLASMA_MSe_NEG_QC4",
+        "HTLV_C18_PLASMA_MSe_NEG_QC5",
+        "HTLV_C18_PLASMA_MSe_NEG_QC6",
+        "HTLV_C18_PLASMA_MSe_NEG_QC7"
+      ],
+      "plain": {
+        "n_features": 2184,
+        "n_defined": 2159,
+        "n_undefined": 25,
+        "median_rsd_pct": 18.286032001172735,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 2184,
+        "n_defined": 2151,
+        "n_undefined": 33,
+        "median_rsd_pct": 15.50355121076976,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    },
+    {
+      "mode": "neg_c18",
+      "method": "batch_loess",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_C18_PLASMA_MSe_NEG_QC1",
+        "HTLV_C18_PLASMA_MSe_NEG_QC2",
+        "HTLV_C18_PLASMA_MSe_NEG_QC3",
+        "HTLV_C18_PLASMA_MSe_NEG_QC4",
+        "HTLV_C18_PLASMA_MSe_NEG_QC5",
+        "HTLV_C18_PLASMA_MSe_NEG_QC6",
+        "HTLV_C18_PLASMA_MSe_NEG_QC7"
+      ],
+      "plain": {
+        "n_features": 2184,
+        "n_defined": 2044,
+        "n_undefined": 140,
+        "median_rsd_pct": 4.754264020106097,
+        "n_near_zero": 636,
+        "frac_near_zero_pct": 31.11545988258317,
+        "n_below_gap_probe": 636,
+        "frac_below_gap_probe_pct": 31.11545988258317
+      },
+      "outlier_removed": {
+        "n_features": 2184,
+        "n_defined": 2046,
+        "n_undefined": 138,
+        "median_rsd_pct": 3.8982104319643714e-13,
+        "n_near_zero": 1053,
+        "frac_near_zero_pct": 51.46627565982405,
+        "n_below_gap_probe": 1053,
+        "frac_below_gap_probe_pct": 51.46627565982405
+      }
+    },
+    {
+      "mode": "neg_c18",
+      "method": "SERRF",
+      "n_qc": 7,
+      "qc_sample_names": [
+        "HTLV_C18_PLASMA_MSe_NEG_QC1",
+        "HTLV_C18_PLASMA_MSe_NEG_QC2",
+        "HTLV_C18_PLASMA_MSe_NEG_QC3",
+        "HTLV_C18_PLASMA_MSe_NEG_QC4",
+        "HTLV_C18_PLASMA_MSe_NEG_QC5",
+        "HTLV_C18_PLASMA_MSe_NEG_QC6",
+        "HTLV_C18_PLASMA_MSe_NEG_QC7"
+      ],
+      "plain": {
+        "n_features": 2184,
+        "n_defined": 2159,
+        "n_undefined": 25,
+        "median_rsd_pct": 6.7382826712730886,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      },
+      "outlier_removed": {
+        "n_features": 2184,
+        "n_defined": 2151,
+        "n_undefined": 33,
+        "median_rsd_pct": 3.642738366626721,
+        "n_near_zero": 0,
+        "frac_near_zero_pct": 0.0,
+        "n_below_gap_probe": 0,
+        "frac_below_gap_probe_pct": 0.0
+      }
+    }
+  ]
+}

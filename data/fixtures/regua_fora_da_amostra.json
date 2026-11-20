@@ -1,0 +1,68 @@
+{
+  "o_que": "RSD mediano dos QCs FORA DA AMOSTRA: os tres corretores, nas duas implementacoes",
+  "estimador": "leave_one_qc_out — esconde 1 dos 7 QCs, remarca como `sample`, reajusta sobre a matriz INTEIRA, le o retido",
+  "variante": "outlier_removed",
+  "unidade": "% de RSD mediano",
+  "populacao": "inteira, por modo",
+  "data": "2026-08-30",
+  "commit": "35a4d5ccfc50500a53c2dd1d6f225ac7f53f9755",
+  "procedencia_nossa": "Quatro modos, tres corretores. O `pos_c18`/`serrf` foi REMEDIDO em 30/08/2026 e bateu no digito: 21.5670",
+  "procedencia_do_r": "28 execucoes do `r_service` por corretor (7 QCs x 4 modos), `ranger` 0.18.0, R 4.4.2, snapshot CRAN 2026-07-01",
+  "ancora": "o `none` saiu do mesmo arnes em cada modo e reproduziu a medicao anterior — `none` e identidade, entao esconder um QC nao pode mudar nada",
+  "ressalvas": [
+    "o SERRF do R nao chama set.seed: cada uma das 28 execucoes carrega o proprio sorteio, e a faixa NAO foi medida",
+    "o `n` definido do LOESS e MENOR que o do `none` — ele cria zeros novos, e as features que ele mais estraga saem da mediana. O numero do LOESS e, por isso, GENEROSO com ele",
+    "um lote, sete QCs; a configuracao de dois lotes nao foi medida"
+  ],
+  "modos": {
+    "pos_hilic": {
+      "none_ancora_pct": 143.81285246297833,
+      "r_serrf_pct": 110.25501556108837,
+      "r_serrf_n": 5801,
+      "r_loess_pct": 142.67485713224218,
+      "r_loess_n": 5167,
+      "nosso_none_pct": 143.81,
+      "nosso_loess_pct": 147.44,
+      "nosso_serrf_pct": 110.14,
+      "segundos_r_serrf": 1705.3,
+      "segundos_r_loess": 599.6
+    },
+    "neg_hilic": {
+      "none_ancora_pct": 67.17843460787417,
+      "r_serrf_pct": 61.467019774295274,
+      "r_serrf_n": 1827,
+      "r_loess_pct": 60.22618774896884,
+      "r_loess_n": 1621,
+      "nosso_none_pct": 67.18,
+      "nosso_loess_pct": 59.38,
+      "nosso_serrf_pct": 62.0,
+      "segundos_r_serrf": 506.4,
+      "segundos_r_loess": 196.6
+    },
+    "pos_c18": {
+      "none_ancora_pct": 24.1455,
+      "r_serrf_pct": 15.35149578654374,
+      "r_serrf_n": 2512,
+      "r_loess_pct": 30.40512957986904,
+      "r_loess_n": 2481,
+      "nosso_none_pct": 24.15,
+      "nosso_loess_pct": 32.45,
+      "nosso_serrf_pct": 14.344,
+      "segundos_r_serrf": 561.1,
+      "segundos_r_loess": 386.0
+    },
+    "neg_c18": {
+      "none_ancora_pct": 15.50355121076976,
+      "r_serrf_pct": 15.28141533274633,
+      "r_serrf_n": 2151,
+      "r_loess_pct": 19.189184147242155,
+      "r_loess_n": 2044,
+      "nosso_none_pct": 15.5,
+      "nosso_loess_pct": 19.37,
+      "nosso_serrf_pct": 15.15,
+      "segundos_r_serrf": 1087.5,
+      "segundos_r_loess": 242.3
+    }
+  },
+  "estado_sf": "estado novo da rodada SF: o nosso_serrf_pct é a mediana fora da amostra do SERRF com a floresta ranger (unidades real-*); o resto é o fixture gravado"
+}

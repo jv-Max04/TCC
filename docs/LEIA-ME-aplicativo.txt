@@ -1,0 +1,1296 @@
+Refino — Refino quimiométrico de metabolômica LC-MS
+====================================================
+
+Esta pasta contém o programa pronto para usar. Não é preciso instalar nada:
+nem Python, nem R, nem banco de dados.
+
+
+COMO ABRIR
+----------
+
+Clique duas vezes em  refino.exe
+
+Na primeira vez o Windows pode mostrar uma tela azul dizendo
+"O Windows protegeu o computador". Isso acontece com todo programa que
+não foi comprado de uma loja e não tem assinatura digital paga — não é
+sinal de que há algo errado com este.
+
+Para abrir mesmo assim:
+
+    1. Clique em  Mais informações
+    2. Clique em  Executar assim mesmo
+
+Se preferir tirar o aviso antes de abrir: se você recebeu um .zip, clique com
+o botão direito NO ARQUIVO .zip, escolha Propriedades e marque Desbloquear —
+depois extraia. A marca fica em cada arquivo, e não na pasta, por isso é no zip
+que se resolve de uma vez.
+
+Se já extraiu, no PowerShell, dentro da pasta:
+
+    Get-ChildItem -Recurse | Unblock-File
+
+A PRIMEIRA ABERTURA NESTE COMPUTADOR É LENTA: entre 1 e 2 minutos. É a
+abertura mais lenta de todas, e o motivo é o antivírus do Windows nunca ter
+visto estes arquivos, e ele varre-os um a um. Extraída do zip publicado da
+windows-2026.10.02.2, a pasta tem 8.280 arquivos e 605,2 MB, na conta que o
+Windows mostra (em milhões de bytes, 634,6); desses, 3.506 arquivos e 220,2 MB
+são da pasta R/, o R que calcula o enriquecimento da lista identificada. A
+cópia entregue ao laboratório leva ainda saidas/ (34 arquivos) e vias-dados/
+(5), e a pasta congelada com as duas mede 8.319 arquivos e 724,8 MB. As duas
+medidas são de 02/10/2026, sobre o zip publicado e a pasta de onde ele saiu. O
+programa só abre a pasta R/ quando se clica em «Enriquecer», no segundo modo da
+aba «Vias metabólicas (beta)»; os arquivos de que a abertura depende ficam em
+_internal/, que tem 4.763. Isto foi lido no código, e não medido: a primeira
+abertura não foi remedida sobre esta pasta. OS QUATRO TEMPOS A SEGUIR SÃO DE
+08/09/2026, SOBRE UMA PASTA MENOR, e continuam por remedir: 55, 77, 85 e 96
+segundos, em quatro construções do programa. O que a pasta maior deve fazer é
+alargá-los, não encurtá-los. É UMA leitura por construção, num computador só, e
+por isso está escrito um intervalo e não um número exato. NÃO É TRAVAMENTO — não feche a
+janela, não clique de novo, e não desligue o computador. Acontece UMA vez por
+computador.
+
+DA SEGUNDA VEZ EM DIANTE ELE ABRE MUITO MAIS RÁPIDO: cerca de 2,7 s. O que vale
+aqui é a ordem de grandeza — segundos, e não
+minutos: três medições deram 2,7 s em 08/09/2026, e três outras deram 8,2, 6,2
+e 6,2 s em 12/09/2026, numa máquina que nesse dia estava de duas a seis vezes
+mais lenta. O antivírus
+guarda o veredito PELO CONTEÚDO dos arquivos, e é por isso que a espera longa não
+se repete. Copiar a pasta para outro lugar do MESMO computador custa cerca de 9 s
+na primeira abertura da cópia — medido 8,6, 9,5 e 8,6 s em três cópias.
+
+Na versão windows-2026.10.02.3, numa máquina de 12 núcleos,
+uma vez cada: a primeira abertura de uma pasta extraída do zip na véspera levou 11,6 s, e a
+segunda e a terceira, 6,2 s cada, até o servidor interno do programa responder. A janela
+aparece depois disso, e esse intervalo não foi medido. Os 6,2 s repetem os de 12/09/2026, e
+não os 2,7 s de 08/09/2026. A primeira abertura num computador que nunca viu o programa não
+foi medida de novo.
+
+HÁ UMA TELA DE ESPERA, E ELA DIZ EM QUE PASSO ESTÁ. Uma faixa
+escura com o nome do programa aparece em cerca de um segundo, e a última linha
+dela vai mudando: "a carregar as bibliotecas científicas... (1 de 4)", depois
+"a preparar o banco de dados... (2 de 4)", "a subir o servidor local... (3 de 4)"
+e "a abrir a janela... (4 de 4)". Ela NÃO torna a abertura mais rápida — existe
+para você ver que o computador não travou e que ainda está a andar.
+
+Não clique duas vezes. Dois cliques abrem dois programas ao mesmo tempo, e os
+dois escrevem no mesmo arquivo de registro.
+
+
+O QUE ELE PRECISA DE VOCÊ
+-------------------------
+
+Dois arquivos CSV exportados do equipamento, do mesmo modo cromatográfico:
+
+    measurements_<modo>.csv    as medições — features nas linhas, amostras nas colunas
+    Sample_List_<modo>.csv     a lista de amostras, com a ordem de injeção
+
+A ordem de injeção só existe no Sample_List. Sem ele não há como corrigir
+deriva — é por isso que os dois são obrigatórios.
+
+UM CARTÃO PARA CADA ARQUIVO, na aba «Preparar o estudo», em «Os seus
+arquivos». O cartão «Medições» recebe o measurements, e o cartão «Lista de
+amostras», o Sample_List. Cada um tem o seu botão «Selecionar arquivo», e o
+diálogo que ele abre leva na barra de título «Escolher measurements» ou
+«Escolher Sample_List», então não há como confundir qual dos dois você está a
+dar. Pelo teclado, Ctrl+O abre o primeiro e Ctrl+Shift+O o segundo.
+
+Podem ser escolhidos em qualquer ordem, e cada um pode ser trocado sozinho sem
+mexer no outro. Depois de escolhido, o nome do arquivo aparece no cartão, ao
+lado de um botão «Remover»; tirar um dos dois faz o programa esquecer as
+leituras e os grupos que vieram do par antigo.
+
+O selo à direita de «Os seus arquivos» conta quantos dos dois já entraram — de
+«0 / 2 obrigatórios» a «2 / 2 obrigatórios». Logo abaixo dos cartões, uma linha
+diz o modo e de onde ele veio — assim:
+
+    Modo: neg_c18 (do nome do arquivo)
+
+O modo é deduzido do nome do arquivo e, se o nome não o trouxer, dos nomes das
+amostras. Se nada o deduzir, a linha diz isso e manda escolhê-lo à mão em
+«Opções avançadas», logo abaixo, onde fica o «Modo do estudo». Escolhido à mão,
+ele passa a dizer «escolhido à mão», e a dedução deixa de o trocar.
+
+Se um dos dois vier no lugar do outro, o programa recusa, com esta mensagem:
+
+    o arquivo não pôde ser lido: measurements_neg_c18.csv linha 2:
+    ID 'LABEL' não é inteiro. A ordem de injeção é a única informação
+    temporal do estudo — adivinhá-la não é opção.
+
+Os modos deste estudo são  pos_hilic,  pos_c18,  neg_hilic  e  neg_c18, e são
+as quatro opções do «Modo do estudo». Para escrever outro, pressione F2 ou dê
+dois cliques no modo selecionado.
+
+
+SETE DOCUMENTOS NESTA PASTA, E ELES RESPONDEM PERGUNTAS DIFERENTES
+
+Abra qualquer um dos sete com duplo clique, no navegador. Nenhum deles
+precisa de internet.
+
+    GUIA.html       COMO SE USA. Segue um exemplo real do começo ao fim, aba a
+                    aba da janela de nove abas, com os números que aquela
+                    execução de facto produziu. As sete capturas de tela que
+                    ele traz são da janela de nove abas — cinco das nove
+                    abas, com duas repetidas porque duas abas mostram dois
+                    passos cada —, e só se refazem no Windows. É o que se lê
+                    antes de usar.
+
+    ENTENDER.html   O QUE CADA COISA É. Explica o sistema inteiro do zero —
+                    o que a máquina mede, o que os três métodos de correção
+                    fazem, o que é o multiverso, como se lê a página de
+                    qualidade, para que serve o banco de dados, e o que a
+                    ferramenta não faz. Não supõe conhecimento prévio de
+                    metabolômica nem de estatística. É o que se lê para
+                    saber o que se está olhando.
+                    O multiverso que ele explica é funcionalidade em beta: veja «Teste de robustez (beta)», em
+                    COMO SE USA.
+
+    MEDICOES.html   DE ONDE SAEM OS NÚMEROS. É o caderno de laboratório da
+                    comparação entre os dois programas: por que não se
+                    comparam as saídas, as três formas de medir qualidade e
+                    o que cada uma NÃO enxerga, quantas execuções foram
+                    feitas, com que parâmetros, e o que cada resultado não
+                    quer dizer. É o que se lê para CONTESTAR um número.
+                    O capítulo 10 sai do programa do laboratório e compara a predição de vias
+                    com o MetaboAnalyst — o local e o da web —, sobre o
+                    dataset de exemplo público deles.
+                    A predição de vias é funcionalidade em beta: veja «Vias metabólicas (beta)»,
+                    em COMO SE USA.
+
+    EXPLICAR.html   CADA TELA, CADA BOTÃO, CADA CAMPO. Percorre a janela
+                    controle a controle: o que cada um é, o que faz ao
+                    dado, o que muda no resultado se for mexido, e quando
+                    deixar como está. Traz a diferença entre a matriz
+                    corrigida, a processada e o arquivo do MetaboAnalyst,
+                    o que cada um dos catorze parâmetros faz, e o que
+                    responder às perguntas que costumam vir. É o que se lê
+                    para EXPLICAR o programa, e não apenas para usá-lo.
+
+    MULTIVERSO.html O QUE É O MULTIVERSO, E QUANTO ELE DEMORA. A ferramenta
+                    roda 9.600 análises em vez de uma, e diz quais features
+                    sobrevivem a todas as escolhas de pré-processamento.
+                    Traz a explicação do mecanismo e a ficha de custo medida
+                    nesta máquina: as quatro corridas cronometradas, o custo
+                    por corretor, e quanto o número de threads muda.
+                    Vale para a aba «Teste de robustez (beta)».
+                    Funcionalidade em beta: está implementada e pode ser
+                    usada, mas não faz parte da entrega ao laboratório.
+
+    FAQ.html        AS DÚVIDAS QUE APARECERAM ENQUANTO O SISTEMA ERA USADO,
+                    com a resposta medida no código no momento em que cada
+                    pergunta foi feita. As perguntas são as palavras de quem
+                    perguntou. Duas das respostas CORRIGEM coisas ditas antes,
+                    e onde a medição não separou está escrito que não separou
+                    — um FAQ só com respostas confiantes ensina a confiar nas
+                    erradas junto com as certas.
+
+    DIAGNOSTICO.html
+                    DE ONDE VEM CADA NÚMERO DO DIAGNÓSTICO. O cartão
+                    «Diagnóstico», na aba «Preparar o estudo», classifica o
+                    defeito da corrida, e este
+                    documento separa três coisas que é fácil confundir: o que
+                    é consensual da área, o que apenas COINCIDE com o
+                    consensual, e o que é construção deste trabalho — os
+                    limiares calibrados sobre quatro corridas de um único
+                    laboratório. Leia-o antes de dar peso ao que o diagnóstico
+                    diz.
+
+Todo número do ENTENDER.html vem com a população em que foi medido, ao lado
+do valor. Ler só o valor é ler metade. O MEDICOES.html vai além: traz o
+desenho da medição que produziu cada um, e os limites declarados de cada
+uma — inclusive o que elas não podem responder.
+
+
+A PASTA saidas/ — OS QUATRO ESTUDOS JÁ PROCESSADOS, SEM RODAR NADA
+
+Dentro dela estão os quatro modos deste estudo já passados pelo programa, para o
+senhor poder abrir os arquivos antes de decidir se quer rodar alguma coisa. São
+32 arquivos, em três pastas:
+
+    1-matrizes-corrigidas/     os 4 modos pelos 3 corretores — none, serrf e
+                               loess. Só a correção de deriva, e nada mais.
+
+    2-formato-metaboanalyst/   os mesmos, no formato que o MetaboAnalyst aceita,
+                               já com o corte de 5.000 features feito pelas
+                               menos estáveis nos QCs.
+
+    3-matrizes-processadas/    o pipeline completo, em DUAS variantes por modo:
+                               uma com os padrões do programa e outra com a
+                               cascata clássica — mediana, log10 e Pareto.
+
+A folha LEIA-ME-das-saidas.txt, dentro da pasta, explica cada uma e diz com que
+parâmetros cada arquivo foi produzido. O PROCEDENCIA.json ao lado traz a rota, os
+parâmetros e o tempo de cada um dos 32.
+
+Esta pasta viaja só na cópia entregue ao laboratório. Os 32 arquivos
+são do estudo real, e a cópia publicada para baixar na internet sai sem ela: quem
+a baixou não encontra saidas/, e o programa roda igual sem ela.
+
+OS DOIS REGIMES ESTÃO PERTO, E A LINHA DE COMANDO É UM POUCO MAIS RÁPIDA.
+Medido em 09/09/2026, com as duas pontas na MESMA sessão e no MESMO
+executável que está nesta pasta: dentro do programa a correção do neg_c18 com
+SERRF mede 83,2 s; fora dele, o corretor sozinho mede 74,6 s. São 11,5% de
+diferença.
+
+De onde vêm os 8,6 s, e o que eles NÃO são: a leitura do arquivo custa 0,06 s e a
+escrita do resultado custa 0,11 s, medidas no mesmo dia — juntas, 0,17 s. Não é
+I/O. O que sobra é o envio do arquivo ao servidor embutido, o worker importar de
+arquivos soltos em vez da instalação de desenvolvimento, e o próprio caminho da
+rota. Rodar por linha de comando continua a ser uma opção, e continua a ser um
+pouco mais rápida — o que se ganha aqui é não precisar de instalar nada.
+
+
+A PASTA R/ — O R QUE CALCULA O ENRIQUECIMENTO DA LISTA IDENTIFICADA
+
+É um R 4.4.3 com o MetaboAnalystR e os pacotes de que ele precisa,
+podado ao que o enriquecimento usa. Não precisa de instalar nada: o programa o
+chama sozinho, isolado de qualquer R que já exista nesta máquina, quando o senhor
+usa o segundo modo da aba «Vias metabólicas (beta)». Não abra nem mude nada lá
+dentro: a pasta foi conferida arquivo a arquivo quando esta cópia foi montada, e
+uma pasta alterada deixa de ser a que foi testada. O programa não a confere de
+novo a cada uso.
+
+O R desta pasta não fala com a internet. No modo externo do enriquecimento,
+ele só reconhece os nomes, aqui; quem envia o pedido ao servidor e lê a
+resposta é o próprio programa, sem passar a resposta ao R.
+
+O R e os pacotes são software livre, sob a GPL e outras licenças: o aviso de cada
+um está em R/doc/COPYRIGHTS e na pasta de cada pacote, em R/library/. A fonte de
+tudo o que vem compilado ali está no arquivo refino-fonte-gpl-do-R-embarcado.zip,
+publicado junto desta versão.
+
+Com uma exceção: alguns binários da pasta R/ trazem,
+ligadas por dentro, bibliotecas de terceiros compiladas com o Rtools44, a
+ferramenta com que o R e os pacotes são compilados para Windows. Entre elas
+estão o cairo, o libiconv e o GLPK. A fonte delas não vai no
+refino-fonte-gpl-do-R-embarcado.zip; o arquivo LEIA-ME-BIBLIOTECAS-DO-RTOOLS.txt,
+dentro dele, diz onde ela está.
+
+
+A PASTA vias-dados/ — AS BIBLIOTECAS QUE O ENRIQUECIMENTO CONSULTA
+
+Cinco arquivos com os nomes de compostos e as vias metabólicas
+humanas que o MetaboAnalyst usa. Eles vêm do servidor do MetaboAnalyst e derivam
+do HMDB e da SMPDB/PathBank; a cópia que está aqui foi conferida, arquivo a
+arquivo, contra o que o programa espera, e é por isso que o enriquecimento no
+modo local roda sem internet nesta pasta.
+
+Esta pasta viaja só na cópia entregue ao laboratório. A licença de redistribuir
+esses arquivos não foi conferida na fonte, então a cópia publicada para baixar
+na internet sai sem eles e os baixa uma vez, com a sua confirmação, quando o
+enriquecimento é usado pela primeira vez.
+
+
+COMO SE USA
+-----------
+
+São NOVE abas, agrupadas pelo que cada uma faz, e o programa não obriga
+nenhuma ordem entre elas depois que os arquivos entram. Elas ficam numa barra
+à esquerda, uma por linha; ali «Teste de robustez (beta)» e «Vias metabólicas (beta)»
+aparecem como «Teste de robustez» e «Vias metabólicas», com a etiqueta «beta» ao lado.
+Duas delas, «Teste de robustez (beta)» e
+«Vias metabólicas (beta)», são funcionalidades em beta, e cada uma diz isso
+na primeira linha.
+
+No pé da barra há dois botões, «Escuro» e «Claro», que trocam as cores da
+janela na hora. Ela abre sempre no escuro, e a escolha não fica gravada
+para a vez seguinte. As figuras não mudam com eles: o fundo delas é sempre
+branco, e a figura gravada é a mesma nos dois.
+
+No topo de todas as abas fica a faixa «Trabalhos em curso», descrita mais
+abaixo. As recusas aparecem num aviso por cima da tela, que some sozinho em 7
+segundos. Uma falha também abre aviso, e esse fica até ser fechado. Um
+resultado bem-sucedido não abre aviso: ele aparece no painel de quem o pediu.
+
+    Preparar o estudo
+        Duas seções, uma abaixo da outra. Em cima, «Os seus arquivos»: os
+        cartões «Medições» e «Lista de amostras», a linha do modo e, fechada,
+        «Opções avançadas», com o «Modo do estudo». Embaixo,
+        «Validação, diagnóstico e palpite»: três cartões, cada um com o botão
+        «Executar», um selo com o estado da leitura e «Detalhes», que abre a
+        explicação e o resultado em texto. No fim da aba, fechado,
+        «Como interpretar o comportamento do sinal analítico», com o texto do
+        laboratório sobre as cinco classes que o «Diagnóstico» dá.
+        O «Palpite» MEDE: corre os três corretores
+        em 200 features do arquivo e leva perto de um minuto; enquanto ele
+        mede, nenhuma correção é disparada.
+        O minuto é de uma corrida de 7 QCs, como
+        as deste estudo. Num computador de 12 núcleos, com 11 QCs levou
+        cerca de 95 s, e com 21, cerca de 215 s.
+        Os «Detalhes» do «Palpite» trazem «Como o Palpite decide», com um
+        exemplo medido.
+
+        O que as três leituras deixam nas outras abas — lido no código, e
+        não visto com dado: a «Validação» traz a lista de features da «Curva
+        do LOESS da feature» e a de nomes da «Referência da normalização», e
+        a estimativa de tempo da aba «Correção»; o «Diagnóstico» propõe
+        «Quantos lotes declarar», diz em «Análise estatística» quais grupos a
+        matriz tem, preenche o contraste do multiverso, e já desenha nos
+        «Gráficos» a deriva dos QCs, as quatro do PCA e o violino do RSD antes
+        de qualquer correção; o «Palpite» sugere o «Corretor», e «Seguir
+        sugestões do app», na aba «Correção», o põe no campo. A justificativa
+        das duas propostas fica em «Por que o programa propôs isto», um quadro
+        que o botão «?» ao lado de «Seguir sugestões do app», na aba
+        «Correção», abre.
+
+        O «Palpite» não preenche o «Corretor» sozinho: o corretor que ele
+        sugere fica guardado, e o «Corretor» continua em «Sem correção» até
+        você escolher outro ou clicar em «Seguir sugestões do app» — como o
+        número de lotes do «Diagnóstico».
+
+        Os três cartões não são independentes. O subtítulo da seção diz
+        «Validação → Diagnóstico → Palpite, nesta ordem: o Diagnóstico
+        precisa da Validação, e o Palpite das duas. Ao pedir um deles, o
+        app roda antes os que faltarem.» A «Validação» roda sozinha. O
+        «Executar» do «Diagnóstico» roda antes a Validação, se ela
+        não foi feita para estes arquivos e este modo; o do «Palpite» roda
+        antes a Validação e o Diagnóstico que faltarem, nesta ordem, e o
+        Palpite é medido nos lotes que esse Diagnóstico sugeriu. As leituras
+        anteriores já feitas para estes arquivos e este modo são
+        reaproveitadas; a pedida roda. Enquanto isso, o cartão pedido mostra
+        a etapa, por exemplo «Etapa 2 de 3: diagnosticando o sinal». A
+        cadeia para, com «Não rodou» no cartão pedido e a razão em
+        «Detalhes» e no aviso, se a Validação recusar os arquivos («Aceita
+        com avisos» conta como aceita), se uma leitura não completar, se os
+        arquivos ou o modo mudarem no meio, ou se o Palpite não puder ser
+        pedido — com uma correção a correr, por exemplo. Nenhuma das três é
+        obrigatória para corrigir, normalizar ou analisar.
+
+    Correção
+        A aba tem três blocos numerados, de cima para baixo: 1
+        «Ajustes», 2 «Execução da etapa» e 3 «Gráficos desta etapa». Antes de
+        os dois arquivos estarem carregados, ela mostra só qual deles falta,
+        com o botão «Ir para Preparar o estudo».
+
+        No topo de «Ajustes», o botão «Seguir sugestões do app». Ele preenche
+        o «Corretor» com o do Palpite — o que deixou os QCs mais estáveis em
+        200 features desta matriz — e «Quantos lotes declarar» com o número
+        que o «Diagnóstico» propôs. Se o Palpite ainda não foi medido para
+        estes arquivos, este modo e estes lotes, o botão o mede primeiro,
+        perto de um minuto, e fica desligado com a frase «Medindo a
+        sugestão…» ao lado; os campos são preenchidos quando ele chega. Ao
+        lado do botão aparece o que entrou — por exemplo «Sugestões
+        aplicadas: corretor «LOESS», 2 lotes.» —, e a frase some quando você
+        muda um desses campos à mão. Sem o «Diagnóstico» feito, o número de
+        lotes fica como estava, e a frase diz isso. Abaixo do botão, o bloco
+        diz «Usando a matriz carregada em «Preparar o estudo».»
+
+        Dois valores iniciais desta aba. «Quantos lotes declarar» abre em 1
+        e continua nele quando o «Diagnóstico» chega: o número que ele
+        propõe, com os cortes, fica guardado, e é este botão que o põe no
+        campo. Digitado à mão, o mesmo número não usa os cortes do
+        «Diagnóstico»: a correção parte a corrida em blocos iguais pela
+        ordem de injeção. E a «Variante do RSD dos QCs» abre em «Com todos
+        os QCs».
+
+        O campo «Quantos lotes declarar», vazio, diz
+        «1 — Não dividir em lotes»; o valor enviado é 1. O Palpite é
+        independente desta aba: é medido nos lotes que o «Diagnóstico» sugeriu, com os cortes dele, ou
+        num lote quando não há sugestão — «estes lotes», acima, são esses —,
+        e não lê o campo de lotes. Mudar algo nesta aba enquanto ele
+        mede não o para nem muda o resultado. O que você mudar no
+        «Corretor» ou nos lotes depois do clique, enquanto o botão espera,
+        fica como você deixou; quando o Palpite chega, a frase ao lado do
+        botão diz o que entrou, o que ficou e o que ele sugeriu — por
+        exemplo «O corretor que você escolheu enquanto o Palpite media
+        ficou como você deixou. O Palpite sugeriu «LOESS»: clique de novo
+        para segui-lo.»
+
+        Sem o clique, o «Corretor» fica em «Sem correção»,
+        também depois de o Palpite ser pedido pelo cartão de «Preparar o
+        estudo»: o corretor que ele sugere fica guardado até o botão o pôr no
+        campo, e trocar os arquivos o esquece. Enquanto não for seguido, ele
+        não conta como proposta da máquina: escolher o corretor à mão não é
+        registrado como decisão que a contraria. Um Palpite novo com outro
+        corretor desfaz a adoção do anterior, e os campos ficam como estavam.
+
+        Depois do clique é diferente: o que você mudar no
+        «Corretor» ou nos lotes enquanto o botão espera fica no campo, e é
+        registrado como decisão sua que contraria a sugestão que chegou — «a
+        proposta da máquina foi trocada», no estado de concordância. Sem o
+        clique nada muda: a sugestão guardada e não pedida não conta como
+        proposta.
+
+        Quando o Palpite precisa ser medido, o clique em
+        «Seguir sugestões do app» roda antes a Validação e o Diagnóstico
+        que faltarem para estes arquivos e este modo (ver «Preparar o
+        estudo»), e a frase ao lado do botão desligado diz a etapa — por
+        exemplo «Etapa 1 de 3: validando os arquivos. Depois vem o Palpite,
+        perto de um minuto; os campos são preenchidos quando ele chegar,
+        menos o que você mudar até lá.» «Sem o «Diagnóstico» feito, o
+        número de lotes fica como estava», acima, fica para quando ele não
+        propõe lotes: sem ele feito, o clique o roda, e os lotes que ele
+        propõe entram no campo quando ele chega, antes do Palpite, se você
+        não mudou «Quantos lotes declarar» depois do clique. O que você
+        mudar nesta aba depois do clique, também durante a Validação e o
+        Diagnóstico, fica como você deixou. Se a cadeia parar, o botão volta
+        a ligar e a frase ao lado dele diz por quê.
+
+        Ao lado do botão, uma frase curta diz o que o app
+        indica — só o corretor e o número de lotes. Por exemplo «Indicado:
+        SERRF, 2 lotes», ou «Indicado: 2 lotes». Enquanto as leituras de
+        «Preparar o estudo» não rodaram, não há frase. Os lotes são os que o
+        «Diagnóstico» sugeriu; o corretor só aparece quando o Palpite já foi
+        medido para estes arquivos, este modo e os lotes sugeridos, porque
+        fora disso o clique o mediria de novo, e ele poderia sugerir outro.
+        Logo depois da frase — ou do botão, quando não há frase —, um botão
+        «?» pequeno abre o quadro «Por que o programa propôs isto», com a
+        justificativa das duas propostas; o quadro fecha com um clique fora
+        dele ou com Esc. O que o último clique fez continua na mesma linha,
+        depois do «?».
+
+        Ainda em «Ajustes», abaixo da matriz, o quadro «Correção do
+        sinal», de cima para baixo: o «Corretor» — «Sem correção», «SERRF»
+        ou «LOESS» —, sempre editável; «Usar vários núcleos»; «Medir qual
+        corretor vence (minutos)»; debaixo deles, a caixa «Intervalo em cada
+        barra — …», desmarcada (descrita mais abaixo, junto do botão de
+        medir); a «Curva do LOESS da feature», com o botão «Ver a curva do
+        LOESS»; «Ver o recorte medido», que abre a ressalva medida do
+        corretor e a do Palpite; «Quantos lotes declarar»; e a «Variante do
+        RSD dos QCs». Em «Execução da etapa», primeiro o aviso da etapa quando
+        há um, e logo abaixo dele o botão «1. Corrigir», com o estado da
+        etapa e a barra ao lado. O pedido leva sempre o corretor que o
+        «Corretor» mostra.
+
+        Quando a correção termina, a aba desce o mínimo para mostrar o
+        «Resultado» sem tirar o botão da tela. As figuras dela — o painel da
+        correção, o violino do RSD por feature e a composição por classe —
+        aparecem em «Gráficos desta etapa», no fim da aba, e também nos
+        «Gráficos»; «Exportar esta figura em Gráficos» leva até lá, onde se
+        grava. Nenhuma etapa exige esta: a «Normalização» e a
+        «Análise estatística» rodam sem ela.
+
+        O «Resultado», logo abaixo do botão, baixa a MATRIZ CORRIGIDA.
+        Escolha o formato — «Formato do laboratório (features nas linhas)» ou
+        «Formato MetaboAnalyst» — e clique em «Baixar a matriz corrigida»: ele
+        pergunta a pasta, manda calcular, e grava lá quando fica pronto. O
+        arquivo é o da correção FEITA, e não o dos campos de agora: corrigida
+        com LOESS, a matriz sai com «loess» no nome mesmo que o «Corretor»
+        tenha mudado depois. Antes de corrigir, o botão fica desligado, com a
+        frase «Corrija a matriz para baixar o resultado.». A caixa «Salvar
+        também o resumo dos métodos (.txt)», marcada, grava ao lado do CSV um
+        <nome>-metodos.txt com o que produziu o arquivo; o mesmo texto fica em
+        «Resumo dos métodos do arquivo», que abre num clique, com «Copiar» e
+        «Salvar como .txt».
+
+        «Gerar os três», no mesmo «Resultado», roda os três corretores e grava
+        os três arquivos numa pasta, no formato escolhido, com um resumo só.
+        No formato MetaboAnalyst, grava também, ao lado de cada um, o
+        «-removidas.csv» com as features que o corte tirou e a causa de cada
+        uma. Se algum
+        «-removidas.csv» não puder ser gravado — disco cheio, arquivo aberto
+        noutro programa —, a frase do fim do lote diz ao lado de qual arquivo
+        ele faltou, no «Resultado» e num aviso de erro.
+        Ele fica ligado assim que há os dois arquivos. Demora: o lote no
+        formato MetaboAnalyst mediu 257 s no pos_hilic — none 0,0 s, LOESS
+        36,8 s e SERRF 220,3 s —; o das matrizes corrigidas não foi medido.
+
+        A CURVA DO LOESS DE UMA FEATURE. Escolha ou escreva o nome de uma
+        feature — a lista chega com a «Validação» — e clique em «Ver a curva
+        do LOESS»: quando a curva volta, a janela vai sozinha à aba «Gráficos»
+        com ela, ao longo das injeções, e com as curvas refeitas sem um QC de
+        cada vez à volta dela. Esse envelope mede a sensibilidade a cada QC, e
+        não é intervalo de confiança: com os sete QCs deste estudo não há
+        banda de erro possível. O pedido não entra na regra de uma
+        correção por vez. Lido no código, e não visto com dado.
+
+    Normalização
+        Os mesmos três blocos numerados: 1 «Ajustes», 2 «Execução da
+        etapa» e 3 «Gráficos desta etapa».
+
+        No topo de «Ajustes», o botão «Seguir sugestões do app». Aqui ele
+        volta os métodos, as frações e os cortes aos valores iniciais do app
+        — pontos de partida, e não uma escolha medida para esta matriz: o
+        programa não propõe o pré-processamento. Ao lado, ele diz quantos
+        campos voltaram. A «Referência da normalização» e o arquivo de
+        fatores ficam como você os deixou. Abaixo do botão, o bloco diz
+        qual matriz entra. Sem correção feita, ele diz que usa a matriz sem
+        correção, e não oferece outra. Com a correção feita, o padrão é a
+        corrigida — o seletor a nomeia pelo corretor, como «Corrigida —
+        LOESS» —, e você pode voltar à original.
+
+        Ao lado do botão há um «?» pequeno, e nenhuma
+        frase de sugestão: aqui o programa não indica nada. O «?» abre o
+        quadro «Por que o programa propôs isto», que nesta aba diz numa
+        frase só sobre que campos dela o programa não opina — «Sobre estes o
+        programa não opina, e a escolha é sua: …», com a lista. O quadro
+        fecha com um clique fora dele ou com Esc.
+
+        Ainda em «Ajustes», o quadro «Pré-processamento e
+        corte»: o «Máximo de features na exportação», os cortes por RSD e
+        por fração de ausentes, os dois passes de redução por posto, a
+        «Imputação de ausentes», a «Normalização por amostra» com a
+        «Referência da normalização», a «Transformação» e o «Escalonamento»,
+        com os nomes equivalentes do MetaboAnalyst à vista. Todos ficam
+        editáveis.
+
+        Aqui fica também «Importar fatores de normalização (opcional)», com
+        «Salvar um arquivo de exemplo…» ao lado, que grava um modelo para
+        preencher. Os fatores só agem com a «Normalização por
+        amostra» em «Pelos fatores fornecidos». Abaixo do quadro, em
+        «Execução da etapa», o botão «2. Normalizar», que não espera a correção, com o estado e a barra
+        ao lado. Concluída, as quatro
+        figuras de distribuição aparecem em «Gráficos desta etapa» e nos
+        «Gráficos».
+
+        O «Resultado», logo abaixo do botão, baixa a MATRIZ NORMALIZADA, com o mesmo seletor de
+        formato, a mesma caixa do resumo e o botão «Baixar a matriz
+        normalizada». No formato MetaboAnalyst há uma recusa: ele só recebe
+        valores positivos, e faz a própria transformação e o próprio
+        escalonamento. Com escalonamento escolhido, a matriz sempre tem
+        negativo, e uma faixa AMARELA avisa antes do clique: «O MetaboAnalyst
+        recebe só valores positivos e faz a própria transformação e o próprio
+        escalonamento. Como alternativa, baixe a matriz antes dessas duas
+        etapas.» Com log, o negativo só aparece no cálculo, e a faixa é
+        VERMELHA, porque o pedido falhou. Nas duas, o botão da faixa é «Baixar
+        a alternativa (antes da transformação e do escalonamento)», e o
+        arquivo diz no nome e no resumo que é a ALTERNATIVA À RECUSA, e não o
+        que você pediu.
+
+    Análise estatística
+        Os blocos são 1 «Ajustes», 2 «Execução da etapa» e 3 «Gráficos desta
+        etapa»; aqui não há «Seguir
+        sugestões do app» nem o «?», porque nenhum destes campos tem
+        proposta do programa.
+
+        No topo de «Ajustes», a matriz original, a corrigida ou a normalizada —
+        as que existirem —, com o padrão na mais tratada. Quando a escolhida
+        não passou pela imputação, uma faixa amarela diz «Esta matriz não
+        passou pela imputação: os zeros entram como valor e podem distorcer a
+        PCA, o PLS-DA e os testes.», com o que os trata; a análise roda mesmo
+        assim. Depois, ainda em «Ajustes», o quadro «Estudo e contraste»: a «Identificação do estudo», o «Grupo
+        A do contraste» e o «Grupo B do contraste» — vazios, o PLS-DA não é
+        calculado —, o «Teste do contraste», com «Automático», «Welch» ou
+        «Mann-Whitney», e «De onde vêm os nomes dos grupos?». Abaixo,
+        «Análises a correr»: quatro caixas vêm ticadas, porque custam
+        segundos, e as outras sete vêm desticadas, porque custam minutos; a
+        frase embaixo delas diz quantas etapas a mais a barra da execução vai
+        anunciar. Abaixo delas, em «Execução da etapa», o botão «3. Analisar
+        e registrar», com o estado e a barra ao lado: ele monta a execução a
+        partir da matriz escolhida em «Ajustes», e é ela que grava no
+        refino.db. Quando termina, o «Próximo
+        passo», logo abaixo do botão, oferece
+        «Ver a qualidade do resultado» e «Abrir em Gráficos». A análise não tem
+        download; o resumo metodológico dela fica em «Qualidade do resultado».
+
+    As três etapas, cada uma sozinha
+        Depois de carregar os dois arquivos em «Preparar o estudo», qualquer
+        das três etapas pode ser usada direto, em qualquer ordem, pelo botão
+        da aba dela, entre os parâmetros e o resultado: «1. Corrigir», «2.
+        Normalizar» e «3. Analisar e registrar». As etapas 1 e 2 NÃO gravam nada no
+        refino.db; só a 3 grava. A correção — a parte cara, minutos no SERRF —
+        não corre de novo quando os parâmetros dela não mudaram: o programa
+        guarda as últimas correções que fez.
+
+        O estado de cada etapa — «não feita», «em curso», «em dia» ou
+        «desatualizada» — fica ao lado do botão da aba dela, e também num ponto ao
+        lado do nome na barra lateral: nenhum enquanto não foi feita, azul em
+        curso (branco no esquema escuro), verde em dia e amarelo desatualizada
+        Mudou um campo de uma etapa depois de a rodar? A aba mostra uma
+        faixa amarela — na «Correção», «Os parâmetros mudaram depois de
+        corrigir; corrija de novo para o resultado valer.» — com o botão que a
+        refaz, «Corrigir de novo». A aba que usa aquele resultado como entrada
+        mostra o aviso também, e diz por qual etapa começar. Os avisos que
+        pedem atenção são amarelos e começam por «Atenção:»; o que falhou ou
+        foi recusado é vermelho e começa por «Não foi possível:».
+        E nenhum botão fica desligado sem uma frase ao lado que diga por quê.
+
+        Uma correção por vez: enquanto uma etapa, o «Gerar os três», um
+        download do «Resultado» ou a medição dos corretores estão a correr, os
+        outros recusam com a frase «Já há uma correção a correr — espere ela
+        terminar, ou cancele-a, antes de disparar outra: duas ao mesmo tempo
+        disputam os mesmos núcleos». Com o «Gerar os três» a correr, a recusa
+        diz outra frase: «Já há um lote a correr; espere ou feche a janela». A
+        medição dos corretores («Medir qual corretor vence (minutos)») entra
+        nessa regra porque corre os três corretores nos mesmos núcleos. O
+        «Palpite» a medir e o multiverso a correr também travam as
+        correções, cada um com a sua frase. A «Validação», o «Diagnóstico», a
+        curva do LOESS e a predição de vias não entram nessa regra.
+
+        Nenhuma etapa espera o Palpite: «1. Corrigir» sai no clique,
+        com o corretor que o «Corretor» mostra, e a «Normalização», a
+        «Análise estatística» e os downloads levam o corretor que a correção
+        feita usou, ou nenhum. Quem espera o Palpite é «Seguir
+        sugestões do app»: se os arquivos, o modo ou os lotes mudarem
+        enquanto ele mede, as sugestões não entram, e a tela diz para clicar
+        de novo.
+
+        «Os lotes», acima, são os que o «Diagnóstico» sugere: mudar «Quantos lotes declarar» ou o
+        «Corretor» enquanto o Palpite mede não o para, e as sugestões entram
+        quando ele chega, com o campo que você mudou como você deixou.
+
+    Teste de robustez (beta)
+        Funcionalidade em beta: está implementada e pode ser usada, mas não
+        faz parte da entrega ao laboratório.
+
+        Escolha os corretores e o par de grupos, veja quanto deve demorar
+        ANTES de começar, execute, acompanhe e pare quando quiser; no fim, a
+        tabela de quais features sobrevivem à grade.
+
+        São três seções numeradas. Em «A grade a percorrer», as três caixas de
+        «Corretores a percorrer», os dois seletores do «Contraste (grupo A x
+        grupo B)», que o «Diagnóstico» preenche, a estimativa de tempo, e os
+        botões «Executar multiverso», «Ler progresso» e «Cancelar». O
+        progresso NÃO se lê sozinho nesta aba: é o «Ler progresso» que o traz.
+        E «Executar multiverso» entra na regra de uma correção por vez, nas
+        duas direções: com outra correção a correr ele recusa, e com
+        ele a correr as correções recusam. Em «A conclusão», os três limiares
+        — presos pela caixa «Automático — usar os limiares da especificação»
+        —, o identificador da execução, «Ler conclusão», a tabela e, fechado,
+        «Como ler esta tabela: o que cada coluna mede e o que fazer com cada
+        veredito». Em «Histórico», as execuções gravadas.
+
+        «Ver histórico» mostra as execuções de multiverso que ficaram
+        GRAVADAS — inclusive as de sessões anteriores. Selecione uma e
+        clique em «Abrir a selecionada» para rever a conclusão dela.
+        Uma execução interrompida por fechar o programa aparece como
+        «interrompido»: ela fica registrada, mas não continua de onde
+        parou.
+
+    Qualidade do resultado
+        As métricas da execução: o conjunto completo, nunca um número. Ela é
+        preenchida pelo resultado, e nada nela dispara cálculo. As figuras
+        ficam na aba «Gráficos», logo abaixo, e é por lá que o gráfico sai do
+        programa.
+
+        Cada métrica é um cartão com o valor e «Como ler», que abre a
+        explicação dela; os cartões vêm agrupados por tema, e as que dependem
+        do par de grupos dizem o que falta quando ele não foi declarado.
+        Depois deles, «PLS-DA — nunca sem validação», com o Q² e o p de
+        permutação ao lado do PLS-DA, e a comparação do RSD dos QCs antes e
+        depois. No fim, «Normalidade por variável e por grupo»: o teste de
+        Shapiro-Wilk por grupo, com o limite dele dito antes dos números, e o
+        botão «Salvar a tabela por variável (CSV)…». Ela só se preenche
+        se «Normalidade por grupo» estiver marcada em «Análises a correr» — e
+        vem marcada. Lido no código, e não visto com dado.
+
+    Gráficos
+        As figuras da execução, uma de cada vez e com a aba inteira. Em cima,
+        o seletor «Figura» e, ao lado, «Voltar à vista original»; no meio, a
+        figura; embaixo, «Largura», «Altura», «Resolução» e «Salvar figura…»;
+        no fim, fechado, «Cores e símbolos dos grupos». O seletor escolhe qual
+        você quer ver, entre 32 figuras: a trajetória dos QCs, o painel da
+        correção, o violino do RSD por feature, a composição por classe, as
+        quatro de distribuição antes-e-depois, o volcano, o fold change, o
+        teste t, a ANOVA, as quatro do PCA, as três do PLS-DA e as três do
+        PLS-DA de um grupo contra o resto, as quatro de agrupamento
+        (dendrograma, mapa de calor, k-means e mapa auto-organizável), as duas
+        de correlação, a floresta aleatória, o SVM, a rede de correlação
+        parcial e a curva do LOESS de uma feature, que só se desenha depois de
+        pedida em «Ver a curva do LOESS», na aba «Correção». Algumas
+        delas, ao serem escolhidas, avisam que a execução ainda não traz o
+        dado que desenham — é aviso, não defeito.
+
+        O que algumas figuras desenham — lido no
+        código, e não visto com dado: o gráfico de scores da PCA pinta cada
+        grupo e desenha a região de predição de cada um, com o número de
+        amostras do grupo na legenda; o de scores do PLS-DA mostra os
+        scores de validação cruzada, cada amostra pela dobra que não a viu,
+        com uma região por grupo; o volcano e o fold change
+        desenham o intervalo do fold change nas 20 features de menor p;
+        e as duas PCAs do painel da correção trazem a região de predição das
+        amostras de estudo. E as barras da medição no mesmo painel
+        ganham um traço ao lado de cada uma quando a caixa «Intervalo em cada
+        barra — …» foi marcada antes de medir.
+
+        O VIOLINO DO RSD POR FEATURE aparece já depois do
+        «Diagnóstico» da aba «Preparar o estudo», antes de qualquer correção
+        — como a trajetória dos QCs e as quatro do PCA. Ele desenha a matriz
+        como foi lida, e o título diz «antes de qualquer correção». O
+        primeiro resultado de «1. Corrigir» toma o lugar dele.
+
+        PARA APROXIMAR: segure Ctrl e gire a roda do rato sobre a figura. Ela
+        aproxima em torno do ponto sob o cursor, então aponte para o que quer
+        ver de perto antes de girar. Girar para cima aproxima, para baixo
+        afasta. SEM o Ctrl a roda não mexe na figura — isso é de propósito,
+        para a roda continuar a rolar a página nas abas que rolam.
+
+        «Voltar à vista original» desfaz o zoom e devolve o enquadramento com
+        que a figura nasceu. Esses dois não mandam o programa calcular nada:
+        só mudam o que está à vista.
+
+        Já «Salvar figura…» NÃO é só mudar a vista: ele pede-lhe um
+        caminho e ESCREVE UM ARQUIVO. O formato é o do nome que você escolher
+        — .png, .tif ou .pdf —, a resolução é a da caixa ao lado (300, 600 ou
+        1.200 pontos por polegada) e o tamanho é o dos campos «Largura» e
+        «Altura», em milímetros, que nascem com o tamanho da figura e mudam se
+        você quiser. O TIFF sai em RGB, sem canal alfa, e o PDF leva as fontes
+        embutidas. Se o tamanho escolhido for pequeno demais para o rodapé da
+        figura caber sem encostar no gráfico, como pode acontecer na coluna
+        simples de revista, de 84 a 90 mm de largura, a figura é gravada SEM o
+        rodapé, e o texto dele vai para um arquivo ao lado dela, com o nome da
+        figura terminado em «-rodape.txt», para ir na legenda do artigo
+        A frase depois do clique diz onde ficou esse arquivo. Ao mudar
+        o tamanho, a frase ao lado dos campos diz a altura mínima para o
+        rodapé caber naquela largura e o que acontece com a altura escolhida.
+        O botão só fica ativo quando há figura desenhada.
+
+        «Cores e símbolos dos grupos» é uma tabela com uma linha por
+        grupo de estudo, onde se escolhe a cor e o símbolo de cada um. Os grupos
+        aparecem nela quando a correção ou a execução terminam; o QC não é
+        grupo e fica de fora. A escolha vale para todas as figuras que
+        desenham grupos, na tela e no arquivo salvo, até fechar o aplicativo,
+        e dois grupos não podem ter a mesma cor e o mesmo símbolo. Lido no
+        código, e não visto com dado.
+
+    Vias metabólicas (beta)
+        Funcionalidade em beta: está implementada e pode ser usada, mas não
+        faz parte da entrega ao laboratório.
+
+        A aba tem DOIS modos, escolhidos num
+        seletor no topo dela, logo abaixo do aviso de beta. O que segue, até
+        «O QUE ESTA ABA NÃO DIZ», descreve o PRIMEIRO, a predição a partir
+        dos picos, e é dele que valem os «TRÊS controles» e o «sem enviar
+        nada». O segundo, o enriquecimento da lista identificada no
+        Progenesis, está no fim desta entrada.
+
+        Quais vias metabólicas parecem estar alteradas entre os dois grupos que
+        você comparou — e sem precisar identificar metabólito nenhum antes.
+
+        É a mesma ideia que o MetaboAnalyst chama de «MS Peaks to Pathways»:
+        em vez de descobrir que composto é cada pico, o programa testa quais
+        picos são compatíveis em massa com cada via e pergunta se as vias
+        aparecem mais entre os picos que mudaram do que o acaso explicaria.
+        O cálculo roda aqui dentro, sem internet e sem enviar nada.
+
+        São TRÊS controles. «Polaridade da ionização» já vem escolhida a partir
+        do modo do estudo — pos_* é positivo — e você pode trocá-la.
+
+        «Massas já deconvoluídas» decide o destino das features cujo nome
+        termina em "n". O equipamento publica dois tipos de nome: as que
+        terminam em "m/z" são o íon medido, e as terminadas em "n" são a massa
+        da molécula, que o Progenesis já resolveu. Não são a mesma quantidade —
+        diferem por um próton. Incluí-las assume que foram vistas como [M+H]+
+        ou [M-H]-, o que é a hipótese comum; deixá-las de fora é a escolha
+        conservadora. No pos_hilic elas são 1.387 de 6.035, quase um quarto.
+
+        «Formas iônicas procuradas» é o terceiro controlo, e é o que mais muda
+        o resultado. Uma molécula aparece no espectro em várias formas — só
+        com um próton, com sódio, com o isótopo de carbono 13, e assim por
+        diante. Quanto mais formas o programa procura, mais picos ele consegue
+        associar a cada composto.
+
+        «Ampla» procura 25 formas, e É O PADRÃO. Ela é a que concorda com o
+        MetaboAnalyst: comparando os dois programas sobre o mesmo dado em
+        18/09/2026, a concordância entre eles sobe de 0,36 para 0,91, e das 10
+        vias mais fortes passam a coincidir 9 em vez de 6.
+
+        «Estreita» procura 8 formas, que é o padrão do algoritmo original em
+        que este módulo se apoia. Escolha-a se quiser reproduzir um resultado
+        gerado antes de 18/09/2026, ou se quiser fidelidade a esse algoritmo
+        em vez de concordância com o MetaboAnalyst. (No modo negativo as
+        duas opções são a mesma coisa, porque o algoritmo só publica uma lista
+        para essa polaridade — o recorte, abaixo, diz quantas formas de facto
+        foram procuradas.)
+
+        O botão «Predizer vias» leva alguns segundos. Acima da tabela fica o
+        RECORTE: quantas features entraram, quantas ficaram de fora e por quê,
+        e sob que corte de p a tabela vale. Leia essa linha antes da tabela —
+        quando o sinal é fraco, o corte é afrouxado automaticamente, e a mesma
+        tabela sob p < 0,2 não afirma o que ela afirmaria sob p < 0,001.
+
+        O QUE ESTA ABA NÃO DIZ: que compostos estão na sua amostra. Os
+        compostos por trás de cada via são candidatos compatíveis em massa,
+        não identificações. Identificar metabólito a partir de tempo_massa
+        continua fora deste programa.
+
+        O SEGUNDO MODO. No seletor do topo da aba,
+        escolha «Enriquecimento da lista identificada no Progenesis
+        (MetaboAnalystR)». Com uma execução de dois grupos feita, carregue a
+        tabela de identificação exportada do Progenesis, confirme as colunas,
+        escolha o corte e clique em «Enriquecer». No modo local, o cálculo
+        roda no R da pasta R/ (veja «A PASTA R/», acima); no modo externo, o
+        R daqui só reconhece os nomes, e a análise é feita no servidor do
+        MetaboAnalyst. O seletor «Biblioteca de vias»
+        escolhe entre «SMPDB — no computador (modo local)», que é o padrão e
+        não envia nada, e «KEGG — pelo servidor do MetaboAnalyst (modo
+        externo)», que envia os nomes de compostos confirmados, e só depois
+        de você clicar em «Enviar». O que sai e o que não sai está em ONDE
+        FICAM OS SEUS DADOS. Na cópia publicada para baixar, o primeiro
+        «Enriquecer» pede antes para baixar as bibliotecas.
+
+    Métodos e limites
+        Os limites da ferramenta, um a um, com a razão de cada corte, em três
+        seções — «Fora deste programa», «Só para leitura» e «Neste programa»
+        —, e cada item abre o texto dele. Abaixo deles, «Referências dos
+        métodos» abre a lista das obras de cada método, com a conferência de
+        cada uma. Onde esses textos e este LEIA-ME discordarem sobre onde fica
+        um controle, vale este.
+
+E há uma FAIXA FIXA no topo, «Trabalhos em curso», que aparece em qualquer
+aba. Ela lista o que você disparou nesta sessão — o Palpite, a medição dos
+corretores, as três etapas e os arquivos do «Resultado» da «Correção» e da
+«Normalização», que ela nomeia pela rota de origem —, uma linha por trabalho, com o nome, o
+estado, uma barra e um botão «Parar»; o identificador de cada um fica
+na dica do nome. Ela se relê sozinha a cada 10 segundos enquanto houver
+trabalho em curso, e «Atualizar» relê na hora. E permite PARAR o que ainda
+está a correr: o «Parar» da linha, ou escolha no seletor e clique em «Parar o
+trabalho selecionado». A parada leva menos de um segundo, contra os minutos
+que uma correção pode custar. Lido no código, e não visto com trabalho a
+correr.
+
+O multiverso (beta) não aparece nesta faixa: ele tem o «Cancelar» próprio, na
+aba dele.
+
+Ela está fora das abas, e à vista em todas, de propósito: uma correção com
+serrf demora 209,9 s no pos_hilic — 6.035 sinais por 68 amostras, pelo caminho
+da rota e com a floresta em paralelo —, e durante esses três minutos você está
+a olhar outra tela. A resposta para «já ficou pronto?» não devia estar atrás
+de uma troca de aba. (O quadro mais abaixo dá 224,5 s para a mesma matriz e o
+mesmo corretor:
+aquele foi medido DENTRO do executável congelado, e este fora dele. É a mesma
+correção, e o que os separa é o binário em que cada um correu.)
+
+A lista não sobrevive a fechar o programa. Aqui o serviço interno vive dentro
+da janela, então fechar a janela encerra os trabalhos junto — ao contrário da
+tela web, onde a API é outro processo. (A tela web não prossegue: o programa
+é esta janela.)
+
+
+OS NOMES DE GRUPO: DE ONDE ELES VÊM
+
+Duas abas pedem um PAR DE GRUPOS — a «Análise estatística», nos campos «Grupo
+A do contraste» e «Grupo B do contraste», para calcular o PLS-DA e o teste do
+contraste, de que saem o volcano e a predição de vias; e a «Teste de robustez (beta)»,
+no «Contraste (grupo A x grupo B)», para chegar à conclusão dela. Na
+«Análise estatística» o nome é escrito; no multiverso os dois seletores vêm
+preenchidos pelo «Diagnóstico». Depois do «Diagnóstico», a «Análise
+estatística» também diz, numa linha abaixo de «Teste do contraste», quais
+grupos a matriz tem e com quantas amostras cada um.
+
+Os nomes NÃO estão no Sample_List. Aquele arquivo tem duas colunas só, ID e
+inj_order_name, e nenhum nome de grupo. Eles estão na SEGUNDA LINHA do
+measurements — a linha que começa com LABEL.
+
+E não digite a grafia que está no arquivo: o programa normaliza a grafia antes
+de comparar. Nos quatro arquivos deste estudo a linha LABEL traz HAM-TSP,
+HAM/TSP ou HAMTSP conforme o modo, e o neg_c18 ainda traz Assyntomatic ao lado
+de Asymptomatic — e os quatro chegam ao programa com os mesmos quatro nomes
+(medido em 30/08/2026, carregando os quatro):
+
+    NoHTLV      Asymptomatic      HAMTSP      ATLL
+
+QC não conta como grupo: ele é a régua do sistema, e o programa o tira da lista.
+
+Se errar o nome, o programa recusa e diz quais existem naquela matriz. É por
+isso que não é preciso acertar de primeira — a lista vem na recusa.
+
+
+QUANTO TEMPO LEVA UMA EXECUÇÃO
+
+Depende muito do método. Medido por nós numa máquina de 12 núcleos:
+
+    sem correção (none)   segundos
+    LOESS                 cerca de meio minuto no modo maior — 31,8 s no
+                          pos_hilic, 6.035 sinais por 68 amostras
+    SERRF                 de minutos a dezenas de minutos — leia o quadro abaixo
+
+
+SERRF É O MÉTODO LENTO, E VALE SABER DISSO ANTES DE ESCOLHÊ-LO
+
+Os dois números que temos medidos, cada um com o tamanho da matriz ao lado —
+porque quem manda no tempo é o tamanho da matriz, e não o nome do modo:
+
+    neg_c18     2.184 sinais x 68 amostras       82,3 s  com os vários núcleos
+    neg_c18     2.184 sinais x 68 amostras       490,1 s  com um núcleo só
+
+    (Este par foi medido num binário só, para os dois lados poderem ser
+    comparados entre si. Em 09/09/2026 a mesma correção, dentro do executável
+    que está nesta pasta, mediu 83,2 s — é esse o número do parágrafo dos dois
+    regimes, mais acima. Os 1,1% entre um e outro são ruído entre construções.)
+
+    pos_hilic   6.035 sinais x 68 amostras       224,5 s  com os vários núcleos
+
+OS DOIS FORAM MEDIDOS DENTRO DESTE PROGRAMA, o segundo em 30/08/2026. Por isso
+dá para compará-los: a matriz do pos_hilic tem 2,8 vezes mais sinais e custou
+3,0 vezes mais tempo. Use-os como ordem de grandeza — matriz maior, espera
+maior —, e conte com que a sua possa ser maior que estas duas.
+
+Contando os quatro arquivos deste estudo, do menor para o maior:
+neg_hilic 2.039 sinais, neg_c18 2.184, pos_c18 2.572 e pos_hilic 6.035.
+
+OS QUATRO, MEDIDOS NA VERSÃO windows-2026.10.02.3, uma vez
+cada, só a correção, com um lote, numa máquina de 12 núcleos:
+
+    SERRF       com os vários núcleos    com um núcleo só
+    neg_hilic        71,5 s                 439,5 s
+    neg_c18          81,8 s                 474,9 s
+    pos_c18          86,9 s                 555,7 s
+    pos_hilic       214,3 s               1.307,3 s  (cerca de 22 min)
+
+    LOESS: 15,4 s, 15,5 s, 20,7 s e 36,0 s, na mesma ordem, com a caixa ticada; com
+    ela desticada, no máximo 0,1 s de diferença.
+
+Cada tempo foi lido de 5 em 5 segundos, e pode estar até cerca de 5 s acima do real. O
+resultado saiu idêntico, byte a byte, com a caixa ticada e desticada, nos quatro estudos e
+nos dois métodos. Os números do quadro acima continuam valendo para as construções em que
+foram medidos.
+
+E O NUMERO DE LOTES MULTIPLICA O CUSTO DO SERRF. Medido no neg_c18: a mesma
+correcao custou 514,9 s com um lote e 974,2 s com dois — os dois com
+um nucleo so; o que a medicao ensina e a RAZAO entre eles, 1,9x, e essa nao muda
+com o numero de nucleos. O SERRF treina uma
+floresta por feature E POR LOTE. Com o LOESS e o contrario — 14,7 s e 12,1 s —,
+porque ele reparte os mesmos pontos. Os numeros acima sao com UM lote, que e o
+padrao; a tela conta os lotes na estimativa dela.
+
+ENQUANTO O SERRF CORRE, A JANELA CONTINUA RESPONDENDO. O cálculo não acontece
+dentro da tela: o programa liga um servidor na sua própria máquina, e é lá que o
+trabalho corre. A janela só pergunta como vai. Ela parecer parada não é sinal de
+travamento — mas fechá-la encerra o trabalho junto.
+
+A LINHA DA EXECUÇÃO SE ATUALIZA SOZINHA, uma vez por segundo, enquanto a
+execução corre, na aba da etapa que corre: você vê «Executando: 3/8 etapas», com
+o tempo decorrido desde o disparo ao lado, aparecer sem tocar em nada, e a
+leitura para sozinha quando a execução termina. (A aba «Teste de robustez
+(beta)» tem um botão «Ler progresso», e lá ele faz falta: aquela leitura não é
+automática.)
+
+AS ETAPAS NÃO CUSTAM O MESMO. São quatro fixas — a correção, o pipeline, o
+relatório de qualidade e a gravação no banco —, mais uma por análise marcada
+em «Análises a correr»: com as quatro que vêm marcadas, a barra conta oito. A
+correção é a primeira e é quase todo o tempo; as outras fixas são segundos, e
+as análises que custam minutos dizem-no na dica da caixa delas. Enquanto a
+correção corre você lê «Executando: 0/8 etapas» com o cronómetro a andar, e
+isso é o estado certo: começou, e nenhuma acabou ainda. Com serrf isso pode
+passar de dez minutos. (São quatro só quando nenhuma análise está marcada.)
+
+Nos downloads do «Resultado» — na «Correção» e na «Normalização» — a espera é
+automática, e A JANELA NÃO DESISTE DELA: ela pergunta ao servidor até o trabalho
+terminar, sem teto de tempo.
+
+Clicar de novo enquanto ele corre NÃO recomeça o trabalho, só volta a esperar
+pelo mesmo. Para interromper de verdade, use a faixa «Trabalhos em curso», no
+topo da janela: o «Parar» da linha dele, ou escolha-o no seletor e clique em
+«Parar o trabalho selecionado».
+
+O BOTÃO «Medir qual corretor vence (minutos)», NA ABA «Correção», DIZ QUANTO
+VAI DEMORAR, ANTES
+
+Ele corre os três corretores de verdade, cada um reajustado uma vez por QC —
+21 ajustes. Depois do «Executar» do cartão «Validação», o programa mostra,
+logo abaixo do botão, uma estimativa de duração calculada do tamanho da SUA
+matriz. Medido na nossa máquina, de 12 núcleos: o modo maior deste estudo dá
+cerca de 40 min com a caixa «Usar vários núcleos» ticada, que é como ele nasce.
+
+A CAIXA DEBAIXO DELE, «Intervalo em cada barra — …», VEM DESMARCADA, E O RÓTULO
+DIZ O CUSTO ANTES DO CLIQUE. Antes da «Validação» ele diz «Intervalo em
+cada barra — a medição fica (n+1)/2 vezes mais lenta, com n QCs»; depois dela,
+o número — com os 7 QCs deste estudo, «Intervalo em cada barra — a medição
+fica 4 vezes mais lenta com 7 QCs», e a estimativa sob o botão multiplica-se
+pelo mesmo fator. Quem não a marca não paga nada.
+
+Marcada, a medição refaz a régua tirando um QC de cada vez, e o «Painel da
+correção», na aba «Gráficos», ganha um traço preto ao lado de cada barra: o
+intervalo jackknife-t com reajuste sobre os QCs. Ele diz quanto a barra
+depende de QUAIS QCs foram injetados, e não das features. O nível, 95%, é
+NOMINAL: a cobertura não foi medida. O rodapé da figura diz isso, e diz a
+margem RELATIVA entre os dois melhores — «Margem relativa dos dois melhores:
+X% do melhor; a medição abstém-se abaixo de 1,2%». O vencedor, o Palpite e a
+regra de empate dele não mudam com a caixa.
+
+O fator do rótulo é contagem de ajustes. No relógio, a única medição é a do
+LOESS no neg_c18, com 7 QCs: 4,05 vezes. O SERRF não foi medido com a caixa,
+e no estudo grande a estimativa passa a horas — cerca de 2,7 h para 6.035
+features em vários núcleos, quatro vezes os cerca de 40 min sem ela —, com o
+botão a dizer «(minutos)». Com menos de 4 QCs num lote — 5 com o LOESS —
+aquela barra fica sem traço, e o rodapé diz o motivo. Um limite inferior
+negativo não aparece: o eixo das barras começa em zero.
+
+O EXECUTÁVEL PODE USAR TODOS OS PROCESSADORES DA SUA MÁQUINA, e o resultado
+é IDÊNTICO nos dois casos — o que muda é o tempo.
+
+A CAIXA «Usar vários núcleos» FICA NO QUADRO «Correção do sinal», NA ABA
+«Correção», e nasce ticada. Destique-a se precisar da máquina livre para outra
+coisa enquanto o cálculo corre: o programa fica cerca de seis vezes mais lento.
+
+Medido na versão windows-2026.10.02.3, uma vez em cada um dos
+quatro estudos: com o SERRF, desticar deixou a correção de 5,8 a 6,4 vezes mais lenta. Com o
+LOESS o tempo mudou no máximo 0,1 s, porque ele não usa os vários núcleos.
+
+A caixa vale também para o LOESS, com o resultado idêntico ao de um núcleo só. O tempo e a memória do LOESS com ela
+ticada não foram remedidos — os números do LOESS nesta folha são de versões em
+que ele corria num núcleo.
+
+O QUE ELA CUSTA EM MEMÓRIA, medido na nossa máquina de 12 núcleos, nos quatro
+estudos deste trabalho:
+
+    modo maior (pos_hilic)   3,2 GB ticada    901 MB desticada
+    os outros tres           2,3 GB ticada    336 a 383 MB desticada
+
+Cada processador ganha a sua cópia das bibliotecas de cálculo, então o número
+cresce com os processadores da SUA máquina — e num computador com pouca
+memória a caixa desticada pode ser mais rápida que a ticada, porque o Windows
+deixa de usar o disco como memória.
+
+A sua máquina pode diferir, e a frase diz isso.
+
+Medido na versão windows-2026.10.02.3, uma vez por estudo, com o
+SERRF, com a caixa ticada / desticada:
+
+    pos_hilic    3,2 GB / 948 MB
+    pos_c18      2,4 GB / 430 MB
+    neg_c18      2,3 GB / 395 MB
+    neg_hilic    2,3 GB / 384 MB
+
+Com o LOESS, cerca de 0,3 GB, ticada ou não. (GB e MB aqui são de 1.024: 1 GB = 1.024 MB.)
+O pico foi lido de 5 em 5 segundos, e um pico mais curto que isso pode ter escapado.
+
+QUANTO DE MEMÓRIA O COMPUTADOR PRECISA: 8 GB. O maior pico medido nestes quatro estudos
+foi de 3,2 GB, no maior deles com a caixa ticada, numa máquina de 12 núcleos. O resto dos
+8 GB fica para o Windows e os outros programas abertos, e quanto eles ocupam no seu
+computador não foi medido. O pico também não foi medido em outra máquina, e com mais
+núcleos ele pode ser maior. Com menos memória, destique a caixa: desticada, o maior pico
+medido foi de 948 MB.
+
+QUAL WINDOWS: Windows 10, versão 1809 ou mais nova, ou Windows 11,
+de 64 bits. O programa foi testado só no Windows 11; o Windows 10 vem do que a biblioteca da
+janela (Qt 6) declara suportar, e não foi testado.
+
+
+O PROGRAMA ANOTA SOZINHO QUANTO CADA COISA DEMOROU
+
+Os dois números do quadro acima foram medidos na nossa máquina. Os que
+interessam agora são os da SUA — é para isso que o teste serve, e é uma das
+coisas que não conseguimos descobrir sem você.
+
+Você não precisa fazer nada para isso acontecer. Toda execução que termina fica
+registrada no refino.db com a hora em que começou, a hora em que terminou, o
+método escolhido e o tamanho da matriz. Vale para «3. Analisar e registrar»,
+na aba «Análise estatística», e também para os downloads do «Resultado» da
+«Correção» e da «Normalização».
+
+Duas coisas ajudam, e nenhuma custa tempo:
+
+    NÃO APAGUE o refino.db antes de zipar. É ele que carrega os tempos.
+
+    Se uma execução demorar muito mais do que o quadro acima sugere, ANOTE o que
+    estava fazendo. O programa registra quanto demorou, mas não registra que
+    você achou estranho — e é isso que nos diz onde procurar.
+
+Se preferir não enviar o refino.db por causa do dado das amostras, diga: dá para
+enviar só os tempos, sem nome de amostra nenhum.
+
+
+COMPARAR MÉTODOS SOBRE OS MESMOS DADOS
+
+Pode executar quantas vezes quiser sobre os mesmos arquivos, trocando o método,
+com o mesmo nome de estudo. Cada execução fica registrada separadamente e as
+três podem ser comparadas depois.
+
+    estudo «lote 3»   método none     execução 1
+    estudo «lote 3»   método loess    execução 2
+    estudo «lote 3»   método serrf    execução 3
+
+
+A TABELA DO MULTIVERSO VEM CHEIA E ZERADA — E ISSO NÃO É DEFEITO
+-----------------------------------------------------------------
+
+Esta seção é sobre a aba «Teste de robustez (beta)», que é
+funcionalidade em beta — veja COMO SE USA.
+
+No fim do multiverso há uma tabela de quais sinais sobrevivem à grade de
+escolhas. ELA NÃO VEM VAZIA. Vem com uma linha por sinal, e a coluna «Fração
+significativa» — em que proporção das combinações aquele sinal apareceu como
+significativo — vem 0,000 em TODAS as linhas.
+
+Medido em 30/08/2026 sobre o arquivo real do neg_c18, com a grade que a janela
+despachava ENTÃO ao escolher um corretor — 1.440 combinações — e o par ATLL
+contra NoHTLV: 2.136 linhas, de 2.184 sinais que entraram, e 0,000 na coluna de
+fração em TODAS as 2.136. Aquela grade levou 1 min 46 s sem correção de sinal.
+
+A grade por corretor tem 3.200 células, 2,22 vezes a daquela medição — a
+grade inteira, com os três corretores, tem 9.600. O TEMPO que o senhor vai ver é portanto outro, e a tela estima-o para a
+sua matriz antes de começar. O que não muda com o tamanho da grade é a coluna
+zerada, que é o que os parágrafos a seguir explicam.
+
+Isso é resultado medido, e não defeito do seu arquivo nem do programa. Já estava
+medido antes de você abrir o programa: nas 24 comparações de grupo possíveis
+nestes arquivos — seis pares de grupos em cada um dos quatro modos —, o número
+de sinais que sobrevivem ao controle de falsas descobertas é zero nas 24. E o
+mesmo teste devolveu zero também sobre um conjunto artificial em que plantamos
+de propósito um efeito forte em 50 sinais de 2.000: nenhum dos 50 sobreviveu ao
+mesmo controle.
+
+Ou seja: a coluna zerada é o comportamento do teste num estudo deste tamanho, e
+não uma leitura sobre a sua amostra.
+
+Uma tabela que devolvesse sinais «robustos» aqui é que seria motivo de
+desconfiança.
+
+
+ONDE FICAM OS SEUS DADOS
+------------------------
+
+Tudo fica nesta máquina, E TUDO FICA DENTRO DESTA PASTA, com as duas ressalvas
+abaixo — e as duas pedem a sua confirmação antes. O programa não envia nada do
+seu estudo sem o senhor confirmar, e só usa a internet nesses dois casos: o modo
+externo do enriquecimento e, só na cópia publicada para baixar, o primeiro
+download das bibliotecas.
+
+Além destas duas, o programa grava fora desta pasta um cache das
+fontes usadas nas figuras, em %LOCALAPPDATA%\refino\cache-de-figuras — uma
+subpasta para cada lugar em que o programa já foi aberto. Ele não contém dado
+do estudo, é criado sem pedir confirmação, e o programa não o apaga. Pode ser
+apagado à mão, com o programa fechado: a abertura seguinte o refaz, e por isso
+demora mais.
+
+O MODO EXTERNO DO ENRIQUECIMENTO É O PRIMEIRO CAMINHO DO PROGRAMA
+QUE ENVIA ALGO PARA FORA. Ele fica na aba «Vias metabólicas (beta)», no segundo
+modo, no seletor «Biblioteca de vias», com o item
+«KEGG — pelo servidor do MetaboAnalyst (modo externo)». O outro item,
+«SMPDB — no computador (modo local)», que é o padrão, continua a não enviar
+nada.
+
+    PARA ONDE    o servidor do MetaboAnalyst, www.xialab.ca, no endereço fixo
+                 https://www.xialab.ca/api/msetora. A análise de vias sobre a
+                 biblioteca KEGG só é feita lá.
+
+    O QUE SAI    só os nomes de compostos que o reconhecimento de nomes,
+                 feito nesta máquina, confirmou — mais alguns valores fixos de
+                 configuração, como o tipo de análise e o nome da biblioteca.
+
+    O QUE NÃO    a tabela do Progenesis, os nomes das features, os p-valores,
+    SAI          as amostras, os grupos, o fundo do ensaio e o refino.db.
+
+    QUANDO       só depois de o senhor confirmar, no diálogo
+                 «Enviar ao servidor do MetaboAnalyst?». Ele mostra quantos
+                 nomes vão e a lista inteira, e o botão que já vem
+                 selecionado é «Cancelar»: enviar exige clicar em «Enviar».
+
+O fundo do ensaio não sai porque o servidor não o usa: medido em 01/10/2026
+sobre 25 nomes públicos, o pedido com o fundo e o pedido sem ele deram o mesmo
+resultado. Por isso, no modo externo, a comparação é sempre contra a biblioteca
+KEGG inteira, e a tela avisa que a análise tende a falsos positivos.
+
+O servidor calcula só com os nomes enviados que estão em alguma
+via KEGG, e a tela diz as duas contagens: «N nomes enviados, M em alguma via
+KEGG». Medido com 63 nomes públicos: 61 estavam em alguma via, e o servidor
+usou 61.
+
+    CANCELAR     durante o envio, interrompe a espera na hora. Se o pedido já
+                 tinha saído, a tela diz que os nomes chegaram ao servidor; a
+                 resposta é descartada e nada é calculado aqui.
+
+    ERRO 500     com um ou dois compostos, o servidor pode falhar por causa da
+                 própria lista — num teste, um composto que só aparece numa
+                 via deu esse erro. A tela sugere acrescentar compostos ou usar
+                 o modo local, em vez de tentar mais tarde.
+
+    TETO         sem resposta em 120 s, o programa desiste do envio e diz
+                 que ele falhou por rede.
+
+A segunda ressalva, e ela não envolve dado do estudo: na cópia
+publicada para baixar na internet, o enriquecimento da lista identificada
+precisa, na primeira vez, de baixar as bibliotecas da pasta vias-dados/ do
+servidor do MetaboAnalyst. O programa pergunta antes, e o que ele baixa são
+arquivos públicos; nada do seu estudo sai. Esses arquivos ficam fora desta
+pasta, em %LOCALAPPDATA%\refino\vias-bibliotecas-baixadas, para servirem a
+qualquer cópia do programa nesta máquina. Na cópia entregue ao laboratório eles
+já vêm na pasta vias-dados/, e nada é baixado.
+
+Ao lado do refino.exe aparecem dois arquivos que não vieram no zip:
+
+    refino.db     o registro do que você fez — os estudos, as execuções, os
+                  parâmetros de cada uma, e as decisões que você sobrescreveu
+    refino.log    o diário técnico: o que aconteceu em cada abertura do
+                  programa, e o motivo se alguma coisa falhar
+
+Eles ficam nesta pasta, para que a pasta que você recebeu seja a mesma que você
+devolve.
+
+Os arquivos que você baixar no «Resultado» da «Correção» e da «Normalização»
+continuam a ser salvos onde você escolher, na hora de salvar — esses não entram aqui sozinhos.
+
+Enquanto o programa está aberto e gravando alguma coisa, aparece por instantes
+um terceiro arquivo, refino.db-journal. Ele some sozinho quando a gravação
+termina.
+
+
+QUEM MAIS PODE LER ISSO DEPENDE DE ONDE VOCÊ PÔS A PASTA
+
+O refino.db guarda o apelido de cada amostra ao lado do grupo dela. Quem
+consegue abri-lo não depende do programa: depende de onde esta pasta está.
+
+    na sua Área de Trabalho, ou nos seus Downloads
+        só você, os administradores da máquina, e o próprio Windows
+
+    na raiz do disco (C:\), ou numa pasta comum como a pasta Público
+        também outras contas da mesma máquina
+
+O programa mede isso TODA VEZ QUE ABRE e escreve o resultado no refino.log. Se
+ele escrever ATENÇÃO ali, e isso for um problema para você: feche o programa,
+mova a pasta inteira para a sua Área de Trabalho, e abra de lá — os arquivos vão
+junto e nada se perde.
+
+Ele avisa e não impede. O programa abre de qualquer jeito.
+
+
+AO TERMINAR: FECHE, ZIPE A PASTA INTEIRA, E DEVOLVA
+---------------------------------------------------
+
+É assim que o resultado do seu teste chega até nós:
+
+    1. FECHE o programa, no X da janela. Espere a janela sumir.
+    2. Clique com o botão direito NA PASTA que você recebeu e escolha
+       "Enviar para > Pasta compactada" (ou "Compactar para arquivo ZIP").
+    3. Devolva o .zip.
+
+POR QUE FECHAR ANTES, e não é formalidade
+
+O refino.db é um banco de dados. Enquanto o programa está aberto ele pode estar
+no meio de uma gravação — e nesse instante o conteúdo verdadeiro está dividido
+entre o refino.db e o arquivo temporário refino.db-journal. Zipar nesse instante
+copia metade de uma gravação, e o resultado pode não abrir depois. O pior é que
+não há aviso nenhum: o zip é criado sem erro.
+
+Com o programa fechado não há gravação em curso e não há arquivo temporário. O
+refino.db está inteiro, e o zip leva tudo.
+
+Conferido no código em 30/08/2026: durante uma gravação a pasta tem refino.db e
+refino.db-journal; terminada a gravação, e com o programa fechado, tem só o
+refino.db.
+
+O QUE VAI NESSE ZIP QUE NÃO VEIO NO QUE VOCÊ RECEBEU
+
+    refino.db     tudo o que você executou, inclusive as execuções que você
+                  interrompeu e as decisões que sobrescreveu
+    refino.log    o diário técnico de cada abertura, com o aviso sobre quem
+                  pode ler a pasta
+
+Não apague nenhum dos dois antes de zipar: são eles que contam o que aconteceu
+do seu lado. Se preferir não enviar o refino.db, diga — o refino.log sozinho já
+mostra o que abriu e o que falhou, e não guarda dado de amostra nenhum.
+
+
+SE ALGO DER ERRADO
+------------------
+
+Anote o que apareceu na tela e o número de versão do arquivo VERSAO.txt,
+nesta pasta. Ele identifica exatamente esta cópia do programa — sem ele não
+é possível saber a qual versão o problema se refere.
+
+Se a janela não abrir, o arquivo refino.log tem o motivo técnico. Ele fica
+nesta mesma pasta, ao lado do refino.exe — abra com o Bloco de Notas.
+
+
+O QUE ELE NÃO FAZ
+-----------------
+
+A aba "Métodos e limites" lista isso por dentro, com a razão de cada corte. Em
+resumo: ele corrige e avalia; ele não identifica compostos a partir de RT_mz, e
+não usa o serviço de enriquecimento em contêiner, que não viaja com este
+executável. O que ele FAZ, na aba «Vias metabólicas (beta)», é PREDIZER vias a
+partir dos picos, sem identificar nada antes — e os compostos que ela mostra
+são candidatos compatíveis em massa, não identificações.
+
+A mesma aba tem um segundo modo, escolhido no topo dela, que enriquece a lista
+que o senhor identificou no Progenesis com o MetaboAnalystR, num R que vem
+junto (a pasta R/), sem contêiner. Os compostos dessa análise são os que o
+senhor identificou. No modo local, sobre a SMPDB, ele não envia nada; o modo
+externo, sobre a KEGG, envia os nomes de compostos confirmados ao servidor do
+MetaboAnalyst — e só depois de o senhor confirmar. O que sai e o que não sai
+está em «ONDE FICAM OS SEUS DADOS», acima.
+
+A aba «Vias metabólicas (beta)» e a «Teste de robustez (beta)» são
+funcionalidades em beta: estão implementadas e podem ser usadas, mas não fazem
+parte da entrega ao laboratório.

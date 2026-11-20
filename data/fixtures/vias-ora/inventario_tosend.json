@@ -1,0 +1,699 @@
+{
+  "nota": "Inventário MEDIDO do objeto que o MetaboAnalystR enviaria ao servidor na ORA KEGG, e o esquema fechado de 11 folhas que o modo externo envia no lugar dele. Capturado em 01/10/2026 trocando .do.api.call no namespace do pacote por uma função que grava o tosend.rds e aborta, SEM envio; R 4.4.3 da árvore portátil; MetaboAnalystR 6bf5462; entrada: os 25 nomes públicos da paridade. Duas capturas: sem o fundo (filtro desligado) e com o fundo em KEGG (63 identificadores). Em objeto_do_pacote, classe e tipo são o class() e o typeof() do R, e a captura registrou valores só de texto. Em esquema_fechado, caminho e tipo são os de ESQUEMA_DA_CARGA (refino.io.enriquecimento_externo), lidos dos bytes que monta_carga escreve com os mesmos 25 nomes, byte a byte iguais à carga mínima do ensaio; classe é a do R para aquele tipo. Valores aparecem SÓ nas folhas de vocabulário fixo: nenhum nome de composto, nenhum identificador KEGG, nenhuma célula da tabela de mapeamento e nenhuma mensagem do pacote estão neste arquivo; essas folhas trazem só o campo conteudo.",
+  "medido_em_2026_10_01": [
+    "A carga mínima de 11 folhas, montada por monta_carga com os 25 nomes públicos da paridade, deu ORA idêntica à do objeto de 39 folhas que o pacote envia: as mesmas 40 vias, todos os valores e acertos iguais, universo 1.519.",
+    "O servidor ignora o fundo do ensaio na ORA KEGG: a carga do próprio pacote com o filtro KEGG e 63 identificadores deu o mesmo universo (1.519) e os mesmos valores que sem o filtro. Por isso o modo externo não envia o fundo, e o universo é a biblioteca KEGG inteira (decisão do usuário: «Seguir só com a biblioteca inteira»)."
+  ],
+  "destino": "https://www.xialab.ca/api/msetora",
+  "objeto_do_pacote": {
+    "sem_fundo": {
+      "bytes": 1530,
+      "folhas": 35,
+      "inventario": [
+        {
+          "caminho": "toSend$mSet$dataSet$type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "conc"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$design.type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "regular"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$cls.type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "disc"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$format",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "rowu"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$paired",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$pair.checked",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$cmpd",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista enviada"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$q.type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "name"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$map.table",
+          "classe": "matrix/array",
+          "tipo": "character",
+          "tamanho": 175,
+          "conteudo": "tabela de mapeamento por nome, uma linha por composto",
+          "colunas": [
+            "Query",
+            "Match",
+            "HMDB",
+            "PubChem",
+            "KEGG",
+            "SMILES",
+            "Comment"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$use.metabo.filter",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$analSet$type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "msetora"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$analSet$msetlibname",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "kegg_pathway"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$l",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$r",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$b",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$t",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$pad",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$msgSet$msg.vec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 0,
+          "valores": []
+        },
+        {
+          "caminho": "toSend$mSet$msgSet$nmcheck.msg",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 2,
+          "conteudo": "mensagem do pacote sobre o casamento de nomes"
+        },
+        {
+          "caminho": "toSend$mSet$cmdSet",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 0,
+          "valores": []
+        },
+        {
+          "caminho": "toSend$mSet$paramSet$report.format",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "html"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$return.cols",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 5,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$lipid.feats",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$query.vec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista consultada"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$hit.inx",
+          "classe": "integer",
+          "tipo": "integer",
+          "tamanho": 25,
+          "conteudo": "inteiro, índice do casamento por nome; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$hit.values",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: o nome casado na biblioteca"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$match.state",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 25,
+          "conteudo": "número, estado do casamento por nome; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$api$filter",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$api$libname",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "kegg_pathway"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$api$excludeNum",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$api$oraVec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista enviada"
+        },
+        {
+          "caminho": "toSend$libNm",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "kegg_pathway"
+          ]
+        },
+        {
+          "caminho": "toSend$filter",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$oraVec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista enviada"
+        },
+        {
+          "caminho": "toSend$excludeNum",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        }
+      ]
+    },
+    "com_fundo": {
+      "bytes": 1764,
+      "folhas": 39,
+      "inventario": [
+        {
+          "caminho": "toSend$mSet$dataSet$type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "conc"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$design.type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "regular"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$cls.type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "disc"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$format",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "rowu"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$paired",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$pair.checked",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$cmpd",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista enviada"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$q.type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "name"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$map.table",
+          "classe": "matrix/array",
+          "tipo": "character",
+          "tamanho": 175,
+          "conteudo": "tabela de mapeamento por nome, uma linha por composto",
+          "colunas": [
+            "Query",
+            "Match",
+            "HMDB",
+            "PubChem",
+            "KEGG",
+            "SMILES",
+            "Comment"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$metabo.filter.kegg",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 63,
+          "conteudo": "identificadores KEGG do fundo"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$metabo.ref.info",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "conteudo": "mensagem do pacote, com a contagem do fundo"
+        },
+        {
+          "caminho": "toSend$mSet$dataSet$use.metabo.filter",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$analSet$type",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "msetora"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$analSet$msetlibname",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "kegg_pathway"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$l",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$r",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$b",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$t",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$imgSet$margin.config$pad",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$msgSet$msg.vec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 0,
+          "valores": []
+        },
+        {
+          "caminho": "toSend$mSet$msgSet$nmcheck.msg",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 2,
+          "conteudo": "mensagem do pacote sobre o casamento de nomes"
+        },
+        {
+          "caminho": "toSend$mSet$cmdSet",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 0,
+          "valores": []
+        },
+        {
+          "caminho": "toSend$mSet$paramSet$report.format",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "html"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$return.cols",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 5,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$lipid.feats",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$query.vec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista consultada"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$hit.inx",
+          "classe": "integer",
+          "tipo": "integer",
+          "tamanho": 25,
+          "conteudo": "inteiro, índice do casamento por nome; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$hit.values",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: o nome casado na biblioteca"
+        },
+        {
+          "caminho": "toSend$mSet$name.map$match.state",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 25,
+          "conteudo": "número, estado do casamento por nome; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$api$filter",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$api$libname",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "kegg_pathway"
+          ]
+        },
+        {
+          "caminho": "toSend$mSet$api$excludeNum",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$mSet$api$oraVec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista enviada"
+        },
+        {
+          "caminho": "toSend$mSet$api$filterData",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 63,
+          "conteudo": "identificadores KEGG do fundo"
+        },
+        {
+          "caminho": "toSend$libNm",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 1,
+          "valores": [
+            "kegg_pathway"
+          ]
+        },
+        {
+          "caminho": "toSend$filter",
+          "classe": "logical",
+          "tipo": "logical",
+          "tamanho": 1,
+          "conteudo": "lógico; valor não registrado pela captura"
+        },
+        {
+          "caminho": "toSend$oraVec",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 25,
+          "conteudo": "nomes de compostos: a lista enviada"
+        },
+        {
+          "caminho": "toSend$filterData",
+          "classe": "character",
+          "tipo": "character",
+          "tamanho": 63,
+          "conteudo": "identificadores KEGG do fundo"
+        },
+        {
+          "caminho": "toSend$excludeNum",
+          "classe": "numeric",
+          "tipo": "double",
+          "tamanho": 1,
+          "conteudo": "número; valor não registrado pela captura"
+        }
+      ]
+    }
+  },
+  "esquema_fechado": {
+    "bytes_com_25_nomes": 1542,
+    "folhas": 11,
+    "inventario": [
+      {
+        "caminho": "raiz$mSet$dataSet$type",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 1,
+        "valores": [
+          "conc"
+        ]
+      },
+      {
+        "caminho": "raiz$mSet$analSet$type",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 1,
+        "valores": [
+          "msetora"
+        ]
+      },
+      {
+        "caminho": "raiz$mSet$analSet$msetlibname",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 1,
+        "valores": [
+          "kegg_pathway"
+        ]
+      },
+      {
+        "caminho": "raiz$mSet$api$filter",
+        "classe": "logical",
+        "tipo": "logico",
+        "tamanho": 1,
+        "valores": [
+          false
+        ]
+      },
+      {
+        "caminho": "raiz$mSet$api$libname",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 1,
+        "valores": [
+          "kegg_pathway"
+        ]
+      },
+      {
+        "caminho": "raiz$mSet$api$excludeNum",
+        "classe": "numeric",
+        "tipo": "real",
+        "tamanho": 1,
+        "valores": [
+          2.0
+        ]
+      },
+      {
+        "caminho": "raiz$mSet$api$oraVec",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 25,
+        "conteudo": "nomes de compostos que o mapeamento local confirmou; tamanho = número de nomes"
+      },
+      {
+        "caminho": "raiz$libNm",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 1,
+        "valores": [
+          "kegg_pathway"
+        ]
+      },
+      {
+        "caminho": "raiz$filter",
+        "classe": "logical",
+        "tipo": "logico",
+        "tamanho": 1,
+        "valores": [
+          false
+        ]
+      },
+      {
+        "caminho": "raiz$oraVec",
+        "classe": "character",
+        "tipo": "texto",
+        "tamanho": 25,
+        "conteudo": "nomes de compostos que o mapeamento local confirmou; tamanho = número de nomes"
+      },
+      {
+        "caminho": "raiz$excludeNum",
+        "classe": "numeric",
+        "tipo": "real",
+        "tamanho": 1,
+        "valores": [
+          2.0
+        ]
+      }
+    ]
+  }
+}

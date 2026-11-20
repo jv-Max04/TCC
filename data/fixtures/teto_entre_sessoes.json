@@ -1,0 +1,106 @@
+{
+  "grupos_ambiente": [
+    {
+      "rotulo": "medicao inicial",
+      "n": 13,
+      "media": 8.497,
+      "desvio": 0.021,
+      "regime": "ambiente"
+    },
+    {
+      "rotulo": "remedicao q=0",
+      "n": 4,
+      "media": 8.819662980416625,
+      "desvio": 0.002100925666880034,
+      "regime": "ambiente"
+    },
+    {
+      "rotulo": "sonda q=0",
+      "n": 3,
+      "media": 8.671431221435139,
+      "desvio": 0.008697248392957832,
+      "regime": "ambiente"
+    },
+    {
+      "rotulo": "sessao nova 1",
+      "n": 3,
+      "media": 8.679897021689545,
+      "desvio": 0.006214322876165166,
+      "regime": "ambiente",
+      "mhz": 3821.8,
+      "load": 2.48
+    },
+    {
+      "rotulo": "sessao nova 2",
+      "n": 3,
+      "media": 8.707159020462953,
+      "desvio": 0.01883037966171155,
+      "regime": "ambiente",
+      "mhz": 3784.9,
+      "load": 2.4
+    },
+    {
+      "rotulo": "sessao nova 3",
+      "n": 3,
+      "media": 8.690660664097203,
+      "desvio": 0.02077335575326679,
+      "regime": "ambiente",
+      "mhz": 4244.4,
+      "load": 2.75
+    },
+    {
+      "rotulo": "sessao nova 4",
+      "n": 3,
+      "media": 8.705630306227182,
+      "desvio": 0.006533896821803532,
+      "regime": "ambiente",
+      "mhz": 4082.1,
+      "load": 2.01
+    },
+    {
+      "rotulo": "sessao nova 5",
+      "n": 3,
+      "media": 8.68696256999977,
+      "desvio": 0.007083916567830421,
+      "regime": "ambiente",
+      "mhz": 4195.7,
+      "load": 2.18
+    }
+  ],
+  "grupos_injetados": [
+    {
+      "rotulo": "remedicao q>=1",
+      "n": 16,
+      "media": 10.341963743953974,
+      "desvio": 0.7594364923816072,
+      "regime": "injetado"
+    },
+    {
+      "rotulo": "sonda q=4",
+      "n": 3,
+      "media": 11.128795720578301,
+      "desvio": 0.07069950766921397,
+      "regime": "injetado"
+    }
+  ],
+  "primario": {
+    "n": 35,
+    "media": 8.633282123811483,
+    "desvio": 0.11493890883381322,
+    "teto": 8.978098850312923
+  },
+  "secundario": {
+    "n": 54,
+    "media": 9.27819780367408,
+    "desvio": 0.9909696012334116,
+    "teto": 12.251106607374314
+  },
+  "sd_entre_sessoes_novas": 0.011916115733802333,
+  "maximo_ambiente_observado": 8.822229770625098,
+  "desfechos": {
+    "E1": true,
+    "E2": false,
+    "E3": true,
+    "E4": false
+  }
+}

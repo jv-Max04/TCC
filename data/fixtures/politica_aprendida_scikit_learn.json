@@ -1,0 +1,178 @@
+{
+  "caracteristicas": [
+    "qc_rsd_median",
+    "qc_rsd_p75",
+    "zero_fraction",
+    "missing_fraction",
+    "pc1_injection_correlation",
+    "qc_dispersion_ratio",
+    "n_features",
+    "n_samples",
+    "n_qcs",
+    "diag_confidence",
+    "n_suggested_batches",
+    "n_changepoints",
+    "is_gradual_drift",
+    "is_step_change",
+    "is_erratic",
+    "is_clean",
+    "is_unassessable"
+  ],
+  "corretor": {
+    "nos": [
+      {
+        "caracteristica": 4,
+        "direita": 6,
+        "esquerda": 1,
+        "folha": false,
+        "limiar": 0.3774854987859726
+      },
+      {
+        "caracteristica": 4,
+        "direita": 3,
+        "esquerda": 2,
+        "folha": false,
+        "limiar": 0.029563999269157648
+      },
+      {
+        "folha": true,
+        "valor": "loess"
+      },
+      {
+        "caracteristica": 10,
+        "direita": 5,
+        "esquerda": 4,
+        "folha": false,
+        "limiar": 1.5
+      },
+      {
+        "folha": true,
+        "valor": "serrf"
+      },
+      {
+        "folha": true,
+        "valor": "serrf"
+      },
+      {
+        "caracteristica": 1,
+        "direita": 10,
+        "esquerda": 7,
+        "folha": false,
+        "limiar": 1.4149530529975891
+      },
+      {
+        "caracteristica": 4,
+        "direita": 9,
+        "esquerda": 8,
+        "folha": false,
+        "limiar": 0.9995799958705902
+      },
+      {
+        "folha": true,
+        "valor": "loess"
+      },
+      {
+        "folha": true,
+        "valor": "loess"
+      },
+      {
+        "caracteristica": 2,
+        "direita": 12,
+        "esquerda": 11,
+        "folha": false,
+        "limiar": 0.22205550223588943
+      },
+      {
+        "folha": true,
+        "valor": "serrf"
+      },
+      {
+        "folha": true,
+        "valor": "loess"
+      }
+    ]
+  },
+  "limiar_de_abstencao": 0.012,
+  "margem": {
+    "nos": [
+      {
+        "caracteristica": 9,
+        "direita": 6,
+        "esquerda": 1,
+        "folha": false,
+        "limiar": 0.9679344892501831
+      },
+      {
+        "caracteristica": 1,
+        "direita": 5,
+        "esquerda": 2,
+        "folha": false,
+        "limiar": 1.9105700254440308
+      },
+      {
+        "caracteristica": 4,
+        "direita": 4,
+        "esquerda": 3,
+        "folha": false,
+        "limiar": 0.8833260238170624
+      },
+      {
+        "folha": true,
+        "valor": 0.10359665000000003
+      },
+      {
+        "folha": true,
+        "valor": 0.008299
+      },
+      {
+        "folha": true,
+        "valor": 0.339217
+      },
+      {
+        "caracteristica": 2,
+        "direita": 10,
+        "esquerda": 7,
+        "folha": false,
+        "limiar": 0.110835000872612
+      },
+      {
+        "caracteristica": 4,
+        "direita": 9,
+        "esquerda": 8,
+        "folha": false,
+        "limiar": 0.854372501373291
+      },
+      {
+        "folha": true,
+        "valor": 1.313762
+      },
+      {
+        "folha": true,
+        "valor": 0.5524252000000001
+      },
+      {
+        "caracteristica": 5,
+        "direita": 12,
+        "esquerda": 11,
+        "folha": false,
+        "limiar": 0.9868244826793671
+      },
+      {
+        "folha": true,
+        "valor": 0.326334
+      },
+      {
+        "folha": true,
+        "valor": 0.14156133333333334
+      }
+    ]
+  },
+  "procedencia": {
+    "corpus": "corpus_fase9_7qcs.jsonl",
+    "gerado_em": "2026-10-18",
+    "n_corpus": 40,
+    "profundidade_maxima": 3,
+    "semente": 42
+  },
+  "versao": 1
+}

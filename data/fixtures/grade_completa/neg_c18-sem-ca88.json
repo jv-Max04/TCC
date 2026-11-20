@@ -1,0 +1,138 @@
+{
+  "modo": "neg_c18",
+  "quando": "2026-09-14T14:49:19.866087+00:00",
+  "maquina": "iwa-win",
+  "n_features": 2184,
+  "n_amostras": 68,
+  "grupos_clinicos": {
+    "ATLL": 13,
+    "Asymptomatic": 18,
+    "HAMTSP": 14,
+    "NoHTLV": 16
+  },
+  "excluidos_por_sample_mask": [
+    "QC"
+  ],
+  "n_celulas": 9600,
+  "composicao": {
+    "corrections": 3,
+    "batch_options": 1,
+    "rsd_cutoffs": 4,
+    "missing_thresholds": 2,
+    "imputations": 5,
+    "sample_norms": 5,
+    "transformations": 4,
+    "scalings": 4
+  },
+  "segundos": 215.1,
+  "pico_rss_gb": 9.63,
+  "chamadas_ao_corretor": 3,
+  "chamadas_por_prefixo": {
+    "('none', 1)": 1,
+    "('serrf', 1)": 1,
+    "('loess', 1)": 1
+  },
+  "pares": {
+    "ATLL x Asymptomatic": {
+      "n_features": 2136,
+      "vereditos": {
+        "absent": 2136
+      },
+      "maior_frac_significant": 0.0,
+      "segundos": 76.0
+    },
+    "ATLL x HAMTSP": {
+      "n_features": 2136,
+      "vereditos": {
+        "absent": 2136
+      },
+      "maior_frac_significant": 0.0,
+      "segundos": 72.2
+    },
+    "ATLL x NoHTLV": {
+      "n_features": 2136,
+      "vereditos": {
+        "absent": 2136
+      },
+      "maior_frac_significant": 0.0,
+      "segundos": 75.0
+    },
+    "Asymptomatic x HAMTSP": {
+      "n_features": 2136,
+      "vereditos": {
+        "absent": 2136
+      },
+      "maior_frac_significant": 0.0,
+      "segundos": 77.2
+    },
+    "Asymptomatic x NoHTLV": {
+      "n_features": 2136,
+      "vereditos": {
+        "absent": 2136
+      },
+      "maior_frac_significant": 0.0,
+      "segundos": 79.9
+    },
+    "HAMTSP x NoHTLV": {
+      "n_features": 2136,
+      "vereditos": {
+        "absent": 2135,
+        "fragile": 1
+      },
+      "maior_frac_significant": 0.26,
+      "segundos": 75.0
+    }
+  },
+  "eixos": {
+    "correction": {
+      "loess": 0.0,
+      "none": 0.0,
+      "serrf": 0.0
+    },
+    "rsd_cutoff": {
+      "0.2": 0.0,
+      "0.25": 0.0,
+      "0.3": 0.0,
+      "None": 0.0
+    },
+    "missing_threshold": {
+      "0.5": 0.0,
+      "0.8": 0.0
+    },
+    "imputation": {
+      "col_min": 0.0,
+      "knn": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "one_fifth_min": 0.0
+    },
+    "sample_normalization": {
+      "median": 0.0,
+      "none": 0.0,
+      "pqn_group": 0.0,
+      "quantile": 0.0,
+      "sum": 0.0
+    },
+    "transformation": {
+      "cbrt": 0.0,
+      "log10": 0.0,
+      "none": 0.0,
+      "sqrt": 0.0
+    },
+    "scaling": {
+      "auto": 0.0,
+      "mean_center": 0.0,
+      "none": 0.0,
+      "pareto": 0.0
+    }
+  },
+  "ca_8_8": {
+    "pulado": true,
+    "motivo": "--sem-ca88; ver neg_hilic.json"
+  },
+  "par_ancora_dos_eixos": [
+    "ATLL",
+    "NoHTLV"
+  ],
+  "segundos_dos_eixos": 38.1
+}

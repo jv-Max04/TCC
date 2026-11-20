@@ -1,0 +1,65 @@
+{
+  "nucleos_nominais": 12,
+  "pontos": [
+    {
+      "queimadores": 0,
+      "parede_s": 125.00683949599625,
+      "nucleo_min_por_celula": 8.681030520555293,
+      "cpu_min_por_celula": 6.119675925925926,
+      "cpu_s": 1057.48,
+      "nucleos_efetivos": 8.459377136991527,
+      "mhz_medio": 4460.143662666666,
+      "mhz_max": 4753.05225
+    },
+    {
+      "queimadores": 4,
+      "parede_s": 159.24176578599145,
+      "nucleo_min_por_celula": 11.058455957360517,
+      "cpu_min_por_celula": 9.043923611111111,
+      "cpu_s": 1562.79,
+      "nucleos_efetivos": 9.81394543250838,
+      "mhz_medio": 4413.182214360587,
+      "mhz_max": 4746.209833333333
+    },
+    {
+      "queimadores": 0,
+      "parede_s": 124.76269080999191,
+      "nucleo_min_por_celula": 8.664075750693883,
+      "cpu_min_por_celula": 6.1198495370370365,
+      "cpu_s": 1057.51,
+      "nucleos_efetivos": 8.47617178769045,
+      "mhz_medio": 4412.322527333333,
+      "mhz_max": 4759.3251666666665
+    },
+    {
+      "queimadores": 4,
+      "parede_s": 161.2778337119962,
+      "nucleo_min_por_celula": 11.19984956333307,
+      "cpu_min_por_celula": 9.176793981481483,
+      "cpu_s": 1585.75,
+      "nucleos_efetivos": 9.832411333300593,
+      "mhz_medio": 4386.67943115942,
+      "mhz_max": 4773.017333333333
+    },
+    {
+      "queimadores": 0,
+      "parede_s": 124.83629846000986,
+      "nucleo_min_por_celula": 8.66918739305624,
+      "cpu_min_por_celula": 6.10908564814815,
+      "cpu_s": 1055.65,
+      "nucleos_efetivos": 8.456274441188816,
+      "mhz_medio": 4424.5412713333335,
+      "mhz_max": 4726.388583333333
+    },
+    {
+      "queimadores": 4,
+      "parede_s": 160.2443756309949,
+      "nucleo_min_por_celula": 11.128081641041312,
+      "cpu_min_por_celula": 9.141666666666667,
+      "cpu_s": 1579.68,
+      "nucleos_efetivos": 9.857943492741557,
+      "mhz_medio": 4405.827244791666,
+      "mhz_max": 4715.73925
+    }
+  ]
+}

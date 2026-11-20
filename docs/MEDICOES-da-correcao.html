@@ -1,0 +1,1482 @@
+<meta charset="utf-8">
+<!--
+  O que importa na tag acima e EXISTIR. Sem <!doctype> este
+  arquivo tambem nao tem <head>, e sem ela nao teria charset nenhum — o arquivo e
+  UTF-8 e nada o diria. No destino "publicado" o esqueleto do publicador declara; no
+  destino "duplo clique a partir do disco", que o paragrafo seguinte nomeia, o browser
+  ADIVINHA windows-1252 e o titulo vira "As mediÃ§Ãµes de correÃ§Ã£o".
+
+  ELA ESTA NO BYTE ZERO POR CINTO DE SEGURANCA, E NAO PORQUE PRECISE ESTAR: cinco
+  paginas-sonda com a tag nos bytes 0, 902, 1202 e 3002 renderizaram TODAS corretamente,
+  so a sem tag quebrando. Ver AR232 e
+  `scripts/declara_charset.py`, cujo oraculo e PRESENCA e nao posicao.
+
+  SEM <!doctype html> DE PROPOSITO, pelo mesmo motivo do GUIA e do ENTENDER: este
+  arquivo tem dois destinos — publicado como artefato, onde o publicador o embrulha
+  num esqueleto proprio, e aberto por duplo clique a partir do disco. Um <!doctype>
+  aqui produziria documento aninhado no primeiro caso.
+
+  Este e o CADERNO DE MEDICOES. O ENTENDER conta a historia do projeto e cita estes
+  resultados; aqui esta o detalhe metodologico que la seria excesso.
+
+  OS IRMAOS SEM <!doctype> — `FAQ-perguntas-frequentes.html`, `GUIA-do-aplicativo.html` e
+  `MULTIVERSO-o-que-e-e-o-que-custa.html` — tambem declaram o charset. Os tres COM
+  <!doctype> (DIAGNOSTICO, ENTENDER, EXPLICAR) declaram depois do comentario de cabecalho,
+  a mais de mil bytes do inicio, e renderizam corretamente; um portao de POSICAO teria acusado os tres.
+-->
+<title>As medições de correção</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap">
+<style>
+:root{
+  --papel:#FAF8F4; --carta:#FFFFFF; --carta2:#F2EFE9;
+  --linha:#E1DDD3;
+  --tinta:#191814; --tinta2:#48453E; --tinta3:#67635B;
+  --tom:#7A2E58; --tom-fraco:#F7ECF2; --tom-linha:#C795AF;
+  --medida:#1B5C48; --medida-fundo:#EAF2ED; --medida-linha:#9BC4B0;
+  --alerta:#8A5310; --alerta-fundo:#FBF1E1; --alerta-linha:#D9AE6B;
+  --grave:#96331F; --grave-fundo:#F9E7E1; --grave-linha:#DBA491;
+  --lateral-fundo:#F4F1EB; --lateral-ativo:#E9E3D8;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}}
+:root[data-theme="dark"]{
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);
+ font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;font-size:16.5px;line-height:1.68;
+ -webkit-font-smoothing:antialiased}
+.folha{max-width:880px;margin:0 auto;padding:0 26px 120px}
+h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;margin:0;text-wrap:balance}
+code{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+ font-size:.88em;background:var(--carta2);padding:1px 5px;border-radius:2px;
+ border:1px solid var(--linha);white-space:nowrap}
+a{color:var(--tom)}
+:focus-visible{outline:2px solid var(--tom);outline-offset:3px}
+.rolo:focus-visible,pre.fluxo:focus-visible{outline-offset:-2px}
+p{margin:0 0 15px}
+img{max-width:100%}
+
+/* ======================= A BARRA LATERAL =======================
+   Ha `<nav class="lateral">`, `.veu`, `.abre-lateral` e um
+   script de doze linhas para a alternancia abaixo de 1100px — acima disso a CSS
+   mostra o menu sem script nenhum.
+
+   Ficam mortas, e a lista e completa a 16/09/2026: `nav.indice` (com os descendentes dela),
+   `footer`, `ol.passos` (com `li` e `li::before`), `ul.pontos li` e `ul.pontos li::before`,
+   `dl.glos`, `img`, `.lat-cap[data-atual="1"]` (com o `.cap-num` dele), `.lat-sub[data-atual="1"]`,
+   `.lateral-busca`, `.lateral-conta`, `.lat-subs`, `.lat-sub` e `.lat-vazio`.
+
+   SAO DUAS CAUSAS.
+   (1) AUSENCIA DE ELEMENTO: nao ha um unico `class="passos"` neste arquivo, em `<ul>` nem em
+   `<ol>`. O mesmo vale para `ul.pontos`: as duas unicas ocorrencias de
+   `class="pontos"` sao `<p>`.
+   (2) HERDADO DO MENU DO `ENTENDER` SEM O MARKUP QUE AS USA: la ha um
+   `<input class="lateral-busca">` e um script de 223 linhas que filtra secoes e escreve
+   `data-atual`; aqui o script tem doze linhas e so alterna o menu, entao nada escreve `data-atual`
+   e nao ha campo de busca nem contador. */
+.abre-lateral{position:fixed;top:14px;left:14px;z-index:40;
+ font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+ background:var(--carta);color:var(--tinta2);border:1px solid var(--linha);
+ padding:9px 14px;border-radius:3px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.09)}
+.abre-lateral:hover{color:var(--tom);border-color:var(--tom-linha)}
+.veu{position:fixed;inset:0;background:rgba(0,0,0,.34);z-index:44;border:0;padding:0;
+ cursor:pointer;display:none}
+.veu[data-aberto="1"]{display:block}
+
+.lateral{position:fixed;top:0;left:0;width:290px;height:100vh;z-index:45;
+ background:var(--lateral-fundo);border-right:1px solid var(--linha);
+ overflow-y:auto;overscroll-behavior:contain;
+ transform:translateX(-100%);transition:transform .18s ease-out;font-size:14px}
+.lateral[data-aberto="1"]{transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.lateral{transition:none}}
+.lateral-int{padding:20px 18px 60px}
+.lateral-titulo{display:block;font-family:"IBM Plex Serif",Georgia,serif;font-size:17px;
+ font-weight:600;color:var(--tinta);text-decoration:none;letter-spacing:-.01em;margin-bottom:3px}
+.lateral-sub{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.15em;
+ text-transform:uppercase;color:var(--tinta3);margin-bottom:16px}
+.lateral-busca{width:100%;font:inherit;font-size:13px;padding:7px 10px;margin-bottom:4px;
+ background:var(--carta);color:var(--tinta);border:1px solid var(--linha);border-radius:3px}
+.lateral-busca::placeholder{color:var(--tinta3)}
+.lateral-conta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--tinta3);
+ min-height:15px;margin-bottom:11px}
+
+.lat-parte{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:20px 0 7px;padding-bottom:5px;
+ border-bottom:1px solid var(--linha)}
+.lat-parte:first-child{margin-top:0}
+.lat-cap{display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--tinta2);
+ padding:5px 8px;margin:0 -8px;border-radius:3px;line-height:1.4}
+.lat-cap:hover{background:var(--lateral-ativo);color:var(--tinta)}
+.lat-cap .cap-num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--tinta3);
+ font-variant-numeric:tabular-nums;flex:0 0 auto;letter-spacing:normal;text-transform:none;font-weight:400}
+.lat-cap[data-atual="1"]{background:var(--lateral-ativo);color:var(--tom);font-weight:600}
+.lat-cap[data-atual="1"] .cap-num{color:var(--tom)}
+.lat-subs{display:none;margin:2px 0 8px 30px;padding-left:11px;border-left:1px solid var(--linha)}
+.lat-subs[data-abre="1"]{display:block}
+.lat-sub{display:block;text-decoration:none;color:var(--tinta3);font-size:13px;
+ padding:3px 6px;margin:0 -6px;border-radius:3px;line-height:1.4}
+.lat-sub:hover{color:var(--tinta);background:var(--lateral-ativo)}
+.lat-sub[data-atual="1"]{color:var(--tom);font-weight:600}
+.lat-vazio{color:var(--tinta3);font-size:13px;padding:10px 0}
+
+@media (min-width:1100px){
+  body{padding-left:290px}
+  .lateral{transform:translateX(0)}
+  .abre-lateral,.veu{display:none}
+}
+
+/* ===================== O RESUMO DE TRES LINHAS =====================
+   Uma por comparacao. Fica no FIM de cada secao e nao no inicio — quem
+   ja leu confirma; quem so quer o essencial salta para ele pelo menu. */
+.resumo{margin:30px 0 6px;padding:18px 20px;background:var(--medida-fundo);
+ border:1px solid var(--medida-linha);border-radius:4px}
+.resumo h4{font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--medida);margin:0 0 10px}
+.resumo ol{margin:0;padding-left:20px}
+.resumo li{margin:5px 0;font-size:15.5px;color:var(--tinta2)}
+.resumo li b{color:var(--tinta)}
+
+/* A ETIQUETA de quem a medicao compara. Sao QUATRO valores. A quarta e a do capitulo
+   10: o oraculo dele nao e o `tools.R` do laboratorio, e sim o MetaboAnalyst, que e outro
+   programa, outra pergunta e outra ressalva. Reusar a etiqueta `quem-ambos` faria o leitor
+   da legenda do capitulo 00 concluir que a comparacao e contra o R do laboratorio. */
+.quem{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+ letter-spacing:.13em;text-transform:uppercase;padding:3px 9px;border-radius:2px;
+ border:1px solid;margin-left:10px;vertical-align:middle;font-weight:500}
+.quem-ambos{color:var(--tom);border-color:var(--tom-linha);background:var(--tom-fraco)}
+.quem-r{color:var(--alerta);border-color:var(--alerta-linha);background:var(--alerta-fundo)}
+.quem-nosso{color:var(--medida);border-color:var(--medida-linha);background:var(--medida-fundo)}
+.quem-mum{color:var(--tinta2);border-color:var(--linha);background:var(--carta2)}
+
+/* ============================ A CAPA ============================ */
+header.capa{background:var(--carta);border-bottom:1px solid var(--linha)}
+.capa-int{max-width:880px;margin:0 auto;padding:52px 26px 38px}
+.selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--tinta3);display:flex;gap:18px;flex-wrap:wrap}
+.selo b{color:var(--tom);font-weight:600}
+h1{font-size:clamp(32px,5.4vw,50px);font-weight:600;letter-spacing:-.022em;line-height:1.08;margin:16px 0 14px}
+.chamada{font-size:19px;color:var(--tinta2);max-width:62ch;margin:0}
+.capa-nota{margin-top:26px;padding-top:18px;border-top:1px solid var(--linha);
+ font-size:14.5px;color:var(--tinta3);max-width:68ch}
+.capa-nota b{color:var(--tinta2)}
+@media (max-width:1099px){.capa-int{padding-top:74px}}
+
+/* ====================== O INDICE NO FLUXO ====================== */
+nav.indice{background:var(--carta2);border:1px solid var(--linha);margin:36px 0 12px;padding:22px 24px}
+nav.indice h2{font-size:12px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:0 0 15px}
+nav.indice h3{font-size:11px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--tom);margin:20px 0 6px}
+nav.indice h3:first-of-type{margin-top:0}
+nav.indice ol{margin:0;padding:0;list-style:none;
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:0 30px}
+nav.indice li{padding:5px 0;border-bottom:1px solid var(--linha);display:flex;gap:10px}
+nav.indice li b{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);
+ font-variant-numeric:tabular-nums;font-weight:600;flex:0 0 auto;padding-top:2px}
+nav.indice a{text-decoration:none;color:var(--tinta2);font-size:15px}
+nav.indice a:hover{color:var(--tom);text-decoration:underline}
+
+/* ========================== O CAPITULO ========================== */
+.cap{margin-top:74px;scroll-margin-top:16px}
+.cap-cab{border-bottom:2px solid var(--tinta);padding-bottom:14px}
+.cap-num{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+ text-transform:uppercase;color:var(--tom);font-weight:600}
+.cap-cab h2{font-size:clamp(24px,3.6vw,32px);font-weight:600;letter-spacing:-.015em;
+ line-height:1.18;margin:9px 0 0}
+.cap-cab .sub{color:var(--tinta3);font-size:14.5px;margin:9px 0 0;max-width:64ch}
+.cap h3{font-size:20.5px;font-weight:600;margin:40px 0 12px;letter-spacing:-.005em;
+ scroll-margin-top:16px}
+.cap h4{font-size:16.5px;font-weight:600;margin:26px 0 8px;color:var(--tinta)}
+
+/* ========= O CARTAO DE NUMERO: o valor E a populacao ========= */
+.medido{background:var(--medida-fundo);border-left:3px solid var(--medida-linha);
+ padding:13px 18px;margin:20px 0;overflow-x:auto}
+.medido .q{display:block;color:var(--tinta2);font-size:12.5px;letter-spacing:.02em;margin-bottom:6px;
+ font-family:"IBM Plex Mono",monospace}
+.medido .v{display:block;color:var(--medida);font-weight:600;font-size:16px;line-height:1.5;
+ font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.medido .pop{display:block;margin-top:9px;padding-top:8px;border-top:1px solid var(--medida-linha);
+ color:var(--tinta3);font-size:13px;line-height:1.58}
+.medido .pop b{color:var(--tinta2);font-weight:600}
+.medido code{background:transparent;border:none;padding:0;color:inherit}
+
+.cilada{background:var(--alerta-fundo);border:1px solid var(--alerta-linha);padding:16px 20px;margin:24px 0}
+.cilada h4{margin:0 0 9px;color:var(--alerta);font-size:15.5px;font-family:"IBM Plex Sans",sans-serif;
+ font-weight:600;letter-spacing:.005em}
+.cilada h4::before{content:"A cilada \00a0 ";font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+ letter-spacing:.18em;text-transform:uppercase}
+.cilada p{margin:0 0 10px;color:var(--tinta2)}
+.cilada p:last-child{margin-bottom:0}
+.errado{font-style:italic;color:var(--alerta);font-weight:500}
+
+.cartao{background:var(--carta);border:1px solid var(--linha);padding:18px 22px;margin:24px 0}
+.cartao > :first-child{margin-top:0}
+.cartao > :last-child{margin-bottom:0}
+.cartao h3,.cartao h4{margin:0 0 10px;font-size:17.5px}
+.destaque{background:var(--tom-fraco);border-color:var(--tom-linha)}
+.destaque h3,.destaque h4{color:var(--tom)}
+.perigo{background:var(--grave-fundo);border-color:var(--grave-linha)}
+.perigo h4{color:var(--grave)}
+
+.termo{font-weight:600;color:var(--tom);border-bottom:1px dotted var(--tom-linha)}
+
+.rolo{overflow-x:auto;margin:22px 0;border:1px solid var(--linha);background:var(--carta)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--linha);vertical-align:top}
+th{background:var(--carta2);font-weight:600;font-size:12px;letter-spacing:.06em;
+ text-transform:uppercase;color:var(--tinta2);white-space:nowrap}
+td{color:var(--tinta2)}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;
+ color:var(--tinta)}
+tbody tr:last-child td{border-bottom:none}
+
+.pontos{margin:15px 0;padding-left:0;list-style:none;color:var(--tinta2)}
+ul.pontos li{position:relative;padding-left:21px;margin-bottom:10px;color:var(--tinta2)}
+ul.pontos li::before{content:"";position:absolute;left:2px;top:12px;width:7px;height:1px;
+ background:var(--tom-linha)}
+ol.passos{margin:15px 0;padding-left:0;list-style:none;counter-reset:pp}
+ol.passos li{position:relative;padding-left:35px;margin-bottom:12px;color:var(--tinta2)}
+ol.passos li::before{counter-increment:pp;content:counter(pp);position:absolute;left:0;top:2px;
+ font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);font-weight:600;
+ border:1px solid var(--tom-linha);border-radius:50%;width:22px;height:22px;
+ display:grid;place-items:center;line-height:1}
+
+pre.fluxo{background:var(--carta);border:1px solid var(--linha);padding:20px;margin:24px 0;
+ overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;
+ color:var(--tinta2);white-space:pre}
+pre.fluxo b{color:var(--tom);font-weight:600}
+pre.fluxo i{color:var(--medida);font-style:italic;font-weight:600}
+
+dl.glos{margin:24px 0;display:grid;grid-template-columns:auto 1fr;gap:0}
+dl.glos dt{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:600;color:var(--tom);
+ padding:12px 22px 12px 0;border-top:1px solid var(--linha);white-space:nowrap}
+dl.glos dd{margin:0;padding:12px 0;border-top:1px solid var(--linha);color:var(--tinta2);font-size:15px}
+
+footer{margin-top:88px;padding-top:28px;border-top:2px solid var(--tinta);
+ color:var(--tinta3);font-size:14.5px}
+footer h3{font-size:18px;margin:0 0 12px;color:var(--tinta)}
+footer b{color:var(--tinta2)}
+footer p{margin:0 0 12px}
+footer p.fecho{margin-top:22px;padding-top:16px;border-top:1px solid var(--linha)}
+
+@media (max-width:640px){
+  dl.glos{grid-template-columns:1fr}
+  dl.glos dt{padding:12px 0 2px;border-top:1px solid var(--linha)}
+  dl.glos dd{padding:0 0 12px;border-top:none}
+}
+@media (max-width:560px){
+  /* `nowrap` no <code> estoura a caixa a 380px: o token mais longo em prosa nua mede
+     ~334px contra ~328px de caixa. `pre-wrap` preserva os espacos internos de nomes
+     como `normalized by - none.csv`; `anywhere` autoriza a quebra dentro do
+     identificador. Acima de 560px nada muda. */
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+}
+
+/* IMPRESSAO. Sem este bloco o defeito e incapacitante e silencioso: Chrome e Edge honram
+   `prefers-color-scheme` ao imprimir E desligam fundos por padrao, entao quem le em tema
+   escuro do sistema imprime --tinta #ECEAE3 sobre papel branco — razao de contraste 1,06,
+   uma pagina em branco com texto fantasma. As TRES formas de :root entram na lista para
+   alcancar tambem o escuro por preferencia. */
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --papel:#FFFFFF; --carta:#FFFFFF; --carta2:#F4F2ED;
+    --linha:#CFCAC0;
+    --tinta:#000000; --tinta2:#26241F; --tinta3:#4A4740;
+    --tom:#5E2244; --tom-fraco:#F7ECF2; --tom-linha:#A87A93;
+    --medida:#124434; --medida-fundo:#EDF4F0; --medida-linha:#7FAE99;
+    --alerta:#6B3F0A; --alerta-fundo:#FBF4E8; --alerta-linha:#C69A55;
+    --grave:#7A2716; --grave-fundo:#FAEDE8; --grave-linha:#C99783;
+    --lateral-fundo:#FFFFFF; --lateral-ativo:#FFFFFF;
+  }
+  body{font-size:11pt;padding-left:0}
+  .lateral,.abre-lateral,.veu{display:none}
+  header.capa{border-bottom:1px solid var(--linha)}
+  .folha{max-width:none;padding-bottom:0}
+  /* o conteudo cortado a direita e irrecuperavel no papel: rolagem vira quebra */
+  .rolo,pre.fluxo{overflow-x:visible}
+  pre.fluxo{white-space:pre-wrap;overflow-wrap:anywhere}
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+  .cap{margin-top:34px;break-inside:auto}
+  .cap-cab,.medido,.cilada,.cartao,.rolo,pre.fluxo{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  nav.indice{break-after:page}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body id="topo">
+
+<button class="abre-lateral" id="abre" aria-controls="lateral" aria-expanded="false">☰ Seções</button>
+<button class="veu" id="veu" tabindex="-1" aria-label="Fechar o menu"></button>
+
+<nav class="lateral" id="lateral" aria-label="Sumário do caderno">
+  <div class="lateral-int">
+    <a class="lateral-titulo" href="#topo">Caderno de medições</a>
+    <div class="lateral-sub">refino quimiométrico</div>
+
+    <div class="lat-parte">Antes dos números</div>
+    <a class="lat-cap" href="#c0"><span class="cap-num">00</span><span>Como ler este caderno</span></a>
+    <a class="lat-cap" href="#c1"><span class="cap-num">01</span><span>A pergunta, e por que é difícil</span></a>
+    <a class="lat-cap" href="#c2"><span class="cap-num">02</span><span>As três réguas</span></a>
+
+    <div class="lat-parte">Nós contra o R</div>
+    <a class="lat-cap" href="#c3"><span class="cap-num">03</span><span>SERRF: quanto de erro cada um remove</span></a>
+    <a class="lat-cap" href="#c4"><span class="cap-num">04</span><span>De onde vem a diferença</span></a>
+    <a class="lat-cap" href="#c5"><span class="cap-num">05</span><span>SERRF: o gabarito, e a surpresa</span></a>
+    <a class="lat-cap" href="#c6"><span class="cap-num">06</span><span>LOESS: o porte fiel</span></a>
+    <a class="lat-cap" href="#c8"><span class="cap-num">08</span><span>Os dois esquemas de validação</span></a>
+
+    <div class="lat-parte">Só o R</div>
+    <a class="lat-cap" href="#c7"><span class="cap-num">07</span><span>Como o R decide qual usar</span></a>
+
+    <div class="lat-parte">Só nosso</div>
+    <a class="lat-cap" href="#c9"><span class="cap-num">09</span><span>O que o LOESS estraga</span></a>
+
+    <div class="lat-parte">Outro oráculo</div>
+    <a class="lat-cap" href="#c10"><span class="cap-num">10</span><span>Vias: nós e o MetaboAnalyst</span></a>
+
+    <div class="lat-parte">Fecho</div>
+    <a class="lat-cap" href="#c11"><span class="cap-num">11</span><span>O que tudo isso significa</span></a>
+    <a class="lat-cap" href="#c12"><span class="cap-num">12</span><span>Ficha técnica</span></a>
+  </div>
+</nav>
+
+<header class="capa">
+  <div class="capa-int">
+    <div class="selo">
+      <span>refino quimiométrico</span>
+      <span>caderno de medições</span>
+      <span><b>como comparamos os dois programas</b></span>
+    </div>
+    <h1>As medições de correção</h1>
+    <p class="chamada">Como o SERRF e o LOESS escritos em Python foram comparados com os do
+      programa em R do laboratório — e, no capítulo 10, como a predição de vias foi comparada
+      com o MetaboAnalyst: o desenho de cada medição, quantas execuções, com que
+      parâmetros, o que deu, e o que cada número quer dizer — inclusive o que ele <b>não</b>
+      quer dizer.</p>
+    <p class="capa-nota">Este documento é o <b>caderno de laboratório</b> das medições feitas
+      entre <b>30 de agosto e 19 de setembro de 2026</b> — o corpo em 30 e 31 de agosto, os
+      capítulos 08 e 09 em 7 de setembro, e o capítulo 10, que compara com o MetaboAnalyst em vez
+      do programa do laboratório, em 19 de setembro. O <b>ENTENDER</b> conta a história do projeto inteiro e
+      cita estes resultados; aqui está o detalhe metodológico que lá seria excesso. Todo número
+      desta página tem procedência declarada, e a última seção lista onde cada um vive.</p>
+  </div>
+</header>
+
+<main class="folha">
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c0">
+  <div class="cap-cab"><span class="cap-num">00</span>
+    <h2>Como ler este caderno</h2>
+  </div>
+
+  <p>Cada medição deste caderno pertence a uma de <b>quatro</b> categorias, e a etiqueta ao lado do
+    título diz qual. A distinção não é organizacional — ela diz <b>o que a medição pode afirmar</b>.</p>
+
+  <table>
+    <tr><td><span class="quem quem-ambos">nós e o R</span></td>
+        <td>Os dois programas fazem a mesma coisa e o número compara. É onde uma divergência é
+            <b>atribuível</b>: mesma entrada, mesma pergunta, dois resultados.</td></tr>
+    <tr><td><span class="quem quem-r">só o R</span></td>
+        <td>Comportamento do programa do laboratório que <b>nós não reproduzimos</b> — porque é
+            decisão dele, ou porque não há equivalente do nosso lado.</td></tr>
+    <tr><td><span class="quem quem-nosso">só nosso</span></td>
+        <td>Pergunta que o R <b>não consegue formular</b>. Quase sempre por falta de verdade
+            plantada: sem gabarito não há como medir recuperação, e a régua dele é sempre RSD de QC.</td></tr>
+    <tr><td><span class="quem quem-mum">outro oráculo</span></td>
+        <td>A comparação é contra um programa que <b>não é o do laboratório</b> — o MetaboAnalyst.
+            Entrou em <b>19/09/2026</b>, com o capítulo 10, e leva etiqueta própria porque as
+            ressalvas são outras: outro algoritmo, outro dado, e uma restrição de privacidade que
+            decide qual dado pode ser usado.</td></tr>
+  </table>
+
+  <p>Cada comparação fecha com um <b>resumo de três linhas</b>. Quem quer só o essencial pode ir de
+    resumo em resumo pelo menu à esquerda; quem quer o desenho encontra-o acima de cada um.</p>
+
+  <div class="cilada">
+    <p><b>E há uma assimetria que atravessa o caderno inteiro.</b> O R é o <b>oráculo parcial</b>
+      deste projeto — em quatro graus diferentes, conforme o caminho. O <code>none</code> é oráculo
+      exato; o <code>batch_loess</code> só nas features cuja curva não teve valor negativo; o SERRF
+      é oráculo <b>estatístico e nada mais</b>, porque o bloco dele não chama <code>set.seed</code>
+      e nem o R o reproduz.</p>
+    <p>Então «divergimos do R» significa coisas diferentes em cada linha, e cada seção diz qual.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c1">
+  <div class="cap-cab"><span class="cap-num">01</span>
+    <h2>A pergunta, e por que ela é difícil</h2>
+  </div>
+
+  <p>A pergunta é simples de enunciar: <b>o nosso SERRF em Python corrige tão bem quanto o do
+    laboratório em R?</b> A dificuldade aparece na primeira tentativa de respondê-la.</p>
+
+  <h3>Por que não se comparam as saídas</h3>
+
+  <p>O caminho óbvio seria rodar os dois sobre o mesmo arquivo e comparar célula a célula.
+    Isso não funciona, e o motivo está no código do laboratório:</p>
+
+  <div class="cilada">
+    <p><b>O SERRF do programa em R não reproduz nem a si mesmo.</b> O bloco não chama
+      <code>set.seed</code>, e substitui zeros por ruído aleatório antes de modelar. Rodar duas
+      vezes o mesmo arquivo, na mesma máquina, produz números diferentes. Comparar célula a
+      célula mediria o sorteio dele, não a nossa fidelidade.</p>
+  </div>
+
+  <p>O mesmo vale, por outro mecanismo, para o <code>batch_loess</code>: o sorteio de dobras da
+    validação cruzada roda dentro de um laço paralelo sem sincronizar o gerador aleatório, o que
+    muda o parâmetro de suavização — e o parâmetro muda <b>se aquela feature acaba corrigida ou
+    devolvida crua</b>. No modo <code>pos_hilic</code>, medido, <b>69% do conjunto de features não
+    corrigidas é ele próprio sorteio</b>.</p>
+
+  <h3>O que é uma régua, aqui</h3>
+
+  <p>Se não se comparam saídas, compara-se <b>qualidade</b> — e para isso é preciso uma medida
+    que possa ser aplicada aos dois programas do mesmo jeito. É o que este documento chama de
+    <b>régua</b>. Usamos três, e a parte mais importante do trabalho foi descobrir o que cada uma
+    enxerga e o que ela é cega.</p>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c2">
+  <div class="cap-cab"><span class="cap-num">02</span>
+    <h2>As três réguas, e o que cada uma não vê</h2>
+  </div>
+
+  <p>Toda medida de qualidade de correção neste domínio parte dos <b>QC</b> — as injeções de
+    controle. O QC é uma <b>mistura física</b> de alíquotas, injetada periodicamente ao longo da
+    corrida. Como é sempre a mesma mistura, qualquer diferença entre dois QCs é <b>técnica por
+    construção</b>: não há biologia possível ali. Nos arquivos deste estudo são <b>sete</b> QCs
+    em 68 injeções.</p>
+
+  <p>A partir daí abrem-se três formas de medir, e elas não dão a mesma resposta.</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Régua</th><th>O que faz</th><th>Protege contra</th><th>É cega para</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>dentro da amostra</b><br><span class="termo">in-sample</span></td>
+        <td>corrige e mede o RSD nos <b>mesmos</b> QCs usados para ajustar</td>
+        <td>nada</td>
+        <td>o método passar a curva pelos próprios pontos de avaliação</td>
+      </tr>
+      <tr>
+        <td><b>fora da amostra</b><br>esconde-um-QC</td>
+        <td>esconde um QC, ajusta com os outros seis, e avalia no escondido — sete vezes</td>
+        <td>decorar os pontos de treino</td>
+        <td>as <b>61 amostras biológicas</b>, que recebem a correção e ninguém confere</td>
+      </tr>
+      <tr>
+        <td><b>verdade fundamental</b><br>dado sintético</td>
+        <td>fabrica a matriz limpa, injeta a deriva, e mede quem a remove</td>
+        <td>as duas coisas acima</td>
+        <td>não é dado real — responde sobre a <b>nossa</b> ideia de deriva</td>
+      </tr>
+    </tbody>
+  </table></div>
+
+  <div class="cartao destaque">
+    <h4>Por que a primeira régua não serve para julgar quem corrige melhor</h4>
+    <p>Um método flexível o bastante para passar exatamente pelos sete QCs deixa-os perfeitamente
+      alinhados: o RSD vai a zero, e ele não aprendeu deriva nenhuma — só decorou sete números.
+      Não é hipótese: medido no <code>pos_c18</code>, sobre a matriz golden
+      <code>normalized by - batch_loess</code> na variante <code>outlier_removed</code>, a mediana
+      do RSD in-sample é de <b>8,0×10⁻¹⁴ pontos percentuais</b> — indistinguível de zero —, com
+      <b>64,4%</b> das 2.486 features de RSD definido abaixo de 1e−6.</p>
+    <p>E o programa do laboratório <b>já sabe disso</b>: dos treze métodos que ele implementa, os
+      <b>três que ajustam modelo</b> — <code>batch_loess</code>, <code>SERRF</code> e
+      <code>svm</code> — são avaliados fora da amostra, e os outros dez, dentro. Quem escreveu
+      aquele código traçou exatamente esta linha.</p>
+  </div>
+
+  <p class="pontos"><span class="errado">"o RSD é a régua do sistema, então o método com RSD menor
+    corrigiu melhor"</span> — é verdadeiro para comparar o <b>dado</b> antes e depois, e falso
+    para comparar <b>métodos</b> que ajustam modelo. Não é comparação frouxa: é comparação
+    inválida.</p>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c3">
+  <div class="cap-cab"><span class="cap-num">03</span>
+    <h2>SERRF, régua 2: quanto de erro cada um remove<span class="quem quem-ambos">nós e o R</span></h2>
+  </div>
+
+  <h3>O desenho</h3>
+
+  <p>Para cada um dos sete QCs: marca-se aquele QC como se fosse uma amostra comum, ajusta-se a
+    correção sobre a matriz <b>inteira</b> — as 61 amostras biológicas continuam presentes —, e
+    guarda-se o valor corrigido do escondido. Ao fim, calcula-se o RSD por feature sobre o vetor
+    dos sete valores fora da amostra, cada QC medido exatamente uma vez.</p>
+
+  <p>O ponto que torna a comparação justa: <b>o mesmo tratamento foi aplicado aos dois
+    programas</b>. Do nosso lado o estimador já existia. Do lado do R, o arquivo de entrada
+    carrega uma linha que declara o tipo de cada coluna, e esconder um QC é trocar um
+    <code>"qc"</code> por <code>"sample"</code> nessa linha — a mesma operação, no formato que o
+    <code>tools.R</code> consome.</p>
+
+  <h3>As três verificações que vieram antes de qualquer número</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Verificação</th><th>Por que</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>a linha modificada volta <b>byte a byte</b> idêntica antes de qualquer mutação</td>
+          <td>uma mudança de aspas alteraria o que o R lê sem aparecer numa comparação de campos</td>
+          <td>passou nos 4 modos</td></tr>
+      <tr><td>a mutação atinge <b>exatamente uma célula</b>, e nenhuma outra linha muda</td>
+          <td>o arnês afirma que plantou; isto <b>confere</b> que plantou</td>
+          <td>conferido nas 28 execuções, com aborto se divergir</td></tr>
+      <tr><td>o arnês inteiro sobre o caminho <b>«não corrigir»</b> devolve o valor conhecido</td>
+          <td>não corrigir é identidade: esconder um QC não pode mudar nada</td>
+          <td><b>24,1455 / 67,1784 / 15,5036 / 143,8129</b> — reproduziu a medição independente</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>A terceira é a que sustenta as outras duas: ela testa a contabilidade das sete colunas, o
+    encanamento dos arquivos e a métrica de uma vez só, <b>por modo</b>, e num caso em que a
+    resposta certa é conhecida de antemão.</p>
+
+  <h3>Os parâmetros</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>estimador</td><td>esconde-um-QC, partição completa e determinística</td></tr>
+      <tr><td>variante do RSD</td><td><code>outlier_removed</code></td></tr>
+      <tr><td>população</td><td>inteira, por modo — 1.827 a 5.801 features com RSD definido</td></tr>
+      <tr><td>execuções do R</td><td><b>28</b> — 7 QCs × 4 modos</td></tr>
+      <tr><td>versões do lado do R</td><td>R 4.4.2, <code>ranger</code> 0.18.0, instantâneo do CRAN de 2026-07-01</td></tr>
+      <tr><td>semente do nosso corretor</td><td>42 (o nosso é determinístico; o do R não fixa semente)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>O resultado</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Modo</th><th>Sem corrigir</th><th>SERRF do R</th><th>SERRF nosso</th><th>O R tira</th><th>Nós tiramos</th></tr></thead>
+    <tbody>
+      <tr><td><code>pos_hilic</code></td><td class="n">143,81%</td><td class="n">110,26%</td><td class="n">135,48%</td><td class="n">33,56 pp</td><td class="n">8,33 pp</td></tr>
+      <tr><td><code>neg_hilic</code></td><td class="n">67,18%</td><td class="n">61,47%</td><td class="n">66,20%</td><td class="n">5,71 pp</td><td class="n">0,98 pp</td></tr>
+      <tr><td><code>pos_c18</code></td><td class="n">24,15%</td><td class="n">15,35%</td><td class="n">21,57%</td><td class="n">8,79 pp</td><td class="n">2,58 pp</td></tr>
+      <tr><td><code>neg_c18</code></td><td class="n">15,50%</td><td class="n">15,28%</td><td class="n">15,47%</td><td class="n">0,22 pp</td><td class="n">0,03 pp</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">fração da correção do R que o nosso porte reproduz</span>
+    <span class="v">de 15% a 29%, conforme o modo</span>
+    <span class="pop"><b>População:</b> os quatro modos reais, população inteira. Por modo:
+      <code>neg_c18</code> 15,1%, <code>neg_hilic</code> 17,1%, <code>pos_hilic</code> 24,8%,
+      <code>pos_c18</code> 29,3%. Os valores nossos vêm da medição de 02/08/2026 com o mesmo
+      estimador e variante; o do <code>pos_c18</code> foi refeito em 30/08 e bateu no dígito
+      — 21,5670 —, e é isso que autoriza usar os outros três sem remedir. <i>Estes números são da floresta do <code>scikit-learn</code>. A floresta padrão é a que conta como a do R, e sob a mesma régua o nosso remove de 90,7% a 159,2% do que o do R remove (DV18). E o SERRF e o LOESS mudaram depois para ficar fiéis ao R: os números medidos antes disso, estes inclusive, ficam por remedir.</i></span>
+  </div>
+
+  <div class="cilada">
+    <p><b>Cuidado com a razão entre os dois resíduos.</b> Ela é de 1,01× a 1,41× e convida a ler
+      «o R corrige 1,4 vezes melhor». É razão do que <b>sobra</b>, não do que se <b>corrige</b>,
+      e é comprimida contra a linha de base:</p>
+    <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+      <thead><tr><th>Modo</th><th>Idêntico ao R</th><th>O nosso</th><th>Não corrigir nada</th><th>Do caminho rumo a «inútil»</th></tr></thead>
+      <tbody>
+        <tr><td><code>neg_c18</code></td><td class="n">1,000</td><td class="n">1,012</td><td class="n">1,015</td><td class="n">80%</td></tr>
+        <tr><td><code>neg_hilic</code></td><td class="n">1,000</td><td class="n">1,077</td><td class="n">1,093</td><td class="n">83%</td></tr>
+        <tr><td><code>pos_hilic</code></td><td class="n">1,000</td><td class="n">1,229</td><td class="n">1,304</td><td class="n">75%</td></tr>
+        <tr><td><code>pos_c18</code></td><td class="n">1,000</td><td class="n">1,405</td><td class="n">1,573</td><td class="n">71%</td></tr>
+      </tbody>
+    </table></div>
+    <p>No <code>neg_c18</code>, <b>1,012 parece empate e a escala inteira vai de 1,000 a
+      1,015</b>. Quanto menos há para corrigir naquele modo, mais comprimida fica a razão. A
+      leitura estável é a fração de correção reproduzida, porque ela normaliza pela quantidade
+      que havia para corrigir.</p>
+  </div>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>O nosso SERRF reproduz <b>15% a 29%</b> da correção do R, conforme o modo — e a faixa é
+        larga o bastante para que «quanto» dependa de qual matriz se olha.</li>
+      <li>A leitura que se sustenta é a <b>fração reproduzida</b>, não o RSD absoluto: ela normaliza
+        pela quantidade que havia para corrigir.</li>
+      <li>O número é <b>por modo</b> e não agregado — <code>neg_c18</code> 15,1%,
+        <code>neg_hilic</code> 17,1%, <code>pos_hilic</code> 24,8%, <code>pos_c18</code> 29,3%.</li>
+    </ol>
+    <p><i>Estes números são da floresta do <code>scikit-learn</code>. A floresta padrão é a que conta como a do R, e sob a mesma régua o nosso remove de 90,7% a 159,2% do que o do R remove (DV18). E o SERRF e o LOESS mudaram depois para ficar fiéis ao R: os números medidos antes disso, estes inclusive, ficam por remedir.</i></p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c4">
+  <div class="cap-cab"><span class="cap-num">04</span>
+    <h2>De onde vem a diferença: um passo de onze<span class="quem quem-ambos">nós e o R</span></h2>
+  </div>
+
+  <p>O algoritmo do SERRF tem <b>onze passos</b>. Os <b>nove primeiros</b> foram provados idênticos
+    entre as duas linguagens, cada um com verificação própria:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Passo</th><th>Como foi verificado</th><th>Resultado</th></tr></thead>
+    <tbody>
+      <tr><td>1 a 3</td><td>ensaio de transcrição contra os intermediários do R</td><td>verde</td></tr>
+      <tr><td>4</td><td>matrizes de preditores comparadas com as do R</td><td><b>10 de 10 exatas</b></td></tr>
+      <tr><td>5, 6, 7</td><td>alimentados com a <b>previsão do R</b>, isolando a floresta</td><td><b>20 de 20 exatos</b></td></tr>
+      <tr><td>8</td><td>contagem de valores não-finitos antes dele</td><td>não dispara</td></tr>
+      <tr><td>9</td><td>posições marcadas, com ponto de captura validado</td><td><b>20 de 20 exatos</b></td></tr>
+      <tr><td><b>floresta</b></td><td>única fonte restante</td><td><b>é a causa</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="pop">Os passos 10 e 11 não entram nesta comparação, e a razão é diferente em cada um: o
+    passo 10 — reparo de ausentes e de negativos — <b>não é observável de fora</b>, e o passo 11 — a
+    restauração dos zeros — é da <b>fronteira</b> e não do SERRF, e fecha pelo <code>[CA-3.6]</code>,
+    que é critério próprio e não comparação passo a passo.</p>
+
+  <p>A prova decisiva é por construção, não por eliminação: alimentando o nosso programa com a
+    previsão da floresta <b>do R</b> — e mais nada mudado —, o critério de fidelidade
+    <b>passa nos quatro modos</b>.</p>
+
+  <h3>E há um defeito real na nossa floresta</h3>
+
+  <p>Antes de treinar cada árvore, sorteiam-se sete pontos <b>com reposição</b> — como tirar sete
+    bolas de um saco de sete, devolvendo a bola a cada tirada. Um sorteio típico sai assim:</p>
+
+  <div class="chamada" style="text-align:center"><code>1, 2, 2, 4, 4, 4, 6</code> &nbsp;→&nbsp;
+    <b>sete tiradas</b>, mas só <b>quatro pontos diferentes</b></div>
+
+  <p>Existe uma regra que diz «não divida um grupo com menos de cinco». As duas bibliotecas têm
+    essa regra, com o mesmo número cinco. <b>Mas contam de formas diferentes:</b></p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>o <code>ranger</code>, do R</td><td>conta as <b>sete tiradas</b></td><td>7 ≥ 5 → <b>divide</b></td></tr>
+      <tr><td>o <code>scikit-learn</code>, nosso</td><td>conta os <b>quatro distintos</b></td><td>4 &lt; 5 → <b>não divide</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Sortear sete com reposição dá cerca de 4,5 pontos distintos em média, então o corte trava a
+    nossa árvore quase metade das vezes e <b>nunca</b> a dele. A correspondência foi medida e é
+    perfeita:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Divisões da árvore</th><th>Quantas árvores</th><th>Pontos distintos no sorteio</th></tr></thead>
+    <tbody>
+      <tr><td><b>0</b> — a árvore é um toco</td><td class="n">206</td><td class="n">3 a 4</td></tr>
+      <tr><td>1</td><td class="n">269</td><td class="n">5 a 6</td></tr>
+      <tr><td>2</td><td class="n">25</td><td class="n">6 a 7</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">forma das árvores, medida na forma exata que o SERRF usa</span>
+    <span class="v">o <code>ranger</code> faz 1,274 divisões por árvore; a nossa faz 0,638, e 41% não dividem nada</span>
+    <span class="pop"><b>População:</b> 7 amostras × 10 preditores, 500 árvores, regressão — a
+      forma exata que o SERRF constrói por feature. Medido dentro do contêiner para o
+      <code>ranger</code> 0.18.0 (1,274 divisões, faixa [1, 2]; 3,548 nós, faixa [3, 5];
+      <code>mtry</code> 3; <code>min.node.size</code> 5) e no <code>scikit-learn</code> 1.9.0 para
+      o nosso (0,638 divisões, faixa [0, 2]; 2,276 nós). O <code>mtry</code> efetivo é <b>3 nos
+      dois</b>, e o número de árvores é 500 nos dois: a única divergência de comportamento é a
+      contagem do corte.</span>
+  </div>
+
+  <p>Uma árvore que não divide devolve a média de tudo — é um chute constante. <b>Quase metade da
+    nossa floresta não aprendeu nada</b>, e isso puxa o resultado para o meio.</p>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>Dos <b>onze passos</b> do SERRF, os <b>nove</b> comparáveis batem com o R exatamente — a
+        diferença não está na transcrição do algoritmo.</li>
+      <li>Ela está na <b>floresta</b>: quase metade das nossas árvores não chega a dividir, e uma
+        árvore que não divide devolve a média de tudo.</li>
+      <li>Isso é a regra 4 do README na prática — <code>ranger</code> e <code>scikit-learn</code> não
+        produzem as mesmas árvores, e perseguir igualdade numérica ali seria perseguir o
+        impossível.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c5">
+  <div class="cap-cab"><span class="cap-num">05</span>
+    <h2>SERRF, régua 3: o gabarito, e a surpresa<span class="quem quem-ambos">nós e o R</span></h2>
+  </div>
+
+  <p>Achado o defeito, a conclusão parecia óbvia: consertar e corrigir mais. Foi o que se testou —
+    e é onde a medição desmentiu a expectativa.</p>
+
+  <h3>Primeiro, o ganho na régua dos QCs</h3>
+
+  <p>Baixando o limite de divisão, no <code>pos_c18</code>, população inteira, fora da amostra:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Limite de divisão</th><th>RSD dos QCs</th></tr></thead>
+    <tbody>
+      <tr><td>5 — o que usamos hoje</td><td class="n">21,57%</td></tr>
+      <tr><td>4</td><td class="n">16,72%</td></tr>
+      <tr><td>3</td><td class="n">13,39%</td></tr>
+      <tr><td><b>2</b></td><td class="n"><b>12,60%</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <p>Monotônico, grande, e <b>abaixo dos 15,35% do próprio R</b>. Pela régua dos QCs, seria ganho
+    de 42%.</p>
+
+  <h3>O desenho do gabarito</h3>
+
+  <p>No dado real não existe gabarito: ninguém sabe a concentração verdadeira de um metabólito num
+    paciente. A saída é <b>fabricar</b> dados onde a resposta é conhecida — gera-se a matriz
+    limpa, injeta-se a deriva, e mede-se quem a remove.</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>tipo de defeito injetado</td><td><code>gradual_drift</code> — deriva progressiva ao longo da corrida</td></tr>
+      <tr><td>razão deriva/ruído</td><td>0,8</td></tr>
+      <tr><td>features</td><td>300, imitando o <code>pos_c18</code></td></tr>
+      <tr><td>sementes do gerador</td><td><b>5</b> — 7, 11, 23, 42 e 101</td></tr>
+      <tr><td>o que se mede</td><td>erro mediano contra a verdade, correlação com a verdade, e <b>fração de features que ficaram piores</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>O que deu</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Configuração</th><th>Divisões/árvore</th><th>RSD dos QCs</th><th>Erro vs verdade</th><th>Features pioradas</th></tr></thead>
+    <tbody>
+      <tr><td><b>o nosso, hoje</b></td><td class="n">0,638</td><td class="n">21,57%</td><td class="n"><b>0,1698</b></td><td class="n"><b>4,1%</b></td></tr>
+      <tr><td><b>o do R</b> (<code>ranger</code>)</td><td class="n">1,274</td><td class="n">15,35%</td><td class="n">0,1728</td><td class="n">11,0%</td></tr>
+      <tr><td>nosso com a contagem do R</td><td class="n">1,636</td><td class="n">14,34%</td><td class="n">0,1726</td><td class="n">13,1%</td></tr>
+      <tr><td>nosso sem quase limite</td><td class="n">3,676</td><td class="n">12,60%</td><td class="n">0,1762</td><td class="n">18,0%</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">o que acontece quando a floresta ganha liberdade para dividir mais</span>
+    <span class="v">o RSD dos QCs melhora sempre, a fração de features pioradas sobe sempre, e o erro contra a verdade não anda</span>
+    <span class="pop"><b>População:</b> a coluna do RSD é do <code>pos_c18</code> real, população
+      inteira, fora da amostra. As duas colunas da direita são do sintético, média de cinco
+      sementes. Pareado semente a semente, o erro contra a verdade sobe 0,0064 (sem limite),
+      0,0028 (contagem do R) e 0,0030 (o R), e em <b>nenhum</b> dos três as cinco sementes vão no
+      mesmo sentido — não há ganho de recuperação em ponto nenhum. A fração piorada sobe nas
+      <b>cinco sementes</b> nas três comparações.</span>
+  </div>
+
+  <div class="cartao destaque">
+    <h4>A previsão foi escrita antes de medir</h4>
+    <p>O <code>ranger</code> fica em 1,274 divisões, <b>entre</b> o nosso 0,638 e o conserto fiel
+      1,636. Se a curva descrevesse o programa do laboratório também, o esperado seria erro
+      ≈ 0,171 e piorada ≈ 9%. Mediu-se <b>0,1728 e 11,0%</b>.</p>
+    <p>Registrar a previsão antes é o que separa medição de ajuste: com ela, a confirmação vale
+      alguma coisa e a surpresa teria sido achado. Sem ela, qualquer número teria «confirmado» a
+      curva depois do fato.</p>
+  </div>
+
+  <h3>O trade-off, formulado com precisão</h3>
+
+  <p>É tentador dizer que o RSD dos QCs e as features pioradas são «inversamente proporcionais».
+    A formulação exata é mais forte e mais útil:</p>
+
+  <div class="chamada"><b>As duas quantidades movem-se monotonicamente com a flexibilidade da
+    floresta, em sentidos opostos — e a recuperação do valor verdadeiro fica parada.</b></div>
+
+  <p>A terceira parte é o que torna o trade-off <b>real</b> e não aparente. Se o erro contra a
+    verdade caísse junto com o RSD, haveria ganho a ser pesado contra o dano. Ele não cai em
+    nenhum dos quatro pontos medidos. O que se compra dividindo mais é <b>número de QC</b>; o que
+    se paga é <b>feature estragada</b>.</p>
+
+  <div class="cilada">
+    <p><b>Por que a régua fora da amostra não protege contra isto.</b> Ela é honesta no que
+      promete: o QC avaliado nunca esteve no treino, e o número não pode ser fraudado por
+      decorar. Ela só cobre <b>7 das 68 colunas</b> — e a correção é aplicada às 68. Uma floresta
+      mais flexível ajusta melhor a estrutura dos QCs e leva junto as amostras biológicas, que
+      nenhuma régua de QC consegue conferir.</p>
+    <p><b>Sem o corpus sintético, a constante teria sido mudada e o ganho publicado.</b> O que
+      pegou não foi revisão nem portão: foi rodar a mesma coisa com mais sementes.</p>
+  </div>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>Dar mais liberdade à floresta <b>melhora o RSD dos QCs sempre</b> — e o erro contra a
+        verdade plantada <b>não anda</b>.</li>
+      <li>Pior: a <b>fração de features pioradas sobe sempre</b>. A régua dos QCs recompensava uma
+        mudança que estragava mais features.</li>
+      <li>É o caso mais claro de por que a régua dos QCs não basta — e ele só apareceu porque
+        existia um <b>gabarito</b> contra o qual medir.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c6">
+  <div class="cap-cab"><span class="cap-num">06</span>
+    <h2>LOESS: o porte fiel, e o método que degrada<span class="quem quem-ambos">nós e o R</span></h2>
+  </div>
+
+  <p>O LOESS é o outro corretor que o laboratório usa, e a situação dele é quase oposta à do
+    SERRF.</p>
+
+  <h3>Fidelidade: tão perto quanto é possível</h3>
+
+  <p>O LOESS não tem floresta — não tem o componente onde as duas linguagens discordam. Ele é uma
+    curva suave ajustada sobre a ordem de injeção, e isso as duas implementações fazem igual.
+    Executado pela linha de comando instalada, contra os arquivos do laboratório:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Medida</th><th>Valor</th></tr></thead>
+    <tbody>
+      <tr><td>caminho «não corrigir»: células idênticas, quatro modos</td><td class="n"><b>872.440 de 872.440</b> — 100,00%</td></tr>
+      <tr><td>LOESS: features que o R deixou sem corrigir<br><code>pos_hilic</code> / <code>neg_hilic</code> / <code>pos_c18</code> / <code>neg_c18</code></td><td class="n">1561 / 165 / 10 / 20</td></tr>
+      <tr><td>LOESS: features que <b>nós</b> deixamos sem corrigir<br><code>pos_hilic</code> / <code>neg_hilic</code> / <code>pos_c18</code> / <code>neg_c18</code></td><td class="n">1265 / 170 / 12 / 26<br><span class="pop">com as dobras do <code>span</code> nos blocos do <code>crossval</code>, como a especificação declara, a mesma medição dá <b>1445 / 191 / 12 / 22</b>; a interseção de 801 abaixo é do conjunto de 1265, e não foi remedida.</span><br><span class="pop">remedido em 04/09/2026 com <code>LoessCorrector(null_denominator="r_faithful")</code></span></td></tr>
+      <tr><td>interseção com o arquivo do laboratório, <code>pos_hilic</code></td><td class="n"><b>801</b></td></tr>
+      <tr><td>interseção do golden com as cinco execuções do R — seis conjuntos; não se compara com o 801 acima</td><td class="n"><b>486</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">concordância do nosso LOESS com o arquivo do laboratório</span>
+    <span class="v">801 features</span>
+    <span class="pop">O 486 da tabela acima não se compara com este número: o 801 é interseção de dois conjuntos e o 486 de seis, e interseção de mais conjuntos é menor por construção.</span>
+    <span class="pop"><b>População:</b> <code>pos_hilic</code>, conjunto de features deixadas sem
+      correção. <b>Isto não quer dizer que a nossa implementação seja melhor.</b> Estabelece que a
+      comparação direta contra o <code>batch_loess</code> <b>não tem poder</b> para separar
+      defeito nosso de sorteio do oráculo, e quantifica quanto.</span>
+  </div>
+
+  <h3>Qualidade: a mesma régua, os dois programas</h3>
+
+  <p>O mesmo desenho de esconder-um-QC, 28 execuções do R, quatro modos:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Modo</th><th>Sem corrigir</th><th>LOESS do R</th><th>LOESS nosso</th><th>Veredito</th></tr></thead>
+    <tbody>
+      <tr><td><code>neg_hilic</code></td><td class="n">67,18%</td><td class="n">60,23%</td><td class="n">59,38%</td><td>os dois melhoram</td></tr>
+      <tr><td><code>pos_hilic</code></td><td class="n">143,81%</td><td class="n">142,67%</td><td class="n">147,44%</td><td>empate no R, <b>o nosso piora</b></td></tr>
+      <tr><td><code>neg_c18</code></td><td class="n">15,50%</td><td class="n">19,19%</td><td class="n">19,37%</td><td><b>os dois pioram</b></td></tr>
+      <tr><td><code>pos_c18</code></td><td class="n">24,15%</td><td class="n">30,41%</td><td class="n">32,45%</td><td><b>os dois pioram</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="medido">
+    <span class="q">quão perto o nosso LOESS fica do do programa em R</span>
+    <span class="v">razão de 0,99× a 1,07× — e no <code>neg_hilic</code> o nosso fica à frente</span>
+    <span class="pop"><b>População:</b> quatro modos reais, população inteira, esconde-um-QC,
+      variante com remoção de outliers; as quatro âncoras do «sem corrigir» reproduziram a medição
+      independente. Contraste com o SERRF, medido no mesmo dia e pela mesma régua:
+      <b>1,01× a 1,41×</b>.</span>
+  </div>
+
+  <div class="cartao destaque">
+    <h4>O achado do capítulo, e ele não é sobre nós</h4>
+    <p>Nos dois modos C18, corrigir por LOESS deixa o dado <b>pior do que não corrigir</b> — e isso
+      vale para o programa do laboratório também, não só para o nosso porte.</p>
+    <p>Como dois implementadores independentes chegam ao mesmo veredito sobre os mesmos arquivos,
+      a afirmação deixa de ser sobre <b>quem programou</b> e passa a ser sobre <b>o método</b>.</p>
+  </div>
+
+  <div class="cilada">
+    <p><b>E a comparação acima é generosa com o LOESS</b>, o que endurece o resultado. O número de
+      features com RSD definido cai sob o LOESS: no <code>pos_hilic</code>, <b>5.167 contra
+      5.801</b>. São 634 features que tinham RSD definido e deixam de ter, porque o LOESS
+      <b>cria zeros novos</b> onde a divisão degenera — e elas saem da mediana.</p>
+    <p>O número do LOESS é, portanto, calculado sobre as sobreviventes, <b>excluindo justamente
+      aquelas em que ele fez o pior estrago</b>. Corrigir esse viés só pode piorar o veredito
+      dele.</p>
+  </div>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>O porte do LOESS é <b>fiel até onde é possível medir</b>: 872.440 de 872.440 células
+        batem, e a concordância nossa com o arquivo do laboratório é de 801 features. O 486 da
+        interseção do golden com as cinco execuções do R não se compara com ele: são interseções
+        de dois e de seis conjuntos.</li>
+      <li>Esse 486 é a medida do <b>ruído do oráculo</b>: o <code>batch_loess</code> do R sorteia
+        sem semente alcançável, então ele não se reproduz nem a si próprio.</li>
+      <li>Consequência de método: a comparação direta contra o <code>batch_loess</code> <b>não tem
+        poder</b> para separar defeito nosso de sorteio do oráculo — e agora sabe-se quanto.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c7">
+  <div class="cap-cab"><span class="cap-num">07</span>
+    <h2>Como o R decide qual correção usar<span class="quem quem-r">só o R</span></h2>
+  </div>
+
+  <p>Esta seção não compara nada. Ela descreve o que o programa do laboratório faz, porque
+    <b>metade dos argumentos deste trabalho depende de acertar isso</b> — e a leitura intuitiva
+    está errada.</p>
+
+  <h3>Ele valida cruzado. Não cai na armadilha do RSD in-sample</h3>
+
+  <p>A suposição natural seria: corrige, mede a concordância dos QCs na matriz corrigida, escolhe o
+    melhor número. Isso seria trapaça — a correção foi construída com esses mesmos QCs, e o LOESS,
+    que desenha uma curva passando por eles, pareceria perfeito sempre.</p>
+
+  <p><b>O R não faz isso.</b> Lido no <code>tools.R</code>:</p>
+
+  <table>
+    <tr><th>Corretor</th><th>Como o RSD reportado é medido</th><th>Linha</th></tr>
+    <tr><td><code>batch_loess</code></td>
+        <td>5 vezes: treina a curva num subconjunto dos QCs, mede nos <b>retidos</b>, média</td>
+        <td><code>968–977</code></td></tr>
+    <tr><td><code>SERRF</code></td>
+        <td>5 dobras, RSD sobre os QCs retidos, média</td>
+        <td><code>1268–1277</code></td></tr>
+    <tr><td><code>none</code></td>
+        <td>direto — e aí tanto faz, porque não há modelo a ajustar</td>
+        <td><code>505</code></td></tr>
+  </table>
+
+  <p>O <code>QC - RSD.csv</code> que ele entrega é essa estimativa validada, não a in-sample.</p>
+
+  <div class="cilada">
+    <p><b>E a validação do SERRF NÃO particiona.</b> No laço, a linha que divide os QCs em cinco
+      grupos é <b>sobrescrita duas linhas depois</b> por um sorteio. Em vez de cinco dobras onde cada
+      QC é testado exatamente uma vez, são <b>cinco sorteios independentes</b> de 5 treino e 2
+      retidos: um QC pode cair no retido de três sorteios e outro de nenhum.</p>
+    <p>Lido até o começo do laço, parece validação de cinco dobras — é o que o nome promete, e é o
+      que qualquer transcritor implementaria. Ver <b>AR44</b>.</p>
+  </div>
+
+  <h3>E ele não escolhe</h3>
+
+  <p>Não há nada no <code>tools.R</code> que eleja um vencedor. Ele calcula os três RSDs, imprime as
+    medianas, escreve as três matrizes normalizadas e um PNG com barras e PCA. <b>Quem decide é a
+    pessoa, olhando.</b></p>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>O argumento deste trabalho <b>não pode ser «o R mede errado»</b> — ele valida cruzado.</li>
+      <li>O que sobra é <b>concreto e defensável</b>: a validação do SERRF sorteia em vez de
+        particionar, e um QC pode ficar de fora de todos os sorteios.</li>
+      <li>E o R <b>não elege vencedor nenhum</b> — a escolha existe, é feita por uma pessoa, e não
+        fica registada em lado nenhum.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c8">
+  <div class="cap-cab"><span class="cap-num">08</span>
+    <h2>Os dois esquemas de validação: o custo separa, o acerto não<span class="quem quem-ambos">nós e o R</span></h2>
+  </div>
+
+  <p>Se os dois programas validam escondendo QCs, a pergunta seguinte é inevitável: <b>o nosso
+    esquema escolhe melhor?</b> E custa mais? Nenhuma das duas estava medida — o repositório
+    comparava as <b>correções</b>, nunca os <b>esquemas</b>.</p>
+
+  <h3>O desenho</h3>
+
+  <p>16 matrizes sintéticas — <b>4 modos × 4 razões de deriva</b> (0,3 · 0,8 · 1,5 · 3,0), 100
+    features, 68 amostras, 7 QCs. O gerador planta a verdade e reamostra resíduos <b>do modo real
+    imitado</b>, incluindo o ruído técnico do bloco de QC.</p>
+
+  <table>
+    <tr><th>Papel</th><th>Como</th><th>O que vê</th></tr>
+    <tr><td><b>oráculo</b></td><td>menor erro de recuperação contra a verdade plantada</td>
+        <td>a verdade</td></tr>
+    <tr><td><b>nosso</b></td><td><code>leave_one_qc_out_rsd</code> de produção: 7 dobras, cada QC
+        retido uma vez</td><td>só QCs</td></tr>
+    <tr><td><b>do R</b></td><td>porte do <code>r_cv</code>: 5 <b>sorteios</b> de 5 treino / 2
+        retidos</td><td>só QCs</td></tr>
+  </table>
+
+  <p>O esquema do R é <b>porte e não invenção</b> — reproduz o sorteio, defeito incluído. Melhorá-lo
+    mediria um estimador que não existe em lado nenhum.</p>
+
+  <h3>O que ficou</h3>
+
+  <div class="medido">
+    <p><b>Custo: 1,38×</b> — 2.261 s contra 1.634 s. Bate a razão de ajustes <b>7:5 = 1,4×</b>
+      prevista sem medir, e repetiu-se em três corridas independentes (1,42× · 1,40× · 1,38×).
+      <b>O tempo segue as dobras, não a implementação.</b></p>
+  </div>
+
+  <h3>O que NÃO ficou, e por quê</h3>
+
+  <p>Acerto: <b>nosso 9/12 (75%), do R 7/12 (58%)</b>. Passa o limiar de 15 pontos que o pré-registo
+    fixou <b>antes</b> de medir — e não é reportável:</p>
+
+  <table>
+    <tr><td>17 pontos com <b>N = 12</b></td><td>são <b>dois acertos</b>; trocar duas matrizes
+        empata</td></tr>
+    <tr><td>a vantagem está em <b>dois dos quatro modos</b></td>
+        <td><code>pos_c18</code> 4–3, <code>neg_hilic</code> 2–1, e <b>zero</b> nos outros dois</td></tr>
+    <tr><td>o acerto é contra <b>uma</b> régua de três</td>
+        <td>e as três discordam entre si em <b>15 de 16</b></td></tr>
+  </table>
+
+  <div class="cilada">
+    <p><b>Dois defeitos do arnês, apanhados pelas próprias âncoras.</b> A primeira corrida ia
+      reportar 62% contra 44%. Estava errada porque (a) a medida «fração que piorou» é <b>zero por
+      construção</b> para o corretor <code>none</code> — tautologia, não vitória — e (b) o empate
+      era resolvido em silêncio pelo mínimo, que devolve o primeiro da lista.</p>
+    <p>O segundo explica o dado mais estranho da corrida: o <code>pos_hilic</code> dava <b>0/4</b>
+      nos dois esquemas, e <b>três das quatro matrizes daquele modo são empate</b>. Falhar contra
+      uma resposta que não existe não é falhar.</p>
+  </div>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>O nosso esquema custa <b>1,4× o do R</b>, e a razão é exatamente a das dobras — 7 contra
+        5. Isso é escolha de orçamento, não de qualidade.</li>
+      <li><b>Não sabemos se ele escolhe melhor.</b> A diferença medida é de dois acertos em doze e
+        concentra-se em dois modos.</li>
+      <li>O que o exercício provou é outra coisa: <b>não existe «o corretor certo» sem dizer certo
+        em quê</b> — três medidas legítimas discordam em 15 de 16 matrizes.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c9">
+  <div class="cap-cab"><span class="cap-num">09</span>
+    <h2>O que o LOESS estraga, e quando<span class="quem quem-nosso">só nosso</span></h2>
+  </div>
+
+  <p>Esta pergunta <b>não é formulável no R</b>. Ele valida cruzado, mas a régua dele é sempre RSD
+    de QC — e sem verdade plantada não há como perguntar <i>quantas features ficaram piores do que
+    se não tivéssemos corrigido</i>.</p>
+
+  <h3>A medida</h3>
+
+  <p>Fração de features cujo erro mediano <b>aumentou</b> com a correção, comparada contra a matriz
+    não corrigida e contra a verdade. É a quantidade que distingue «corrigiu pouco» de «corrigiu e
+    estragou parte».</p>
+
+  <h3>O resultado, nos dezasseis pontos</h3>
+
+  <div class="rolo">
+  <table>
+    <tr><th>modo</th><th>deriva 0,3</th><th>0,8</th><th>1,5</th><th>3,0</th></tr>
+    <tr><td><code>pos_hilic</code></td><td><b>0,78</b> / 0,26</td><td>0,13 / 0,43</td>
+        <td>0,01 / 0,13</td><td>0,00 / 0,09</td></tr>
+    <tr><td><code>pos_c18</code></td><td><b>0,85</b> / 0,32</td><td>0,23 / 0,03</td>
+        <td>0,04 / 0,00</td><td>0,00 / 0,02</td></tr>
+    <tr><td><code>neg_hilic</code></td><td><b>0,70</b> / 0,24</td><td>0,48 / 0,10</td>
+        <td>0,09 / 0,09</td><td>0,02 / 0,10</td></tr>
+    <tr><td><code>neg_c18</code></td><td><b>0,81</b> / 0,07</td><td>0,18 / 0,01</td>
+        <td>0,02 / 0,01</td><td>0,00 / 0,01</td></tr>
+  </table>
+  </div>
+  <p class="capa-nota">Cada célula é <code>loess</code> / <code>serrf</code>.</p>
+
+  <div class="medido">
+    <p><b>Com deriva fraca, o LOESS deixa 70% a 85% das features piores do que não corrigir</b> — nos
+      quatro modos: 0,78 · 0,85 · 0,70 · 0,81. E o padrão é <b>monótono nos quatro</b>: com deriva
+      3,0 ele cai para 0,00–0,02. O SERRF não é monótono e fica sempre abaixo de 0,43.</p>
+  </div>
+
+  <h3>O mecanismo, declarado como hipótese</h3>
+
+  <p>Sem deriva real para corrigir, a curva do LOESS ajusta-se ao <b>ruído dos sete QCs</b> e
+    transfere esse ruído às amostras. Com muita deriva há sinal verdadeiro a seguir, e o ajuste passa
+    a ser útil. <b>É hipótese</b> — o que está medido é a associação entre razão de deriva e fração
+    piorada, nos quatro modos.</p>
+
+  <div class="cilada">
+    <p><b>E isto não é defeito do nosso porte.</b> O comportamento que produz o número é o mesmo que
+      o <code>[CA-3.6]</code> obriga a <b>reproduzir</b> fielmente — a curva do LOESS ser arrastada
+      por pontos aberrantes. <b>O R define o método; esta medição diz o que o método custa.</b></p>
+  </div>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>Corrigir com LOESS onde há <b>pouca deriva</b> estraga a maioria das features — entre 70%
+        e 85%, nos quatro modos.</li>
+      <li>O risco <b>cai monotonicamente</b> com a deriva presente: com deriva forte o LOESS não
+        estraga praticamente nada.</li>
+      <li>A ferramenta <b>já mede a deriva</b> — a correlação da PC1 com a ordem de injeção, no
+        painel «Validação, diagnóstico e palpite» — e a política do
+        <code>--auto aprendida</code> <b>usa</b> essa característica, entre as 17 do perfil. O
+        palpite da janela não usa o perfil: ele mede os três corretores em 200 features do
+        arquivo. O que continua a não existir
+        é o <b>aviso</b>: nenhuma ressalva liga deriva fraca a risco do LOESS, e ela é derivável do
+        que já existe.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c10">
+  <div class="cap-cab"><span class="cap-num">10</span>
+    <h2>Vias metabólicas: nós, o MetaboAnalyst local, e o da web<span class="quem quem-mum">outro oráculo</span></h2>
+  </div>
+
+  <div class="cilada">
+    <p><b>Funcionalidade em beta:</b> está implementada e pode ser usada, mas não faz parte da
+      entrega ao laboratório. Na janela, a aba se chama «Vias metabólicas (beta)».</p>
+  </div>
+
+  <p>A ferramenta tem uma capacidade que o resto deste caderno não cobre:
+    <b>predizer que vias metabólicas estão ativas a partir dos picos</b>, sem passar pela
+    identificação dos metabólitos. O oráculo aqui <b>não é o programa do laboratório</b> — o
+    <code>tools.R</code> não faz isto. É o <b>MetaboAnalyst</b>, que é o que a área usa.</p>
+
+  <h3>Por que o dado é de outra pessoa</h3>
+
+  <div class="cilada">
+    <p><b>Os dados do laboratório não podem ser enviados.</b> Em <code>data/reference/</code> o
+      diagnóstico está embutido no nome da amostra, e enviá-los a um serviço web de terceiro é
+      publicação de dado clínico — foi o que retirou o <code>[CA-11.2]</code> do projeto.</p>
+    <p>A saída foi usar o <b>dataset de exemplo do próprio MetaboAnalyst</b>: o estudo de malária
+      (MTBLS665), 12 amostras, 6 <code>Naive</code> contra 6 <code>Semi_immune</code>. É público,
+      é deles, e <b>nada do laboratório sai da máquina</b>.</p>
+  </div>
+
+  <h3>A âncora, escrita antes de qualquer resultado</h3>
+
+  <p>A estatística foi calculada <b>uma vez só</b>, fora dos três programas, e os três receberam o
+    mesmo arquivo. Se cada um calculasse a sua, haveria <b>duas</b> diferenças ao mesmo tempo — a do
+    teste e a do algoritmo de vias — e nenhuma divergência seria atribuível a coisa nenhuma.</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>picos entregues aos três</td><td class="n"><b>4878</b></td></tr>
+      <tr><td>teste, calculado uma vez</td><td>Welch, <code>Naive</code> × <code>Semi_immune</code></td></tr>
+      <tr><td>picos com <i>p</i> &lt; 0,05</td><td class="n">2983</td></tr>
+      <tr><td>parâmetros, idênticos nos três</td><td>modo positivo · 10 ppm · mummichog <b>v2</b> ·
+        biblioteca <code>hsa_mfn</code> · mínimo 3 por via · corte 1×10⁻⁴ · íons primários
+        obrigatórios · 100 permutações</td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="capa-nota">O modo positivo é <b>parâmetro do experimento</b>, não afirmação sobre o
+    MTBLS665: o que a medição exige é que os três recebam o mesmo, não que seja o modo correto do
+    estudo original.</p>
+
+  <h3>O primeiro resultado não era o alvo: a web e o contêiner local são o mesmo programa</h3>
+
+  <p>As duas saídas foram comparadas coluna a coluna, nas 41 vias que cada uma publica:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>coluna</th><th>idêntico em</th></tr></thead>
+    <tbody>
+      <tr><td><code>Pathway total</code></td><td class="n">41/41</td></tr>
+      <tr><td><code>Hits.total</code></td><td class="n">41/41</td></tr>
+      <tr><td><code>Hits.sig</code></td><td class="n">41/41</td></tr>
+      <tr><td><code>Expected</code></td><td class="n">41/41</td></tr>
+      <tr><td><code>Emp.Hits</code></td><td class="n">41/41</td></tr>
+      <tr><td>Fisher</td><td class="n">41/41</td></tr>
+      <tr><td>EASE</td><td class="n">41/41</td></tr>
+      <tr><td>Gamma</td><td class="n">41/41</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>E a própria web diz por quê: ela publica o histórico de comandos em R da sessão, e ele é a mesma
+    função, a mesma biblioteca e os mesmos argumentos que o contêiner local corre.</p>
+
+  <pre class="fluxo">mSet&lt;-SetPeakEnrichMethod(mSet, <b>"mum"</b>, <b>"v2"</b>)
+mSet&lt;-SetMummichogPval(mSet, <b>1.0E-4</b>)
+mSet&lt;-PerformPSEA(mSet, <b>"hsa_mfn"</b>, "current", <b>3</b> , <b>100</b>)</pre>
+
+  <div class="medido">
+    <p><b>Isto fecha um limite que estava declarado.</b> A comparação de 18/09/2026 correu contra o
+      <b>MetaboAnalystR em contêiner</b>, e a entrada que a registra abre uma seção inteira com o
+      título <i>«o recorte, e por que não foi contra a versão web»</i>: a web ficou de fora por
+      causa do dado clínico. O que aquela entrada <b>não</b> podia dizer é se as duas concordam.
+      Agora está medido — concordam em tudo o que ambas publicam —, então toda comparação feita
+      contra o contêiner <b>é</b> uma comparação contra o serviço.</p>
+  </div>
+
+  <p>Uma observação que não era o alvo e vale registar: o <code>Gamma</code> sai de <b>100
+    permutações</b> e é idêntico nas 41 vias, a sete dígitos. Duas execuções independentes de um
+    procedimento estocástico não fazem isso por acaso — <b>aquele caminho deles é determinístico</b>,
+    ao contrário do SERRF do <code>tools.R</code>, que não reproduz nem a si mesmo (capítulo 01). É
+    observação sobre a saída; a semente deles não foi lida.</p>
+
+  <h3>O instrumento errou primeiro, e a contradição foi o que o denunciou</h3>
+
+  <div class="cilada">
+    <p><b>A primeira versão desta comparação concluiu que a web e o contêiner discordavam em 11 das
+      41 vias — com os <i>p</i>-valores idênticos em 41/41.</b> As duas coisas não podem ser
+      verdadeiras ao mesmo tempo: se a contagem difere, o teste que sai dela também difere.</p>
+    <p>A causa era do <b>instrumento</b>, não do alvo. A tabela do MetaboAnalyst traz <b>duas</b>
+      famílias de contagem com papel aparentemente igual — <code>Hits.total</code>/<code>Hits.sig</code>,
+      que contam <b>compostos casados</b>, e <code>Total.EC</code>/<code>Sig.EC</code>, que contam
+      <b>compostos empíricos</b>. O script lia uma de cada lado.</p>
+  </div>
+
+  <p>Qual das duas é a nossa foi decidido por <b>medição</b>, e não pelo nome da coluna. O
+    <code>Expected</code> é, por construção, proporcional ao tamanho da via na quantidade que o teste
+    usa — então basta ver de qual coluna ele é múltiplo constante:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>razão</th><th>coeficiente de variação</th><th></th></tr></thead>
+    <tbody>
+      <tr><td><code>Expected / Total.EC</code></td><td class="n"><b>1,6×10⁻⁵</b></td><td>constante</td></tr>
+      <tr><td><code>Expected / Hits.total</code></td><td class="n">3,8×10⁻¹</td><td>não</td></tr>
+      <tr><td><code>Expected / Pathway total</code></td><td class="n">6,7×10⁻¹</td><td>não</td></tr>
+    </tbody>
+  </table></div>
+
+  <p>O teste deles corre sobre <b>composto empírico</b> — que é exatamente o que o nosso
+    <code>sobreposicao</code> e o <code>detectados_na_via</code> contam. As colunas
+    <code>Hits.*</code> são publicadas, mas não são o operando. <b>E a tabela que a web deixa baixar
+    não traz as colunas <code>.EC</code></b>, então a comparação de contagem só é possível contra o
+    contêiner local — sem perda, porque os <i>p</i>-valores dos dois são os mesmos.</p>
+
+  <h3>Nós contra o MetaboAnalyst, nas 41 vias que os dois publicam</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>critério</th><th>busca <b>ampla</b> (25 formas)</th><th>busca estreita (8 formas)</th></tr></thead>
+    <tbody>
+      <tr><td>Spearman, sobreposição × <code>Sig.EC</code></td><td class="n"><b>+0,938</b></td><td class="n">+0,500</td></tr>
+      <tr><td>Spearman, detectados × <code>Total.EC</code></td><td class="n"><b>+0,989</b></td><td class="n">+0,966</td></tr>
+      <tr><td>Spearman, Fisher × <code>FET</code></td><td class="n"><b>+0,929</b></td><td class="n">+0,394</td></tr>
+      <tr><td>Spearman, permutação × <code>Gamma</code></td><td class="n"><b>+0,929</b></td><td class="n">+0,394</td></tr>
+      <tr><td>sobreposição idêntica à deles</td><td class="n"><b>32/41</b></td><td class="n">12/41</td></tr>
+      <tr><td>topo-10 em comum</td><td class="n"><b>8/10</b></td><td class="n">4/10</td></tr>
+      <tr><td>compostos empíricos somados — deles: <b>533</b></td><td class="n">563 — <b>1,06×</b></td><td class="n">409 — 0,77×</td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="capa-nota">Os somatórios são sobre as <b>41 vias que os dois lados publicam</b>, não
+    sobre as 119 da nossa tabela nem sobre o modelo inteiro.</p>
+
+  <div class="medido">
+    <p><b>E isto confirma uma escolha que tinha sido feita com outro dado.</b> A busca
+      ampla de adutos é o padrão do aplicativo, escolhida com base numa
+      medição sobre o dado do laboratório: a concordância subia de <b>0,36</b> para <b>0,91</b> e o
+      topo-10 de 6/10 para 9/10.</p>
+    <p>Esta medição é sobre dado <b>público, escolhido pelo MetaboAnalyst e não por nós</b>, e
+      reproduz o mesmo desfecho: <b>0,39 → 0,93</b> e <b>4/10 → 8/10</b>. É confirmação
+      independente, não repetição da mesma medida.</p>
+  </div>
+
+  <h3>O que esta comparação não estabelece</h3>
+
+  <ul>
+    <li><b>Não diz qual dos dois está certo.</b> Não há verdade fundamental aqui — são duas
+      implementações do mesmo algoritmo publicado, e concordância mede consistência, não acerto.</li>
+    <li><b>Igualdade numérica nunca foi o critério</b>, e isso estava pré-registado: os dois lados
+      permutam com geradores diferentes.</li>
+    <li><b>A entrada não é idêntica num ponto, e ele está medido.</b> Eles descartam <b>349</b> picos
+      de <i>m/z</i> repetido — 4878 caem para 4529 — e nós mantemos os 4878, porque o nosso nome de
+      feature carrega o tempo de retenção e as duas linhas são sinais distintos. Os nossos 6% a mais
+      de compostos empíricos são <b>compatíveis</b> com os 7,7% a mais de picos; compatível não é
+      estabelecido, e a residual não foi esgotada.</li>
+    <li><b>Não mede acerto biológico</b>, e não diz nada sobre a malária: o estudo entrou como
+      <b>lista de picos</b>, para que houvesse uma entrada pública que os três pudessem receber.</li>
+  </ul>
+
+  <div class="resumo">
+    <h4>O útil em três linhas</h4>
+    <ol>
+      <li>O <b>MetaboAnalyst da web e o contêiner local produzem o mesmo resultado</b> — as 41 vias
+        nas 8 colunas que ambos publicam, mais o histórico de comandos em R que a própria web
+        mostra. Comparar contra o contêiner é comparar contra o serviço.</li>
+      <li>Sobre a lista pública, com a busca ampla, <b>concordamos a ρ = 0,93</b> nos dois
+        <i>p</i>-valores, com <b>8 das 10</b> vias do topo em comum e <b>32 de 41</b> sobreposições
+        idênticas.</li>
+      <li>A busca ampla ser o padrão foi <b>decidida sobre o dado do laboratório e confirmada aqui
+        sobre dado que não escolhemos</b> — e nada do laboratório precisou sair da máquina para isso.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c11">
+  <div class="cap-cab"><span class="cap-num">11</span>
+    <h2>O que tudo isso significa</h2>
+  </div>
+
+  <h3>A frase completa sobre o SERRF</h3>
+
+  <div class="chamada"><b>O nosso SERRF corrige menos, recupera a verdade igual, e estraga
+    2,7 vezes menos features.</b></div>
+
+  <p>A formulação importa em cada terço:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Metade da frase</th><th>Sustentada por</th><th>O que ela NÃO diz</th></tr></thead>
+    <tbody>
+      <tr><td><b>corrige menos</b></td>
+          <td>15% a 29% da correção do R, régua fora da amostra, 4 modos, população inteira</td>
+          <td>que a diferença seja de recuperação — é de RSD de QC</td></tr>
+      <tr><td><b>recupera igual</b></td>
+          <td>erro contra a verdade difere em 0,0030, e as 5 sementes não vão no mesmo sentido</td>
+          <td>que os dois sejam equivalentes — diz que <b>não há evidência</b> de que um recupere melhor</td></tr>
+      <tr><td><b>estraga menos</b></td>
+          <td>4,1% contra 11,0% de features pioradas, consistente nas 5 sementes</td>
+          <td>que o nosso seja melhor — diz que é mais <b>conservador</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <p><i>A frase e a tabela são da floresta do <code>scikit-learn</code>. Com a que conta como a do R, que é a padrão, o «corrige menos» não vale: o nosso remove de 90,7% a 159,2% do que o do R remove. E o SERRF e o LOESS mudaram depois para ficar fiéis ao R: os números medidos antes disso, estes inclusive, ficam por remedir.</i></p>
+
+  <h3>A pergunta que fica aberta, e é decisão de método</h3>
+
+  <p>Podemos aproximar a nossa floresta da do R, ou ir além dela: a costura é uma função só, e a
+    curva está medida em quatro pontos. <b>Mas não há escolha obviamente certa</b>, porque o que
+    se ganha e o que se perde são grandezas diferentes:</p>
+
+  <ul>
+    <li><b>Quem prioriza a estabilidade dos QCs</b> — porque é isso que a literatura reporta, e é
+      o que um revisor vai olhar — prefere a floresta mais flexível.</li>
+    <li><b>Quem prioriza não estragar feature</b> — porque uma feature piorada pode virar um
+      falso positivo biológico — prefere a mais conservadora.</li>
+    <li><b>E ninguém pode decidir pelo erro contra a verdade</b>, porque ele não distingue as
+      duas: ficou parado nos quatro pontos.</li>
+  </ul>
+
+  <p>Essa análise não foi feita, e não deve ser feita às pressas. O que este documento estabelece
+    é que <b>o trade-off existe, tem forma medida, e não se resolve por uma métrica só</b>.</p>
+  <p><i>O produto usa a floresta que conta como a do R, e a anterior fica como opção (<code>floresta="scikit_learn"</code>). A comparação das duas foi a rodada SF, inconclusiva na medida primária.</i></p>
+
+  <h3>Por que isto é a tese do projeto, e não um detalhe</h3>
+
+  <div class="cartao destaque">
+    <p>A ferramenta não existe para achar a correção certa. <b>Existe porque não dá para saber
+      qual é a certa.</b> Se houvesse gabarito, bastaria escolher o método que mais se aproxima
+      dele, e todo o resto do sistema seria desnecessário.</p>
+    <p>O que se faz em vez disso: rodar as correções plausíveis e reportar <b>quais conclusões
+      biológicas sobrevivem a todas</b>. Uma feature que aparece como diferencial sob os três
+      corretores é achado; uma que só aparece sob um é artefato da escolha.</p>
+    <p><i>Na janela, quem roda as correções plausíveis e reporta o que
+      sobrevive a todas é a aba «Multiverso (beta)», funcionalidade em beta: está
+      implementada e pode ser usada, mas não faz parte da entrega ao laboratório.</i></p>
+    <p>Cada medição deste documento é uma demonstração disso. O ranking dos métodos <b>inverte</b>
+      conforme a régua, com o mesmo arquivo e sem que um valor mude. O ganho de 42% numa régua
+      legítima <b>não era ganho</b>. E o corretor que remove mais erro é o que estraga mais
+      feature.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c12">
+  <div class="cap-cab"><span class="cap-num">12</span>
+    <h2>Ficha técnica</h2>
+  </div>
+
+  <h3>Contagem de execuções</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Medição</th><th>Execuções do programa em R</th><th>Correções do nosso lado</th></tr></thead>
+    <tbody>
+      <tr><td>SERRF, régua fora da amostra, 4 modos</td><td class="n">28</td><td class="n">7 (<code>pos_c18</code>) + 3 modos já medidos</td></tr>
+      <tr><td>LOESS, régua fora da amostra, 4 modos</td><td class="n">28</td><td class="n">4 modos já medidos</td></tr>
+      <tr><td>varredura do limite de divisão (3 valores)</td><td class="n">—</td><td class="n">21</td></tr>
+      <tr><td>conserto fiel, régua dos QCs</td><td class="n">—</td><td class="n">7</td></tr>
+      <tr><td>verdade fundamental, 5 sementes × 3 configurações nossas</td><td class="n">—</td><td class="n">15</td></tr>
+      <tr><td>verdade fundamental, o R</td><td class="n"><b>5</b></td><td class="n">—</td></tr>
+      <tr><td><b>subtotal, capítulos 03 a 07</b></td><td class="n"><b>61</b></td><td class="n"><b>50</b></td></tr>
+      <tr><td>esquemas de validação e fração piorada, capítulos 08 e 09 — <b>uma</b> corrida completa<br><span class="pop">16 matrizes × 3 corretores × (1 recuperação + 7 dobras nossas + 5 sorteios do R) = 624. O esquema do R é <b>porte</b> e corre em Python: nenhuma destas execuções é do programa em R. DV36 regista <b>três</b> corridas independentes — um piloto e duas completas —, e o total acumulado delas <b>não foi medido</b></span></td><td class="n">—</td><td class="n"><b>624</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Ambiente e versões</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>R</td><td>4.4.2, em contêiner, sem rede</td></tr>
+      <tr><td>pacotes do R</td><td><code>ranger</code> 0.18.0, <code>data.table</code> 1.18.4, <code>bootstrap</code> 2019.6, <code>magrittr</code> 2.0.5</td></tr>
+      <tr><td>instantâneo do CRAN</td><td>2026-07-01 — datado de propósito: <code>ranger</code> produz árvores diferentes entre versões</td></tr>
+      <tr><td>Python</td><td>3.12, <code>scikit-learn</code> 1.9.0</td></tr>
+      <tr><td>máquina</td><td>Windows 11, 12 núcleos lógicos; o contêiner recebe metade</td></tr>
+      <tr><td>capítulo 10 — o nosso lado</td><td><code>mummichog</code> 2.7.0, modelo
+        <code>human_model_mfn</code> (MFN 1.10.4), 119 vias</td></tr>
+      <tr><td>capítulo 10 — o oráculo local</td><td>MetaboAnalystR 4.3.0 em contêiner, biblioteca
+        <code>hsa_mfn</code>, 119 vias — os <b>mesmos</b> 119 nomes</td></tr>
+      <tr><td>capítulo 10 — o oráculo da web</td><td><code>metaboanalyst.ca</code>, sessão de
+        19/09/2026; o rodapé do serviço declara <i>last updated 2026-09-14</i></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Limites declarados</h3>
+
+  <ul>
+    <li><b>O SERRF do R não fixa semente.</b> Cada execução carrega o próprio sorteio, e a faixa
+      entre execuções <b>não foi medida</b> em nenhuma destas medições. O que sustenta o achado da
+      verdade fundamental é a consistência nas cinco sementes, não a estabilidade de cada uma.</li>
+    <li><b>Um lote, sete QCs.</b> A configuração de dois lotes não foi medida, e é onde uma âncora
+      global do algoritmo deixa de ser inerte.</li>
+    <li><b>O gabarito do capítulo 05 é sintético.</b> Ele responde sobre a <b>nossa</b> ideia de
+      deriva — deriva gradual, razão 0,8, 300 features imitando o <code>pos_c18</code>, cinco
+      sementes. Se a deriva real não se parecer com ela, o gabarito está certo sobre a pergunta
+      errada.</li>
+    <li><b>O corpus dos capítulos 08 e 09 é outro, e os limites acima não se transferem para ele:</b>
+      16 matrizes de <b>100 features</b>, 68 amostras e 7 QCs, em <b>quatro</b> razões de deriva —
+      0,3 · 0,8 · 1,5 · 3,0 —, com <b>uma semente por célula</b> e sem repetição. É por isso que o
+      capítulo 09 consegue mostrar que o veredito muda com a razão de deriva; e é pelo mesmo motivo
+      que a variação <b>dentro</b> de cada célula é desconhecida.</li>
+    <li><b>300 features no gabarito do capítulo 05 e 100 nas matrizes dos capítulos 08 e 09</b>,
+      contra 2.039 a 6.035 nos modos reais.</li>
+    <li><b>A camada de teste em contêiner não roda no clone Windows do autor</b> — o arnês usa
+      chamadas POSIX que o Windows não tem. As execuções deste documento foram feitas pelos
+      scripts, não pela suíte.</li>
+  </ul>
+
+  <h3>Onde cada número vive</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>O quê</th><th>Onde</th></tr></thead>
+    <tbody>
+      <tr><td>os três corretores × duas implementações × quatro modos</td><td><code>data/fixtures/regua_fora_da_amostra.json</code></td></tr>
+      <tr><td>a auditoria da floresta, a varredura e a refutação</td><td><code>data/fixtures/serrf_min_samples_split.json</code></td></tr>
+      <tr><td>a floresta com a contagem do <code>ranger</code></td><td><code>scripts/floresta_ranger_emulada.py</code></td></tr>
+      <tr><td>o cruzamento que confere os fixtures</td><td><code>tests/test_regua_fora_da_amostra.py</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <p class="pontos">Os números dos capítulos 03 a 07 foram medidos em <b>30 e 31 de agosto de
+    2026</b>. Fora dessa janela há quatro procedências, e as duas últimas são <b>posteriores</b> ao
+    corpo do caderno: a fidelidade do LOESS é de 09/08/2026; os valores do nosso lado na régua fora
+    da amostra vêm de 02/08/2026, com o <code>pos_c18</code> refeito e conferido no dígito; as
+    contagens de features deixadas sem corrigir foram remedidas em <b>04/09/2026</b>; e os capítulos
+    08 e 09 são inteiros de <b>07/09/2026</b>, registados em DV36 e DV37.</p>
+
+  <p class="pontos"><b>O capítulo 10 está fora de todas essas janelas e de todo esse corpus.</b> Ele
+    é de <b>19/09/2026</b>, o oráculo não é o programa do laboratório, e o dado não é o do
+    laboratório — é o exemplo público do próprio MetaboAnalyst. Nada dos limites declarados acima
+    se transfere para ele: não há QC, não há lote, não há verdade plantada, e a régua não é RSD.</p>
+</section>
+
+</main>
+
+<script>
+/* Doze linhas, e só para a alternância abaixo de 1100px — acima disso a CSS já mostra o menu
+   sem script nenhum, e o documento continua navegável com o JavaScript desligado. */
+(function () {
+  var lat = document.getElementById('lateral');
+  var abre = document.getElementById('abre');
+  var veu = document.getElementById('veu');
+  function poe(aberto) {
+    lat.dataset.aberto = aberto ? '1' : '0';
+    veu.dataset.aberto = aberto ? '1' : '0';
+    abre.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+  }
+  abre.addEventListener('click', function () { poe(lat.dataset.aberto !== '1'); });
+  veu.addEventListener('click', function () { poe(false); });
+  lat.addEventListener('click', function (e) { if (e.target.closest('a')) poe(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') poe(false); });
+})();
+</script>
+</body>
+</html>

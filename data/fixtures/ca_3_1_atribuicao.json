@@ -1,0 +1,65 @@
+{
+ "criterio": "[CA-3.1] — atribuicao: floresta ou passo 6",
+ "amostragem": "data/fixtures/amostra_ca_3_1.json, semente 20260808, n derivado por modo",
+ "arnes": "scripts/atribuicao_ca_3_1.py — injecao em SerrfCorrector._predict",
+ "desfecho_pre_registrado": "A — com a predicao do R o criterio PASSA dentro da tolerancia",
+ "por_modo": {
+  "pos_hilic": {
+   "n": 37,
+   "d_A_amostra": 0.22348163963122536,
+   "d_A_populacao_conhecida": 0.19814835143596543,
+   "d_B_amostra": 0.014314078225832555,
+   "tolerancia": 0.03234878695238705,
+   "razao_A": 6.908501390180705,
+   "razao_B": 0.4424919625858275,
+   "se_z": 0.23921495515874933,
+   "segundos": 68.1,
+   "ancora_dz_sobre_se": 0.28107067910939787,
+   "ancora_fecha": true,
+   "dB_sobre_d_r1_r2": 1.3274758877574826
+  },
+  "pos_c18": {
+   "n": 127,
+   "d_A_amostra": 0.18076343972628425,
+   "d_A_populacao_conhecida": 0.262550307281998,
+   "d_B_amostra": 0.02380366516685417,
+   "tolerancia": 0.10318568521326262,
+   "razao_A": 1.7518267127139302,
+   "razao_B": 0.23068766871739152,
+   "se_z": 0.12988048260544066,
+   "segundos": 103.1,
+   "ancora_dz_sobre_se": 1.6139918983338801,
+   "ancora_fecha": true,
+   "dB_sobre_d_r1_r2": 0.6920630061521745
+  },
+  "neg_hilic": {
+   "n": 141,
+   "d_A_amostra": 0.06748853302331391,
+   "d_A_populacao_conhecida": 0.051687101217508455,
+   "d_B_amostra": 0.005845244408656108,
+   "tolerancia": 0.019604032160293494,
+   "razao_A": 3.442584284268157,
+   "razao_B": 0.2981654162195885,
+   "se_z": 0.12572241733396713,
+   "segundos": 110.3,
+   "ancora_dz_sobre_se": 1.0932530308093984,
+   "ancora_fecha": true,
+   "dB_sobre_d_r1_r2": 0.8944962486587654
+  },
+  "neg_c18": {
+   "n": 601,
+   "d_A_amostra": 0.07207406758619783,
+   "d_A_populacao_conhecida": 0.07490502459617905,
+   "d_B_amostra": 0.022598930500178797,
+   "tolerancia": 0.05242955816200496,
+   "razao_A": 1.3746838636994085,
+   "razao_B": 0.43103415882981744,
+   "se_z": 0.04710986525363453,
+   "segundos": 434.8,
+   "ancora_dz_sobre_se": 0.4244985593983866,
+   "ancora_fecha": true,
+   "dB_sobre_d_r1_r2": 1.2931024764894523
+  }
+ },
+ "commit": "37cf33664c1edb5ef471c60ad15d90148261bb32"
+}

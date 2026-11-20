@@ -1,0 +1,649 @@
+<meta charset="utf-8">
+<!--
+  SEM <!doctype html> DE PROPOSITO, pelo mesmo motivo do GUIA, do ENTENDER e do MEDICOES:
+  este arquivo tem dois destinos — publicado como artefato, onde o publicador o embrulha
+  num esqueleto proprio, e aberto por duplo clique a partir do disco. Um <!doctype> aqui
+  produziria documento aninhado no primeiro caso.
+
+  Este e o FAQ. As RESPOSTAS foram medidas no codigo. Onde a resposta e "nao sei", ela esta
+  marcada como tal.
+
+  A CSS e a do MEDICOES, copiada na geracao e nao redigitada.
+-->
+<title>Perguntas frequentes — refino quimiométrico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap">
+<style>
+:root{
+  --papel:#FAF8F4; --carta:#FFFFFF; --carta2:#F2EFE9;
+  --linha:#E1DDD3;
+  --tinta:#191814; --tinta2:#48453E; --tinta3:#67635B;
+  --tom:#7A2E58; --tom-fraco:#F7ECF2; --tom-linha:#C795AF;
+  --medida:#1B5C48; --medida-fundo:#EAF2ED; --medida-linha:#9BC4B0;
+  --alerta:#8A5310; --alerta-fundo:#FBF1E1; --alerta-linha:#D9AE6B;
+  --grave:#96331F; --grave-fundo:#F9E7E1; --grave-linha:#DBA491;
+  --lateral-fundo:#F4F1EB; --lateral-ativo:#E9E3D8;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}}
+:root[data-theme="dark"]{
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);
+ font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;font-size:16.5px;line-height:1.68;
+ -webkit-font-smoothing:antialiased}
+.folha{max-width:880px;margin:0 auto;padding:0 26px 120px}
+h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;margin:0;text-wrap:balance}
+code{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+ font-size:.88em;background:var(--carta2);padding:1px 5px;border-radius:2px;
+ border:1px solid var(--linha);white-space:nowrap}
+a{color:var(--tom)}
+:focus-visible{outline:2px solid var(--tom);outline-offset:3px}
+.rolo:focus-visible,pre.fluxo:focus-visible{outline-offset:-2px}
+p{margin:0 0 15px}
+img{max-width:100%}
+
+/* ======================= A BARRA LATERAL =======================
+   Ha `<nav class="lateral">`, `.veu`, `.abre-lateral` e um
+   script de doze linhas para a alternancia abaixo de 1100px — acima disso a CSS
+   mostra o menu sem script nenhum.
+
+   Ficam mortas: `nav.indice`, `footer` e `ol.passos` — esta ultima porque as listas
+   deste arquivo sao `<ul class="passos">`, e o seletor de tipo e `ol`. */
+.abre-lateral{position:fixed;top:14px;left:14px;z-index:40;
+ font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+ background:var(--carta);color:var(--tinta2);border:1px solid var(--linha);
+ padding:9px 14px;border-radius:3px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.09)}
+.abre-lateral:hover{color:var(--tom);border-color:var(--tom-linha)}
+.veu{position:fixed;inset:0;background:rgba(0,0,0,.34);z-index:44;border:0;padding:0;
+ cursor:pointer;display:none}
+.veu[data-aberto="1"]{display:block}
+
+.lateral{position:fixed;top:0;left:0;width:290px;height:100vh;z-index:45;
+ background:var(--lateral-fundo);border-right:1px solid var(--linha);
+ overflow-y:auto;overscroll-behavior:contain;
+ transform:translateX(-100%);transition:transform .18s ease-out;font-size:14px}
+.lateral[data-aberto="1"]{transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.lateral{transition:none}}
+.lateral-int{padding:20px 18px 60px}
+.lateral-titulo{display:block;font-family:"IBM Plex Serif",Georgia,serif;font-size:17px;
+ font-weight:600;color:var(--tinta);text-decoration:none;letter-spacing:-.01em;margin-bottom:3px}
+.lateral-sub{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.15em;
+ text-transform:uppercase;color:var(--tinta3);margin-bottom:16px}
+.lateral-busca{width:100%;font:inherit;font-size:13px;padding:7px 10px;margin-bottom:4px;
+ background:var(--carta);color:var(--tinta);border:1px solid var(--linha);border-radius:3px}
+.lateral-busca::placeholder{color:var(--tinta3)}
+.lateral-conta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--tinta3);
+ min-height:15px;margin-bottom:11px}
+
+.lat-parte{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:20px 0 7px;padding-bottom:5px;
+ border-bottom:1px solid var(--linha)}
+.lat-parte:first-child{margin-top:0}
+.lat-cap{display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--tinta2);
+ padding:5px 8px;margin:0 -8px;border-radius:3px;line-height:1.4}
+.lat-cap:hover{background:var(--lateral-ativo);color:var(--tinta)}
+.lat-cap .cap-num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--tinta3);
+ font-variant-numeric:tabular-nums;flex:0 0 auto;font-weight:400;letter-spacing:0;text-transform:none}
+.lat-cap[data-atual="1"]{background:var(--lateral-ativo);color:var(--tom);font-weight:600}
+.lat-cap[data-atual="1"] .cap-num{color:var(--tom)}
+
+/* AS DUAS REGRAS DE `[data-atual]` CONTINUAM SEM DISPARAR, e isto vai declarado: nenhum script
+   poe o atributo — o de doze linhas no fim do arquivo so faz a alternancia abaixo de 1100px.
+   Ou nasce um observador de rolagem que marque o capitulo corrente, ou as duas saem. E uma
+   decisao de desenho, e nao de manutencao. */
+.lat-subs{display:none;margin:2px 0 8px 30px;padding-left:11px;border-left:1px solid var(--linha)}
+.lat-subs[data-abre="1"]{display:block}
+.lat-sub{display:block;text-decoration:none;color:var(--tinta3);font-size:13px;
+ padding:3px 6px;margin:0 -6px;border-radius:3px;line-height:1.4}
+.lat-sub:hover{color:var(--tinta);background:var(--lateral-ativo)}
+.lat-sub[data-atual="1"]{color:var(--tom);font-weight:600}
+.lat-vazio{color:var(--tinta3);font-size:13px;padding:10px 0}
+
+@media (min-width:1100px){
+  body{padding-left:290px}
+  .lateral{transform:translateX(0)}
+  .abre-lateral,.veu{display:none}
+}
+
+/* ===================== O RESUMO DE TRES LINHAS =====================
+   Uma por comparacao. Fica no FIM de cada secao e nao no inicio — quem
+   ja leu confirma; quem so quer o essencial salta para ele pelo menu. */
+.resumo{margin:30px 0 6px;padding:18px 20px;background:var(--medida-fundo);
+ border:1px solid var(--medida-linha);border-radius:4px}
+.resumo h4{font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--medida);margin:0 0 10px}
+.resumo ol{margin:0;padding-left:20px}
+.resumo li{margin:5px 0;font-size:15.5px;color:var(--tinta2)}
+.resumo li b{color:var(--tinta)}
+
+/* A ETIQUETA de quem a medicao compara. Tres valores, e so tres. */
+.quem{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+ letter-spacing:.13em;text-transform:uppercase;padding:3px 9px;border-radius:2px;
+ border:1px solid;margin-left:10px;vertical-align:middle;font-weight:500}
+.quem-ambos{color:var(--tom);border-color:var(--tom-linha);background:var(--tom-fraco)}
+.quem-r{color:var(--alerta);border-color:var(--alerta-linha);background:var(--alerta-fundo)}
+.quem-nosso{color:var(--medida);border-color:var(--medida-linha);background:var(--medida-fundo)}
+
+/* ============================ A CAPA ============================ */
+header.capa{background:var(--carta);border-bottom:1px solid var(--linha)}
+.capa-int{max-width:880px;margin:0 auto;padding:52px 26px 38px}
+.selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--tinta3);display:flex;gap:18px;flex-wrap:wrap}
+.selo b{color:var(--tom);font-weight:600}
+h1{font-size:clamp(32px,5.4vw,50px);font-weight:600;letter-spacing:-.022em;line-height:1.08;margin:16px 0 14px}
+.chamada{font-size:19px;color:var(--tinta2);max-width:62ch;margin:0}
+.capa-nota{margin-top:26px;padding-top:18px;border-top:1px solid var(--linha);
+ font-size:14.5px;color:var(--tinta3);max-width:68ch}
+.capa-nota b{color:var(--tinta2)}
+@media (max-width:1099px){.capa-int{padding-top:74px}}
+
+/* ====================== O INDICE NO FLUXO ====================== */
+nav.indice{background:var(--carta2);border:1px solid var(--linha);margin:36px 0 12px;padding:22px 24px}
+nav.indice h2{font-size:12px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:0 0 15px}
+nav.indice h3{font-size:11px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--tom);margin:20px 0 6px}
+nav.indice h3:first-of-type{margin-top:0}
+nav.indice ol{margin:0;padding:0;list-style:none;
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:0 30px}
+nav.indice li{padding:5px 0;border-bottom:1px solid var(--linha);display:flex;gap:10px}
+nav.indice li b{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);
+ font-variant-numeric:tabular-nums;font-weight:600;flex:0 0 auto;padding-top:2px}
+nav.indice a{text-decoration:none;color:var(--tinta2);font-size:15px}
+nav.indice a:hover{color:var(--tom);text-decoration:underline}
+
+/* ========================== O CAPITULO ========================== */
+.cap{margin-top:74px;scroll-margin-top:16px}
+.cap-cab{border-bottom:2px solid var(--tinta);padding-bottom:14px}
+.cap-num{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+ text-transform:uppercase;color:var(--tom);font-weight:600}
+.cap-cab h2{font-size:clamp(24px,3.6vw,32px);font-weight:600;letter-spacing:-.015em;
+ line-height:1.18;margin:9px 0 0}
+.cap-cab .sub{color:var(--tinta3);font-size:14.5px;margin:9px 0 0;max-width:64ch}
+.cap h3{font-size:20.5px;font-weight:600;margin:40px 0 12px;letter-spacing:-.005em;
+ scroll-margin-top:16px}
+.cap h4{font-size:16.5px;font-weight:600;margin:26px 0 8px;color:var(--tinta)}
+
+/* ========= O CARTAO DE NUMERO: o valor E a populacao ========= */
+.medido{background:var(--medida-fundo);border-left:3px solid var(--medida-linha);
+ padding:13px 18px;margin:20px 0;overflow-x:auto}
+.medido .q{display:block;color:var(--tinta2);font-size:12.5px;letter-spacing:.02em;margin-bottom:6px;
+ font-family:"IBM Plex Mono",monospace}
+.medido .v{display:block;color:var(--medida);font-weight:600;font-size:16px;line-height:1.5;
+ font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.medido .pop{display:block;margin-top:9px;padding-top:8px;border-top:1px solid var(--medida-linha);
+ color:var(--tinta3);font-size:13px;line-height:1.58}
+.medido .pop b{color:var(--tinta2);font-weight:600}
+.medido code{background:transparent;border:none;padding:0;color:inherit}
+
+.cilada{background:var(--alerta-fundo);border:1px solid var(--alerta-linha);padding:16px 20px;margin:24px 0}
+.cilada h4{margin:0 0 9px;color:var(--alerta);font-size:15.5px;font-family:"IBM Plex Sans",sans-serif;
+ font-weight:600;letter-spacing:.005em}
+.cilada h4::before{content:"A cilada \00a0 ";font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+ letter-spacing:.18em;text-transform:uppercase}
+.cilada p{margin:0 0 10px;color:var(--tinta2)}
+.cilada p:last-child{margin-bottom:0}
+.cilada .errado{font-style:italic;color:var(--alerta);font-weight:500}
+
+.cartao{background:var(--carta);border:1px solid var(--linha);padding:18px 22px;margin:24px 0}
+.cartao > :first-child{margin-top:0}
+.cartao > :last-child{margin-bottom:0}
+.cartao h3,.cartao h4{margin:0 0 10px;font-size:17.5px}
+.destaque{background:var(--tom-fraco);border-color:var(--tom-linha)}
+.destaque h3,.destaque h4{color:var(--tom)}
+.perigo{background:var(--grave-fundo);border-color:var(--grave-linha)}
+.perigo h4{color:var(--grave)}
+
+.termo{font-weight:600;color:var(--tom);border-bottom:1px dotted var(--tom-linha)}
+
+.rolo{overflow-x:auto;margin:22px 0;border:1px solid var(--linha);background:var(--carta)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--linha);vertical-align:top}
+th{background:var(--carta2);font-weight:600;font-size:12px;letter-spacing:.06em;
+ text-transform:uppercase;color:var(--tinta2);white-space:nowrap}
+td{color:var(--tinta2)}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;
+ color:var(--tinta)}
+tbody tr:last-child td{border-bottom:none}
+
+ul.pontos{margin:15px 0;padding-left:0;list-style:none}
+ul.pontos li{position:relative;padding-left:21px;margin-bottom:10px;color:var(--tinta2)}
+ul.pontos li::before{content:"";position:absolute;left:2px;top:12px;width:7px;height:1px;
+ background:var(--tom-linha)}
+ol.passos{margin:15px 0;padding-left:0;list-style:none;counter-reset:pp}
+ol.passos li{position:relative;padding-left:35px;margin-bottom:12px;color:var(--tinta2)}
+ol.passos li::before{counter-increment:pp;content:counter(pp);position:absolute;left:0;top:2px;
+ font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);font-weight:600;
+ border:1px solid var(--tom-linha);border-radius:50%;width:22px;height:22px;
+ display:grid;place-items:center;line-height:1}
+
+pre.fluxo{background:var(--carta);border:1px solid var(--linha);padding:20px;margin:24px 0;
+ overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;
+ color:var(--tinta2);white-space:pre}
+pre.fluxo b{color:var(--tom);font-weight:600}
+pre.fluxo i{color:var(--medida);font-style:italic;font-weight:600}
+
+dl.glos{margin:24px 0;display:grid;grid-template-columns:auto 1fr;gap:0}
+dl.glos dt{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:600;color:var(--tom);
+ padding:12px 22px 12px 0;border-top:1px solid var(--linha);white-space:nowrap}
+dl.glos dd{margin:0;padding:12px 0;border-top:1px solid var(--linha);color:var(--tinta2);font-size:15px}
+
+footer{margin-top:88px;padding-top:28px;border-top:2px solid var(--tinta);
+ color:var(--tinta3);font-size:14.5px}
+footer h3{font-size:18px;margin:0 0 12px;color:var(--tinta)}
+footer b{color:var(--tinta2)}
+footer p{margin:0 0 12px}
+footer p.fecho{margin-top:22px;padding-top:16px;border-top:1px solid var(--linha)}
+
+@media (max-width:640px){
+  dl.glos{grid-template-columns:1fr}
+  dl.glos dt{padding:12px 0 2px;border-top:1px solid var(--linha)}
+  dl.glos dd{padding:0 0 12px;border-top:none}
+}
+@media (max-width:560px){
+  /* `nowrap` no <code> estoura a caixa a 380px: o token mais longo em prosa nua mede
+     ~334px contra ~328px de caixa. `pre-wrap` preserva os espacos internos de nomes
+     como `normalized by - none.csv`; `anywhere` autoriza a quebra dentro do
+     identificador. Acima de 560px nada muda. */
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+}
+
+/* IMPRESSAO. Sem este bloco o defeito e incapacitante e silencioso: Chrome e Edge honram
+   `prefers-color-scheme` ao imprimir E desligam fundos por padrao, entao quem le em tema
+   escuro do sistema imprime --tinta #ECEAE3 sobre papel branco — razao de contraste 1,06,
+   uma pagina em branco com texto fantasma. As TRES formas de :root entram na lista para
+   alcancar tambem o escuro por preferencia. */
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --papel:#FFFFFF; --carta:#FFFFFF; --carta2:#F4F2ED;
+    --linha:#CFCAC0;
+    --tinta:#000000; --tinta2:#26241F; --tinta3:#4A4740;
+    --tom:#5E2244; --tom-fraco:#F7ECF2; --tom-linha:#A87A93;
+    --medida:#124434; --medida-fundo:#EDF4F0; --medida-linha:#7FAE99;
+    --alerta:#6B3F0A; --alerta-fundo:#FBF4E8; --alerta-linha:#C69A55;
+    --grave:#7A2716; --grave-fundo:#FAEDE8; --grave-linha:#C99783;
+    --lateral-fundo:#FFFFFF; --lateral-ativo:#FFFFFF;
+  }
+  body{font-size:11pt;padding-left:0}
+  .lateral,.abre-lateral,.veu{display:none}
+  header.capa{border-bottom:1px solid var(--linha)}
+  .folha{max-width:none;padding-bottom:0}
+  /* o conteudo cortado a direita e irrecuperavel no papel: rolagem vira quebra */
+  .rolo,pre.fluxo{overflow-x:visible}
+  pre.fluxo{white-space:pre-wrap;overflow-wrap:anywhere}
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+  .cap{margin-top:34px;break-inside:auto}
+  .cap-cab,.medido,.cilada,.cartao,.rolo,pre.fluxo{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  nav.indice{break-after:page}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body id="topo">
+
+<button class="abre-lateral" id="abre" aria-controls="lateral" aria-expanded="false">☰ Perguntas</button>
+<button class="veu" id="veu" tabindex="-1" aria-label="Fechar o menu"></button>
+
+<nav class="lateral" id="lateral" aria-label="Sumário das perguntas">
+  <div class="lateral-int">
+    <a class="lateral-titulo" href="#topo">Perguntas frequentes</a>
+    <div class="lateral-sub">refino quimiométrico</div>
+    <div class="lat-parte">Os botões</div>
+    <a class="lat-cap" href="#q1"><span class="cap-num">01</span><span>O que «Executar pipeline» faz exatamente?</span></a>
+    <a class="lat-cap" href="#q2"><span class="cap-num">02</span><span>Executar o pipeline deixa os três downloads prontos?</span></a>
+    <a class="lat-cap" href="#q3"><span class="cap-num">03</span><span>Os botões «Gerar os três — …» são parecidos com «Medir qual corretor vence»?</span></a>
+    <div class="lat-parte">Como se escolhe a correção</div>
+    <a class="lat-cap" href="#q4"><span class="cap-num">04</span><span>O que «Medir qual corretor vence» faz, em termos simples?</span></a>
+    <a class="lat-cap" href="#q5"><span class="cap-num">05</span><span>Rodar as três correções direto não responde qual ficou melhor?</span></a>
+    <div class="lat-parte">O que os números querem dizer</div>
+    <a class="lat-cap" href="#q6"><span class="cap-num">06</span><span>O que é uma «feature significativa»?</span></a>
+    <a class="lat-cap" href="#q7"><span class="cap-num">07</span><span>Feature significativa é a que tem mais chance de estar envolvida no diagnóstico?</span></a>
+    <div class="lat-parte">O programa do laboratório</div>
+    <a class="lat-cap" href="#q8"><span class="cap-num">08</span><span>Como o R do laboratório verifica qual correção fica melhor?</span></a>
+    <a class="lat-cap" href="#q9"><span class="cap-num">09</span><span>A validação do R é menos efetiva que a nossa? E demora mais ou menos?</span></a>
+  </div>
+</nav>
+
+<header class="capa">
+  <div class="capa-int">
+    <div class="selo">
+      <span>refino quimiométrico</span>
+      <span>perguntas frequentes</span>
+      <span><b>com as respostas medidas</b></span>
+    </div>
+    <h1>Perguntas frequentes</h1>
+    <p class="chamada">As dúvidas que apareceram ao usar o programa — e as respostas, medidas
+      no código.</p>
+    <p class="capa-nota">Onde a resposta é <b>«não sei»</b>, ela está marcada como tal em vez de
+      escondida atrás de uma frase confiante. O detalhe
+      metodológico está no <b>caderno de medições</b> — o arquivo <code>MEDICOES.html</code>, nesta
+      mesma pasta.</p>
+  </div>
+</header>
+
+<main class="folha">
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q1">
+  <div class="cap-cab"><span class="cap-num">01</span>
+    <h2>O que «Executar pipeline» faz exatamente?</h2>
+  </div>
+
+  <div class="destaque">
+    <p><b>O botão «Executar pipeline» deixou de existir</b>, junto
+      com a aba «Executar e exportar». A rota que ele chamava, <code>POST /execucoes</code>, é a que
+      a aba «Análise estatística» dispara no botão «3. Analisar e registrar», e as quatro etapas da
+      tabela abaixo são as dela. A análise roda
+      sobre a matriz escolhida na seção «Entrada» da aba — a original, a corrigida ou a normalizada —
+      e leva a correção e o pré-processamento da etapa que produziu essa matriz; sobre a original, vai
+      sem correção e sem pré-processamento.</p>
+  </div>
+
+  <p><b>Quatro etapas</b>, e a tupla está em <code>src/refino/api/rotas.py</code>:</p>
+  <table>
+    <tr><th>Etapa</th><th>O que é</th></tr>
+    <tr><td>correção</td><td>o corretor escolhido — <code>none</code>, <code>loess</code> ou
+        <code>serrf</code></td></tr>
+    <tr><td>pipeline</td><td>o pré-processamento com os parâmetros selecionados — imputação,
+        normalização, transformação, escalonamento</td></tr>
+    <tr><td>relatório de qualidade</td><td>o relatório inteiro — RSD, agrupamento de QC no PCA, e
+        o resto</td></tr>
+    <tr><td>gravação no banco</td><td>a linha da execução, com o tempo por etapa</td></tr>
+  </table>
+  <div class="cilada">
+    <p><code>rsd_cutoff</code> e <code>missing_threshold</code> s&atilde;o par&acirc;metros declarados da rota (<code>rotas.py</code>, na assinatura de <code>executar</code> &mdash; linhas 2239-2240 em 16/09/2026), entram na especifica&ccedil;&atilde;o que ela constr&oacute;i, e o pr&eacute;-processamento aplica o primeiro. <b>O corte ENTRA, e a janela envia-o:</b> o campo &laquo;Corte de RSD por fra&ccedil;&atilde;o&raquo; e o &laquo;Corte por fra&ccedil;&atilde;o de ausentes&raquo; viajam em <code>POST /execucoes</code> quando est&atilde;o preenchidos. Vazio nos dois campos <b>salta</b> a etapa, e &eacute; s&oacute; nesse caso que a matriz sai sem corte.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q2">
+  <div class="cap-cab"><span class="cap-num">02</span>
+    <h2>Executar o pipeline deixa os três downloads prontos?</h2>
+  </div>
+
+  <div class="destaque">
+    <p><b>A pergunta é sobre um botão que não existe mais.</b> Os
+      downloads ficam no «Resultado» da etapa que produz o
+      arquivo: «Baixar a matriz corrigida» na aba «Correção» e «Baixar a matriz normalizada» na aba
+      «Normalização», cada um no formato do laboratório ou no do MetaboAnalyst, e «Gerar os três» na
+      «Correção». O que se baixa é o que a etapa mostrou: o pedido leva os parâmetros da etapa feita,
+      e não os campos da tela no instante do clique. A «Análise estatística» não tem download.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q3">
+  <div class="cap-cab"><span class="cap-num">03</span>
+    <h2>Os botões «Gerar os três — …» são parecidos com «Medir qual corretor vence»?</h2>
+  </div>
+
+  <p>Três arquivos, um por corretor — <b>com a correção do sinal, e mais nada</b>. O botão é
+    «Gerar os três», no «Resultado» da aba «Correção», e gera os três corretores no formato
+    escolhido no seletor ao lado — o do laboratório ou o do MetaboAnalyst. <b>Ele não aplica o
+    pré-processamento nem os cortes que você escolheu na tela</b>: para levar as suas escolhas de
+    pré-processamento, o botão é «Baixar a matriz normalizada», na aba «Normalização». Mas «gerar
+    os três» e «medir qual corretor vence» são de <b>naturezas diferentes</b>:</p>
+  <div class="rolo">
+  <table>
+    <tr><th></th><th>Gerar os três</th><th>Medir qual corretor vence</th></tr>
+    <tr><td>corre os três corretores</td><td>sim</td><td>sim</td></tr>
+    <tr><td>ajustes por corretor</td><td><b>1</b></td><td><b>7</b> — um por QC retido</td></tr>
+    <tr><td>o que sai</td><td><b>três arquivos</b> no disco</td><td><b>um veredito</b>, com as
+        pontuações</td></tr>
+    <tr><td>aplica pré-processamento e corte</td><td><b>não</b> — só a correção do sinal</td><td>não</td></tr>
+
+    <tr><td colspan="3">O botão de lote cai em
+        <code>POST /matrizes/corrigir</code> ou em <code>POST /matrizes/exportar</code>, e nenhuma das
+        duas rotas aceita imputação, normalização, transformação, escalonamento, corte de RSD ou
+        corte de ausentes — as etapas declaradas são <code>("correcao", "escrita do
+        artefato")</code> e <code>("correcao", "exportacao")</code>. O
+        teto de <b>5.000</b> features do arquivo do MetaboAnalyst é limite <b>de formato</b>,
+        aplicado por RSD crescente para o arquivo caber — não é o corte de qualidade que você
+        escolhe na tela.</td></tr>
+
+    <tr><td>custo medido, <code>pos_hilic</code></td><td><b>257,1 s</b> os três — <b>e só no formato MetaboAnalyst</b>. O da matriz corrigida <b>não foi medido</b>, e repetir o número nos dois seria afirmar sobre a população errada</td>
+        <td>cerca de <b>40 min</b> no executável, com a caixa «usar vários núcleos» ticada. O executável usa todos os
+        processadores da máquina, e o resultado é idêntico ao de um núcleo só.</td></tr>
+  </table>
+  </div>
+  <div class="destaque">
+    <p><b>Um entrega material para você julgar; o outro entrega um julgamento.</b> O segundo custa
+      sete vezes mais porque um julgamento honesto não pode usar o número barato — ver a pergunta
+      seguinte.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q4">
+  <div class="cap-cab"><span class="cap-num">04</span>
+    <h2>O que «Medir qual corretor vence» faz, em termos simples?</h2>
+  </div>
+
+  <p><b>O problema.</b> Há três formas de corrigir e nenhuma é a melhor sempre. Olhando os
+    números não se sabe qual funcionou.</p>
+  <p><b>A régua.</b> Os QCs são a mesma mistura injetada várias vezes. Como é sempre a mesma
+    amostra, qualquer diferença entre eles é <b>erro do equipamento</b>, nunca biologia. Uma boa
+    correção deixa os QCs mais parecidos entre si.</p>
+  <div class="cilada">
+    <p><b>A armadilha.</b> Corrigir e depois medir a concordância dos QCs <b>na própria matriz
+      corrigida</b> é trapaça: a correção foi construída usando esses mesmos QCs. É dar ao aluno a
+      prova com as respostas que ele decorou. O LOESS desenha uma curva que passa pelos QCs —
+      medido assim, ele parece perfeito sempre.</p>
+  </div>
+  <p><b>O que o botão faz.</b> Esconde um QC, constrói a correção com os outros seis, e vai ver se
+    ela acertou o que estava escondido. Repete <b>sete vezes</b>, uma por QC. Faz isso para os três
+    corretores e diz qual ganhou.</p>
+  <div class="medido">
+    <p><b>Não é risco teórico.</b> O mesmo arquivo de referência dá, para o <code>batch_loess</code>:
+      <b>3,78%</b> medido na própria matriz corrigida, contra <b>104,73%</b> fora dela, no
+      estimador de compatibilidade com o R — cinco sorteios de cinco QCs de treino e dois retidos
+      (AR44). Escondendo um QC de cada vez, o LOESS do R no mesmo modo dá 142,67%, numa execução
+      (DV29). Dentro da amostra o LOESS parece perfeito, e fora dela não. E o <b>ranking entre os métodos inverte</b> — não é que um número seja mais otimista, é
+      que elegem vencedores diferentes.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q5">
+  <div class="cap-cab"><span class="cap-num">05</span>
+    <h2>Rodar as três correções direto não responde qual ficou melhor?</h2>
+  </div>
+
+  <p><b>Sim para a régua dos QCs</b>, com três ressalvas:</p>
+  <ol>
+    <li><b>RSD não é a única régua, e as réguas discordam.</b> O RSD e o agrupamento dos QCs no PCA
+      <b>elegem métodos diferentes</b>. Por isso toda avaliação devolve o conjunto completo e não um
+      vencedor.</li>
+    <li><b>São sete QCs.</b> Sete pontos é pouco; mesmo a medição honesta é frágil, e toda
+      estatística baseada em QC tem de vir com incerteza declarada.</li>
+    <li><b>Há uma terceira saída, e é o coração da ferramenta:</b> em vez de apostar em eleger o
+      vencedor, perguntar <b>quais conclusões sobrevivem às três correções</b>. Se uma feature é
+      significativa com os três, não foi preciso acertar a escolha. Se só aparece com um, é suspeita
+      <b>mesmo que aquele tenha vencido</b>.
+      Na janela, quem faz esta pergunta é a aba «Multiverso (beta)».
+      Funcionalidade em beta: está implementada e pode ser usada, mas não faz parte da entrega ao
+      laboratório.</li>
+  </ol>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q6">
+  <div class="cap-cab"><span class="cap-num">06</span>
+    <h2>O que é uma «feature significativa»?</h2>
+  </div>
+
+  <div class="cilada">
+    <p><b>Primeiro, o vocabulário.</b> O que está na tabela não são metabólitos — são
+      <b>features</b>: sinais identificados por tempo de retenção e massa
+      (<code>2.25_810.7739m/z</code>). <b>Uma molécula gera vários sinais</b>, e um sinal sozinho não
+      diz qual molécula é. Esta ferramenta trabalha com os sinais: ela <b>não identifica</b>. É o
+      que a aba «Métodos e limites» diz também, e as duas frases têm de continuar a
+      dizer o mesmo. O programa <b>exporta no formato que o MetaboAnalyst aceita</b>.</p>
+    <p><b>O programa prediz atividade de via a partir dos
+      picos</b>, na aba «Vias metabólicas (beta)», dentro do programa e sem internet — é o algoritmo do
+      mummichog, o mesmo da aba «MS Peaks to Pathways» do MetaboAnalyst, e ele <b>dispensa</b> a
+      identificação em vez de a exigir. Os compostos por trás de cada via são candidatos
+      compatíveis em massa, não identificações.
+      <b>Funcionalidade em beta:</b> está implementada e pode ser usada, mas não faz parte da entrega
+      ao laboratório.</p>
+    <p><b>O enriquecimento de uma lista já identificada
+      também existe dentro do programa</b>. A aba «Vias metabólicas (beta)» tem um segundo modo, escolhido no topo dela: o senhor
+      carrega a tabela de identificação que exportou do Progenesis, confirma as colunas, escolhe o
+      corte, e o programa roda a análise de sobre-representação do MetaboAnalystR num R que vem junto,
+      na pasta <code>R</code> — sem Docker; no modo local, que é o padrão, sem enviar nada, e no modo externo, sobre a KEGG, levando ao servidor do MetaboAnalyst, do seu estudo, só os nomes de compostos confirmados, depois de o senhor confirmar o envio. Os compostos dessa análise são os que o
+      senhor identificou; o programa continua a <b>não</b> identificar a partir dos sinais. Também em
+      beta. O que continua fora é o serviço em contêiner da linha de comando.</p>
+  </div>
+  <p><b>Significativa</b> quer dizer: a diferença entre os grupos é maior do que o acaso explicaria.
+    O teste devolve o <b>valor-p</b> — a chance de ver uma diferença desse tamanho <b>se não houvesse
+    diferença nenhuma</b>.</p>
+  <p><b>O problema que domina tudo:</b> não se testa uma feature, testam-se milhares. Com 6.000
+    features e o limiar usual de 5%, esperam-se <b>300 «significativas» só por sorte</b>. Por isso
+    corrige-se para o número de testes.</p>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q7">
+  <div class="cap-cab"><span class="cap-num">07</span>
+    <h2>Feature significativa é a que tem mais chance de estar envolvida no diagnóstico?</h2>
+  </div>
+
+  <p><b>Quase — e a diferença importa.</b> Significativa é uma afirmação sobre <b>ter detectado
+    uma diferença</b>, não sobre estar envolvida na doença. Três motivos para diferir sem estar
+    envolvida:</p>
+  <ul class="passos">
+    <li><b>Confundimento</b> — se o grupo doente é mais velho, ou toma um medicamento, ou teve
+      coleta noutro dia, as features achadas separam isso, não a doença.</li>
+    <li><b>Efeito técnico que sobreviveu</b> — é o que a correção existe para remover.</li>
+    <li><b>Estar a jusante</b> — muda <i>por causa</i> da doença sem participar dela. Serve de
+      marcador, não é o mecanismo.</li>
+  </ul>
+  <div class="cilada">
+    <p><b>O valor-p NÃO é a chance da feature estar envolvida.</b> É a chance de ver uma diferença
+      desse tamanho se não houvesse diferença nenhuma. Trocar as duas é o erro estatístico mais
+      comum que existe.</p>
+  </div>
+  <p><b>E significativo não quer dizer grande.</b> Com amostras suficientes, uma diferença minúscula
+    fica significativa — real, detectável e irrelevante.</p>
+  <p><b>Para diagnosticar, o que interessa é outra coisa:</b> diferir entre grupos não é conseguir
+    classificar um paciente novo. Por isso o PLS-DA nunca sai sem o <b>Q²</b>. Num outro estudo
+    do laboratório, a separação parecia convincente no gráfico e o Q² deu <b>~24%</b>.</p>
+  <div class="destaque">
+    <p><b>Leitura certa:</b> a lista de significativas é uma <b>lista de candidatas</b>, não de
+      culpadas.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q8">
+  <div class="cap-cab"><span class="cap-num">08</span>
+    <h2>Como o R do laboratório verifica qual correção fica melhor?</h2>
+  </div>
+
+  <p><b>Ele valida cruzado — não cai na armadilha ingénua.</b> Lido no <code>tools.R</code>: para
+    o <code>batch_loess</code>, cinco vezes treina a curva num subconjunto dos QCs e mede nos
+    <b>retidos</b>; para o <code>SERRF</code>, cinco dobras com RSD sobre os retidos. O
+    <code>QC - RSD.csv</code> que ele entrega é essa estimativa validada.</p>
+  <div class="cilada">
+    <p><b>Mas a validação do SERRF não particiona.</b> No laço, a linha que divide os QCs em cinco
+      grupos é <b>sobrescrita duas linhas depois</b> por um sorteio: são <b>cinco sorteios
+      independentes</b> de 5 treino e 2 retidos, e um QC pode cair no retido de três sorteios e outro
+      de nenhum.</p>
+  </div>
+  <p><b>E ele não escolhe.</b> Não há nada no <code>tools.R</code> que eleja um vencedor: calcula os
+    três RSDs, imprime as medianas, escreve as três matrizes e um gráfico. <b>Quem decide é a
+    pessoa, olhando.</b></p>
+  <div class="destaque">
+    <p><b>O argumento deste trabalho não pode ser «o R mede errado»</b>, porque ele valida. O
+      argumento é sobre a <b>partição</b>, sobre <b>quem decide</b>, e sobre <b>o que acontece depois
+      da decisão</b>.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="q9">
+  <div class="cap-cab"><span class="cap-num">09</span>
+    <h2>A validação do R é menos efetiva que a nossa? E demora mais ou menos?</h2>
+  </div>
+
+  <p>Das duas respostas, uma foi medida em 07/09/2026;
+    a outra continua sem resposta, e isso vai dito em vez de escondido.</p>
+  <div class="medido">
+    <p><b>Tempo — MEDIDO.</b> O nosso esquema custa <b>1,38×</b> o do R: 2.261 s contra 1.634 s, em
+      16 matrizes e quatro modos. Bate a razão de ajustes <b>7:5 = 1,4×</b> prevista sem medir, e
+      repetiu-se em três corridas independentes. <b>O tempo segue as dobras, não a implementação.</b></p>
+  </div>
+  <p><b>Efetividade — medida, e mesmo assim sem resposta.</b> Deu <b>9/12</b> contra <b>7/12</b>. A
+    diferença passa o limiar de 15 pontos que o pré-registo fixou antes de medir, e <b>não é
+    reportável</b>: são <b>dois acertos</b> num total de doze, a vantagem concentra-se em dois dos
+    quatro modos e é zero nos outros dois, e o acerto é contra <b>uma</b> régua de três — que
+    discordam entre si em 15 de 16 matrizes.</p>
+  <div class="cilada">
+    <p><b>Passar o próprio critério e não reportar vai declarado.</b> Com um denominador de doze, um
+      limiar percentual é trivial de passar — e escolher a régua depois de ver o número é
+      exactamente o que o pré-registo existe para impedir.</p>
+  </div>
+  <p>A medição produziu um achado que <b>não era a pergunta</b>: com deriva fraca, o LOESS deixa
+    <b>70% a 85%</b> das features piores do que não corrigir, nos quatro modos. Isso o R não
+    consegue medir — ele valida, mas a régua dele é sempre RSD de QC, e sem verdade plantada a
+    pergunta <i>«quantas features ficaram piores?»</i> não é formulável lá. O detalhe está no
+    <b>caderno de medições</b> — <code>MEDICOES.html</code>, nesta mesma pasta —, seções 08 («Os
+    dois esquemas de validação») e 09 («O que o LOESS estraga»).</p>
+</section>
+
+</main>
+
+<footer class="folha">
+  <h3>O que este arquivo não cobre</h3>
+  <p><b>Ele não é o manual.</b> Como se usa o programa, clique a clique, está no
+  <code>GUIA.html</code>; o que cada aba, botão e campo faz está no <code>EXPLICAR.html</code>; de
+  onde vêm os números da comparação com o programa em R está no <code>MEDICOES.html</code>.</p>
+  <p><b>As respostas que citam linha de código caducam quando o código mudar.</b> Se uma frase
+  daqui discordar do que está na tela, <b>é a tela que vale</b>.</p>
+  <p class="fecho">Última conferência deste arquivo contra o código: <b>16/09/2026</b>.</p>
+</footer>
+
+
+<script>
+/* Doze linhas, e só para a alternância abaixo de 1100px — acima disso a CSS já mostra o menu
+   sem script nenhum, e o documento continua navegável com o JavaScript desligado. */
+(function () {
+  var lat = document.getElementById('lateral');
+  var abre = document.getElementById('abre');
+  var veu = document.getElementById('veu');
+  function poe(aberto) {
+    lat.dataset.aberto = aberto ? '1' : '0';
+    veu.dataset.aberto = aberto ? '1' : '0';
+    abre.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+  }
+  abre.addEventListener('click', function () { poe(lat.dataset.aberto !== '1'); });
+  veu.addEventListener('click', function () { poe(false); });
+  lat.addEventListener('click', function (e) { if (e.target.closest('a')) poe(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') poe(false); });
+})();
+</script>
+
+</body>
+</html>

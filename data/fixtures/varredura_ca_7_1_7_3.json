@@ -1,0 +1,742 @@
+{
+ "o_que": "as 80 celulas de DV32: CA-7.1 e CA-7.3 em 5 sementes x 4 modos x 2 contagens de QC",
+ "gerador": "scripts/varre_ca_7_1_e_7_3.py",
+ "n_features": 1500,
+ "tolerancia_emergente": 0.3,
+ "sementes": [
+  7,
+  11,
+  23,
+  42,
+  101
+ ],
+ "totais_com_oito_qcs": {
+  "ca_7_1_fora": 13,
+  "ca_7_3_acertos": 16,
+  "n": 20
+ },
+ "totais_com_sete_qcs": {
+  "ca_7_1_fora": 16,
+  "ca_7_3_acertos": 18,
+  "n": 20
+ },
+ "celulas": [
+  {
+   "modo": "pos_hilic",
+   "semente": 7,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.9593464428457049,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -33.29070003158995,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 11,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.8755443274699954,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -39.117980149503126,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 23,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.4908731776483837,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -65.86654769151077,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 42,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.8212502731096303,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -42.8933820242243,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 101,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.9853570769270209,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -31.482019544745082,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [],
+    "esperado": 45,
+    "acertou": false
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 7,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.2619433701695696,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": 8.465163631291759,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 11,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.019479647385415647,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -91.93389342218813,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 23,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.18183626367316885,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -24.70548088067542,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 42,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.2728228193883184,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": 12.970111547957943,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 101,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.03756321133712212,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -84.44587522272376,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45,
+     67
+    ],
+    "esperado": 45,
+    "acertou": false
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 7,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.4872667291401852,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -27.46848330750443,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 11,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.27528631888006444,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -59.0225783149651,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     23,
+     45
+    ],
+    "esperado": 45,
+    "acertou": false
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 23,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.2479377410363961,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -63.093518750164314,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45,
+     67
+    ],
+    "esperado": 45,
+    "acertou": false
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 42,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.4190221803527123,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -37.62694546699727,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 101,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.4297202150564918,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -36.03450207554453,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 7,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.15877890686039262,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": 2.438004426059753,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 11,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.09671158411624549,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -37.60542960242226,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 23,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.11675267573546591,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -24.67569307389296,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 42,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.10265498997941302,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -33.7709742068303,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 101,
+   "n_qcs": 8,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.11652119859266381,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -24.825033166023346,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 7,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.8216715320405763,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -42.86408928165104,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 11,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.8982884605315151,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -37.536439709928715,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 23,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.4544675788669877,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -68.39805445608876,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 42,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 1.1891764946410897,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -17.309193057430658,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_hilic",
+   "semente": 101,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.9402282305027783,
+    "alvo_do_arquivo_real": 1.4381,
+    "desvio_pct": -34.62010774613877,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [],
+    "esperado": 45,
+    "acertou": false
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 7,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.13921185706924877,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -42.355338687681666,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 11,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.021304998817909416,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -91.17805431970623,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 23,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.1378477818047857,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -42.9201731657202,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 42,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.20424880531750728,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -15.424925334365513,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "pos_c18",
+   "semente": 101,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.038516557699379755,
+    "alvo_do_arquivo_real": 0.2415,
+    "desvio_pct": -84.05111482427338,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 7,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.3880237279524511,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -42.241183692698556,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [],
+    "esperado": 45,
+    "acertou": false
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 11,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.2810084185639535,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -58.17082188687801,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 23,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.20601047848089066,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -69.33455217611035,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 42,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.4425105459824513,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -34.13061238725047,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_hilic",
+   "semente": 101,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.42638691458826977,
+    "alvo_do_arquivo_real": 0.6718,
+    "desvio_pct": -36.53067660192471,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 7,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.13998231478768133,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -9.688829169237849,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 11,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.10610327415229216,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -31.54627474045667,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 23,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.09268928630725776,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -40.20046044693048,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 42,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.10724660459243308,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -30.80864219843027,
+    "dentro_da_tolerancia": false
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  },
+  {
+   "modo": "neg_c18",
+   "semente": 101,
+   "n_qcs": 7,
+   "ca_7_1": {
+    "rsd_qc_medido": 0.11982594600339687,
+    "alvo_do_arquivo_real": 0.155,
+    "desvio_pct": -22.6929380623246,
+    "dentro_da_tolerancia": true
+   },
+   "ca_7_3": {
+    "pontos_detectados": [
+     45
+    ],
+    "esperado": 45,
+    "acertou": true
+   }
+  }
+ ]
+}

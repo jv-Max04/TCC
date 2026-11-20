@@ -1,0 +1,838 @@
+<!doctype html>
+<!--
+  DIAGNOSTICO-o-que-ele-mede.html — o documento de PROCEDENCIA da camada de diagnostico.
+
+  Os seis irmaos dele na pasta que viaja, e a divisao de trabalho:
+    GUIA-do-aplicativo.html    ensina a OPERAR, clique a clique, com capturas de tela.
+    ENTENDER-o-sistema.html    ensina o SISTEMA do zero, sem supor metabolomica.
+    EXPLICAR-cada-tela...html  ensina a EXPLICAR cada aba, botao e campo.
+    MULTIVERSO-o-que-e...html  o que o multiverso e, e o que ele custa.
+    MEDICOES-da-correcao.html  o caderno de MEDICOES da correcao: o detalhe metodologico que
+                               no ENTENDER seria excesso.
+    FAQ-perguntas-frequentes.html  as perguntas frequentes, com a resposta medida no codigo.
+    ESTE                       de onde vem cada NUMERO do diagnostico: o que e consensual
+                               da area, o que apenas COINCIDE, e o que e construcao nossa.
+  A lista dos SETE e a de `scripts/prepara_entrega.ps1` (`$temQueFicar`), que e quem a confere.
+
+  POR QUE ELE EXISTE. Para responder se as classes de defeito sao usadas no mundo afora ou
+  foram inventadas aqui: tres das quantidades sao as recomendadas pelas diretrizes de
+  consenso, e um limiar COINCIDE com o corte publicado. Este documento e o registro dessa
+  particao. A pergunta que ele responde e "voces inventaram isso?", e a resposta honesta tem
+  tres partes que nao se podem misturar: o que e consensual, o que coincide, e o que e nosso.
+
+  REGRA DE REDACAO, herdada do ENTENDER e do EXPLICAR: todo numero vem com a POPULACAO em que
+  foi medido, em cartao `.medido`, e nunca solto na frase. Nao
+  acrescentar quantificador de frequencia que nao tenha sido medido. E a distincao entre
+  COINCIDIR e DERIVAR e conteudo, nao estilo: escrever "derivado de Broadhurst" seria
+  procedencia inventada.
+
+  O CSS E O DO `MULTIVERSO-o-que-e-e-o-que-custa.html`, VERBATIM — conferido por diff dos dois
+  blocos `<style>` em 16/09/2026: uma unica linha de diferenca, e ela e uma linha em branco. As
+  familias dele que ficam SEM USO aqui vao declaradas, porque dizer "o CSS e o mesmo" sem dizer o
+  que dele nao se aplica e afirmacao de cobertura mais larga que o mecanismo. Contado no CORPO em
+  16/09/2026, e a particao e completa em vez de exemplar. NAO exercitadas: `ol.passos`,
+  `ul.pontos`, `.veu`, `.lateral` e as suas filhas, `.abre-lateral`, `nav.indice`,
+  `footer p.fecho`, `dl.glos`, `pre.fluxo`, `.termo` e `.cap-cab .sub`. Exercitadas, com a
+  contagem de cada uma: `.cap` 8, `.errado` 7, `.rolo` 7, `.cilada` 7, `.medido` 5, `.n` 5,
+  `.cartao destaque` 4, `.chamada` 1, `.perigo` 1 e `.selo` 1.
+
+  SEM JAVASCRIPT. O documento e curto o bastante para nao precisar de barra lateral derivada
+  do DOM, e por isso nao ha script nenhum: nao ha melhoria progressiva a degradar.
+
+  AS CITACOES NAO TEM PORTAO. As afirmacoes de literatura foram conferidas por leitura dos
+  dois artigos em 05/09/2026 e nao sao verificaveis pela suite — e prosa cujo referente vive
+  fora da arvore. Vai declarado no
+  capitulo 08 em vez de subentendido.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O diagnóstico — refino quimiométrico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;500;600&display=swap">
+<style>
+
+:root{
+  --papel:#FAF8F4; --carta:#FFFFFF; --carta2:#F2EFE9;
+  --linha:#E1DDD3;
+  --tinta:#191814; --tinta2:#48453E; --tinta3:#67635B;
+  --tom:#7A2E58; --tom-fraco:#F7ECF2; --tom-linha:#C795AF;
+  --medida:#1B5C48; --medida-fundo:#EAF2ED; --medida-linha:#9BC4B0;
+  --alerta:#8A5310; --alerta-fundo:#FBF1E1; --alerta-linha:#D9AE6B;
+  --grave:#96331F; --grave-fundo:#F9E7E1; --grave-linha:#DBA491;
+  --lateral-fundo:#F4F1EB; --lateral-ativo:#E9E3D8;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}}
+:root[data-theme="dark"]{
+  --papel:#131210; --carta:#1B1A17; --carta2:#232320;
+  --linha:#2F2E2A;
+  --tinta:#ECEAE3; --tinta2:#B6B2A8; --tinta3:#968F83;
+  --tom:#E09BC0; --tom-fraco:#2C1524; --tom-linha:#6A3552;
+  --medida:#7FC9A8; --medida-fundo:#132720; --medida-linha:#2F5A47;
+  --alerta:#D9A85A; --alerta-fundo:#2A2312; --alerta-linha:#5C4A24;
+  --grave:#E08D76; --grave-fundo:#2F1811; --grave-linha:#5E3226;
+  --lateral-fundo:#191816; --lateral-ativo:#27261F;
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--papel);color:var(--tinta);
+ font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;font-size:16.5px;line-height:1.68;
+ -webkit-font-smoothing:antialiased}
+.folha{max-width:880px;margin:0 auto;padding:0 26px 120px}
+h1,h2,h3,h4{font-family:"IBM Plex Serif",Georgia,serif;margin:0;text-wrap:balance}
+code{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+ font-size:.88em;background:var(--carta2);padding:1px 5px;border-radius:2px;
+ border:1px solid var(--linha);white-space:nowrap}
+a{color:var(--tom)}
+:focus-visible{outline:2px solid var(--tom);outline-offset:3px}
+.rolo:focus-visible,pre.fluxo:focus-visible{outline-offset:-2px}
+p{margin:0 0 15px}
+img{max-width:100%}
+
+/* ======================= A BARRA LATERAL =======================
+   HERDADO DO `ENTENDER`: esta pagina NAO tem barra lateral nem script. Medido em 16/09/2026
+   sobre o CORPO, e o recorte e parte da medicao —
+   `sed -n '/^<body>/,$p' docs/DIAGNOSTICO-o-que-ele-mede.html | grep -c '<script'` devolve 0,
+   e o mesmo recorte da 0 para `class="lateral"`, `class="veu"`, `<nav` e `<footer`. O recorte
+   nao e zelo: esta frase contem a propria cadeia procurada, e `grep -c` sobre o arquivo cru
+   conta-a a si mesma e devolve 1 — e o instrumento a ler a sua propria copia.
+   Ficam mortas aqui: `.abre-lateral`, `.veu`, `.lateral` e as suas filhas, `nav.indice`,
+   `footer p.fecho` e `ol.passos` — esta ultima porque o corpo nao tem lista de passos: o unico
+   `<ul>` dele, na seccao dos limites declarados, nao tem classe nenhuma, e nao ha um `<ol>` no
+   arquivo. */
+.abre-lateral{position:fixed;top:14px;left:14px;z-index:40;
+ font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+ background:var(--carta);color:var(--tinta2);border:1px solid var(--linha);
+ padding:9px 14px;border-radius:3px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,.09)}
+.abre-lateral:hover{color:var(--tom);border-color:var(--tom-linha)}
+.veu{position:fixed;inset:0;background:rgba(0,0,0,.34);z-index:44;border:0;padding:0;
+ cursor:pointer;display:none}
+.veu[data-aberto="1"]{display:block}
+
+.lateral{position:fixed;top:0;left:0;width:290px;height:100vh;z-index:45;
+ background:var(--lateral-fundo);border-right:1px solid var(--linha);
+ overflow-y:auto;overscroll-behavior:contain;
+ transform:translateX(-100%);transition:transform .18s ease-out;font-size:14px}
+.lateral[data-aberto="1"]{transform:translateX(0)}
+@media (prefers-reduced-motion:reduce){.lateral{transition:none}}
+.lateral-int{padding:20px 18px 60px}
+.lateral-titulo{display:block;font-family:"IBM Plex Serif",Georgia,serif;font-size:17px;
+ font-weight:600;color:var(--tinta);text-decoration:none;letter-spacing:-.01em;margin-bottom:3px}
+.lateral-sub{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.15em;
+ text-transform:uppercase;color:var(--tinta3);margin-bottom:16px}
+.lateral-busca{width:100%;font:inherit;font-size:13px;padding:7px 10px;margin-bottom:4px;
+ background:var(--carta);color:var(--tinta);border:1px solid var(--linha);border-radius:3px}
+.lateral-busca::placeholder{color:var(--tinta3)}
+.lateral-conta{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--tinta3);
+ min-height:15px;margin-bottom:11px}
+
+.lat-parte{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:20px 0 7px;padding-bottom:5px;
+ border-bottom:1px solid var(--linha)}
+.lat-parte:first-child{margin-top:0}
+.lat-cap{display:flex;gap:9px;align-items:baseline;text-decoration:none;color:var(--tinta2);
+ padding:5px 8px;margin:0 -8px;border-radius:3px;line-height:1.4}
+.lat-cap:hover{background:var(--lateral-ativo);color:var(--tinta)}
+.lat-cap .num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--tinta3);
+ font-variant-numeric:tabular-nums;flex:0 0 auto}
+.lat-cap[data-atual="1"]{background:var(--lateral-ativo);color:var(--tom);font-weight:600}
+.lat-cap[data-atual="1"] .num{color:var(--tom)}
+.lat-subs{display:none;margin:2px 0 8px 30px;padding-left:11px;border-left:1px solid var(--linha)}
+.lat-subs[data-abre="1"]{display:block}
+.lat-sub{display:block;text-decoration:none;color:var(--tinta3);font-size:13px;
+ padding:3px 6px;margin:0 -6px;border-radius:3px;line-height:1.4}
+.lat-sub:hover{color:var(--tinta);background:var(--lateral-ativo)}
+.lat-sub[data-atual="1"]{color:var(--tom);font-weight:600}
+.lat-vazio{color:var(--tinta3);font-size:13px;padding:10px 0}
+
+@media (min-width:1100px){
+  body{padding-left:290px}
+  .lateral{transform:translateX(0)}
+  .abre-lateral,.veu{display:none}
+}
+
+/* ============================ A CAPA ============================ */
+header.capa{background:var(--carta);border-bottom:1px solid var(--linha)}
+.capa-int{max-width:880px;margin:0 auto;padding:52px 26px 38px}
+.selo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+ color:var(--tinta3);display:flex;gap:18px;flex-wrap:wrap}
+.selo b{color:var(--tom);font-weight:600}
+h1{font-size:clamp(32px,5.4vw,50px);font-weight:600;letter-spacing:-.022em;line-height:1.08;margin:16px 0 14px}
+.chamada{font-size:19px;color:var(--tinta2);max-width:62ch;margin:0}
+.capa-nota{margin-top:26px;padding-top:18px;border-top:1px solid var(--linha);
+ font-size:14.5px;color:var(--tinta3);max-width:68ch}
+.capa-nota b{color:var(--tinta2)}
+@media (max-width:1099px){.capa-int{padding-top:74px}}
+
+/* ====================== O INDICE NO FLUXO ====================== */
+nav.indice{background:var(--carta2);border:1px solid var(--linha);margin:36px 0 12px;padding:22px 24px}
+nav.indice h2{font-size:12px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--tinta3);margin:0 0 15px}
+nav.indice h3{font-size:11px;font-family:"IBM Plex Mono",monospace;font-weight:600;letter-spacing:.14em;
+ text-transform:uppercase;color:var(--tom);margin:20px 0 6px}
+nav.indice h3:first-of-type{margin-top:0}
+nav.indice ol{margin:0;padding:0;list-style:none;
+ display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:0 30px}
+nav.indice li{padding:5px 0;border-bottom:1px solid var(--linha);display:flex;gap:10px}
+nav.indice li b{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);
+ font-variant-numeric:tabular-nums;font-weight:600;flex:0 0 auto;padding-top:2px}
+nav.indice a{text-decoration:none;color:var(--tinta2);font-size:15px}
+nav.indice a:hover{color:var(--tom);text-decoration:underline}
+
+/* ========================== O CAPITULO ========================== */
+.cap{margin-top:74px;scroll-margin-top:16px}
+.cap-cab{border-bottom:2px solid var(--tinta);padding-bottom:14px}
+.cap-num{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.18em;
+ text-transform:uppercase;color:var(--tom);font-weight:600}
+.cap-cab h2{font-size:clamp(24px,3.6vw,32px);font-weight:600;letter-spacing:-.015em;
+ line-height:1.18;margin:9px 0 0}
+.cap-cab .sub{color:var(--tinta3);font-size:14.5px;margin:9px 0 0;max-width:64ch}
+.cap h3{font-size:20.5px;font-weight:600;margin:40px 0 12px;letter-spacing:-.005em;
+ scroll-margin-top:16px}
+.cap h4{font-size:16.5px;font-weight:600;margin:26px 0 8px;color:var(--tinta)}
+
+/* ========= O CARTAO DE NUMERO: o valor E a populacao ========= */
+.medido{background:var(--medida-fundo);border-left:3px solid var(--medida-linha);
+ padding:13px 18px;margin:20px 0;overflow-x:auto}
+.medido .q{display:block;color:var(--tinta2);font-size:12.5px;letter-spacing:.02em;margin-bottom:6px;
+ font-family:"IBM Plex Mono",monospace}
+.medido .v{display:block;color:var(--medida);font-weight:600;font-size:16px;line-height:1.5;
+ font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+.medido .pop{display:block;margin-top:9px;padding-top:8px;border-top:1px solid var(--medida-linha);
+ color:var(--tinta3);font-size:13px;line-height:1.58}
+.medido .pop b{color:var(--tinta2);font-weight:600}
+.medido code{background:transparent;border:none;padding:0;color:inherit}
+
+.cilada{background:var(--alerta-fundo);border:1px solid var(--alerta-linha);padding:16px 20px;margin:24px 0}
+.cilada h4{margin:0 0 9px;color:var(--alerta);font-size:15.5px;font-family:"IBM Plex Sans",sans-serif;
+ font-weight:600;letter-spacing:.005em}
+.cilada h4::before{content:"A cilada \00a0 ";font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+ letter-spacing:.18em;text-transform:uppercase}
+.cilada p{margin:0 0 10px;color:var(--tinta2)}
+.cilada p:last-child{margin-bottom:0}
+.cilada .errado{font-style:italic;color:var(--alerta);font-weight:500}
+
+.cartao{background:var(--carta);border:1px solid var(--linha);padding:18px 22px;margin:24px 0}
+.cartao > :first-child{margin-top:0}
+.cartao > :last-child{margin-bottom:0}
+.cartao h3,.cartao h4{margin:0 0 10px;font-size:17.5px}
+.destaque{background:var(--tom-fraco);border-color:var(--tom-linha)}
+.destaque h3,.destaque h4{color:var(--tom)}
+.perigo{background:var(--grave-fundo);border-color:var(--grave-linha)}
+.perigo h4{color:var(--grave)}
+
+.termo{font-weight:600;color:var(--tom);border-bottom:1px dotted var(--tom-linha)}
+
+.rolo{overflow-x:auto;margin:22px 0;border:1px solid var(--linha);background:var(--carta)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--linha);vertical-align:top}
+th{background:var(--carta2);font-weight:600;font-size:12px;letter-spacing:.06em;
+ text-transform:uppercase;color:var(--tinta2);white-space:nowrap}
+td{color:var(--tinta2)}
+td.n{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap;
+ color:var(--tinta)}
+tbody tr:last-child td{border-bottom:none}
+
+ul.pontos{margin:15px 0;padding-left:0;list-style:none}
+ul.pontos li{position:relative;padding-left:21px;margin-bottom:10px;color:var(--tinta2)}
+ul.pontos li::before{content:"";position:absolute;left:2px;top:12px;width:7px;height:1px;
+ background:var(--tom-linha)}
+ol.passos{margin:15px 0;padding-left:0;list-style:none;counter-reset:pp}
+ol.passos li{position:relative;padding-left:35px;margin-bottom:12px;color:var(--tinta2)}
+ol.passos li::before{counter-increment:pp;content:counter(pp);position:absolute;left:0;top:2px;
+ font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--tom);font-weight:600;
+ border:1px solid var(--tom-linha);border-radius:50%;width:22px;height:22px;
+ display:grid;place-items:center;line-height:1}
+
+pre.fluxo{background:var(--carta);border:1px solid var(--linha);padding:20px;margin:24px 0;
+ overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:12.5px;line-height:1.65;
+ color:var(--tinta2);white-space:pre}
+pre.fluxo b{color:var(--tom);font-weight:600}
+pre.fluxo i{color:var(--medida);font-style:italic;font-weight:600}
+
+dl.glos{margin:24px 0;display:grid;grid-template-columns:auto 1fr;gap:0}
+dl.glos dt{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:600;color:var(--tom);
+ padding:12px 22px 12px 0;border-top:1px solid var(--linha);white-space:nowrap}
+dl.glos dd{margin:0;padding:12px 0;border-top:1px solid var(--linha);color:var(--tinta2);font-size:15px}
+
+footer{margin-top:88px;padding-top:28px;border-top:2px solid var(--tinta);
+ color:var(--tinta3);font-size:14.5px}
+footer h3{font-size:18px;margin:0 0 12px;color:var(--tinta)}
+footer b{color:var(--tinta2)}
+footer p{margin:0 0 12px}
+footer p.fecho{margin-top:22px;padding-top:16px;border-top:1px solid var(--linha)}
+
+@media (max-width:640px){
+  dl.glos{grid-template-columns:1fr}
+  dl.glos dt{padding:12px 0 2px;border-top:1px solid var(--linha)}
+  dl.glos dd{padding:0 0 12px;border-top:none}
+}
+@media (max-width:560px){
+  /* `nowrap` no <code> estoura a caixa a 380px: o token mais longo em prosa nua mede
+     ~334px contra ~328px de caixa. `pre-wrap` preserva os espacos internos de nomes
+     como `normalized by - none.csv`; `anywhere` autoriza a quebra dentro do
+     identificador. Acima de 560px nada muda. */
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+}
+
+/* IMPRESSAO. Sem este bloco o defeito e incapacitante e silencioso: Chrome e Edge honram
+   `prefers-color-scheme` ao imprimir E desligam fundos por padrao, entao quem le em tema
+   escuro do sistema imprime --tinta #ECEAE3 sobre papel branco — razao de contraste 1,06,
+   uma pagina em branco com texto fantasma. As TRES formas de :root entram na lista para
+   alcancar tambem o escuro por preferencia. */
+@media print{
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --papel:#FFFFFF; --carta:#FFFFFF; --carta2:#F4F2ED;
+    --linha:#CFCAC0;
+    --tinta:#000000; --tinta2:#26241F; --tinta3:#4A4740;
+    --tom:#5E2244; --tom-fraco:#F7ECF2; --tom-linha:#A87A93;
+    --medida:#124434; --medida-fundo:#EDF4F0; --medida-linha:#7FAE99;
+    --alerta:#6B3F0A; --alerta-fundo:#FBF4E8; --alerta-linha:#C69A55;
+    --grave:#7A2716; --grave-fundo:#FAEDE8; --grave-linha:#C99783;
+    --lateral-fundo:#FFFFFF; --lateral-ativo:#FFFFFF;
+  }
+  body{font-size:11pt;padding-left:0}
+  .lateral,.abre-lateral,.veu{display:none}
+  header.capa{border-bottom:1px solid var(--linha)}
+  .folha{max-width:none;padding-bottom:0}
+  /* o conteudo cortado a direita e irrecuperavel no papel: rolagem vira quebra */
+  .rolo,pre.fluxo{overflow-x:visible}
+  pre.fluxo{white-space:pre-wrap;overflow-wrap:anywhere}
+  code{white-space:pre-wrap;overflow-wrap:anywhere}
+  .cap{margin-top:34px;break-inside:auto}
+  .cap-cab,.medido,.cilada,.cartao,.rolo,pre.fluxo{break-inside:avoid}
+  h2,h3,h4{break-after:avoid}
+  nav.indice{break-after:page}
+  a{text-decoration:none}
+}
+</style>
+</head>
+<body>
+
+<header class="capa">
+  <div class="capa-int">
+    <div class="selo">
+      <span>refino quimiométrico</span>
+      <span>o diagnóstico</span>
+      <span><b>o que ele mede, e de onde vêm os números</b></span>
+    </div>
+    <h1>O diagnóstico automático</h1>
+    <p class="chamada">O botão «Diagnóstico» responde <b>uma</b> pergunta, e ela é mais estreita do
+      que o nome sugere: <b>que forma tem o erro nesta corrida?</b> Ele não responde se o dado é
+      bom, não escolhe o método de correção, e a percentagem que ele mostra <b>não é uma
+      probabilidade</b>.</p>
+    <p class="capa-nota">Este documento responde a uma pergunta: <b>estas classes existem na
+      literatura, ou foram inventadas aqui?</b>
+      A resposta é <b>as duas coisas</b>, em partes diferentes — e a partição está no capítulo 04.</p>
+  </div>
+</header>
+
+<main class="folha">
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c1">
+  <div class="cap-cab"><span class="cap-num">01</span>
+    <h2>O vocabulário mínimo, em quatro termos</h2>
+  </div>
+
+  <p>Sem estes quatro, o resto do documento não se lê. Cada um vale por si.</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Termo</th><th>O que é</th><th>Por que importa aqui</th></tr></thead>
+    <tbody>
+      <tr><td><b>feature</b></td><td>uma coluna da tabela: um sinal medido, nomeado
+        <code>tempo_massa</code> — por exemplo <code>2.25_810.7739m/z</code></td>
+        <td><b>Não é uma molécula.</b> Uma molécula gera vários sinais. «6035 features» são 6035
+          sinais, não 6035 substâncias</td></tr>
+      <tr><td><b>QC</b></td><td>uma mistura de <b>todas</b> as amostras, reinjetada
+        periodicamente ao longo da corrida</td>
+        <td>Como é sempre a mesma mistura, qualquer variação medida nela é <b>do aparelho</b>, não
+          biológica. É a régua de todo o sistema</td></tr>
+      <tr><td><b>RSD</b></td><td>desvio padrão dividido pela média — espalhamento
+        <b>relativo</b></td>
+        <td>Medido nos QCs, é ruído puro. <b>Menor é melhor:</b> RSD de 0,02 é o aparelho a repetir
+          a mesma medida com 2% de variação</td></tr>
+      <tr><td><b>deriva</b></td><td>o erro sistemático que escorrega ao longo de horas de
+        corrida</td>
+        <td>A amostra 60 é medida por um aparelho ligeiramente diferente do que mediu a amostra 1.
+          É o que a correção existe para desfazer</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cilada">
+    <h4>«menor é melhor» tem um motivo, e não é estético</h4>
+    <p>O objetivo do estudo é que a diferença entre dois grupos de pacientes seja <b>deles</b>. Se o
+      aparelho varia 100% entre injeções da mesma mistura, qualquer diferença que se veja entre
+      pacientes pode ser do aparelho. O RSD dos QCs mede exatamente quanta dessa dúvida existe.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c2">
+  <div class="cap-cab"><span class="cap-num">02</span>
+    <h2>A cascata: cinco regras, e a primeira que casa decide</h2>
+  </div>
+
+  <p>O diagnóstico não pontua nem vota. É uma <b>cascata</b>: as regras são testadas em ordem, e a
+    primeira que casar devolve a classe e encerra. A ordem é vinculante — trocá-la muda o
+    resultado.</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>#</th><th>Classe</th><th>O que significa fisicamente</th><th>O que a dispara</th></tr></thead>
+    <tbody>
+      <tr><td class="n">0</td><td><code>unassessable</code></td><td><b>não deu para medir</b> — não
+        é um defeito, é a ausência de medida</td><td>a métrica estrutural ficou indefinida ou
+        instável — <b>e há uma SEGUNDA porta, dentro da regra 3</b>: quando a trajetória dos QCs
+        <b>não se move</b>, com <code>&#931;|&#916;v|</code> abaixo do piso
+        <code>trajectory_movement_min</code>, que vale <b>1,0</b>. Ali a métrica estrutural está
+        <b>definida</b>; o que falta é deriva a medir, e trajetória sem movimento não é
+        errática. <b>Nos quatro arquivos deste estudo o piso não dispara, e em DOIS deles ele
+        nem é avaliado</b> — o movimento medido é <b>249,1</b> no <code>pos_hilic</code>,
+        <b>265,3</b> no <code>pos_c18</code>, <b>80,2</b> no <code>neg_hilic</code> e
+        <b>28,0</b> no <code>neg_c18</code>, todos muito acima de 1,0; mas <code>classify</code>
+        devolve na <b>regra 1</b> no <code>neg_c18</code> e na <b>regra 2</b> no
+        <code>neg_hilic</code>, e a linha que lê o piso está na regra 3. <b>«Não dispara» e
+        «não foi avaliado» não são o mesmo desfecho</b>, e confundi-los é contar medição que
+        não aconteceu como aprovação. Nos outros dois a regra é a 4, e ali o piso corre.
+        As duas portas dão o mesmo rótulo por causas diferentes</td></tr>
+      <tr><td class="n">1</td><td><code>clean</code></td><td>nenhum padrão detectado — o que
+        <b>não</b> é o mesmo que «o dado está bom»</td><td>RSD mediano <b>e</b> correlação com a
+        ordem de injeção, ambos abaixo do limiar</td></tr>
+      <tr><td class="n">2</td><td><code>step_change</code></td><td><b>degrau</b> — o sinal muda de
+        nível e <b>fica</b> no nível novo</td><td>há ponto de corte e o salto se
+        <b>sustenta</b></td></tr>
+      <tr><td class="n">3</td><td><code>gradual_drift</code></td><td><b>deriva gradual</b> — o sinal
+        escorrega ao longo da corrida</td><td>a trajetória dos QCs é suficientemente
+        monótona</td></tr>
+      <tr><td class="n">4</td><td><code>erratic</code></td><td>varia sem direção que a cascata
+        reconheça</td><td><b>nenhuma das anteriores casou</b></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Por que esta ordem, e não outra</h3>
+
+  <div class="cartao destaque">
+    <h4><code>unassessable</code> é a regra <b>0</b> por aritmética, não por importância</h4>
+    <p>Se a métrica estrutural for indefinida, a comparação «indefinido &lt; limiar» é <b>falsa</b>
+      pela norma de ponto flutuante. A matriz não casaria a regra 1, escorregaria pelas 2 e 3, e
+      cairia em <code>erratic</code> — o caso restante — <b>por acidente aritmético</b>.</p>
+    <p>E as duas conclusões levam a ações opostas: <code>erratic</code> sugere tentar método
+      robusto; <b>não avaliável</b> sugere olhar o dado antes de corrigir seja o que for.</p>
+  </div>
+
+  <div class="cartao destaque">
+    <h4><code>step_change</code> vem antes de <code>gradual_drift</code> porque <b>degrau também é monótono</b></h4>
+    <p>Um degrau sobe e fica. Visto pela estatística de monotonicidade, isso é tão monótono quanto
+      uma rampa. É só a <b>ordem</b> que separa os dois — e é por isso que a regra 3 pode usar uma
+      estatística que não distingue degrau de deriva.</p>
+  </div>
+
+  <div class="cilada">
+    <h4><code>erratic</code> é o ramo <span class="errado">else</span>, e não um achado</h4>
+    <p>A regra 4 não diz «o seu dado varia erraticamente». Diz <b>«eu tentei quatro padrões e
+      nenhum encaixou»</b>. É diagnóstico por exclusão, e deve ser lido assim.</p>
+    <p>A consequência prática: <code>erratic</code> é o destino de tudo o que a cascata não
+      reconhece, incluindo formas de erro reais que ela não foi construída para ver.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c3">
+  <div class="cap-cab"><span class="cap-num">03</span>
+    <h2>A percentagem não é uma probabilidade</h2>
+  </div>
+
+  <p>A tela mostra, por exemplo, <b>«confiança da classificação: 65%»</b>. Quase todo leitor entende
+    isso como «65% de chance de estar certo». <b>Não é isso.</b></p>
+
+  <p>A confiança é a <b>distância relativa até os limiares que não foram alcançados</b>, saturada em
+    1. Quando a cascata cai em <code>erratic</code>, ela reporta o quão <b>longe</b> os dados
+    ficaram de qualificar como degrau ou como deriva — e reporta a <b>menor</b> das duas
+    distâncias, porque quem decide é a condição mais apertada.</p>
+
+  <h3>O cálculo, sobre um arquivo real</h3>
+
+  <div class="medido">
+    <span class="q">de onde saem os 65% do <code>pos_hilic</code></span>
+    <span class="v">min( |0,7060 − 2,0| ÷ 2,0 ; |0,1545 − 0,487| ÷ 0,487 ) = min(0,647 ; 0,683) = <b>0,647</b> → 65%</span>
+    <span class="pop"><b>População:</b> o arquivo <code>measurements_pos_hilic.csv</code> deste
+      estudo, com 6035 features e 68 amostras. O <b>0,7060</b> é a sustentação do salto, comparada
+      ao limiar <b>2,0</b> da regra 2; o <b>0,1545</b> é a monotonicidade da trajetória dos QCs,
+      comparada ao limiar <b>0,487</b> da regra 3. Os dois limiares são os que <b>não</b> foram
+      alcançados — por isso a matriz caiu na regra 4.</span>
+  </div>
+
+  <div class="medido">
+    <span class="q">a mesma medição nos quatro arquivos</span>
+    <span class="v"><code>pos_hilic</code> <b>65%</b> · <code>pos_c18</code> <b>34%</b> ·
+      <code>neg_hilic</code> <b>43%</b> · <code>neg_c18</code> <b>20%</b> com a reserva escalar, e
+      <b>5%</b> com o limiar por modo</span>
+    <span class="pop"><b>População:</b> os quatro arquivos de referência deste estudo, remedidos em
+      13/09/2026 com <code>classify()</code> sobre as <b>duas</b> políticas. Três dos quatro
+      números são <b>idênticos</b> nas duas; o <code>neg_c18</code> é o único que a escolha do
+      limiar move, e move-o <b>3,6×</b> — margem de 0,1951 contra 0,0541.
+      <b>As quatro rotas de produção correm o limiar por modo</b>, então no <code>neg_c18</code>
+      o que a janela mostra é <b>5%</b>.
+      A rota do «Diagnóstico» é <b>condicional</b>, e são três
+      coisas e não duas: a <b>reserva</b> escalar, o <b>mapa</b> por modo, e o <b>valor que quem
+      chama manda</b>. O mapa entra quando o chamador <b>não manda</b> limiar de RSD; um valor
+      mandado desliga-o e passa a valer nos quatro modos — é o canal de «quem tem os dados
+      calibra». A janela não manda limiar nenhum, e por isso os <b>5%</b> são o que
+      ela mostra. A
+      percentagem não é característica da ferramenta: é de <b>cada corrida</b> — e neste
+      modo também do limiar.</span>
+  </div>
+
+  <div class="cilada">
+    <h4>o que a percentagem <b>não</b> diz</h4>
+    <p><span class="errado">«65% de confiança de que o meu dado está errático»</span> — não. Diz
+      «estou 65% do caminho longe de ter chamado isto de degrau».</p>
+    <p><span class="errado">«65% de chance de a classificação estar certa»</span> — não. O número
+      <b>nunca foi comparado</b> contra frequência real de acerto. O código o declara com essas
+      palavras: <b>derivada e não calibrada</b>.</p>
+    <p><b>E a janela não mostra este aviso.</b> As palavras <b>«derivada e não
+      calibrada»</b> vivem num comentário de código — <code>src/refino/domain/diagnosis.py</code>
+      — e em tela nenhuma. A janela Windows não acrescenta aviso nenhum.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c4">
+  <div class="cap-cab"><span class="cap-num">04</span>
+    <h2>De onde vem cada número: o que é da área, e o que é nosso</h2>
+  </div>
+
+  <p>Sem citação de literatura, a leitura natural seria que a camada inteira é invenção
+    deste trabalho. <b>Não é</b>, e a partição é esta:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Elemento</th><th>Procedência</th><th>Fonte</th></tr></thead>
+    <tbody>
+      <tr><td>RSD de QC como régua de qualidade</td><td><b>consensual na área</b></td>
+        <td>Broadhurst et al. (2018)</td></tr>
+      <tr><td>o corte de <b>0,20</b> em RSD</td><td><b>coincide</b> com o consensual
+        <code>&lt; 20%</code> — mas é a <b>RESERVA</b>, e não o corte que a cascata
+        aplica</td><td>idem, citando Sangster 2006 e Dunn 2011</td></tr>
+      <tr><td>dispersão dos QCs em componentes principais</td><td><b>inspeção recomendada</b>;
+        análogo do <b>D-ratio</b></td><td>idem</td></tr>
+      <tr><td>correlação com a <b>ordem de injeção</b></td><td><b>inspeção recomendada</b>, sem
+        limiar publicado</td><td>Broadhurst 2018; QComics 2024</td></tr>
+      <tr><td>os cortes <b>0,30</b>, <b>2,0</b> e <b>0,487</b></td><td><b>deste trabalho</b>,
+        medidos sobre os quatro arquivos</td><td>—</td></tr>
+      <tr><td>o <b>eixo</b> deriva × degrau</td><td><b>tem contraparte publicada</b></td><td>Čuklina 2021; Westgard 1977</td></tr>
+      <tr><td>a partição em <b>cinco</b> classes, a ordem, e os cortes</td><td><b>deste
+        trabalho</b></td><td>—</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cilada">
+    <h4>coincidir não é derivar, e a diferença é honestidade de procedência</h4>
+    <p>O <b>0,20</b> entrou no projeto como valor inicial da especificação, <b>não</b> por leitura de
+      Broadhurst. Escrever «derivado de Broadhurst» seria <span class="errado">procedência
+      inventada</span> — afirmar que uma fonte contém algo que ela não contém.</p>
+    <p>O que se pode afirmar, e é bastante: o nosso corte <b>coincide</b> com o corte de aceitação
+      consensual da área. Quem precisar defender o número agora tem onde.</p>
+    <p><b>E há uma segunda metade, de ESCOPO.</b> A coincidência é sobre a <b>reserva de modo
+      desconhecido</b>. A cascata compara contra o limiar <b>por modo</b> — 1,0466 · 0,2346 ·
+      0,4915 · 0,1639 —, e <b>três dos quatro ficam acima de 20%</b>. Dizer «o nosso corte coincide
+      com o consensual» sem esta metade é erro de escopo: o número está certo e a
+      população não é a que a frase sugere.</p>
+  </div>
+
+  <h3>O eixo deriva × degrau tem contraparte publicada</h3>
+
+  <div class="cilada">
+    <h4>supor que <span class="errado">«a literatura não classifica deriva em tipos
+      discretos»</span></h4>
+    <p><b>Čuklina et al. (2021)</b>, <i>Mol. Syst. Biol.</i> 17:e10240: <i>«In proteomic datasets,
+      two types of batch effects are frequently encountered, continuous and discrete.»</i> Os
+      <b>contínuos</b> são deriva ao longo das corridas, corrigidos por <b>LOESS</b>; os
+      <b>discretos</b> são deslocamento do lote inteiro, corrigidos por centragem. <b>O corretor é
+      condicionado ao tipo</b> — que é precisamente a premissa da cascata deste trabalho.</p>
+    <p><b>Westgard et al. (1977)</b>, <i>Clin. Chem.</i> 23(10):1857, já nomeava <i>«an increase in
+      random error, a systematic shift, a systematic drift, and mixtures of these»</i>.</p>
+    <p><b>Isso fortalece o trabalho em vez de o enfraquecer:</b> o eixo que a nossa cascata
+      separa é o mesmo que a literatura separa, e ela <b>corrobora</b> a distinção.</p>
+  </div>
+
+  <p>O que continua <b>deste trabalho</b> é a partição fechada em <b>cinco</b> classes, a ordem das
+    regras, e os cortes <b>2,0</b> e <b>0,487</b>.</p>
+
+  <h3>A alternativa publicada existe — e responde outra pergunta</h3>
+
+  <p>QComics (2024) recomenda, para detectar deriva e observações fora de controle, <b>cartas de
+    controle de Shewhart com as regras múltiplas de Westgard</b> — um arcabouço com décadas de uso
+    em química clínica, e com limiares publicados:</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>Regra</th><th>Dispara quando</th><th>Aplicável com 7 QCs?</th></tr></thead>
+    <tbody>
+      <tr><td><code>1_3s</code></td><td>um QC excede ±3 desvios padrão</td><td><b>sim</b></td></tr>
+      <tr><td><code>2_2s</code></td><td>dois QCs consecutivos excedem ±2 DP na mesma direção</td><td><b>sim</b></td></tr>
+      <tr><td><code>4_1s</code></td><td>quatro consecutivos excedem ±1 DP na mesma direção</td><td>poder mínimo</td></tr>
+      <tr><td><code>10_x</code></td><td>dez consecutivos do mesmo lado da média</td><td><b>não</b> — impossível por contagem</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="cartao destaque">
+    <h4>por que <b>não</b> substituímos a cascata por elas</h4>
+    <p><b>Respondem outra pergunta.</b> «Está fora de controle?» não é «qual a forma do erro?». A
+      segunda é a que decide quantos lotes declarar, e é a que este projeto precisa.</p>
+    <p><b>E metade delas não roda neste dado.</b> Com 7 QCs, a regra dos dez consecutivos não pode
+      disparar, e a dos quatro tem poder mínimo.</p>
+    <p>A escolha foi <b>ancorar e declarar</b>, não substituir.</p>
+  </div>
+
+  <div class="cartao destaque">
+    <h4>um número novo na mesma rota: a PERMANOVA</h4>
+    <p>A rota de diagnóstico — <code>POST /matrizes/diagnosticar</code>, que é
+      camada interna da janela — calcula também uma <b>PERMANOVA</b> sobre os componentes da
+      PCA estrutural da matriz <b>ingerida</b>: a pseudo-F de Anderson (2001), com 999 permutações e
+      <b>semente</b> (a da rota, padrão 42), e ao lado dela o teste de dispersão de Anderson (2006).
+      Os dois <code>p</code> aparecem <b>na mesma frase</b>, no rodapé da figura de scores da PCA,
+      porque o <code>p</code> da PERMANOVA sozinho confunde diferença de centro com diferença de
+      espalhamento.</p>
+    <p><b>A população é outra que a da nuvem:</b> o teste corre sobre as amostras de estudo, com QC e
+      validação de fora — nos quatro arquivos deste estudo, 61 das 68 injeções —, enquanto a figura
+      desenha todas.</p>
+    <p><b>Ela não entra na cascata de cinco classes</b> e não muda o diagnóstico. E há uma armadilha
+      de interface: <b>desmarcar a caixa «PERMANOVA nos componentes» não impede o
+      cálculo</b> — tira a etapa da barra de progresso, e a conta corre na mesma.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c5">
+  <div class="cap-cab"><span class="cap-num">05</span>
+    <h2>O que a literatura diz dos nossos dados</h2>
+  </div>
+
+  <p>Esta seção não é sobre o método — é sobre o <b>material</b>. E é desconfortável, o que é
+    exatamente por que ela existe.</p>
+
+  <div class="medido">
+    <span class="q">QCs por corrida, medido nos quatro arquivos</span>
+    <span class="v"><b>7</b> QCs, nas posições de injeção 1, 12, 23, 34, 45, 56 e 68</span>
+    <span class="pop"><b>População:</b> os quatro arquivos de referência, lidos por
+      <code>load_matrix</code> com a máscara de QC, em 05/09/2026. Os intervalos entre QCs
+      consecutivos são <b>11, 11, 11, 11, 11 e 12</b> injeções. Os quatro modos são
+      idênticos nestas três medidas.</span>
+  </div>
+
+  <div class="cartao perigo">
+    <h3>uma das medidas fica <b>abaixo</b> do recomendado</h3>
+    <p>O artigo pede um QC <b>ao menos a cada 10 amostras</b> e/ou ao menos cinco QCs, e temos
+      <b>10 amostras entre QCs</b> (11 no último intervalo): o espaçamento está dentro. Fica abaixo só
+      a exigência de oito QCs para correção não linear. O SERRF entra nela por inferência nossa: a
+      obra é de 2018 e o SERRF, de 2019.</p>
+    <p>Broadhurst 2018 pede <b>ao menos 5 QCs</b> distribuídos uniformemente, e <b>ao menos 8 quando
+      se usa correção não-linear</b> — que é exatamente o caso de SERRF e LOESS. Temos <b>7</b>.</p>
+    <p><b>Não é defeito deste trabalho</b> — é propriedade do dado que o laboratório produziu. Mas
+      limita o que <b>qualquer</b> método pode concluir sobre estas corridas, o nosso incluído, e
+      por isso pertence à seção de limitações e não a uma nota de rodapé.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c6">
+  <div class="cap-cab"><span class="cap-num">06</span>
+    <h2>Quanto ele acerta</h2>
+  </div>
+
+  <p>Há um teste que responde isto sem ambiguidade: gerar matrizes sintéticas em que o tipo de
+    defeito verdadeiro é <b>conhecido por construção</b>, porque foi plantado, e contar quantas a
+    cascata recupera.</p>
+
+  <div class="medido">
+    <span class="q">taxa de recuperação do tipo plantado — critério <code>[CA-7.4]</code></span>
+    <span class="v"><b>69,5%</b>, contra alvo declarado de <code>&gt; 85%</code></span>
+    <span class="pop"><b>População:</b> <b>200</b> matrizes sintéticas do corpus reprodutível,
+      <b>50 por tipo de defeito</b>, sob a política de diagnóstico de produção e <b>sem nenhum
+      limiar reajustado</b> para acomodar o resultado. Medido em 31/08/2026. O resíduo é
+      <code>step_change</code>, que <b>recupera 52%</b> — <b>26 de 50</b> —, e a maior
+      célula de erro é <b>23 de 50</b> a cair em <code>erratic</code>.</span>
+  </div>
+
+  <p>O critério <b>não passa</b>, e a Fase 7 não fechou por causa disso. Isso está declarado no
+    trabalho como <b>resultado</b>, não escondido: um alvo escrito antes da medição, e uma medição
+    que não o alcançou.</p>
+
+  <div class="cilada">
+    <h4>o que este número <b>não</b> autoriza dizer</h4>
+    <p><span class="errado">«o diagnóstico não funciona»</span> — nos quatro arquivos reais a
+      classificação é a esperada. O 69,5% é sobre matrizes sintéticas, que cobrem regiões do espaço
+      que os quatro arquivos não visitam.</p>
+    <p><span class="errado">«69,5% é a acurácia da ferramenta»</span> — é a acurácia <b>desta
+      cascata</b>, sobre <b>este corpus</b>, na tarefa de recuperar um tipo plantado. Nenhuma outra
+      leitura está medida.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c7">
+  <div class="cap-cab"><span class="cap-num">07</span>
+    <h2>O que o diagnóstico <b>não</b> faz</h2>
+  </div>
+
+  <p>Esta seção é o escopo negativo, e ela existe porque a leitura natural da tela sugere mais do
+    que a ferramenta entrega.</p>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <thead><tr><th>O que se supõe</th><th>O que de facto acontece</th></tr></thead>
+    <tbody>
+      <tr><td>«o diagnóstico escolhe o método de correção»</td><td><b>Não</b> — e a precisão
+        importa. Não existe mapa <code>tipo de defeito → corretor</code> no código nem no
+        documento, e o <b>pipeline de correção</b> não consome a classe. O botão «Palpite» também
+        não consome o perfil: ele mede os três corretores em 200 features do arquivo, e nem a
+        classe nem a confiança do diagnóstico entram nessa medição — entram os lotes, quando o
+        número que o diagnóstico propôs está no campo. <b>Quem consome o perfil inteiro é a
+        política aprendida da linha de comando</b>, em <code>--auto aprendida</code>: ela recebe
+        um vetor que inclui as cinco indicadoras <code>is_&lt;tipo&gt;</code> <b>e a confiança</b>.
+        A árvore que o produto carrega, retreinada no corpus
+        <code>corpus_fase9_7qcs_ranger.jsonl</code>, <b>não corta pela confiança</b>: a do
+        corretor corta pela correlação do PC1 com a injeção, pela fração de zeros, pela razão de
+        dispersão dos QCs e pela mediana do RSD dos QCs; a da margem, pelo p75 do RSD, pela razão
+        de dispersão, pela correlação do PC1 e pela indicadora <code>is_step_change</code> —
+        então uma classe entra, na margem. Lido de
+        <code>decision/politica_aprendida.json</code>.</td></tr>
+      <tr><td>«o diagnóstico diz se o dado está bom»</td><td><b>Não.</b> Diz que <b>forma</b> tem o
+        erro. <code>clean</code> significa «nenhum padrão detectado», não «o dado presta»</td></tr>
+      <tr><td>«a percentagem é a confiança no resultado»</td><td><b>Não.</b> É a distância aos
+        limiares não alcançados, e não está calibrada</td></tr>
+      <tr><td>«o diagnóstico usa o modo escolhido»</td><td><b>Só num ponto:</b> o limiar de RSD da
+        regra 1 varia por modo. As regras 2, 3 e 4 são cegas ao modo</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Uma medição que atualiza o próprio projeto</h3>
+
+  <p>A especificação afirma que o tipo de defeito <b>não separa</b> qual corretor vence — e foi esse
+    o argumento para nunca se construir o mapa. Essa medição foi feita sobre 12 matrizes. Sobre o
+    corpus completo de 40, o quadro é outro:</p>
+
+  <div class="medido">
+    <span class="q">tipo de defeito × corretor vencedor</span>
+    <span class="v"><code>erratic</code> → <b>79%</b> serrf (11 de 14) · <code>gradual_drift</code> →
+      <b>41%</b> serrf (9 de 22) · base geral <b>60%</b> (24 de 40)</span>
+    <span class="pop"><b>População:</b> as <b>40</b> matrizes do corpus de treino da política, 10
+      por modo, rotuladas pelo oráculo. Teste exato de Fisher entre as duas classes principais:
+      <b>p = 0,041</b>, razão de chances <b>5,3</b>, <b>n = 36</b>. Medido em 05/09/2026.
+      Conferido em 16/09/2026: os três números continuam a reproduzir
+      exatamente sobre o arquivo, mas o <code>defect_type</code> gravado em
+      <code>corpus_fase9.jsonl</code> foi congelado em <b>03/08/2026</b>, sob a política
+      <b>escalar</b> de RSD — 0,20 para os quatro modos —, e a regra 1 que a produção corre usa o
+      <b>limiar por modo</b>. Recomparadas as duas políticas sobre
+      as 40 linhas, <b>8 mudam o desfecho da regra 1</b>: cinco entram em <code>clean</code>
+      (<code>pos_hilic</code> 1, 4, 6 e 7, <code>pos_c18</code> 3) e três saem dele
+      (<code>neg_c18</code> 2, 5 e 7). A <b>direção</b> do achado sobrevive; os três números não —
+      e não há número novo a pôr no lugar sem <b>regerar o corpus</b>, porque reclassificar as três
+      que saem de <code>clean</code> exige as regras 2 a 4, que precisam das matrizes e não se leem
+      do arquivo.
+      Em 18/10/2026 o corpus foi regerado — o mesmo plano de 40 matrizes, com
+      7 QCs e diagnosticado com o limiar por modo que a produção corre
+      (<code>data/fixtures/corpus_fase9_7qcs.jsonl</code>). Sobre ele: <code>erratic</code> →
+      <b>78%</b> serrf (7 de 9) · <code>gradual_drift</code> → <b>32%</b> serrf (7 de 22) ·
+      <code>clean</code> → 7 de 8 serrf · base geral <b>55%</b> (22 de 40). Fisher entre as duas
+      classes principais: <b>p = 0,044</b>, razão de chances <b>7,5</b>, <b>n = 31</b> — a direção
+      continua, e a ressalva abaixo também.</span>
+  </div>
+
+  <div class="cilada">
+    <h4>isto é sugestivo, e não estabelecido</h4>
+    <p>Com <b>36</b> casos e um teste rodado <b>depois</b> de olhar os dados, não é conclusão
+      publicável. É o suficiente para dizer que a premissa «não separa» merece ser <b>remedida</b>
+      sobre o corpus atual — e não mais que isso.</p>
+    <p><b>E a conferência de 16/09/2026 reforça a ressalva em vez de a aliviar.</b> Sob o limiar por
+      modo que a produção corre, os rótulos das 40 linhas mudam, e o <b>p passa a depender de onde
+      caem as três matrizes que deixam de ser <code>clean</code></b> — algo que só a regeneração do
+      corpus responde, porque a reclassificação delas passa pelas regras 2 a 4. Os extremos
+      medidos: <b>p = 0,013</b> se as três caírem em <code>erratic</code>, <b>p = 0,129</b> se
+      caírem em <code>gradual_drift</code>, <b>p = 0,054</b> se forem simplesmente excluídas. Um
+      sinal cuja significância varia de <b>0,013 a 0,129</b> conforme três matrizes é exatamente o
+      que «sugestivo e não estabelecido» quer dizer.</p>
+    <p>A regeneração respondeu, e a ressalva continua: no corpus
+      refeito com 7 QCs e o limiar por modo, o teste dá <b>p = 0,044</b> com <b>31</b> casos —
+      dentro da faixa de 0,013 a 0,129 acima, e ainda um teste rodado depois de olhar os dados. Os
+      <b>36</b> casos do primeiro parágrafo são do corpus de oito QCs.</p>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------ -->
+<section class="cap" id="c8">
+  <div class="cap-cab"><span class="cap-num">08</span>
+    <h2>Ficha técnica</h2>
+  </div>
+
+  <h3>A frase com que isto se explica de pé</h3>
+
+  <div class="cartao destaque">
+    <p><b>O diagnóstico classifica a forma do erro em cinco classes, por uma cascata de regras cujas
+      duas quantidades da primeira regra são as que a literatura de consenso recomenda inspecionar,
+      cujo limiar de RSD coincide com o corte consensual da área, e cujos demais limiares e cuja
+      partição são construção deste trabalho — com taxa de recuperação medida de 69,5% sobre 200
+      matrizes sintéticas, contra alvo de 85%.</b></p>
+  </div>
+
+  <h3>Onde os números vivem</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td>a cascata e a ordem das regras</td><td><code>src/refino/diagnosis/profile.py</code></td></tr>
+      <tr><td>os limiares e a procedência de cada um</td><td><code>src/refino/diagnosis/policy.py</code></td></tr>
+      <tr><td>as duas métricas estruturais</td><td><code>src/refino/metrics/structure.py</code></td></tr>
+      <tr><td>o corpus de treino da política</td><td><code>data/fixtures/corpus_fase9_7qcs.jsonl</code>; o de oito QCs, <code>data/fixtures/corpus_fase9.jsonl</code>, fica para as medições que o usaram. O artefato distribuído sai de <code>data/fixtures/corpus_fase9_7qcs_ranger.jsonl</code>, rotulado com a floresta que conta como a do R; e os rótulos dele são do SERRF de antes de ele ficar fiel ao R, e ficam por remedir.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>As duas referências, por extenso</h3>
+
+  <div class="rolo" tabindex="0" role="region" aria-label="tabela"><table>
+    <tbody>
+      <tr><td><b>Broadhurst et al. (2018)</b></td><td>«Guidelines and considerations for the use of
+        system suitability and quality control samples in mass spectrometry assays applied in
+        untargeted clinical metabolomic studies». <i>Metabolomics</i>.
+        <code>10.1007/s11306-018-1367-3</code></td></tr>
+      <tr><td><b>González-Domínguez et al. (2024)</b></td><td>«QComics: Recommendations and
+        Guidelines for Robust, Easily Implementable and Reportable Quality Control of Metabolomics
+        Data». <i>Analytical Chemistry</i>. <code>10.1021/acs.analchem.3c03660</code></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Limites declarados deste documento</h3>
+
+  <ul>
+    <li><b>Sangster 2006 e Dunn 2011 não foram lidos.</b> Entram como <b>citados por</b> Broadhurst
+      2018, que é o que se conferiu. Citar fonte não lida seria procedência inventada.</li>
+    <li><b>Nenhum limiar foi tocado</b> por esta ancoragem. Citar não muda comportamento: o
+      <code>[CA-7.4]</code> continua a medir 69,5%, e a cascata continua a ser heurística deste
+      trabalho.</li>
+    <li><b>Não há portão que confira estas citações</b> contra a fonte externa. As afirmações de
+      literatura foram conferidas por leitura dos artigos em 05/09/2026 e <b>não são verificáveis
+      pela suíte de testes</b> — é prosa cujo referente vive fora do repositório.</li>
+    <li><b>A busca de literatura não foi exaustiva, e há uma taxonomia ENCONTRADA e não
+      conferida.</b> Foram consultadas as duas diretrizes de consenso da área e a literatura
+      adjacente de correção de deriva. Não se afirma que nenhuma taxonomia publicada exista — e
+      há uma que <b>foi encontrada e não foi conferida na fonte</b>: a literatura de
+      <b>reconhecimento de padrão em carta de controle</b>, que classifica <b>seis a sete formas
+      automaticamente</b>. Ela vai nomeada aqui em vez de ficar de fora, com a ressalva de que
+      ninguém a leu.</li>
+  </ul>
+</section>
+
+</main>
+
+</body>
+</html>

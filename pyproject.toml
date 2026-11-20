@@ -1,0 +1,243 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "refino"
+version = "0.1.0"
+description = "Refino quimiométrico automatizado de matrizes de LC-MS"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+
+# Um único minor, deliberadamente: com requires-python aberto, duas máquinas
+# resolveriam minors diferentes e a mesma semente deixaria de dar a mesma saída.
+requires-python = ">=3.12,<3.13"
+
+# Versões exatas, não faixas. pandas está em major 3.x com quebras em relação
+# ao 2.x; uma faixa deixaria a resolução escorregar entre majors.
+#
+# Os pinos de runtime se repetem em `$RuntimeDoAlvo` de `scripts/congela_windows.ps1`,
+# que monta a venv do executável. Ao mudar uma versão aqui, mude lá também.
+dependencies = [
+    "numpy==2.5.1",
+    "pandas==3.0.5",
+    "scipy==1.18.0",
+    "scikit-learn==1.9.0",
+    # Já vinha com o scikit-learn. É dependência direta porque `statistics/clustering.py`
+    # a importa para limitar o OpenMP do `KMeans` a uma thread: a redução paralela da
+    # inércia não é reproduzível bit a bit.
+    "threadpoolctl==3.6.0",
+    "ruptures==1.1.10",
+    "joblib==1.5.3",
+    "fastapi==0.140.0",
+    "SQLAlchemy==2.0.51",
+    # `alembic` para as migrações do banco, que precisam subir e descer sem perda.
+    # `matplotlib` desenha os gráficos do relatório e as figuras da janela.
+    "alembic==1.18.5",
+    "matplotlib==3.11.1",
+    # Servidor da API. Declarado, e não só instalado, porque o teste de pinos confere
+    # apenas o que está declarado.
+    "uvicorn==0.51.0",
+    # `File()` e `Form()` do FastAPI, usados no envio de arquivos, exigem este pacote.
+    "python-multipart==0.0.32",
+    # Predição de atividade de via a partir dos picos, sem identificação prévia: o
+    # algoritmo do mummichog (Li et al., PLoS Comput Biol, 2013), o mesmo da aba
+    # "MS Peaks to Pathways" do MetaboAnalyst. Licença BSD 3-Clause, compatível com a
+    # GPL-3.0-or-later. O pacote traz embutido o modelo metabólico humano MFN 1.10.4.
+    # `networkx` é dependência dele, usada na análise modular.
+    #
+    # O mummichog também puxa `xlsxwriter`, que só `mummichog.reporting` usa; os dois
+    # ficam fora do executável pela lista `EXCLUIDOS` de `refino-desktop.spec`.
+    "mummichog==2.7.0",
+    "networkx==3.6.1",
+    # Cliente HTTP com que a interface fala com a API; o `TestClient` do FastAPI também
+    # depende dele. `httpx2` e não `httpx` porque o starlette depreciou o segundo, e
+    # manter os dois seria ter duas bibliotecas de HTTP na mesma árvore.
+    "httpx2==2.9.1",
+]
+
+# O comando `refino` da CLI.
+[project.scripts]
+refino = "refino.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+    "pytest-cov==7.1.0",
+    "hypothesis==6.161.5",
+    "ruff==0.16.0",
+    "mypy==2.3.0",
+    # Stubs do scipy; a versão acompanha a de `scipy` em `dependencies`. Entram como
+    # dependência e não como `type: ignore` no import porque `metrics/structure.py`
+    # está sob mypy estrito, e silenciar o import apagaria a checagem de toda chamada
+    # a `scipy.stats`.
+    "scipy-stubs==1.18.0.1",
+    # Comparação de imagem das figuras. `--mpl` não entra no `addopts` de propósito:
+    # com ele a suíte inteira passaria a depender da renderização de texto do
+    # matplotlib. A comparação roda em subprocesso, em `tests/unit/test_plots_arnes.py`.
+    "pytest-mpl==0.19.0",
+]
+
+# A janela (PySide6), os testes dela (pytest-qt) e o congelamento (pyinstaller). O grupo
+# é opcional porque o PySide6 pesa centenas de MB e quem só usa a biblioteca ou a CLI
+# não precisa dele; `make setup` o instala.
+#
+# O teste de pinos trata o grupo como atômico: ou nenhum membro instalado, ou todos na
+# versão declarada. Por isso o `pyinstaller` fica aqui e não num grupo próprio. Os pinos
+# de PySide6 e pyinstaller também se repetem em `scripts/congela_windows.ps1`.
+desktop = [
+    "PySide6==6.11.2",
+    "pytest-qt==4.5.0",
+    "pyinstaller==6.22.2",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+# ---------------------------------------------------------------------------
+# pytest e cobertura
+# ---------------------------------------------------------------------------
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# --strict-markers: marcador digitado errado falha em vez de silenciosamente
+# não filtrar nada (um `-m golden` com erro de digitação passaria como
+# "nenhum teste falhou").
+#
+# A cobertura e o piso de 85% ficam no addopts para valer em toda execução da
+# suíte. Uma seleção parcial não alcança o piso e precisa passar `--no-cov`.
+addopts = "--strict-markers --strict-config --cov=src/refino --cov-report=term-missing --cov-fail-under=85"
+
+# Os marcadores da suíte. A seleção de cada commit é `-m "not slow"`.
+markers = [
+    "property: invariantes via hypothesis",
+    "golden: comparação contra as saídas do R em data/reference/",
+    "integration: pipeline completo num modo real",
+    "synthetic: recuperação com verdade conhecida",
+    "slow: orçamento de tempo em dezenas de minutos",
+]
+
+[tool.coverage.run]
+source = ["src/refino"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+# Sem exclude_lines de propósito: um padrão global tiraria linhas da medição sem
+# nada indicar. Exclusão é pontual, com `pragma: no cover` no próprio código.
+
+# ---------------------------------------------------------------------------
+# ruff
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+# O `ruff format` reescreve blocos de código dentro de `.md`, e a documentação mostra
+# trechos ilustrativos que não são programa completo: formatá-los muda o que o texto
+# explica. A exclusão fica aqui para valer em toda invocação do ruff, e não só nas do
+# `make lint`.
+extend-exclude = ["*.md"]
+
+# Sem `force-exclude` a exclusão acima vale só para a varredura: um arquivo passado
+# explicitamente na linha de comando, que é o que faz um editor que formata ao gravar,
+# seria formatado mesmo assim.
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.ruff.lint.isort]
+# `tests` não vive sob src/, então o isort do ruff o classificaria como
+# terceiro e brigaria com a ordenação a cada import de tests.conftest.
+known-first-party = ["refino", "tests"]
+
+[tool.ruff.lint.per-file-ignores]
+# Este arquivo contém, de propósito, código que viola lint e tipos: é o material
+# que os testes injetam para provar que as verificações estão ativas.
+"tests/test_tooling.py" = ["E501"]
+
+# Migrações geradas por `alembic revision --autogenerate`. Reformatá-las à mão as
+# faria divergir da próxima geração. Só o E501 fica isento; o resto do lint vale.
+"src/refino/persistence/migrations/versions/*.py" = ["E501"]
+
+# ---------------------------------------------------------------------------
+# mypy
+# ---------------------------------------------------------------------------
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src/refino"]
+# Padrão frouxo na base e estrito nos pacotes do núcleo, mais abaixo. O estrito é
+# escopado por override e não por linha de comando, para que o editor e o `make lint`
+# verifiquem a mesma coisa.
+#
+# Estes três flags fazem parte de `strict` e valem para a árvore toda.
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+# Bibliotecas que não publicam `py.typed` nem stubs. O `ignore_missing_imports` vai
+# escopado a cada módulo, um a um, para que uma dependência nova sem stub reprove em
+# vez de passar despercebida. Não afrouxa o estrito dos nossos pacotes: o que fica
+# `Any` é só a fronteira da biblioteca de terceiro.
+[[tool.mypy.overrides]]
+module = ["sklearn.*"]
+ignore_missing_imports = true
+
+# Usado pelos corretores, que paralelizam sobre features com `Parallel`/`delayed`.
+[[tool.mypy.overrides]]
+module = ["joblib.*"]
+ignore_missing_imports = true
+
+# Importado em `statistics/clustering.py` para limitar as threads do `KMeans`.
+[[tool.mypy.overrides]]
+module = ["threadpoolctl.*"]
+ignore_missing_imports = true
+
+# `pathways/analise.py` converte o resultado do mummichog para `dataclass` tipados
+# num ponto só; quem consome o relatório não vê `Any`.
+[[tool.mypy.overrides]]
+module = ["mummichog.*"]
+ignore_missing_imports = true
+
+# Modo estrito nos pacotes do núcleo, com os flags componentes listados um a um em
+# vez de `strict = true`. O atalho não pode ser usado: dentro de um override ele vaza
+# para a configuração global, a árvore inteira passa a ser verificada em modo estrito
+# e o escopo por pacote deixa de existir sem aviso. `tests/test_mypy_strict_parity.py`
+# confere que estes flags, somados aos três da base, são os que o mypy instalado
+# chama de `strict`.
+[[tool.mypy.overrides]]
+# Pacote novo de núcleo entra nesta lista ao ser criado: o teste de paridade confere
+# os flags, não os módulos.
+module = [
+    "refino.domain",
+    "refino.domain.*",
+    "refino.metrics",
+    "refino.metrics.*",
+    "refino.correction",
+    "refino.correction.*",
+    "refino.diagnosis",
+    "refino.diagnosis.*",
+    "refino.plots",
+    "refino.plots.*",
+    "refino.statistics",
+    "refino.statistics.*",
+    "refino.preprocessing",
+    "refino.preprocessing.*",
+    "refino.pathways",
+    "refino.pathways.*",
+]
+disallow_any_generics = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_decorators = true
+disallow_subclassing_any = true
+check_untyped_defs = true
+warn_return_any = true
+no_implicit_reexport = true
+strict_equality = true
+extra_checks = true

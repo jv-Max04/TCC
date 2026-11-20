@@ -1,0 +1,301 @@
+{
+ "o_que": "O experimento do `min_samples_split` da floresta do SERRF: o ganho no QC e a REFUTACAO dele",
+ "data": "2026-08-30",
+ "commit": "35a4d5ccfc50500a53c2dd1d6f225ac7f53f9755",
+ "veredito": "NAO ADOTAR `split=2` NEM o conserto fiel. O ganho no RSD dos QCs acompanha a flexibilidade da floresta e nao a recuperacao da verdade — medido em tres pontos.",
+ "1_forma_da_arvore": {
+  "o_que": "quantas divisoes cada arvore faz, 7 amostras x 10 preditores, 500 arvores",
+  "ranger_0_18_0": {
+   "divisoes_media": 1.274,
+   "divisoes_min": 1,
+   "divisoes_max": 2,
+   "nos_media": 3.548,
+   "nos_min": 3,
+   "nos_max": 5,
+   "mtry": 3,
+   "min_node_size": 5,
+   "num_trees": 500,
+   "splitrule": "variance"
+  },
+  "nosso_split_5": {
+   "divisoes_media": 0.638,
+   "divisoes_min": 0,
+   "divisoes_max": 2,
+   "nos_media": 2.276,
+   "mtry_efectivo": 3
+  },
+  "nosso_split_2": {
+   "divisoes_media": 3.676,
+   "divisoes_min": 2,
+   "divisoes_max": 6
+  },
+  "causa_raiz": "`min_samples_split` do sklearn conta linhas DISTINTAS do bootstrap; `min.node.size` do ranger conta amostras sorteadas COM multiplicidade. Uma raiz de 7 sorteios mostrou n_node_samples=4 ao lado de weighted_n_node_samples=7.0, e o corte de 5 e comparado contra o 4. Sortear 7 com reposicao da ~4,5 distintas, entao o corte trava a raiz em 41% das nossas arvores e NUNCA na do ranger.",
+  "correspondencia_medida": {
+   "0_divisoes": "206 arvores, 3 a 4 distintas",
+   "1_divisao": "269 arvores, 5 a 6 distintas",
+   "2_divisoes": "25 arvores, 6 a 7 distintas"
+  }
+ },
+ "2_ganho_na_regua_dos_qc": {
+  "o_que": "RSD mediano fora da amostra, pos_c18, populacao inteira (2512 features)",
+  "referencia": {
+   "none": 24.1455,
+   "r_serrf": 15.3515
+  },
+  "por_min_samples_split": {
+   "5": 21.567,
+   "4": 16.718187146763036,
+   "3": 13.388316776383286,
+   "2": 12.598196935552618
+  },
+  "leitura": "monotonico e grande: 21,57 -> 12,60. Com split=2 ficariamos ABAIXO do R."
+ },
+ "3_a_refutacao_contra_a_verdade": {
+  "o_que": "erro contra a VERDADE FUNDAMENTAL, dado sintetico com deriva injetada",
+  "desenho": "gradual_drift, drift_to_noise_ratio=0.8, 300 features, imita pos_c18, SERRF semente 42",
+  "sementes": [
+   7,
+   11,
+   23,
+   42,
+   101
+  ],
+  "split_5": {
+   "erro_medio": 0.16980598522231855,
+   "erro_dp": 0.018811012860408993,
+   "correlacao_media": 0.9675855119101733,
+   "piorada_media": 0.04133333333333333,
+   "piorada_dp": 0.024562844569254054,
+   "por_semente": [
+    {
+     "erro": 0.1864480210850647,
+     "correlacao": 0.9675532115750661,
+     "fracao_piorada": 0.043333333333333335
+    },
+    {
+     "erro": 0.18514403502930324,
+     "correlacao": 0.95210630649365,
+     "fracao_piorada": 0.08
+    },
+    {
+     "erro": 0.15311587995238535,
+     "correlacao": 0.976661097295423,
+     "fracao_piorada": 0.04
+    },
+    {
+     "erro": 0.17809448688021515,
+     "correlacao": 0.976546783875558,
+     "fracao_piorada": 0.03
+    },
+    {
+     "erro": 0.14622750316462427,
+     "correlacao": 0.9650601603111695,
+     "fracao_piorada": 0.013333333333333334
+    }
+   ]
+  },
+  "split_2": {
+   "erro_medio": 0.1762135485215543,
+   "erro_dp": 0.01817634487447023,
+   "correlacao_media": 0.9668712044244108,
+   "piorada_media": 0.18000000000000002,
+   "piorada_dp": 0.12976474439881153,
+   "por_semente": [
+    {
+     "erro": 0.18340819472677056,
+     "correlacao": 0.9702314120342784,
+     "fracao_piorada": 0.08666666666666667
+    },
+    {
+     "erro": 0.19368986143451244,
+     "correlacao": 0.9531890462757941,
+     "fracao_piorada": 0.23666666666666666
+    },
+    {
+     "erro": 0.1856972307159765,
+     "correlacao": 0.9693626900472823,
+     "fracao_piorada": 0.38333333333333336
+    },
+    {
+     "erro": 0.1712011276860584,
+     "correlacao": 0.9778956450796118,
+     "fracao_piorada": 0.10666666666666667
+    },
+    {
+     "erro": 0.1470713280444536,
+     "correlacao": 0.9636772286850871,
+     "fracao_piorada": 0.08666666666666667
+    }
+   ]
+  },
+  "pareado_2_menos_5": {
+   "erro": {
+    "media": 0.006407563299235764,
+    "todas_no_mesmo_sentido": false
+   },
+   "fracao_piorada": {
+    "media": 0.1386666666666667,
+    "todas_no_mesmo_sentido": true
+   }
+  },
+  "criterio_de_desfecho_pre_registrado": {
+   "a": "erro cai e piorada nao sobe -> ganho genuino",
+   "b": "erro cai e piorada sobe -> melhora na media e estraga uma parte",
+   "c": "erro sobe -> achatamento: o ganho no QC e artefato",
+   "d": "correlacao cai -> destruiu estrutura",
+   "disparou": "c, com a piorada consistente nas cinco. Uma semente so tinha lido (b)."
+  }
+ },
+ "o_que_sobrevive": "O defeito de transcricao e REAL e continua aberto: a nossa floresta nao tem a semantica do ranger. O que caiu foi supor que consertar 'para mais divisoes' melhora. O conserto FIEL — sortear e duplicar linhas, dando a semantica exacta do ranger, ~1,27 divisoes — cai ENTRE as nossas 0,64 e as 3,68 do split=2, e NAO foi medido.",
+ "4_o_conserto_fiel_tambem_foi_medido": {
+  "o_que": "a semantica de contagem do ranger, por sorteio a mao com as linhas REPETIDAS (scripts/floresta_ranger_emulada.py). Elimina os tocos: divisoes [1,3] em vez de [0,2].",
+  "forma": {
+   "divisoes_media": 1.636,
+   "divisoes_min": 1,
+   "divisoes_max": 3,
+   "nota": "o ranger mede 1,274 [1,2]; a emulada e mais permissiva, e isso vai declarado"
+  },
+  "qc_pos_c18_pct": 14.344418566725107,
+  "verdade_5_sementes": {
+   "erro_medio": 0.17261818832951806,
+   "correlacao_media": 0.96677048678778,
+   "piorada_media": 0.13066666666666665,
+   "por_semente": [
+    {
+     "erro": 0.1832720252456939,
+     "correlacao": 0.9700179267018816,
+     "fracao_piorada": 0.07
+    },
+    {
+     "erro": 0.19168688231760178,
+     "correlacao": 0.9532847006751342,
+     "fracao_piorada": 0.21333333333333335
+    },
+    {
+     "erro": 0.17263189203248433,
+     "correlacao": 0.9679497150681845,
+     "fracao_piorada": 0.21
+    },
+    {
+     "erro": 0.17134825490702527,
+     "correlacao": 0.9772278624870034,
+     "fracao_piorada": 0.09666666666666666
+    },
+    {
+     "erro": 0.14415188714478516,
+     "correlacao": 0.9653722290066965,
+     "fracao_piorada": 0.06333333333333334
+    }
+   ]
+  },
+  "pareado_contra_o_atual": {
+   "erro": {
+    "media": 0.0028122031071995458,
+    "todas_no_mesmo_sentido": false
+   },
+   "fracao_piorada": {
+    "media": 0.08933333333333333,
+    "todas_no_mesmo_sentido": true
+   }
+  },
+  "desfecho": "(b) — QC melhora muito e a verdade nao acompanha. MESMO padrao do split=2. O conserto fiel tambem NAO deve ser adotado com base nesta evidencia."
+ },
+ "5_dose_resposta": {
+  "o_que": "tres configuracoes ordenadas por numero de divisoes por arvore",
+  "pontos": [
+   {
+    "config": "atual split=5",
+    "divisoes": 0.638,
+    "qc_pct": 21.567,
+    "erro_verdade": 0.16980598522231855,
+    "piorada": 0.04133333333333333
+   },
+   {
+    "config": "ranger (o do R)",
+    "divisoes": 1.274,
+    "qc_pct": 15.3515,
+    "erro_verdade": 0.17276304281086133,
+    "piorada": 0.11000000000000001
+   },
+   {
+    "config": "fiel ao ranger",
+    "divisoes": 1.636,
+    "qc_pct": 14.344418566725107,
+    "erro_verdade": 0.17261818832951806,
+    "piorada": 0.13066666666666665
+   },
+   {
+    "config": "split=2",
+    "divisoes": 3.676,
+    "qc_pct": 12.5982,
+    "erro_verdade": 0.1762135485215543,
+    "piorada": 0.18000000000000002
+   }
+  ],
+  "leitura": "mais divisoes -> o RSD dos QCs MELHORA sempre, a fracao piorada PIORA sempre, e o erro contra a verdade NAO ANDA. O ganho no QC acompanha a flexibilidade do modelo, nao a remocao de deriva. E a assinatura de artefato, em tres pontos.",
+  "implicacao_NAO_medida": "MEDIDA em 31/08/2026 e CONFIRMADA — ver a secao 6. Esta chave fica com o nome antigo de proposito: ela registra que a afirmacao foi inferencia antes de ser medicao."
+ },
+ "6_o_ranger_contra_a_verdade": {
+  "o_que": "o SERRF do R medido contra a VERDADE FUNDAMENTAL, fechando a implicacao da secao 5",
+  "data": "2026-08-31",
+  "desenho": "a matriz sintetica escrita no formato do tools.R e corrida no conteiner; a saida comparada contra a verdade pelas MESMAS funcoes que mediram o nosso lado",
+  "ancora": "o `none` do R reproduziu a entrada a epsilon de maquina nas cinco sementes (erro relativo 6,1e-16 a 1,9e-15), conferido ANTES de ler qualquer numero do SERRF",
+  "por_semente": {
+   "7": {
+    "erro": 0.18512455999544453,
+    "correlacao": 0.9718733142476677,
+    "fracao_piorada": 0.07333333333333333,
+    "n": 300
+   },
+   "11": {
+    "erro": 0.19374317404497704,
+    "correlacao": 0.9569783440279117,
+    "fracao_piorada": 0.20666666666666667,
+    "n": 300
+   },
+   "23": {
+    "erro": 0.16792310855583303,
+    "correlacao": 0.970025745205983,
+    "fracao_piorada": 0.13666666666666666,
+    "n": 300
+   },
+   "42": {
+    "erro": 0.17438985722768074,
+    "correlacao": 0.9778136968530531,
+    "fracao_piorada": 0.09,
+    "n": 300
+   },
+   "101": {
+    "erro": 0.14263451423037118,
+    "correlacao": 0.969738057036547,
+    "fracao_piorada": 0.043333333333333335,
+    "n": 300
+   }
+  },
+  "r_medias": {
+   "erro": 0.17276304281086133,
+   "correlacao": 0.9692858314742324,
+   "piorada": 0.11000000000000001
+  },
+  "pareado_r_menos_nosso": {
+   "erro": {
+    "media": 0.0029570575885427665,
+    "todas_no_mesmo_sentido": false
+   },
+   "fracao_piorada": {
+    "media": 0.06866666666666665,
+    "todas_no_mesmo_sentido": true
+   }
+  },
+  "previsao_pre_registrada": {
+   "erro": "~0,171",
+   "piorada": "~9%",
+   "medido": {
+    "erro": 0.17276304281086133,
+    "piorada": 0.11000000000000001
+   },
+   "bateu": true
+  },
+  "desfecho": "(a) — o R piora MAIS features que nos, nas CINCO sementes. A dose-resposta transporta-se para ele, e a inferencia da secao 5 deixa de ser inferencia."
+ }
+}

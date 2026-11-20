@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Ferramental
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# Declarado aqui, e não só no `.gitignore` que o próprio hypothesis escreve dentro
+# da pasta: a regra do projeto não deve depender de um padrão da dependência.
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Arquivos de lock de suíte de escritório (LibreOffice, Excel), criados ao abrir
+# um CSV em planilha.
+.~lock.*#
+~$*
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Configuração local do Claude Code
+.claude/
+
+# Saídas do pipeline Python. O que fica versionado são as fixtures de
+# `data/fixtures/`.
+out/
+
+# Banco SQLite em arquivo. O conteúdo é dado clínico: nome de amostra e grupo
+# diagnóstico. O caminho padrão fica sob `out/`, ignorado acima por diretório, o
+# que cobre também os arquivos `-wal`, `-journal` e `-shm` que o SQLite escreve ao
+# lado do banco. Os padrões abaixo são a segunda linha, para um banco criado em
+# outro lugar.
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# Dados de referência do laboratório e o pipeline R. Ficam em disco e fora do git;
+# `data/reference/` aponta para esta pasta por symlink. Sem ela, os testes que
+# dependem dos dados dão `skip`.
+serrf/
+
+# Saídas do MetaboAnalyst sobre os mesmos dados. Fora do git porque os nomes de
+# amostra carregam os códigos de grupo clínico.
+metabo-analisys/

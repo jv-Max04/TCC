@@ -1,0 +1,855 @@
+{
+  "provenance": {
+    "command": "scripts/gen_loess_golden.py --runs-dir DIR",
+    "generated_at": "2026-07-29T02:20:59+0000",
+    "python_version": "3.12.13",
+    "numpy_version": "2.5.1",
+    "sidecar": "loess_golden_r.npz",
+    "sidecar_sha256": "eb5d76948813d2ac5ef691ce7e633c6d2ef6a37f642f083f209507174952dfb5",
+    "reference_root": "data/reference",
+    "floor_definition": "Piso POR FEATURE. Para cada par das M execucoes do R: mediana, sobre as celulas com |b| finito e nao nulo e ambos os lados finitos, de |a-b|/|b|; o par e DESCARTADO se qualquer das duas execucoes devolveu a feature bit-identica a matriz `none`, porque ali |a-b| e zero por construcao e o zero diria 'concordam' onde o fato e 'nenhuma corrigiu'; e a celula so conta se houver mais de 5 utilizaveis. O piso da feature e a mediana sobre os pares validos, e fica indefinido se os pares validos forem menos de 50% dos pares disponiveis.",
+    "floor_near_zero_threshold": 1e-12,
+    "min_cells": 5,
+    "min_pair_fraction": 0.5,
+    "sample_size": 400,
+    "sample_seed": 1,
+    "corrector_seed": 42,
+    "seed_note": "DOIS campos porque sao duas coisas. A versao ad hoc deste fixture registrava um unico `seed: 42`, que e a semente do CORRETOR; a amostra foi sorteada com 1. Lido como semente de amostragem o valor era errado, e ninguem reproduziria a amostra a partir dele.",
+    "reproducibility": {
+      "reproducible_arrays": [
+        "floor_neg_c18",
+        "floor_neg_hilic",
+        "floor_pos_c18",
+        "floor_pos_hilic",
+        "golden_uncorrected_neg_c18",
+        "golden_uncorrected_neg_hilic",
+        "golden_uncorrected_pos_c18",
+        "golden_uncorrected_pos_hilic",
+        "sample_neg_c18",
+        "sample_neg_hilic",
+        "sample_pos_c18",
+        "sample_pos_hilic"
+      ],
+      "non_reproducible_arrays": [],
+      "measured": "--check reproduz os doze arrays bit a bit a partir das mesmas cinco execucoes. O piso vem de matrizes JA gravadas em disco, e nao de nova chamada ao oraculo: irreprodutibilidade do R entra pelo VALOR do piso, e nao pela leitura dele.",
+      "caveat": "Reproduzivel dadas AS MESMAS cinco execucoes, que e o que o campo diz. Com outras cinco o piso muda, e e essa variacao que o SLACK absorve — cv de 0,205 por jackknife."
+    },
+    "runs": {
+      "pos_hilic": {
+        "link_to_u3": "conferido contra r_serrf_divergence.json: mesma entrada, imagem, R e nucleos",
+        "runs": [
+          {
+            "run": 1,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 577.4230134487152,
+            "batch_loess_sha256": "a14320e01fc4cc7a3640ccbc796e5c2e995cf90b6bf2bd0848060d515cf83eda"
+          },
+          {
+            "run": 2,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 603.8466637134552,
+            "batch_loess_sha256": "ec1d7d420b4f4b13acd4f90f0a0ec91844ac0fd225c6a17bd1f2d864aca3d863"
+          },
+          {
+            "run": 3,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 603.0097193717957,
+            "batch_loess_sha256": "1d22d0c83520d06d3c3a49347bdff9c696576893d87ff16054e17b125ce78f88"
+          },
+          {
+            "run": 4,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 578.8254454135895,
+            "batch_loess_sha256": "b50480f44406671ca4294337dee202e004de313a78d64aa3f692263ec944861a"
+          },
+          {
+            "run": 5,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "3ea407891b0ab6177e0e1942b70a5e51eb9d966e4c8db00293500d6660fffa2f",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 443.43606066703796,
+            "batch_loess_sha256": "1fbe25b4589064f7e1fc509619d939b14c3be602d0fcbb5750ba39c4e6ae2136"
+          }
+        ]
+      },
+      "neg_hilic": {
+        "link_to_u3": "conferido contra r_serrf_divergence.json: mesma entrada, imagem, R e nucleos",
+        "runs": [
+          {
+            "run": 1,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 98.94313287734985,
+            "batch_loess_sha256": "ff6bca71570961932d8cf6256e03d7714aa4082a27b66df80c0de56ddbf35bd2"
+          },
+          {
+            "run": 2,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 98.27617812156677,
+            "batch_loess_sha256": "018b9bb213d7ae390ccf8382759f8678f92bb2f111c2143697b2339c6560e7ab"
+          },
+          {
+            "run": 3,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 99.6592059135437,
+            "batch_loess_sha256": "bb949636b203eaeafa9bf88908f2b5c6f45731ed937faaac7be0955d28e8f5a2"
+          },
+          {
+            "run": 4,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 98.2474250793457,
+            "batch_loess_sha256": "c299f47efe2d525e7b9c89198640ba0949cea12b74212ae04119dd9fb3ae36e8"
+          },
+          {
+            "run": 5,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "6af102b98cde965e01cbac57fb46d0248481260483a116d0d94c9485af4b7168",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 98.26046800613403,
+            "batch_loess_sha256": "37b2a9163324245bc2e2285fe4f8abdf434ab4282ff1ff04be4bbb054de1303b"
+          }
+        ]
+      },
+      "pos_c18": {
+        "link_to_u3": "conferido contra r_serrf_divergence.json: mesma entrada, imagem, R e nucleos",
+        "runs": [
+          {
+            "run": 1,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 107.86461687088013,
+            "batch_loess_sha256": "54f08f09aea7b46e7a2d70b56694939a76b2b77906b38d4d7d8391e879d71885"
+          },
+          {
+            "run": 2,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 108.05598187446594,
+            "batch_loess_sha256": "8d911d4cfe16035dad4ce9efd40f097b0716d5f3dc0bda69eb363e7c5fd9fb84"
+          },
+          {
+            "run": 3,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 110.88136672973633,
+            "batch_loess_sha256": "cbf7cfc70ca8df04129f8a14b1ee7866bc642f50b0af02919f9e76728716c5e7"
+          },
+          {
+            "run": 4,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 112.47272729873657,
+            "batch_loess_sha256": "9bbbb87b9aa3004fbf1d0d655e8bf7a27a0d740621afa0c66e952abb3c4dfd91"
+          },
+          {
+            "run": 5,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "e07ae1611deb21ead4e1fad7780e17a8bf237e4f6687a26c640b005e837a8b52",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 112.0131003856659,
+            "batch_loess_sha256": "6f80af1153519ef16a731720cf0805358f7688dadcba76c736fd3cbcb02e84c4"
+          }
+        ]
+      },
+      "neg_c18": {
+        "link_to_u3": "conferido contra r_serrf_divergence.json: mesma entrada, imagem, R e nucleos",
+        "runs": [
+          {
+            "run": 1,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 104.29510617256165,
+            "batch_loess_sha256": "7e5df3389b1e70bf44729303c7762063d4a21a3400ef6997401643e588796038"
+          },
+          {
+            "run": 2,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 104.24955034255981,
+            "batch_loess_sha256": "c926e2bd4cf6710fe2fcfe5e8727c6a38d41c55e7d00ab41d3afaac761dac010"
+          },
+          {
+            "run": 3,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 104.15252447128296,
+            "batch_loess_sha256": "6400af3121f0f50d972e27c45677a3fcaf4ac326fc1497fc50425cedbfa9d642"
+          },
+          {
+            "run": 4,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 104.42971324920654,
+            "batch_loess_sha256": "5573f4170a0b1d1ecb356f02dc81891cdfb5abcb39f717c0c49621896f1502f2"
+          },
+          {
+            "run": 5,
+            "r_version": "R version 4.4.2 (2024-10-31)",
+            "image": "r-base:4.4.2",
+            "image_digest": "r-base@sha256:fe9b29520eeb5292d814b0958783c0ddfcdab37402967a3e67307604354f98d7",
+            "input_sha256": "d56e6765d1253a7f5e1479bdb49f2055c434b2f9a0a750731bc87bcbb6dc2e84",
+            "cores_detected": 12,
+            "detectcores_ratio": 0.5,
+            "package_versions": {
+              "magrittr": "2.0.5",
+              "data.table": "1.18.4",
+              "ranger": "0.18.0",
+              "bootstrap": "2019.6",
+              "pacman": "0.5.1",
+              "jsonlite": "2.0.0"
+            },
+            "cran_snapshot": "https://packagemanager.posit.co/cran/2026-07-01",
+            "elapsed_run_seconds": 103.9011664390564,
+            "batch_loess_sha256": "c000a36ba21377569c55e0113c79629e43654f067b06d875deedaa1f94946248"
+          }
+        ]
+      }
+    },
+    "note": "A razao POR FEATURE e a quantidade; razao de medianas e artefato de populacao e nivel de agregacao (AR40, na forma corrigida)."
+  },
+  "modes": {
+    "pos_hilic": {
+      "n_ratios": 145,
+      "n_excluded_floor_near_zero": 39,
+      "median": 1.298103268058048,
+      "p90": 7.763495807963927,
+      "p25": 0.5341275295697488,
+      "p75": 3.0085645793383073,
+      "n_golden_uncorrected": 1561
+    },
+    "neg_hilic": {
+      "n_ratios": 257,
+      "n_excluded_floor_near_zero": 21,
+      "median": 1.0284815523627107,
+      "p90": 4.216620908810376,
+      "p25": 0.36402112820793886,
+      "p75": 2.1468061481512763,
+      "n_golden_uncorrected": 165
+    },
+    "pos_c18": {
+      "n_ratios": 336,
+      "n_excluded_floor_near_zero": 53,
+      "median": 1.5513511407116731,
+      "p90": 6.616029417129623,
+      "p25": 0.6585548528730256,
+      "p75": 3.271703067874963,
+      "n_golden_uncorrected": 10
+    },
+    "neg_c18": {
+      "n_ratios": 312,
+      "n_excluded_floor_near_zero": 64,
+      "median": 1.1009087745099198,
+      "p90": 5.602847569042739,
+      "p25": 0.44957198415314803,
+      "p75": 3.1640330104234398,
+      "n_golden_uncorrected": 20
+    }
+  },
+  "slack": {
+    "k": 3.0,
+    "rationale": "O SLACK e margem sobre o portao, nao constante do resultado. A distincao importa: RADIUS_INFLATION entra no numero corrigido e errar nele corrompe a saida; o SLACK so decide quando o teste reprova. Por isso ele nao precisa de derivacao teorica — precisa de justificativa sobre a variabilidade que absorve, e e isso que esta medido aqui. Mesmo raciocinio do k = 3 do pre-registro, num portao mais simples.",
+    "sources": "Duas fontes candidatas, e so UMA entra na margem. (1) O PISO: vem de M execucoes de um oraculo sem set.seed alcancavel, e regenerar com outras M execucoes o move — esta ENTRA, porque o portao le o piso do sidecar e uma regeneracao legitima o troca. (2) A AMOSTRA de 400 features: esta NAO entra, porque os indices sorteados estao CONGELADOS no proprio sidecar e o teste os le de la. O portao compara a mesma amostra com a mesma amostra, e margem comprada para uma variacao que o portao nunca ve e margem que so serve para deixar passar regressao — conclusao correta sobre a quantidade errada. Ela esta MEDIDA e registrada porque diz outra coisa, que importa: quanto o numero congelado depende de qual amostra caiu.",
+    "no_quadratic_sum": "Nao ha soma em quadratura aqui, e a ausencia e o ponto. A correcao que o k do [CA-3.1] recebeu — somar sd_py e sd_R em quadratura e nao aritmeticamente — valia porque as DUAS dispersoes alcancavam a mesma quantidade comparada. Aqui a segunda fonte nao alcanca o portao, e somar duas fontes das quais uma nao atua e o mesmo erro com o sinal trocado: inflaria a margem em vez de reduzi-la.",
+    "sample_caveat": "O que a variabilidade por amostra diz, e nao e sobre a margem: o p90 do pos_hilic tem cv de 0,32 entre dez amostras de 400 features. Logo o p90 congelado descreve ESTA amostra, e nao a populacao de features do modo. Cobra-lo como portao e legitimo — a amostra e a mesma nas duas pontas —, mas citar '7,76' como propriedade do pos_hilic seria a escala de medicao de AR16. A mediana e bem mais estavel: cv de 0,13 no pior modo.",
+    "formula": "SLACK = 1 + k * cv_oracle, pelo pior (modo, estatistica)",
+    "worst_case": {
+      "value": 0.2047360788921969,
+      "mode": "pos_hilic",
+      "statistic": "p90"
+    },
+    "per_mode": {
+      "pos_hilic": {
+        "median": {
+          "cv_oracle_in_margin": 0.02797497830529518,
+          "cv_sample_excluded": 0.1312788819733089
+        },
+        "p90": {
+          "cv_oracle_in_margin": 0.2047360788921969,
+          "cv_sample_excluded": 0.31794534736478824
+        }
+      },
+      "neg_hilic": {
+        "median": {
+          "cv_oracle_in_margin": 0.08754961771468382,
+          "cv_sample_excluded": 0.04208768756191131
+        },
+        "p90": {
+          "cv_oracle_in_margin": 0.16134577274179862,
+          "cv_sample_excluded": 0.1845388380467558
+        }
+      },
+      "pos_c18": {
+        "median": {
+          "cv_oracle_in_margin": 0.027229947074224787,
+          "cv_sample_excluded": 0.12581045106408706
+        },
+        "p90": {
+          "cv_oracle_in_margin": 0.08132236396779935,
+          "cv_sample_excluded": 0.07049407334386282
+        }
+      },
+      "neg_c18": {
+        "median": {
+          "cv_oracle_in_margin": 0.0656980405328102,
+          "cv_sample_excluded": 0.0605953667560314
+        },
+        "p90": {
+          "cv_oracle_in_margin": 0.20383658076103373,
+          "cv_sample_excluded": 0.07124805577899121
+        }
+      }
+    },
+    "derived_exact": 1.6142082366765906,
+    "value": 1.62,
+    "supersedes": "SLACK = 1,5, DECLARADO e nao derivado, era APERTADO DEMAIS. O oraculo sozinho move o p90 do pos_hilic com cv de 0,205; a k = 3 isso e 61%, acima dos 50% que 1,5 concedia. Regenerar o piso com outras cinco execucoes do R poderia reprovar o portao SEM nenhuma regressao no corretor — e um portao que reprova sem regressao ensina a ignora-lo.",
+    "measurements": {
+      "pos_hilic": {
+        "jackknife": {
+          "n_leave_one_out": 5,
+          "median": {
+            "leave_one_out": [
+              1.3904502737838362,
+              1.3742911643921547,
+              1.3847527351458022,
+              1.3426701373955885,
+              1.3918898434250726
+            ],
+            "sd_jackknife": 0.03631441076195666,
+            "cv": 0.02797497830529518
+          },
+          "p90": {
+            "leave_one_out": [
+              7.502269484369744,
+              8.880509333776832,
+              6.4617200160502355,
+              7.9327199650371005,
+              8.109551048174115
+            ],
+            "sd_jackknife": 1.5894676902185423,
+            "cv": 0.2047360788921969
+          }
+        },
+        "sample": {
+          "n_seeds": 10,
+          "seeds": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "median": {
+            "by_seed": [
+              1.4562081915569092,
+              1.7546195237285236,
+              1.3911818673932652,
+              1.5474489219296672,
+              1.3369471839108393,
+              1.2283052421746001,
+              1.3580959817636171,
+              1.255200186632229,
+              1.3758691293398035,
+              1.1641720450364397
+            ],
+            "sd_ddof1": 0.17041354571655903,
+            "cv": 0.1312788819733089
+          },
+          "p90": {
+            "by_seed": [
+              8.30442594652232,
+              8.735671866161997,
+              9.821808385253782,
+              8.560840916182453,
+              12.412590065980318,
+              7.594413326719663,
+              7.31628612071808,
+              7.168567483404588,
+              14.652839396900049,
+              7.551686925627365
+            ],
+            "sd_ddof1": 2.468367371428168,
+            "cv": 0.31794534736478824
+          }
+        }
+      },
+      "neg_hilic": {
+        "jackknife": {
+          "n_leave_one_out": 5,
+          "median": {
+            "leave_one_out": [
+              1.0174681849698062,
+              0.9503918294542341,
+              1.0251007496553322,
+              1.0532646402525294,
+              1.0860180378813182
+            ],
+            "sd_jackknife": 0.09004316673595988,
+            "cv": 0.08754961771468382
+          },
+          "p90": {
+            "leave_one_out": [
+              4.69226197268918,
+              4.3408635655811185,
+              3.950970988273343,
+              4.278904758971171,
+              3.7015897015192225
+            ],
+            "sd_jackknife": 0.6803339588912353,
+            "cv": 0.16134577274179862
+          }
+        },
+        "sample": {
+          "n_seeds": 10,
+          "seeds": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "median": {
+            "by_seed": [
+              1.1365664274390181,
+              1.0407071859486623,
+              1.13761795727722,
+              1.1377804810157899,
+              1.0924593577314057,
+              1.0300817782834968,
+              1.0760560033030553,
+              1.0720397491913434,
+              1.0774505193226327,
+              1.1509187022827727
+            ],
+            "sd_ddof1": 0.04328641023903129,
+            "cv": 0.04208768756191131
+          },
+          "p90": {
+            "by_seed": [
+              4.204923716262158,
+              5.84004632998898,
+              4.708870777329135,
+              5.141091137650796,
+              4.669471985201291,
+              3.770840851806318,
+              6.21258620540085,
+              3.993253523694077,
+              4.5833458156481806,
+              5.157011909551883
+            ],
+            "sd_ddof1": 0.7781303229955223,
+            "cv": 0.1845388380467558
+          }
+        }
+      },
+      "pos_c18": {
+        "jackknife": {
+          "n_leave_one_out": 5,
+          "median": {
+            "leave_one_out": [
+              1.392220899362954,
+              1.4519000696331843,
+              1.4152191903291909,
+              1.433849205447907,
+              1.4049210228846643
+            ],
+            "sd_jackknife": 0.04224320945511711,
+            "cv": 0.027229947074224787
+          },
+          "p90": {
+            "leave_one_out": [
+              5.510917165214676,
+              5.665961682263402,
+              5.972540591332204,
+              5.907305557099253,
+              5.234843291595557
+            ],
+            "sd_jackknife": 0.5380311522814826,
+            "cv": 0.08132236396779935
+          }
+        },
+        "sample": {
+          "n_seeds": 10,
+          "seeds": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "median": {
+            "by_seed": [
+              1.388503416588738,
+              1.5712094071507083,
+              1.7210385404641884,
+              1.523128041083869,
+              1.6384875145703268,
+              1.3683195046777987,
+              1.3558067312089788,
+              1.219430588213218,
+              1.8724991755261602,
+              1.583868487517839
+            ],
+            "sd_ddof1": 0.1951761867717216,
+            "cv": 0.12581045106408706
+          },
+          "p90": {
+            "by_seed": [
+              7.418525769424129,
+              7.196812118242658,
+              7.800005718652217,
+              7.397286893119418,
+              6.860719738029273,
+              7.786755296232027,
+              6.522414625001426,
+              7.078624457621714,
+              7.976377459372554,
+              6.935915595728503
+            ],
+            "sd_ddof1": 0.4663908629762896,
+            "cv": 0.07049407334386282
+          }
+        }
+      },
+      "neg_c18": {
+        "jackknife": {
+          "n_leave_one_out": 5,
+          "median": {
+            "leave_one_out": [
+              1.1218136743928504,
+              1.2125984846881397,
+              1.11197151541284,
+              1.1698314401453258,
+              1.1459656257520061
+            ],
+            "sd_jackknife": 0.07232754929067911,
+            "cv": 0.0656980405328102
+          },
+          "p90": {
+            "leave_one_out": [
+              4.277642403962767,
+              6.007023990381429,
+              5.341977169645588,
+              5.507586038750548,
+              5.0557394250607945
+            ],
+            "sd_jackknife": 1.1420652909989417,
+            "cv": 0.20383658076103373
+          }
+        },
+        "sample": {
+          "n_seeds": 10,
+          "seeds": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "median": {
+            "by_seed": [
+              1.040729712790754,
+              1.0152448784421633,
+              1.0686737586496657,
+              1.0480641446866719,
+              1.0289110452952333,
+              1.1835556875378777,
+              1.2094213454256124,
+              1.1417598635388204,
+              1.1065974546739308,
+              1.077236543029168
+            ],
+            "sd_ddof1": 0.06670997095636166,
+            "cv": 0.0605953667560314
+          },
+          "p90": {
+            "by_seed": [
+              4.912315418411227,
+              4.189245971285054,
+              5.082675409754409,
+              5.2849523013044255,
+              5.419114501367412,
+              4.957487994473452,
+              5.564213499345003,
+              5.516740866087211,
+              5.2492618709624,
+              5.026015388903606
+            ],
+            "sd_ddof1": 0.3991919961203424,
+            "cv": 0.07124805577899121
+          }
+        }
+      }
+    }
+  }
+}

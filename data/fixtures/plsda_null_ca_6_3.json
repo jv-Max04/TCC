@@ -1,0 +1,30 @@
+{
+ "medicao": "nula do [CA-6.3]",
+ "data": "2026-08-01",
+ "modo": "pos_hilic",
+ "par": [
+  "ATLL",
+  "NoHTLV"
+ ],
+ "n_execucoes": 100,
+ "n_permutacoes": 200,
+ "semente_base": 20260801,
+ "n_amostras_no_par": 29,
+ "n_features": 758,
+ "custo_s": 71,
+ "fracao_p_maior_005": 0.95,
+ "fracao_q2_menor_igual_zero": 0.86,
+ "fracao_conjunta": 0.86,
+ "q2_nula": {
+  "mediana": -0.291,
+  "min": -1.3873,
+  "max": 0.2804
+ },
+ "p_nula": {
+  "mediana": 0.495,
+  "min": 0.005,
+  "max": 1.0
+ },
+ "desfecho_disparado": 3,
+ "condicao_de_parada": true
+}

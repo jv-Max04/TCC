@@ -1,0 +1,241 @@
+{
+ "natureza": "Dispersao do SERRF entre execucoes identicas, e custo por feature com `n` FIXO nos quatro modos. Existe para decidir se os 2,3% de amplitude entre modos medidos em 02/09/2026 sao ruido ou efeito.",
+ "data": "2026-10-24",
+ "commit": "f3cca15951425b6f2d2926628a07ee6ae3751115",
+ "caminho_medido_sha256": {
+  "src/refino/correction/serrf.py": "f09dd43ca6101be54a92fb196a9aebeace24e9091f62f36d126094a2d14ff729",
+  "src/refino/correction/_serrf_steps.py": "49e5be9a7d73d39425ba28bd5d0fe6429a1c3e7476ff80cba45404048c415b81",
+  "src/refino/correction/_floresta_ranger.py": "275210557ba13602900c21c7210dda0494074e928c7dfed1e8b93e46cb211b0a"
+ },
+ "maquina": {
+  "plataforma": "Windows-11-10.0.26200-SP0",
+  "processador": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+  "nucleos_logicos": 12
+ },
+ "parametros": {
+  "n_alvo": 400,
+  "repeticoes": 5,
+  "semente_da_amostra": 20260902,
+  "n_jobs": 1,
+  "amplitude_entre_modos_medida_em_02_09": 0.023
+ },
+ "desfechos_pre_registrados": [
+  {
+   "id": "a",
+   "criterio": "a amplitude DENTRO de um modo (max-min sobre a mediana, 5 repeticoes) e MAIOR que os 2,3% medidos entre modos",
+   "leitura": "a variacao entre modos e ruido, e o custo do SERRF e `c x n_features` com um `c` so. A hipotese de efeito perde a premissa do lado da correcao directa, e a inversao passa a ser propriedade do detector - que continua por testar"
+  },
+  {
+   "id": "b",
+   "criterio": "a amplitude DENTRO de um modo e MENOR que os 2,3% entre modos",
+   "leitura": "ha efeito real de modo, pequeno mas mensuravel, e a fraccao de zeros passa a ser candidata COM suporte - sem ainda estar testada"
+  },
+  {
+   "id": "c",
+   "criterio": "o custo desvia da recta `c x n` em mais de 5% em algum ponto do varrimento de n",
+   "leitura": "ha termo POR EXECUCAO que a leitura \u00ab190 ms x features\u00bb esconde, e a estimativa que a tela mostra precisa dele"
+  }
+ ],
+ "escopo_negativo": [
+  "NAO mede o detector de custo fixo: testar a hipotese de que a inversao vive na deteccao por intervalos entre ticks exigiria correr mede_custo_do_multiverso.py outra vez, e ele reescreve um fixture que ui/fluxo.py e MULTIVERSO.html consomem.",
+  "NAO mede a fraccao de zeros: e propriedade do dado, nao parametro.",
+  "n_jobs=1, o regime que o executor do multiverso forca.",
+  "uma maquina, um dia, uma sessao: a dispersao e a de execucoes consecutivas no mesmo processo - nao cobre arranque a frio nem maquina ocupada."
+ ],
+ "experimento_1_n_fixo": [
+  {
+   "modo": "neg_hilic",
+   "n_features_da_matriz": 2039,
+   "n_corrigidas": 400,
+   "mediana_s": 66.797,
+   "amplitude_relativa": 0.0092,
+   "ms_por_feature": 166.993,
+   "corridas": [
+    {
+     "parede_s": 67.167,
+     "cpu_s": 67.031,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.773,
+     "cpu_s": 66.594,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.797,
+     "cpu_s": 66.609,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.554,
+     "cpu_s": 66.453,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 67.009,
+     "cpu_s": 67.016,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    }
+   ]
+  },
+  {
+   "modo": "neg_c18",
+   "n_features_da_matriz": 2184,
+   "n_corrigidas": 400,
+   "mediana_s": 66.652,
+   "amplitude_relativa": 0.0048,
+   "ms_por_feature": 166.63,
+   "corridas": [
+    {
+     "parede_s": 66.654,
+     "cpu_s": 66.562,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.365,
+     "cpu_s": 66.25,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.498,
+     "cpu_s": 66.344,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.683,
+     "cpu_s": 66.516,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.652,
+     "cpu_s": 66.609,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    }
+   ]
+  },
+  {
+   "modo": "pos_c18",
+   "n_features_da_matriz": 2572,
+   "n_corrigidas": 400,
+   "mediana_s": 66.645,
+   "amplitude_relativa": 0.0077,
+   "ms_por_feature": 166.613,
+   "corridas": [
+    {
+     "parede_s": 66.464,
+     "cpu_s": 66.344,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.911,
+     "cpu_s": 66.766,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.497,
+     "cpu_s": 66.312,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.645,
+     "cpu_s": 66.469,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 66.976,
+     "cpu_s": 66.906,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    }
+   ]
+  },
+  {
+   "modo": "pos_hilic",
+   "n_features_da_matriz": 6035,
+   "n_corrigidas": 400,
+   "mediana_s": 67.386,
+   "amplitude_relativa": 0.0095,
+   "ms_por_feature": 168.465,
+   "corridas": [
+    {
+     "parede_s": 67.313,
+     "cpu_s": 67.516,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 67.381,
+     "cpu_s": 67.422,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 67.953,
+     "cpu_s": 67.812,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 67.386,
+     "cpu_s": 67.344,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    },
+    {
+     "parede_s": 67.918,
+     "cpu_s": 68.141,
+     "n_corrigidas": 400,
+     "sem_correcao": {}
+    }
+   ]
+  }
+ ],
+ "experimento_2_n_variavel": [
+  {
+   "n": 100,
+   "parede_s": 17.306,
+   "cpu_s": 17.609,
+   "n_corrigidas": 100,
+   "sem_correcao": {},
+   "ms_por_feature": 173.06
+  },
+  {
+   "n": 200,
+   "parede_s": 34.085,
+   "cpu_s": 34.047,
+   "n_corrigidas": 200,
+   "sem_correcao": {},
+   "ms_por_feature": 170.425
+  },
+  {
+   "n": 400,
+   "parede_s": 67.573,
+   "cpu_s": 67.812,
+   "n_corrigidas": 400,
+   "sem_correcao": {},
+   "ms_por_feature": 168.933
+  },
+  {
+   "n": 800,
+   "parede_s": 135.056,
+   "cpu_s": 134.984,
+   "n_corrigidas": 800,
+   "sem_correcao": {},
+   "ms_por_feature": 168.82
+  }
+ ]
+}

@@ -1,0 +1,194 @@
+{
+  "criterio": "[CA-3.12]",
+  "natureza": "PRE-REGISTRO. Escrito e commitado ANTES da primeira execucao do criterio. Nenhum numero medido do lado do Python aparece aqui: os alvos sao do oraculo e as sementes sao escolha declarada.",
+  "unidades": "median_rsd_pct e sampling_se_pct estao em PONTOS PERCENTUAIS. A coluna do QC - RSD.csv esta em FRACAO (0,31 = 31%) e a conversao acontece na leitura. Sufixo de unidade em toda quantidade e reparo de defeito real: a secao 4.4 trouxe 1,9e-15 ao lado de uma tabela em pontos percentuais.",
+  "preregistration": {
+    "seeds": [
+      50000,
+      100000,
+      150000,
+      200000,
+      250000,
+      300000,
+      350000,
+      400000,
+      450000,
+      500000,
+      550000,
+      600000,
+      650000,
+      700000,
+      750000,
+      800000,
+      850000,
+      900000,
+      950000,
+      1000000
+    ],
+    "n_seeds": 20,
+    "seed_rule": "SEED_GAP * k para k de 1 a 20, com SEED_GAP = 50000. Regra fechada e nao escolha valor a valor: um conjunto escolhido a dedo seria indistinguivel de um conjunto escolhido depois de ver o resultado.",
+    "seed_spacing_rationale": "O espacamento e decisao de desenho, nao formatacao. O LoessCorrector deriva o fluxo de cada feature por seed + index (loess.py:140), com index sendo o indice ORIGINAL da coluna, logo em [0, n_features). Sementes consecutivas fariam as 20 execucoes serem a mesma sequencia deslocada de uma posicao, e o intervalo do batch_loess sairia estreito POR CONSTRUCAO — mediria DV15 e nao a variabilidade semente-a-semente. Com o espacamento acima do maior n_features as faixas sao disjuntas e as execucoes sao realizacoes independentes, que e a premissa que a contencao assume. NAO e correcao de DV15 nem afrouxamento de regua: nenhuma linha de loess.py muda e nenhuma tolerancia muda.",
+    "seed_disjointness": {
+      "n_faixas": 100,
+      "menor_gap_entre_faixas": 10000,
+      "menor_gap_entre_sementes": 50000,
+      "draw_seed_gap": 10000,
+      "maior_n_features_nos_quatro_modos": 6035,
+      "modo_do_maior": "pos_hilic",
+      "faixas_disjuntas": true,
+      "margem": 3965,
+      "regra": "duas execucoes do LoessCorrector compartilham fluxo por feature exatamente quando |s - s'| < n_features, porque loess.py passa seed = seed + index com index sendo o indice ORIGINAL da coluna. As faixas sao as n_seeds * n_draws sementes DERIVADAS (seed + draw * DRAW_SEED_GAP), nao as n_seeds declaradas: desde a correcao de AR46 cada sorteio tem fluxo proprio, e a disjuncao tem de valer entre sorteios tambem. Conferida contra os arquivos, nao suposta."
+    },
+    "estimator": "refino.metrics.crossval.qc_rsd_r_cv",
+    "n_draws": 5,
+    "draw_seed_gap": 10000,
+    "draw_seed_rule": "o corretor recebe seed + draw * DRAW_SEED_GAP em cada sorteio, e nao a mesma semente nos n_draws. A versao anterior passava seed=seed nos cinco: so a particao variava, os fluxos do LOESS e do SERRF eram identicos entre eles, e a media era sobre replicatas correlacionadas — n_draws=5 afirmava cinco realizacoes independentes e entregava uma repetida cinco vezes (AR46). Achado por REVISAO DE CODIGO e nao por olhar o numero, que e o que torna esta uma correcao de defeito e nao um ajuste de resultado.",
+    "train_ratio": 0.7,
+    "rsd_variant": "outlier_removed",
+    "rsd_variant_note": "outlier_removed espelha o oraculo: RSD() do tools.R so implementa essa variante. Ela e VACUA nas duas metades deste criterio porque o retido tem n = 2 (round(7 * 0,7) = 5 de treino, 2 no alvo), entao plain daria os mesmos numeros. Declarado porque escolher a variante que casa com o oraculo e transcricao fiel, e a vacuidade e propriedade do recorte de hoje: com mais QCs no retido as duas deixam de coincidir.",
+    "n_sampled_features": 500,
+    "feature_sampling": "O subconjunto de 500 features VARIA com a semente: sampled_feature_names deriva de default_rng([seed, n_features]) (crossval.py:157). Consequencia declarada: o intervalo dos 20 absorve DUAS fontes — estocasticidade da correcao e subamostragem —, que juntas sao a incerteza total do nosso estimador contra um alvo fixo. Por isso sampling_se_pct entra como DECOMPOSICAO da largura e NAO e somado ao intervalo: somar seria alargar para conter, que e a regra 2 do README.",
+    "sampling_se_pct": {
+      "pos_hilic": 2.73,
+      "neg_hilic": 2.69,
+      "pos_c18": 1.62,
+      "neg_c18": 6.45
+    },
+    "enforce_batch_representation": "derivado do corretor e nao fixo: a restricao da linha 1263 do tools.R existe no caminho SERRF e NAO no do batch_loess, que sorteia cinco vezes sem condicao (linhas 893-903). Com lote unico a diferenca e inerte nos quatro modos — e o ramo 7 do AR9 —, mas fixa-la aqui reproduziria o oraculo em metade do criterio e o contradiria na outra.",
+    "containment_rule": "intervalo = [min, max] das 20 medianas entre features, uma por semente. A mediana publicada do R tem de cair dentro. A LARGURA do intervalo e resultado e vai ao relatorio junto — largura grande nao e sucesso silencioso. Mediana, media e sd_ddof1 dos 20 acompanham, porque colapsar vinte valores em um apaga a informacao que separa acoes opostas.",
+    "comparison_note": "Os dois lados nao medem a mesma populacao de features e isso e declarado: a mediana publicada e sobre todas as features definidas na coluna, a nossa sobre 500 amostradas. E o que sampling_se_pct quantifica. O que os dois lados TEM de compartilhar e o estimador — subamostragem repetida 5/2 — e e por isso que a comparacao usa qc_rsd_r_cv e nao o in-sample: contra a tabela 4.4 o in-sample daria 21 a 29 pontos de distancia com uma implementacao correta (secao 7, [CA-3.2])."
+  },
+  "outcome_criteria": {
+    "nota": "Escritos ANTES de rodar. A coluna de proibicoes e metade do valor: sem ela qualquer falha seria lida como confirmacao da suspeita a mao, porque a explicacao estaria disponivel e encaixaria num padrao conhecido (precedente AR40).",
+    "casos": [
+      {
+        "se": "o intervalo contem a mediana publicada",
+        "entao": "[CA-3.12] verde; a largura e o resultado",
+        "proibido": "tratar largura grande como sucesso sem reporta-la"
+      },
+      {
+        "se": "falha POR CIMA na metade do SERRF",
+        "entao": "DV12 e a suspeita — deficit de capacidade da floresta desloca o intervalo EM BLOCO, e menos capacidade significa correcao menos responsiva, logo RSD residual mais alto do nosso lado. E a predicao direcional escrita antes desta medicao. A saida C — reportar a divergencia como achado, com largura e distancia — e a resposta esperada, porque intervalo deslocado por correcao deixa de ser contencao e vira contencao depois de corrigir na direcao que eu esperava.",
+        "proibido": "alargar o intervalo acrescentando sementes ate conter"
+      },
+      {
+        "se": "falha POR BAIXO na metade do SERRF",
+        "entao": "DV12 NAO e a causa e a investigacao comeca do zero. Esta linha e metade do valor do pre-registro.",
+        "proibido": "atribuir a DV12 porque a explicacao esta a mao"
+      },
+      {
+        "se": "falha na metade do batch_loess, em qualquer direcao",
+        "entao": "DV15 NAO e a causa, e a mudanca de atribuicao esta registrada abaixo em attribution_amendment. Com as faixas de seed + index disjuntas o mecanismo de DV15 e inerte nesta medicao, entao o estreitamento bilateral que DV15 previa deixa de estar previsto. Falha aqui e investigacao nova, sem suspeito pre-registrado.",
+        "proibido": "atribuir a DV15 por inercia da atribuicao anterior. DV15 continua verdadeira como defeito do codigo e continua por corrigir; o que mudou e que ela nao alcanca ESTA medicao."
+      },
+      {
+        "se": "contem, mas a largura excede a propria mediana",
+        "entao": "achado sobre o estimador e nao sobre nos. Asercao sem poder recebe ROTULO, e o rotulo e o que diz ao leitor onde esta o dente — precedente do [CA-3.10] e do [CA-3.2].",
+        "proibido": "declarar verde sem nomear que o portao nao tem dente"
+      }
+    ]
+  },
+  "attribution_amendment": {
+    "o_que_mudou": "A atribuicao anterior era: SERRF aponta DV12 com deslocamento em bloco, batch_loess aponta DV15 com estreitamento bilateral. A metade do SERRF continua exatamente assim. A metade do batch_loess muda: com o espacamento declarado acima, DV15 fica inerte e nao ha suspeito pre-registrado para aquela metade.",
+    "por_que": "DV15 mordia por SOBREPOSICAO de faixas de seed + index, e a sobreposicao e funcao do espacamento das sementes — que era parametro livre ate este arquivo fixa-lo. Manter sementes consecutivas testaria a predicao de DV15 e produziria, na outra ponta, um intervalo sabidamente errado: estreito por construcao, e portanto sem valor como evidencia sobre a nossa implementacao do LOESS. Gastar metade do teto de parede para reconfirmar por medicao um defeito ja estabelecido por leitura de codigo e o pior dos dois usos do orcamento.",
+    "o_que_isso_NAO_e": "Nao e correcao de DV15: loess.py continua com seed + index, o defeito continua registrado e continua por corrigir. Nao e ajuste de regua: nenhuma tolerancia e nenhum numero esperado mudou. A condicao que destrava DV15 continua sendo a regeneracao do golden do LOESS, e a predicao direcional dela continua testavel LA, onde a correcao e a regeneracao sao um unico ato.",
+    "onde_isso_deixa_DV15": "A frase de DV15 'falha bilateral na metade do batch_loess aponta para ca' passa a ser condicional ao espacamento das sementes."
+  },
+  "budget": {
+    "wall_minutes_ceiling": 335,
+    "ajustes_por_modo_e_metodo": 100,
+    "ajustes_totais": 800,
+    "forma": "Orcamento em parede e nucleo-minutos, com marcador slow explicito e jobs separados. Exige-se UM ajuste de r_cv medido antes de estimar o total, e nao estimativa: o reajuste do r_cv roda sobre a submatriz de QC — 7 colunas, nao 68 —, entao o orcamento de 5 min por ajuste do [CA-3.8] nao se transfere para ca.",
+    "se_estourar": "Condicao de parada. Nao se reduz n_draws, nem o numero de sementes, nem se eleva o teto: as tres mudam o que o criterio afirma ou movem a regua. A saida ja tomada foi amostrar features, que preserva a quantidade e declara a precisao, e ela ja esta dentro deste orcamento."
+  },
+  "targets_published": [
+    {
+      "mode": "pos_hilic",
+      "method": "SERRF",
+      "median_rsd_pct": 69.3011565399217,
+      "n_features": 6035,
+      "n_defined": 6035,
+      "n_undefined": 0
+    },
+    {
+      "mode": "pos_hilic",
+      "method": "batch_loess",
+      "median_rsd_pct": 104.729877507194,
+      "n_features": 6035,
+      "n_defined": 5243,
+      "n_undefined": 792
+    },
+    {
+      "mode": "pos_c18",
+      "method": "SERRF",
+      "median_rsd_pct": 20.978065278088298,
+      "n_features": 2572,
+      "n_defined": 2572,
+      "n_undefined": 0
+    },
+    {
+      "mode": "pos_c18",
+      "method": "batch_loess",
+      "median_rsd_pct": 22.4225474666605,
+      "n_features": 2572,
+      "n_defined": 2496,
+      "n_undefined": 76
+    },
+    {
+      "mode": "neg_hilic",
+      "method": "SERRF",
+      "median_rsd_pct": 55.6466587816421,
+      "n_features": 2039,
+      "n_defined": 2039,
+      "n_undefined": 0
+    },
+    {
+      "mode": "neg_hilic",
+      "method": "batch_loess",
+      "median_rsd_pct": 65.5515921307349,
+      "n_features": 2039,
+      "n_defined": 1698,
+      "n_undefined": 341
+    },
+    {
+      "mode": "neg_c18",
+      "method": "SERRF",
+      "median_rsd_pct": 15.262516857310048,
+      "n_features": 2184,
+      "n_defined": 2184,
+      "n_undefined": 0
+    },
+    {
+      "mode": "neg_c18",
+      "method": "batch_loess",
+      "median_rsd_pct": 15.8951150311157,
+      "n_features": 2184,
+      "n_defined": 2125,
+      "n_undefined": 59
+    }
+  ],
+  "provenance": {
+    "command": "scripts/gen_r_cv_prereg.py",
+    "generated_at": "2026-07-30T18:56:12+0000",
+    "python_version": "3.12.13",
+    "numpy_version": "2.5.1",
+    "target_source": "Colunas SERRF e batch_loess dos quatro QC - RSD.csv do laboratorio. Sao artefato publicado do oraculo e nao medicao nossa — e por isso conge-las aqui nao contamina o pre-registro, congela o ALVO.",
+    "input_sources": {
+      "output/pos_hilic_toserrf - normalization result/QC - RSD.csv": "26d5bd099a9dfdc6ea04d41d495a4e43538663fcee65c7118eb82fe377624daf",
+      "output/pos_c18_toserrf - normalization result/QC - RSD.csv": "16bac1a9fc0050977e1926cfa11cb939f2332c46dd66958823a306bac7e7ac0b",
+      "output/neg_hilic_toserrf - normalization result/QC - RSD.csv": "4dcdd6c79b7339826b0c041c6602c16e2a52e603ee97fbb40c196f70c281bfcd",
+      "output/neg_c18_toserrf - normalization result/QC - RSD.csv": "c48fc7be432908909f9a63f50df7febaf13c9c9daab8d7a62bfba30af67f9250"
+    }
+  },
+  "regeneration_contract": {
+    "exact": [
+      "preregistration",
+      "outcome_criteria",
+      "attribution_amendment",
+      "budget",
+      "targets_published",
+      "provenance.input_sources"
+    ],
+    "note": "TUDO neste arquivo e exato na regeneracao, e isso o distingue do r_serrf_divergence.json, cujo bloco medido nao pode bater por construcao. Aqui nao ha bloco medido: alvo publicado e escolha declarada sao ambos deterministicos. Regeneracao que diverge em qualquer campo e mudanca de pre-registro, e mudar pre-registro depois de medir o anula."
+  }
+}
